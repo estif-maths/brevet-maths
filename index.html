@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Brevet 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --nombres: #4cc9f0;
+            --gestion: #4895ef;
+            --geometrie: #7209b7;
+            --special: #f72585;
+            --bg: #f8f9fe;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: #2b2d42;
+        }
+
+        /* En-tête avec un dégradé plus dynamique */
+        header {
+            background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 50% 20%;
+            border-bottom-right-radius: 50% 20%;
+            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        header p {
+            font-weight: 300;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: -40px auto 4rem;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            margin: 3rem 0 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, #ddd, transparent);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: #f0f2ff;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-circle {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Styles spécifiques par catégorie */
+        .card-special .icon-circle { background: #ffe5f0; color: var(--special); }
+        .card-nombres .icon-circle { background: #e0f7fa; color: var(--nombres); }
+        .card-gestion .icon-circle { background: #e3f2fd; color: var(--gestion); }
+        .card-geometrie .icon-circle { background: #f3e5f5; color: var(--geometrie); }
+
+        .title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2b2d42;
+        }
+
+        .number-badge {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #8d99ae;
+            margin-top: 5px;
+        }
+
+        footer {
+            background: #2b2d42;
+            color: #edf2f4;
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-top: 5px;
+        }
+
+        /* Animation d'entrée */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .grid > * {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Maths Brevet 2026</h1>
+    <p>Ton espace de réussite interactif pour la 3<sup>ème</sup></p>
+</header>
+
+<div class="container">
+    
+    <h2 class="section-title">⚡ Les Indispensables</h2>
+    <div class="grid">
+        <a href="automatismes.html" class="card card-special">
+            <div class="icon-circle">⚡</div>
+            <span class="title">Automatismes</span>
+            <span class="number-badge">Entraînement quotidien</span>
+        </a>
+        <a href="algorithmique.html" class="card card-special">
+            <div class="icon-circle">💻</div>
+            <span class="title">Algorithmique</span>
+            <span class="number-badge">Scratch & Logique</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">🔢 Nombres & Calculs</h2>
+    <div class="grid">
+        <a href="chapitre1.html" class="card card-nombres">
+            <div class="icon-circle">1</div>
+            <span class="title">Nombres entiers</span>
+        </a>
+        <a href="chapitre2.html" class="card card-nombres">
+            <div class="icon-circle">2</div>
+            <span class="title">Nombres rationnels</span>
+        </a>
+        <a href="chapitre3.html" class="card card-nombres">
+            <div class="icon-circle">3</div>
+            <span class="title">Calcul littéral</span>
+        </a>
+        <a href="chapitre4.html" class="card card-nombres">
+            <div class="icon-circle">4</div>
+            <span class="title">Équations</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">📊 Organisation & Fonctions</h2>
+    <div class="grid">
+        <a href="Proprotionnalité et fonction.html" class="card card-gestion">
+            <div class="icon-circle">5</div>
+            <span class="title">Proportionnalité</span>
+        </a>
+        <a href="chapitre6.html" class="card card-gestion">
+            <div class="icon-circle">6</div>
+            <span class="title">Fonctions</span>
+        </a>
+        <a href="chapitre7.html" class="card card-gestion">
+            <div class="icon-circle">7</div>
+            <span class="title">Fonctions affines</span>
+        </a>
+        <a href="chapitre8.html" class="card card-gestion">
+            <div class="icon-circle">8</div>
+            <span class="title">Statistiques</span>
+        </a>
+        <a href="chapitre9.html" class="card card-gestion">
+            <div class="icon-circle">9</div>
+            <span class="title">Probabilités</span>
+        </a>
+    </div>
+
+    <h2 class="section-title">📐 Espace & Géométrie</h2>
+    <div class="grid">
+        <a href="chapitre10.html" class="card card-geometrie">
+            <div class="icon-circle">10</div>
+            <span class="title">Transformations</span>
+        </a>
+        <a href="chapitre11.html" class="card card-geometrie">
+            <div class="icon-circle">11</div>
+            <span class="title">Thalès</span>
+        </a>
+        <a href="chapitre12.html" class="card card-geometrie">
+            <div class="icon-circle">12</div>
+            <span class="title">Triangles Rectangles</span>
+        </a>
+        <a href="chapitre13.html" class="card card-geometrie">
+            <div class="icon-circle">13</div>
+            <span class="title">Solides</span>
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    <p>Réalisé avec passion pour mes élèves</p>
+    <p style="font-weight: 600;">Estifanos Gidey Kahisay — 2026</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 : Nombres Entiers - Maths 3ème</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --bg: #f8f9fe;
+            --text: #2b2d42;
+            --success: #2ecc71;
+            --warning: #fab005;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 1rem; text-align: center; }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
+        
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; }
+        .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        .content-section { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid #f0f2ff; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        
+        .definition-box { background: #f0f2ff; padding: 20px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .method-box { background: #fff9db; padding: 20px; border: 1px solid var(--warning); margin: 20px 0; border-radius: 15px; }
+        .example-box { background: #fdfdfd; padding: 20px; border: 1px dashed #ccc; margin: 15px 0; border-radius: 15px; }
+        .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
+        
+        .exercice-card { background: #fff; border: 1px solid #edf2f4; padding: 20px; margin-bottom: 25px; border-radius: 15px; position: relative; }
+        .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.8rem; margin-right: 10px; font-weight: 600; }
+        
+        .check-btn { background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 15px; font-family: 'Poppins'; transition: 0.3s; }
+        .check-btn:hover { background: var(--primary); }
+        .correction { display: none; background: #f0fff4; border: 1px solid var(--success); padding: 15px; margin-top: 15px; border-radius: 10px; color: #2d6a4f; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapitre 1 : Nombres Entiers</h1>
+    <p>Maîtriser l'arithmétique avec méthode et pratique</p>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showSection('cours')">📖 Cours Détaillé</button>
+        <button class="tab-btn" onclick="showSection('exercices')">📝 Exercices Interactifs</button>
+        <button class="tab-btn" onclick="showSection('entraine')">⚡ Quiz</button>
+    </div>
+
+    <div id="cours" class="content-section active">
+        
+        <h2>1. Division euclidienne</h2>
+        <div class="definition-box">
+            <strong>Définition :</strong> Effectuer la division euclidienne de \(a\) par \(b\), c'est trouver \(q\) et \(r\) tels que :<br>
+            <center><strong>\(a = b \times q + r\) avec \(0 \le r < b\)</strong></center>
+        </div>
+
+        <h2>2. Décomposition en facteurs premiers</h2>
+        <p>Tout nombre peut s'écrire comme un produit unique de nombres premiers.</p>
+        <div class="method-box">
+            <strong>Méthode en colonne (Exemple : 84)</strong><br>
+            84 | <strong>2</strong> (car pair)<br>
+            42 | <strong>2</strong> (car pair)<br>
+            21 | <strong>3</strong> (car 2+1=3)<br>
+             7 | <strong>7</strong> (car premier)<br>
+             1 | <br>
+            <strong>\(84 = 2^2 \times 3 \times 7\)</strong>
+        </div>
+
+        <h2>3. Plus Grand Commun Diviseur (PGCD)</h2>
+        <div class="method-box">
+            <strong>Méthode :</strong> On décompose, puis on multiplie les <strong>facteurs communs</strong> munis de leur <strong>plus petite puissance</strong>.
+        </div>
+        <div class="example-box">
+            <strong>Exemple : PGCD(60 ; 84)</strong><br>
+            • \(60 = 2^2 \times 3 \times 5\)<br>
+            • \(84 = 2^2 \times 3 \times 7\)<br>
+            Communs : 2 et 3. Puissances : \(2^2\) et \(3^1\).<br>
+            <strong>PGCD = \(4 \times 3 = 12\)</strong>.
+        </div>
+        <div class="utilite-box">
+            <strong>💡 Ça sert à quoi ?</strong> À faire des partages équitables. <br>
+            <em>Exemple : Faire le plus grand nombre de bouquets identiques avec 60 roses et 84 iris.</em>
+        </div>
+
+        <h2>4. Plus Petit Commun Multiple (PPCM)</h2>
+        <div class="method-box">
+            <strong>Méthode :</strong> On décompose, puis on multiplie <strong>tous les facteurs</strong> munis de leur <strong>plus grande puissance</strong>.
+        </div>
+        <div class="example-box">
+            <strong>Exemple : PPCM(84 ; 150)</strong><br>
+            • \(84 = 2^2 \times 3 \times 7\)<br>
+            • \(150 = 2 \times 3 \times 5^2\)<br>
+            Facteurs présents : 2, 3, 5, 7. Max : \(2^2, 3^1, 5^2, 7^1\).<br>
+            <strong>PPCM = \(4 \times 3 \times 25 \times 7 = 2100\)</strong>.
+        </div>
+        <div class="utilite-box">
+            <strong>💡 Ça sert à quoi ?</strong> À trouver la répétition de cycles.<br>
+            <em>Exemple : Savoir quand deux bus se recroiseront s'ils ont des durées de trajets différentes.</em>
+        </div>
+    </div>
+
+    <div id="exercices" class="content-section">
+        <h2>Exercices d'entraînement</h2>
+
+        <h3>I. Applications directes</h3>
+        <div class="exercice-card">
+            <span class="badge">Application 1</span>
+            Décomposer 120 et 450 en produits de facteurs premiers.
+            <br><button class="check-btn" onclick="toggleCorr('c1')">Vérifier la réponse</button>
+            <div id="c1" class="correction">
+                \(120 = 2^3 \times 3 \times 5\)<br>
+                \(450 = 2 \times 3^2 \times 5^2\)
+            </div>
+        </div>
+
+        <div class="exercice-card">
+            <span class="badge">Application 2</span>
+            Calculer le PGCD de 126 et 210.
+            <br><button class="check-btn" onclick="toggleCorr('c2')">Vérifier la réponse</button>
+            <div id="c2" class="correction">
+                \(126 = 2 \times 3^2 \times 7\)<br>
+                \(210 = 2 \times 3 \times 5 \times 7\)<br>
+                PGCD = \(2 \times 3 \times 7 = 42\).
+            </div>
+        </div>
+
+        <h3>II. Problèmes concrets</h3>
+        <div class="exercice-card">
+            <span class="badge">Problème 1</span>
+            Un photographe doit répartir 250 photos dans des salles de 18 places maximum. Combien de salles faut-il ?
+            <br><button class="check-btn" onclick="toggleCorr('c3')">Vérifier la réponse</button>
+            <div id="c3" class="correction">
+                \(250 = 18 \times 13 + 16\).<br>
+                Il faut 13 salles pleines + 1 salle pour les 16 photos restantes. <strong>Total : 14 salles</strong>.
+            </div>
+        </div>
+
+        <div class="exercice-card">
+            <span class="badge">Problème 2</span>
+            Deux phares s'allument à minuit. Le phare A brille toutes les 15s et le B toutes les 20s. Quand brilleront-ils ensemble ?
+            <br><button class="check-btn" onclick="toggleCorr('c4')">Vérifier la réponse</button>
+            <div id="c4" class="correction">
+                PPCM(15 ; 20) = 60.<br>
+                Ils brilleront ensemble toutes les <strong>60 secondes (1 minute)</strong>.
+            </div>
+        </div>
+    </div>
+
+    <div id="entraine" class="content-section" style="text-align: center;">
+        <h2>Quiz Flash ⚡</h2>
+        <div class="method-box">
+            <p>Le nombre 1 est-il un nombre premier ?</p>
+            <button class="tab-btn" style="border: 1px solid #ccc" onclick="checkQ(true)">NON</button>
+            <button class="tab-btn" style="border: 1px solid #ccc" onclick="checkQ(false)">OUI</button>
+            <p id="q-res" style="margin-top: 15px; font-weight: 600;"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function toggleCorr(id) {
+        const div = document.getElementById(id);
+        const btn = event.target;
+        if (div.style.display === "block") {
+            div.style.display = "none";
+            btn.innerText = "Vérifier la réponse";
+        } else {
+            div.style.display = "block";
+            btn.innerText = "Masquer la réponse";
+        }
+    }
+
+    function checkQ(isCorrect) {
+        const res = document.getElementById('q-res');
+        res.innerHTML = isCorrect ? "✅ Bravo !" : "❌ Faux, il n'a qu'un diviseur.";
+        res.style.color = isCorrect ? "green" : "red";
+    }
+</script>
+
+</body>
+</html>
