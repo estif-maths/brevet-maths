@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatisimes 01 - Course aux Nombres</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --info: #4cc9f0;
+            --bg: #f8f9fe;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #2b2d42; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .nav-back { margin-bottom: 20px; }
+        .nav-back a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+
+        header { text-align: center; margin-bottom: 30px; }
+        header h1 { color: var(--primary); margin: 0; font-size: 2rem; text-transform: uppercase; }
+
+        .timer-bar { position: sticky; top: 10px; background: var(--accent); color: white; padding: 15px; text-align: center; font-size: 1.5em; font-weight: bold; border-radius: 12px; z-index: 1000; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+        
+        .hint-box { background-color: #eef2ff; border-left: 5px solid var(--info); padding: 15px; margin: 20px 0; border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #edf2f7; padding: 15px; text-align: left; }
+        th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; }
+        .num-col { width: 40px; text-align: center; font-weight: bold; color: #64748b; }
+        .ans-input { width: 100%; max-width: 160px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: all 0.2s; }
+        .ans-input:focus { border-color: var(--primary); outline: none; background: #f8faff; }
+
+        .btn-finish { display: block; width: 100%; padding: 20px; background: var(--success); color: white; border: none; font-size: 1.2rem; border-radius: 12px; cursor: pointer; margin-top: 30px; font-weight: 600; transition: transform 0.2s; }
+        .btn-finish:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3); }
+
+        /* Résultats & Badges */
+        #results-section { display: none; text-align: center; animation: fadeIn 0.5s ease; }
+        .badge-card { padding: 40px; border-radius: 20px; background: white; border: 3px solid var(--success); margin-bottom: 30px; }
+        .badge-icon { font-size: 80px; display: block; margin-bottom: 10px; }
+        .score-display { font-size: 3.5rem; font-weight: 800; color: #2d3748; }
+        
+        .correction-table { width: 100%; margin-top: 20px; font-size: 0.9rem; border-radius: 12px; overflow: hidden; }
+        .row-correct { background-color: #f0fff4; }
+        .row-wrong { background-color: #fff5f5; }
+        .text-correct { color: var(--success); font-weight: bold; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-back">
+        <a href="index.html">← Retour à la galerie</a>
+    </div>
+
+    <header>
+        <h1>Automatisimes 01</h1>
+        <p>Entraînement à la Course aux Nombres</p>
+    </header>
+
+    <div id="timer" class="timer-bar">Temps restant : 09:00</div>
+
+    <div class="hint-box">
+        <strong>💡 Aide à la saisie :</strong><br>
+        • Pour les puissances, utilise le symbole <strong>^</strong> (ex: 10² → <strong>10^2</strong>).<br>
+        • Tu peux utiliser la virgule ou le point pour les nombres décimaux.<br>
+        • Les fractions sont acceptées (ex: <strong>1/2</strong> au lieu de 0,5).
+    </div>
+
+    <form id="quizForm">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num-col">N°</th>
+                    <th>ÉNONCÉ</th>
+                    <th>RÉPONSE</th>
+                </tr>
+            </thead>
+            <tbody id="questionsBody"></tbody>
+        </table>
+        <button type="button" class="btn-finish" onclick="calculateResults()">Valider mes réponses</button>
+    </form>
+
+    <div id="results-section">
+        <div class="badge-card">
+            <span id="badgeIcon" class="badge-icon"></span>
+            <h2 id="badgeTitle" style="margin:0;"></h2>
+            <div class="score-display"><span id="finalScore">0</span> / 22</div>
+            <p id="motivationalMessage" style="color: #718096;"></p>
+        </div>
+
+        <h3 style="text-align:left; color: var(--primary);">Correction détaillée</h3>
+        <table class="correction-table">
+            <thead>
+                <tr>
+                    <th class="num-col">N°</th>
+                    <th>Ta réponse</th>
+                    <th>Correction</th>
+                </tr>
+            </thead>
+            <tbody id="correctionBody"></tbody>
+        </table>
+        <button onclick="location.reload()" style="margin-top: 30px; padding: 12px 25px; border-radius: 8px; cursor: pointer; border: 1px solid #cbd5e0; background: white;">Recommencer le test</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { id: 1, q: "5 &times; 9", a: "45" },
+        { id: 2, q: "Le quart de 24", a: "6" },
+        { id: 3, q: "47 &minus; 29", a: "18" },
+        { id: 4, q: "Nombre entre 3 et 3,1", a: "3.05", type: "range" },
+        { id: 5, q: "0,4 + 0,16", a: "0.56" },
+        { id: 6, q: "Durée de 8h10 à 9h05 (min)", a: "55" },
+        { id: 7, q: "308,72 &times; 10", a: "3087.2" },
+        { id: 8, q: "205 + 3/100 + 7/1000", a: "205.037" },
+        { id: 9, q: "7 dm = ..... m", a: "0.7" },
+        { id: 10, q: "Prix de 10 stylos (si 4 coûtent 8€)", a: "20" },
+        { id: 11, q: "3x &minus; 5 = 7 (x = ?)", a: "4" },
+        { id: 12, q: "10³ / 10⁵ (en décimal)", a: "0.01" },
+        { id: 13, q: "Réduire : 8x² - 10x + 6x² + 12", a: "14x^2-10x+12", type: "algebra", hint: "ex: 14x^2-10x+12" },
+        { id: 14, q: "Programme : (2 - 5)²", a: "9" },
+        { id: 15, q: "13/35 - 2/7", a: "3/35" },
+        { id: 16, q: "Côté d'un carré d'aire 36 cm²", a: "6" },
+        { id: 17, q: "Proba nb premier entre 1 et 10", a: "0.4" },
+        { id: 18, q: "(2/5) &divide; (9/2)", a: "4/45" },
+        { id: 19, q: "3/5 de 40", a: "24" },
+        { id: 20, q: "Image de 3 par f(x) = 4 - 2x", a: "-2" },
+        { id: 21, q: "Distance à 90 km/h en 20 min (km)", a: "30" },
+        { id: 22, q: "Médiane de : 5, 10, 16, 18, 27", a: "16" }
+    ];
+
+    const container = document.getElementById('questionsBody');
+    quizData.forEach(item => {
+        container.innerHTML += `
+            <tr>
+                <td class="num-col">${item.id}</td>
+                <td>${item.q}</td>
+                <td><input type="text" id="ans-${item.id}" class="ans-input" placeholder="${item.hint || ''}" autocomplete="off"></td>
+            </tr>`;
+    });
+
+    let timeLeft = 540;
+    const timerDisplay = document.getElementById('timer');
+    const countdown = setInterval(() => {
+        timeLeft--;
+        let min = Math.floor(timeLeft / 60);
+        let sec = timeLeft % 60;
+        timerDisplay.innerText = `Temps restant : ${min}:${sec < 10 ? '0'+sec : sec}`;
+        if (timeLeft <= 0) calculateResults();
+    }, 1000);
+
+    function normalize(val) {
+        if (!val) return null;
+        let str = val.toString().replace(',', '.').replace(/\s/g, '').toLowerCase();
+        if (str.includes('/')) {
+            let parts = str.split('/');
+            return parseFloat(parts[0]) / parseFloat(parts[1]);
+        }
+        return parseFloat(str);
+    }
+
+    function calculateResults() {
+        clearInterval(countdown);
+        let score = 0;
+        const correctionBody = document.getElementById('correctionBody');
+        correctionBody.innerHTML = "";
+
+        quizData.forEach(item => {
+            let rawUser = document.getElementById(`ans-${item.id}`).value.trim();
+            let isCorrect = false;
+
+            if (item.type === "algebra") {
+                isCorrect = (rawUser.replace(/\s/g, '').replace('²', '^2') === item.a);
+            } else if (item.type === "range") {
+                let val = normalize(rawUser);
+                if (val > 3 && val < 3.1) isCorrect = true;
+            } else {
+                let userVal = normalize(rawUser);
+                let targetVal = normalize(item.a);
+                if (userVal !== null && Math.abs(userVal - targetVal) < 0.0001) isCorrect = true;
+            }
+
+            if (isCorrect) score++;
+
+            correctionBody.innerHTML += `
+                <tr class="${isCorrect ? 'row-correct' : 'row-wrong'}">
+                    <td class="num-col">${item.id}</td>
+                    <td>${rawUser || "<em>Vide</em>"}</td>
+                    <td class="text-correct">${item.a.replace('^2', '²')}</td>
+                </tr>`;
+        });
+
+        document.getElementById('quizForm').style.display = "none";
+        document.getElementById('timer').style.display = "none";
+        document.querySelector('.hint-box').style.display = "none";
+        document.getElementById('results-section').style.display = "block";
+        document.getElementById('finalScore').innerText = score;
+
+        const icon = document.getElementById('badgeIcon');
+        const title = document.getElementById('badgeTitle');
+        const msg = document.getElementById('motivationalMessage');
+
+        if (score >= 20) { icon.innerText = "🏆"; title.innerText = "EXPERT"; title.style.color = "#d4af37"; msg.innerText = "Parfait ! Tu as une excellente maîtrise du calcul mental."; }
+        else if (score >= 15) { icon.innerText = "🥈"; title.innerText = "TRÈS BIEN"; title.style.color = "#95a5a6"; msg.innerText = "Très bon score ! Encore un petit effort pour l'or."; }
+        else if (score >= 10) { icon.innerText = "🥉"; title.innerText = "BIEN"; title.style.color = "#cd7f32"; msg.innerText = "C'est bien. Analyse tes erreurs pour progresser."; }
+        else { icon.innerText = "💪"; title.innerText = "COURAGE"; title.style.color = "#3498db"; msg.innerText = "Continue de t'entraîner régulièrement, ça va venir !"; }
+        
+        window.scrollTo(0,0);
+    }
+</script>
+
+</body>
+</html>
