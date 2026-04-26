@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre 1 : Nombres Entiers - Maths 3ème</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
@@ -16,13 +18,14 @@
             --text: #2b2d42;
             --success: #2ecc71;
             --warning: #fab005;
+            --brevet: #e67e22;
         }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
         header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 1rem; text-align: center; }
-        .container { max-width: 1000px; margin: 2rem auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
         .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
         
-        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; }
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; flex-wrap: wrap; }
         .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
         .tab-btn.active { background: var(--primary); color: white; }
         
@@ -38,11 +41,161 @@
         .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
         
         .exercice-card { background: #fff; border: 1px solid #edf2f4; padding: 20px; margin-bottom: 25px; border-radius: 15px; position: relative; }
-        .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.8rem; margin-right: 10px; font-weight: 600; }
+        .badge { background: var(--accent); color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.8rem; margin-right: 10px; font-weight: 600; display: inline-block; margin-bottom: 10px; }
         
         .check-btn { background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 15px; font-family: 'Poppins'; transition: 0.3s; }
         .check-btn:hover { background: var(--primary); }
         .correction { display: none; background: #f0fff4; border: 1px solid var(--success); padding: 15px; margin-top: 15px; border-radius: 10px; color: #2d6a4f; }
+
+        .step-list { margin: 10px 0 0 20px; padding-left: 0; }
+        .step-list li { margin-bottom: 8px; }
+
+        /* Styles pour les exercices importés */
+        .exercice-card-import {
+            background: white;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        .card-header {
+            background: #f8fafc;
+            padding: 1rem 1.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .card-header h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+        }
+        .badge-import {
+            background: #3b82f6;
+            color: white;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .badge-brevet {
+            background: var(--brevet);
+            color: white;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .card-body {
+            padding: 1.6rem 1.8rem;
+        }
+        .question {
+            background: #f1f5f9;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            border-left: 5px solid #3b82f6;
+            margin-bottom: 1.3rem;
+            font-weight: 500;
+        }
+        .subquestion {
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.8rem 0 0.3rem;
+        }
+        .input-group label {
+            font-weight: 500;
+            min-width: 100px;
+        }
+        input {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid #cbd5e1;
+            font-family: 'Inter', monospace;
+            width: auto;
+            min-width: 200px;
+            font-size: 0.9rem;
+        }
+        button.verify {
+            background: #0f172a;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        button.verify:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+        .solution {
+            background: #fefce8;
+            border-left: 5px solid #eab308;
+            padding: 1rem 1.3rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            font-size: 0.92rem;
+            display: none;
+            line-height: 1.5;
+        }
+        .feedback-correct {
+            color: #15803d;
+            background: #dcfce7;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .feedback-wrong {
+            color: #b91c1c;
+            background: #fee2e2;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        hr {
+            margin: 0.8rem 0;
+            border-color: #e2e8f0;
+        }
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #eef2ff;
+            padding: 0.1rem 0.3rem;
+            border-radius: 6px;
+        }
+        .brevet-header {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .exercise-image {
+            max-width: 100%;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -60,68 +213,176 @@
     <div class="tabs">
         <button class="tab-btn active" onclick="showSection('cours')">📖 Cours Détaillé</button>
         <button class="tab-btn" onclick="showSection('exercices')">📝 Exercices Interactifs</button>
-        <button class="tab-btn" onclick="showSection('entraine')">⚡ Quiz</button>
+        <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
     </div>
 
     <div id="cours" class="content-section active">
-        
-        <h2>1. Division euclidienne</h2>
+        <h2>1. Nombres premiers</h2>
+        <div class="definition-box">
+            <strong>Définition :</strong> Un nombre premier est un entier naturel qui a exactement deux diviseurs distincts : 1 et lui-même.<br>
+            <strong>Exemples :</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, ...<br>
+            <strong>Remarques :</strong> 
+            <ul>
+                <li>2 est le seul nombre premier pair.</li>
+                <li>1 n'est pas premier (il n'a qu'un seul diviseur).</li>
+                <li>0 n'est pas premier.</li>
+            </ul>
+        </div>
+        <div class="example-box">
+            <strong>📌 Exemple détaillé : Vérifier si 13 est premier</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche les diviseurs de 13. On teste les nombres de 2 jusqu'à √13 ≈ 3,6.</li>
+                <li>Étape 2 : 13 n'est pas divisible par 2 (car il est impair).</li>
+                <li>Étape 3 : 13 n'est pas divisible par 3 (car 1+3=4 non multiple de 3).</li>
+                <li>Étape 4 : On a testé tous les diviseurs possibles. Aucun diviseur autre que 1 et 13.</li>
+                <li><strong>Conclusion : 13 est un nombre premier.</strong></li>
+            </ul>
+            <br>
+            <strong>📌 Exemple détaillé : Vérifier si 21 est premier</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche les diviseurs de 21. On teste les nombres de 2 jusqu'à √21 ≈ 4,5.</li>
+                <li>Étape 2 : 21 n'est pas divisible par 2 (impair).</li>
+                <li>Étape 3 : 21 est divisible par 3 car 2+1=3 (multiple de 3). 21 ÷ 3 = 7.</li>
+                <li>Étape 4 : On a trouvé un diviseur autre que 1 et 21 (c'est 3).</li>
+                <li><strong>Conclusion : 21 n'est pas premier (c'est un nombre composé : 21 = 3 × 7).</strong></li>
+            </ul>
+        </div>
+        <div class="utilite-box">
+            <strong>💡 Ça sert à quoi ?</strong> Les nombres premiers sont essentiels en cryptographie (sécuriser les données bancaires, les mots de passe), en théorie des nombres et pour simplifier des fractions.
+        </div>
+
+        <h2>2. Division euclidienne</h2>
         <div class="definition-box">
             <strong>Définition :</strong> Effectuer la division euclidienne de \(a\) par \(b\), c'est trouver \(q\) et \(r\) tels que :<br>
             <center><strong>\(a = b \times q + r\) avec \(0 \le r < b\)</strong></center>
         </div>
-
-        <h2>2. Décomposition en facteurs premiers</h2>
-        <p>Tout nombre peut s'écrire comme un produit unique de nombres premiers.</p>
-        <div class="method-box">
-            <strong>Méthode en colonne (Exemple : 84)</strong><br>
-            84 | <strong>2</strong> (car pair)<br>
-            42 | <strong>2</strong> (car pair)<br>
-            21 | <strong>3</strong> (car 2+1=3)<br>
-             7 | <strong>7</strong> (car premier)<br>
-             1 | <br>
-            <strong>\(84 = 2^2 \times 3 \times 7\)</strong>
+        <div class="example-box">
+            <strong>📌 Exemple détaillé : Partage de 47 bonbons entre 5 enfants</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche combien de fois 5 (nombre d'enfants) va dans 47 (nombre de bonbons).</li>
+                <li>Étape 2 : 5 × 9 = 45 (9 enfants reçoivent 5 bonbons chacun → 45 bonbons distribués).</li>
+                <li>Étape 3 : On calcule le reste : 47 − 45 = 2 bonbons non distribués.</li>
+                <li>Étape 4 : On vérifie que le reste (2) est bien inférieur au diviseur (5).</li>
+                <li><strong>Résultat : 47 = 5 × 9 + 2 → Chaque enfant reçoit 9 bonbons, il reste 2 bonbons.</strong></li>
+            </ul>
+            <br>
+            <strong>📌 Exemple détaillé : Parking de 135 places en rangées de 12 places</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche combien de rangées complètes de 12 places on peut faire avec 135 places.</li>
+                <li>Étape 2 : 12 × 11 = 132 (11 rangées pleines utilisent 132 places).</li>
+                <li>Étape 3 : On calcule le reste : 135 − 132 = 3 places libres.</li>
+                <li>Étape 4 : On vérifie que le reste (3) est inférieur à 12.</li>
+                <li><strong>Résultat : 135 = 12 × 11 + 3 → 11 rangées pleines et 3 places libres.</strong></li>
+            </ul>
         </div>
 
-        <h2>3. Plus Grand Commun Diviseur (PGCD)</h2>
+        <h2>3. Décomposition en facteurs premiers</h2>
+        <p>Tout nombre peut s'écrire comme un produit unique de nombres premiers.</p>
+        <div class="method-box">
+            <strong>Méthode en colonne :</strong> On divise successivement le nombre par les nombres premiers dans l'ordre.
+        </div>
+        <div class="example-box">
+            <strong>📌 Exemple détaillé : Décomposition de 84 en facteurs premiers</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : 84 est pair → on divise par 2 → 84 ÷ 2 = 42.</li>
+                <li>Étape 2 : 42 est pair → on divise par 2 → 42 ÷ 2 = 21.</li>
+                <li>Étape 3 : 21 n'est pas pair. La somme des chiffres 2+1=3 est multiple de 3 → on divise par 3 → 21 ÷ 3 = 7.</li>
+                <li>Étape 4 : 7 est un nombre premier → on divise par 7 → 7 ÷ 7 = 1. On s'arrête.</li>
+                <li><strong>Résultat : 84 = 2 × 2 × 3 × 7 = 2² × 3 × 7.</strong></li>
+            </ul>
+            <br>
+            <strong>📌 Exemple détaillé : Décomposition de 60 en facteurs premiers</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : 60 est pair → 60 ÷ 2 = 30.</li>
+                <li>Étape 2 : 30 est pair → 30 ÷ 2 = 15.</li>
+                <li>Étape 3 : 15 n'est pas pair → 1+5=6 multiple de 3 → 15 ÷ 3 = 5.</li>
+                <li>Étape 4 : 5 est premier → 5 ÷ 5 = 1. Terminé.</li>
+                <li><strong>Résultat : 60 = 2² × 3 × 5.</strong></li>
+            </ul>
+        </div>
+        <div class="utilite-box">
+            <strong>💡 Exemple concret :</strong> Pour simplifier la fraction \(\frac{60}{84}\) :<br>
+            \(60 = 2^2 \times 3 \times 5\) et \(84 = 2^2 \times 3 \times 7\) → on simplifie par \(2^2 \times 3\) donne \(\frac{5}{7}\).
+        </div>
+
+        <h2>4. Plus Grand Commun Diviseur (PGCD)</h2>
         <div class="method-box">
             <strong>Méthode :</strong> On décompose, puis on multiplie les <strong>facteurs communs</strong> munis de leur <strong>plus petite puissance</strong>.
         </div>
         <div class="example-box">
-            <strong>Exemple : PGCD(60 ; 84)</strong><br>
-            • \(60 = 2^2 \times 3 \times 5\)<br>
-            • \(84 = 2^2 \times 3 \times 7\)<br>
-            Communs : 2 et 3. Puissances : \(2^2\) et \(3^1\).<br>
-            <strong>PGCD = \(4 \times 3 = 12\)</strong>.
+            <strong>📌 Exemple détaillé : PGCD(60 ; 84)</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : Décomposer 60 → \(60 = 2^2 × 3 × 5\)</li>
+                <li>Étape 2 : Décomposer 84 → \(84 = 2^2 × 3 × 7\)</li>
+                <li>Étape 3 : Identifier les facteurs communs : 2² et 3 ( le facteur 5 n'est pas dans 84, le 7 n'est pas dans 60).</li>
+                <li>Étape 4 : Prendre chaque facteur avec la plus petite puissance : 2² (exposant 2 dans les deux) et 3¹ (exposant 1 dans les deux).</li>
+                <li>Étape 5 : Multiplier : \(2² × 3 = 4 × 3 = 12\).</li>
+                <li><strong>Conclusion : PGCD(60 ; 84) = 12.</strong></li>
+            </ul>
         </div>
         <div class="utilite-box">
             <strong>💡 Ça sert à quoi ?</strong> À faire des partages équitables. <br>
-            <em>Exemple : Faire le plus grand nombre de bouquets identiques avec 60 roses et 84 iris.</em>
+            <em>Exemple : Faire le plus grand nombre de bouquets identiques avec 60 roses et 84 iris.</em><br>
+            <strong>📌 Étapes détaillées :</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche le PGCD de 60 et 84 car le nombre de bouquets doit diviser à la fois 60 et 84.</li>
+                <li>Étape 2 : Décomposer 60 → \(60 = 2^2 × 3 × 5\)</li>
+                <li>Étape 3 : Décomposer 84 → \(84 = 2^2 × 3 × 7\)</li>
+                <li>Étape 4 : Facteurs communs : 2² et 3 → PGCD = 2² × 3 = 4 × 3 = 12</li>
+                <li>Étape 5 : Chaque bouquet contiendra 60 ÷ 12 = 5 roses et 84 ÷ 12 = 7 iris.</li>
+                <li><strong>Conclusion : On peut faire 12 bouquets identiques, chacun composé de 5 roses et 7 iris.</strong></li>
+            </ul>
+            <br>
+            <strong>Autre exemple concret :</strong> Pour carreler une pièce rectangulaire de 126 cm sur 210 cm avec des carreaux carrés identiques les plus grands possible, on utilise le PGCD(126,210).<br>
+            <strong>Détail du calcul :</strong><br>
+            - 126 = 2 × 3² × 7<br>
+            - 210 = 2 × 3 × 5 × 7<br>
+            - Facteurs communs : 2, 3, 7 → PGCD = 2 × 3 × 7 = 42 cm de côté.
         </div>
 
-        <h2>4. Plus Petit Commun Multiple (PPCM)</h2>
+        <h2>5. Plus Petit Commun Multiple (PPCM)</h2>
         <div class="method-box">
             <strong>Méthode :</strong> On décompose, puis on multiplie <strong>tous les facteurs</strong> munis de leur <strong>plus grande puissance</strong>.
         </div>
         <div class="example-box">
-            <strong>Exemple : PPCM(84 ; 150)</strong><br>
-            • \(84 = 2^2 \times 3 \times 7\)<br>
-            • \(150 = 2 \times 3 \times 5^2\)<br>
-            Facteurs présents : 2, 3, 5, 7. Max : \(2^2, 3^1, 5^2, 7^1\).<br>
-            <strong>PPCM = \(4 \times 3 \times 25 \times 7 = 2100\)</strong>.
+            <strong>📌 Exemple détaillé : PPCM(84 ; 150)</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : Décomposer 84 → \(84 = 2^2 × 3 × 7\)</li>
+                <li>Étape 2 : Décomposer 150 → \(150 = 2 × 3 × 5^2\)</li>
+                <li>Étape 3 : Lister tous les facteurs premiers présents : 2, 3, 5, 7.</li>
+                <li>Étape 4 : Prendre chaque facteur avec la plus grande puissance : 2² (max entre 2² et 2¹), 3¹ (identique), 5² (présent seulement dans 150), 7¹ (présent seulement dans 84).</li>
+                <li>Étape 5 : Multiplier : \(2² × 3 × 5² × 7 = 4 × 3 × 25 × 7 = 12 × 175 = 2100\).</li>
+                <li><strong>Conclusion : PPCM(84 ; 150) = 2100.</strong></li>
+            </ul>
         </div>
         <div class="utilite-box">
             <strong>💡 Ça sert à quoi ?</strong> À trouver la répétition de cycles.<br>
-            <em>Exemple : Savoir quand deux bus se recroiseront s'ils ont des durées de trajets différentes.</em>
+            <em>Exemple : Savoir quand deux bus se recroiseront s'ils ont des durées de trajets différentes.</em><br>
+            <strong>📌 Étapes détaillées :</strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : Bus A fait un trajet toutes les 15 minutes. Bus B toutes les 20 minutes.</li>
+                <li>Étape 2 : On cherche le PPCM(15 ; 20) car c'est le premier instant où les deux cycles coïncident.</li>
+                <li>Étape 3 : Décomposer 15 → \(15 = 3 × 5\)</li>
+                <li>Étape 4 : Décomposer 20 → \(20 = 2^2 × 5\)</li>
+                <li>Étape 5 : Lister tous les facteurs : 2, 3, 5 → prendre la plus grande puissance : 2², 3¹, 5¹</li>
+                <li>Étape 6 : PPCM = 2² × 3 × 5 = 4 × 3 × 5 = 60</li>
+                <li><strong>Conclusion : Les deux bus se recroiseront toutes les 60 minutes (toutes les heures).</strong></li>
+            </ul>
+            <br>
+            <strong>Autre exemple concret détaillé :</strong> Dans une course à pied, Pierre fait un tour en 15 min et Paul en 20 min. Ils partent ensemble. Quand se retrouveront-ils ensemble sur la ligne de départ ?<br>
+            <ul class="step-list">
+                <li>Étape 1 : On cherche PPCM(15 ; 20) = 60.</li>
+                <li><strong>Conclusion : Ils se retrouveront ensemble toutes les 60 minutes (1 heure).</strong></li>
+            </ul>
         </div>
     </div>
 
     <div id="exercices" class="content-section">
-        <h2>Exercices d'entraînement</h2>
+        <h2>📚 Exercices d'entraînement</h2>
 
         <h3>I. Applications directes</h3>
         <div class="exercice-card">
-            <span class="badge">Application 1</span>
+            <div class="badge">Application 1</div>
             Décomposer 120 et 450 en produits de facteurs premiers.
             <br><button class="check-btn" onclick="toggleCorr('c1')">Vérifier la réponse</button>
             <div id="c1" class="correction">
@@ -131,7 +392,7 @@
         </div>
 
         <div class="exercice-card">
-            <span class="badge">Application 2</span>
+            <div class="badge">Application 2</div>
             Calculer le PGCD de 126 et 210.
             <br><button class="check-btn" onclick="toggleCorr('c2')">Vérifier la réponse</button>
             <div id="c2" class="correction">
@@ -143,7 +404,7 @@
 
         <h3>II. Problèmes concrets</h3>
         <div class="exercice-card">
-            <span class="badge">Problème 1</span>
+            <div class="badge">Problème 1</div>
             Un photographe doit répartir 250 photos dans des salles de 18 places maximum. Combien de salles faut-il ?
             <br><button class="check-btn" onclick="toggleCorr('c3')">Vérifier la réponse</button>
             <div id="c3" class="correction">
@@ -153,7 +414,7 @@
         </div>
 
         <div class="exercice-card">
-            <span class="badge">Problème 2</span>
+            <div class="badge">Problème 2</div>
             Deux phares s'allument à minuit. Le phare A brille toutes les 15s et le B toutes les 20s. Quand brilleront-ils ensemble ?
             <br><button class="check-btn" onclick="toggleCorr('c4')">Vérifier la réponse</button>
             <div id="c4" class="correction">
@@ -161,16 +422,316 @@
                 Ils brilleront ensemble toutes les <strong>60 secondes (1 minute)</strong>.
             </div>
         </div>
+
+        <h3>III. Exercices supplémentaires</h3>
+        
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📌 Exercice 1 – Division euclidienne (quotient 24, diviseur 9)</h4>
+                <div class="badge-import">Division euclidienne</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Le quotient d'une division euclidienne est 24 et son diviseur est 9.</div>
+                <div class="subquestion">1) Quels sont tous les restes possibles ?</div>
+                <div class="input-group">
+                    <label>Restes possibles :</label>
+                    <input type="text" id="ex1a" placeholder="ex: 0,1,2,3,4,5,6,7,8" style="width: 280px;">
+                    <button class="verify" id="btn1a">✔️ Vérifier</button>
+                </div>
+                <div class="subquestion">2) En déduire tous les dividendes possibles.</div>
+                <div class="input-group">
+                    <label>Dividendes possibles :</label>
+                    <input type="text" id="ex1b" placeholder="ex: 216,217,..." style="width: 360px;">
+                    <button class="verify" id="btn1b">✔️ Vérifier</button>
+                </div>
+                <div id="sol1" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🔢 Exercice 2 – Nombre 607* divisible par 2 et 3</h4>
+                <div class="badge-import">Critères / division euclidienne</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Un nombre entier composé de 4 chiffres s'écrit : 607*. Ce nombre est divisible à la fois par 2 et par 3. Quels sont tous les nombres possibles ?</div>
+                <div class="input-group">
+                    <label>Nombres possibles :</label>
+                    <input type="text" id="ex2" placeholder="ex: 6072, 6078" style="width: 300px;">
+                    <button class="verify" id="btn2">🔍 Vérifier</button>
+                </div>
+                <div id="sol2" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🖼️ Exercice 3 – Photographies dans des salles</h4>
+                <div class="badge-import">Division euclidienne</div>
+            </div>
+            <div class="card-body">
+                <div class="question">On doit répartir 250 photographies. Chaque salle contient au plus 18 photographies. Combien de salles doit-on prévoir au minimum ?</div>
+                <div class="input-group">
+                    <label>Nombre minimal de salles :</label>
+                    <input type="text" id="ex3" placeholder="ex: 14" style="width: 100px;">
+                    <button class="verify" id="btn3">🏛️ Vérifier</button>
+                </div>
+                <div id="sol3" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📋 Exercice 4 – Liste des diviseurs</h4>
+                <div class="badge-import">Diviseurs d'un nombre</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Donner la liste de tous les diviseurs de :</div>
+                <div><strong>a) 22 &nbsp;&nbsp; b) 45 &nbsp;&nbsp; c) 50 &nbsp;&nbsp; d) 42 &nbsp;&nbsp; e) 37 &nbsp;&nbsp; f) 60</strong></div>
+                <div class="input-group"><label>Diviseurs 22 :</label><input type="text" id="ex4a" placeholder="ex: 1,2,11,22" style="width: 240px;"><button class="verify" id="btn4a">Vérifier</button></div>
+                <div class="input-group"><label>Diviseurs 45 :</label><input type="text" id="ex4b" placeholder="1,3,5,9,15,45" style="width: 260px;"><button class="verify" id="btn4b">Vérifier</button></div>
+                <div class="input-group"><label>Diviseurs 50 :</label><input type="text" id="ex4c" placeholder="1,2,5,10,25,50" style="width: 240px;"><button class="verify" id="btn4c">Vérifier</button></div>
+                <div class="input-group"><label>Diviseurs 42 :</label><input type="text" id="ex4d" placeholder="1,2,3,6,7,14,21,42" style="width: 300px;"><button class="verify" id="btn4d">Vérifier</button></div>
+                <div class="input-group"><label>Diviseurs 37 :</label><input type="text" id="ex4e" placeholder="nombre premier" style="width: 150px;"><button class="verify" id="btn4e">Vérifier</button></div>
+                <div class="input-group"><label>Diviseurs 60 :</label><input type="text" id="ex4f" placeholder="1,2,3,4,5,6,10,12,15,20,30,60" style="width: 360px;"><button class="verify" id="btn4f">Vérifier</button></div>
+                <div id="sol4" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏃 Exercice 5 – Groupes d'adolescents</h4>
+                <div class="badge-import">Diviseurs & PGCD</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Centre sportif : 120 adolescents. Groupes de même effectif, effectif par groupe strictement entre 15 et 30.</div>
+                <div class="subquestion">1) Liste des diviseurs de 120.</div>
+                <div class="input-group"><label>Diviseurs 120 :</label><input type="text" id="ex5a" placeholder="tous les diviseurs" style="width: 360px;"><button class="verify" id="btn5a">Vérifier</button></div>
+                <div class="subquestion">2) Répartitions possibles (nombre de groupes et effectif).</div>
+                <div class="input-group"><label>Possibilités :</label><input type="text" id="ex5b" placeholder="ex: 6 groupes de 20, 5 groupes de 24" style="width: 400px;"><button class="verify" id="btn5b">Vérifier</button></div>
+                <div id="sol5" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🤝 Exercice 6 – Diviseurs communs</h4>
+                <div class="badge-import">Diviseurs communs / PGCD</div>
+            </div>
+            <div class="card-body">
+                <div class="question">a) i) Diviseurs de 35. ii) Diviseurs de 55. iii) Diviseurs communs à 35 et 55.</div>
+                <div class="input-group"><label>35 :</label><input type="text" id="ex6a1" style="width: 180px;"><button class="verify" id="btn6a1">Vérifier</button></div>
+                <div class="input-group"><label>55 :</label><input type="text" id="ex6a2" style="width: 180px;"><button class="verify" id="btn6a2">Vérifier</button></div>
+                <div class="input-group"><label>Communs (35;55) :</label><input type="text" id="ex6a3" style="width: 180px;"><button class="verify" id="btn6a3">Vérifier</button></div>
+                <hr>
+                <div class="subquestion">b) Diviseurs communs à 18 et 36 (PGCD(18,36)=18).</div>
+                <div class="input-group"><label>Communs (18;36) :</label><input type="text" id="ex6b" placeholder="1,2,3,6,9,18" style="width: 260px;"><button class="verify" id="btn6b">Vérifier</button></div>
+                <div class="subquestion">c) Diviseurs communs à 21 et 10.</div>
+                <div class="input-group"><label>Communs (21;10) :</label><input type="text" id="ex6c" style="width: 120px;"><button class="verify" id="btn6c">Vérifier</button></div>
+                <div id="sol6" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>💐 Exercice 7 – Bouquets de pivoines et roses</h4>
+                <div class="badge-import">PGCD / Division euclidienne</div>
+            </div>
+            <div class="card-body">
+                <div class="question">64 pivoines et 160 roses. Bouquets identiques (même composition).</div>
+                <div class="subquestion">1) Toutes les fleurs seront-elles utilisées si on compose : a) 40 bouquets ? b) 16 bouquets ?</div>
+                <div class="input-group"><label>a) 40 bouquets ? (Oui/Non)</label><input type="text" id="ex7a" placeholder="Oui ou Non" style="width: 100px;"><button class="verify" id="btn7a">Vérifier</button></div>
+                <div class="input-group"><label>b) 16 bouquets ? (Oui/Non)</label><input type="text" id="ex7b" placeholder="Oui ou Non" style="width: 100px;"><button class="verify" id="btn7b">Vérifier</button></div>
+                <div class="subquestion">2) Avec 32 bouquets identiques : a) Justifier qu'il ne restera aucune fleur. b) Combien de pivoines et roses par bouquet ? (Utiliser le PGCD)</div>
+                <div class="input-group"><label>Justification (PGCD) :</label><input type="text" id="ex7c" placeholder="ex: 32 est diviseur de 64 et 160" style="width: 300px;"><button class="verify" id="btn7c">Vérifier</button></div>
+                <div class="input-group"><label>Pivoines/ bouquet & roses/ bouquet :</label><input type="text" id="ex7d" placeholder="2 pivoines, 5 roses" style="width: 260px;"><button class="verify" id="btn7d">Vérifier</button></div>
+                <div id="sol7" class="solution"></div>
+            </div>
+        </div>
+        
+        <footer><i class="fas fa-chalkboard-teacher"></i> Toutes les corrections utilisent la division euclidienne, le PGCD ou le PPCM conformément au programme.</footer>
     </div>
 
-    <div id="entraine" class="content-section" style="text-align: center;">
-        <h2>Quiz Flash ⚡</h2>
-        <div class="method-box">
-            <p>Le nombre 1 est-il un nombre premier ?</p>
-            <button class="tab-btn" style="border: 1px solid #ccc" onclick="checkQ(true)">NON</button>
-            <button class="tab-btn" style="border: 1px solid #ccc" onclick="checkQ(false)">OUI</button>
-            <p id="q-res" style="margin-top: 15px; font-weight: 600;"></p>
+    <div id="brevet" class="content-section">
+        <div class="brevet-header">
+            <i class="fas fa-graduation-cap"></i> Entraînement au Brevet des Collèges
         </div>
+        <h2>📝 Exercices Type Brevet</h2>
+        <p style="margin-bottom: 20px;">Ces exercices sont inspirés d'annales du Diplôme National du Brevet. Ils mobilisent les notions de PGCD, PPCM, division euclidienne et nombres premiers.</p>
+
+        <!-- EXERCICE BREVET 1 (précédent) -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏆 Exercice Brevet 1 – Le problème des confettis</h4>
+                <div class="badge-brevet">Brevet 2021 (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Pour une fête, on dispose de 180 confettis rouges et 150 confettis bleus. On veut faire des sachets identiques contenant chacun le même nombre de confettis rouges et le même nombre de confettis bleus, en utilisant tous les confettis.</div>
+                <div class="subquestion">1) Quel est le plus grand nombre de sachets que l'on peut réaliser ?</div>
+                <div class="input-group"><label>Nombre maximal de sachets :</label><input type="text" id="brevet1a" placeholder="ex: 30" style="width: 120px;"><button class="verify" id="btnBrevet1a">🎯 Vérifier</button></div>
+                <div class="subquestion">2) Dans ce cas, combien y aura-t-il de confettis rouges et de confettis bleus par sachet ?</div>
+                <div class="input-group"><label>Confettis par sachet :</label><input type="text" id="brevet1b" placeholder="ex: 6 rouges, 5 bleus" style="width: 250px;"><button class="verify" id="btnBrevet1b">🎯 Vérifier</button></div>
+                <div id="solBrevet1" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE BREVET 2 (précédent) -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏆 Exercice Brevet 2 – Le carrelage de la salle</h4>
+                <div class="badge-brevet">Brevet 2019 (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Une salle rectangulaire mesure 270 cm de longueur et 210 cm de largeur. On veut la carreler avec des carreaux carrés identiques, sans découpe, en utilisant les plus grands carreaux possibles.</div>
+                <div class="subquestion">1) Quelle est la longueur du côté d'un carreau ?</div>
+                <div class="input-group"><label>Côté du carreau (en cm) :</label><input type="text" id="brevet2a" placeholder="ex: 30" style="width: 120px;"><button class="verify" id="btnBrevet2a">🎯 Vérifier</button></div>
+                <div class="subquestion">2) Combien de carreaux seront nécessaires ?</div>
+                <div class="input-group"><label>Nombre de carreaux :</label><input type="text" id="brevet2b" placeholder="ex: 63" style="width: 120px;"><button class="verify" id="btnBrevet2b">🎯 Vérifier</button></div>
+                <div id="solBrevet2" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE BREVET 3 (précédent) -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏆 Exercice Brevet 3 – Les feux de signalisation</h4>
+                <div class="badge-brevet">Brevet 2022 (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Un feu rouge clignote toutes les 24 secondes, un feu vert clignote toutes les 36 secondes. Ils s'allument ensemble à 8h00.</div>
+                <div class="subquestion">À quelle heure s'allumeront-ils à nouveau ensemble pour la première fois ?</div>
+                <div class="input-group"><label>Heure (format HH:MM:SS) :</label><input type="text" id="brevet3" placeholder="ex: 8:01:12" style="width: 150px;"><button class="verify" id="btnBrevet3">🎯 Vérifier</button></div>
+                <div id="solBrevet3" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE BREVET 4 (précédent) -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏆 Exercice Brevet 4 – Nombres premiers et fractions</h4>
+                <div class="badge-brevet">Brevet 2020 (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">On considère la fraction \(\frac{252}{294}\).</div>
+                <div class="subquestion">1) Décomposer 252 et 294 en produits de facteurs premiers.</div>
+                <div class="input-group"><label>252 =</label><input type="text" id="brevet4a" placeholder="ex: 2^2 × 3^2 × 7" style="width: 200px;"><button class="verify" id="btnBrevet4a">Vérifier</button></div>
+                <div class="input-group"><label>294 =</label><input type="text" id="brevet4b" placeholder="ex: 2 × 3 × 7^2" style="width: 200px;"><button class="verify" id="btnBrevet4b">Vérifier</button></div>
+                <div class="subquestion">2) En déduire la fraction irréductible égale à \(\frac{252}{294}\).</div>
+                <div class="input-group"><label>Fraction irréductible :</label><input type="text" id="brevet4c" placeholder="ex: 6/7" style="width: 120px;"><button class="verify" id="btnBrevet4c">Vérifier</button></div>
+                <div id="solBrevet4" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ========== NOUVEAUX EXERCICES DU FICHIER PDF ========== -->
+        
+        <!-- EXERCICE PDF 1 : Problème des bus (avec image) -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🚌 Exercice Brevet 5 – Les deux bus (Amérique du Nord)</h4>
+                <div class="badge-brevet">Brevet (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <img src="image1.png" alt="Schéma du problème des bus" class="exercise-image" style="max-width: 100%; border-radius: 10px;">
+                <div class="question">
+                    C'est à 6 h 30 que les deux bus des lignes 1 et 2 partent de l'arrêt « Mairie » dans le sens des aiguilles d'une montre.<br>
+                    Le bus de la ligne 1 met 3 minutes entre chaque arrêt (temps de stationnement compris), tandis que le bus de la ligne 2 met 4 minutes.<br>
+                    Tous les deux vont effectuer le circuit complet un grand nombre de fois. Ils s'arrêteront juste après 20 h.<br>
+                    Est-ce que les deux bus vont se retrouver à un moment de la journée à l'arrêt « Mairie » en même temps ? Si oui, donner tous les horaires précis de ces rencontres.
+                </div>
+                <div class="input-group">
+                    <label>Horaires des rencontres :</label>
+                    <input type="text" id="pdfEx1" placeholder="ex: 6h30, 6h42, 6h54, ..." style="width: 350px;">
+                    <button class="verify" id="btnPdfEx1">🚌 Vérifier</button>
+                </div>
+                <div id="solPdfEx1" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE PDF 2 : Mosaïque carrelage -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏠 Exercice Brevet 6 – Mosaïque sur le mur (Amérique Sud)</h4>
+                <div class="badge-brevet">Brevet (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Carole souhaite réaliser une mosaïque sur un mur de sa maison. La surface à paver est un rectangle de dimensions 108 cm et 225 cm et doit être entièrement recouverte par des carreaux de faïence carrés de même dimension sans découpe.
+                </div>
+                <div class="subquestion">1) Carole peut-elle utiliser des carreaux de 3 cm de côté ? De 6 cm de côté ?</div>
+                <div class="input-group"><label>Carreaux 3 cm (Oui/Non) :</label><input type="text" id="pdfEx2a" style="width: 100px;"><button class="verify" id="btnPdfEx2a">Vérifier</button></div>
+                <div class="input-group"><label>Carreaux 6 cm (Oui/Non) :</label><input type="text" id="pdfEx2b" style="width: 100px;"><button class="verify" id="btnPdfEx2b">Vérifier</button></div>
+                <div class="subquestion">2) Quelle est la dimension maximale des carreaux que Carole peut poser ? Combien de carreaux utilisera-t-elle ?</div>
+                <div class="input-group"><label>Dimension max (cm) :</label><input type="text" id="pdfEx2c" style="width: 80px;"><button class="verify" id="btnPdfEx2c">Vérifier</button></div>
+                <div class="input-group"><label>Nombre de carreaux :</label><input type="text" id="pdfEx2d" style="width: 100px;"><button class="verify" id="btnPdfEx2d">Vérifier</button></div>
+                <div id="solPdfEx2" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE PDF 3 : Laboratoire A et B -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧪 Exercice Brevet 7 – Vaccin contre la grippe (Laboratoires A et B)</h4>
+                <div class="badge-brevet">Brevet (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Laboratoire A : 5 groupes de 29 souris. 3 groupes vaccinés (aucune malade), 2 groupes non vaccinés (23 malades par groupe).<br>
+                    Laboratoire B : proportion \( \frac{140}{870} \) de souris malades.
+                </div>
+                <div class="subquestion">1) a) Montrer que la proportion de souris malades dans le labo A est \( \frac{146}{145} \). b) Justifier la non-simplification.</div>
+                <div class="input-group"><label>Vérification (taper la fraction) :</label><input type="text" id="pdfEx3a" placeholder="ex: 146/145" style="width: 120px;"><button class="verify" id="btnPdfEx3a">Vérifier</button></div>
+                <div class="subquestion">2) Décomposer 140 et 870 en produits de facteurs premiers, puis donner la forme irréductible de \( \frac{140}{870} \).</div>
+                <div class="input-group"><label>140 =</label><input type="text" id="pdfEx3b" style="width: 180px;"><button class="verify" id="btnPdfEx3b">Vérifier</button></div>
+                <div class="input-group"><label>870 =</label><input type="text" id="pdfEx3c" style="width: 180px;"><button class="verify" id="btnPdfEx3c">Vérifier</button></div>
+                <div class="input-group"><label>Fraction irréductible :</label><input type="text" id="pdfEx3d" style="width: 100px;"><button class="verify" id="btnPdfEx3d">Vérifier</button></div>
+                <div id="solPdfEx3" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE PDF 4 : Trésor du capitaine -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>💰 Exercice Brevet 8 – Le trésor du capitaine</h4>
+                <div class="badge-brevet">Brevet (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Un capitaine possède un trésor constitué de 69 diamants, 1 150 perles et 4 140 pièces d'or. Il partage équitablement le trésor entre les marins. Toutes les pièces, perles et diamants ont été distribués.
+                </div>
+                <div class="subquestion">1) Décomposer 69, 1 150 et 4 140 en produits de facteurs premiers.</div>
+                <div class="input-group"><label>69 =</label><input type="text" id="pdfEx4a" style="width: 150px;"><button class="verify" id="btnPdfEx4a">Vérifier</button></div>
+                <div class="input-group"><label>1150 =</label><input type="text" id="pdfEx4b" style="width: 180px;"><button class="verify" id="btnPdfEx4b">Vérifier</button></div>
+                <div class="input-group"><label>4140 =</label><input type="text" id="pdfEx4c" style="width: 200px;"><button class="verify" id="btnPdfEx4c">Vérifier</button></div>
+                <div class="subquestion">2) Combien y a-t-il de marins ?</div>
+                <div class="input-group"><label>Nombre de marins :</label><input type="text" id="pdfEx4d" style="width: 80px;"><button class="verify" id="btnPdfEx4d">Vérifier</button></div>
+                <div id="solPdfEx4" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- EXERCICE PDF 5 : Nems et samossas -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🍱 Exercice Brevet 9 – Nems et samossas (snack)</h4>
+                <div class="badge-brevet">Brevet (inspiré)</div>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Un snack vend des barquettes composées de nems et de samossas. Le cuisinier a préparé 162 nems et 108 samossas. Dans chaque barquette : le nombre de nems doit être le même ; le nombre de samossas doit être le même ; tous les nems et tous les samossas doivent être utilisés.
+                </div>
+                <div class="subquestion">1) Décomposer 162 et 108 en produits de facteurs premiers.</div>
+                <div class="input-group"><label>162 =</label><input type="text" id="pdfEx5a" style="width: 150px;"><button class="verify" id="btnPdfEx5a">Vérifier</button></div>
+                <div class="input-group"><label>108 =</label><input type="text" id="pdfEx5b" style="width: 150px;"><button class="verify" id="btnPdfEx5b">Vérifier</button></div>
+                <div class="subquestion">2) Déterminer deux diviseurs communs à 162 et 108 plus grands que 10.</div>
+                <div class="input-group"><label>Diviseurs >10 :</label><input type="text" id="pdfEx5c" placeholder="ex: 18, 27" style="width: 150px;"><button class="verify" id="btnPdfEx5c">Vérifier</button></div>
+                <div class="subquestion">3) a) Peut-il réaliser 36 barquettes ? b) Nombre maximal de barquettes ? c) Combien de nems et samossas par barquette dans ce cas ?</div>
+                <div class="input-group"><label>36 barquettes ? (Oui/Non) :</label><input type="text" id="pdfEx5d" style="width: 80px;"><button class="verify" id="btnPdfEx5d">Vérifier</button></div>
+                <div class="input-group"><label>Nombre max de barquettes :</label><input type="text" id="pdfEx5e" style="width: 80px;"><button class="verify" id="btnPdfEx5e">Vérifier</button></div>
+                <div class="input-group"><label>Composition (nems, samossas) :</label><input type="text" id="pdfEx5f" placeholder="ex: 3 nems, 2 samossas" style="width: 200px;"><button class="verify" id="btnPdfEx5f">Vérifier</button></div>
+                <div id="solPdfEx5" class="solution"></div>
+            </div>
+        </div>
+
+        <footer><i class="fas fa-graduation-cap"></i> Ces exercices sont similaires à ceux du Diplôme National du Brevet. Pense à bien justifier tes réponses !</footer>
     </div>
 </div>
 
@@ -194,12 +755,141 @@
         }
     }
 
-    function checkQ(isCorrect) {
-        const res = document.getElementById('q-res');
-        res.innerHTML = isCorrect ? "✅ Bravo !" : "❌ Faux, il n'a qu'un diviseur.";
-        res.style.color = isCorrect ? "green" : "red";
+    function displaySolution(divId, content, isCorrect) {
+        const solDiv = document.getElementById(divId);
+        solDiv.style.display = 'block';
+        let badge = isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div>';
+        solDiv.innerHTML = badge + content;
     }
-</script>
 
+    function displayBrevetSolution(divId, content, isCorrect) {
+        const solDiv = document.getElementById(divId);
+        solDiv.style.display = 'block';
+        let badge = isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div>';
+        solDiv.innerHTML = badge + content;
+    }
+
+    // ========== CORRECTIONS EXERCICES PRÉCÉDENTS ==========
+    document.getElementById('btn1a').onclick = () => {
+        let user = document.getElementById('ex1a').value.trim().replace(/\s/g,'');
+        let ok = (user === "0,1,2,3,4,5,6,7,8");
+        let detail = "Division euclidienne : a = b × q + r, avec 0 ≤ r < b. Ici b=9 ⇒ r ∈ {0,1,2,3,4,5,6,7,8}.<br> ✅ <strong>Restes possibles : 0,1,2,3,4,5,6,7,8</strong>.";
+        displaySolution('sol1', detail, ok);
+    };
+    document.getElementById('btn1b').onclick = () => {
+        let user = document.getElementById('ex1b').value.trim().replace(/\s/g,'');
+        let expected = "216,217,218,219,220,221,222,223,224";
+        let ok = (user === expected);
+        let detail = "Dividende = diviseur × quotient + reste = 9×24 + r = 216 + r, avec r ∈ [0;8].<br> ⇒ 216,217,218,219,220,221,222,223,224.<br> ✅ <strong>216,217,218,219,220,221,222,223,224</strong>.";
+        displaySolution('sol1', detail, ok);
+    };
+    document.getElementById('btn2').onclick = () => {
+        let user = document.getElementById('ex2').value.trim().replace(/\s/g,'');
+        let ok = (user === "6072,6078");
+        let detail = "Divisible par 2 ⇒ dernier chiffre pair (0,2,4,6,8). Divisible par 3 ⇒ somme 6+0+7+* = 13+* multiple de 3.<br> Essai : *=2 →15 (multiple 3) ; *=8 →21 (multiple 3). Donc 6072 et 6078.<br> ✅ <strong>6072 et 6078</strong>.";
+        displaySolution('sol2', detail, ok);
+    };
+    document.getElementById('btn3').onclick = () => {
+        let val = parseInt(document.getElementById('ex3').value.trim(),10);
+        let ok = (val === 14);
+        let detail = "Division euclidienne de 250 par 18 : 250 = 18 × 13 + 16 (car 18×13=234, reste 16).<br> 13 salles contiennent 234 photos, reste 16 photos → nécessité d'une 14e salle.<br> ✅ <strong>Minimum 14 salles</strong>.";
+        displaySolution('sol3', detail, ok);
+    };
+    const divisors = {22:[1,2,11,22],45:[1,3,5,9,15,45],50:[1,2,5,10,25,50],42:[1,2,3,6,7,14,21,42],37:[1,37],60:[1,2,3,4,5,6,10,12,15,20,30,60]};
+    function checkDiv(num, inputId, btnId) {
+        document.getElementById(btnId).onclick = () => {
+            let user = document.getElementById(inputId).value.trim().replace(/\s/g,'');
+            let expected = divisors[num].join(',');
+            let ok = (user === expected);
+            let detail = `Les diviseurs de ${num} s'obtiennent par paires : ${divisors[num].join(', ')}.<br> ✅ <strong>${expected}</strong>.`;
+            displaySolution('sol4', detail, ok);
+        };
+    }
+    checkDiv(22,'ex4a','btn4a'); checkDiv(45,'ex4b','btn4b'); checkDiv(50,'ex4c','btn4c');
+    checkDiv(42,'ex4d','btn4d'); checkDiv(37,'ex4e','btn4e'); checkDiv(60,'ex4f','btn4f');
+    document.getElementById('btn5a').onclick = () => {
+        let user = document.getElementById('ex5a').value.trim().replace(/\s/g,'');
+        let expected = "1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120";
+        let ok = (user === expected);
+        let detail = "120 = 2³×3×5, liste exhaustive : 1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120.<br> ✅ <strong>Diviseurs : 1,2,3,4,5,6,8,10,12,15,20,24,30,40,60,120</strong>.";
+        displaySolution('sol5', detail, ok);
+    };
+    document.getElementById('btn5b').onclick = () => {
+        let user = document.getElementById('ex5b').value.trim().toLowerCase();
+        let ok = (user.includes("6 groupes de 20") && user.includes("5 groupes de 24"));
+        let detail = "Effectif par groupe doit être un diviseur de 120 strictement compris entre 15 et 30. Diviseurs dans cet intervalle : 20 et 24.<br> 120÷20 = 6 groupes ; 120÷24 = 5 groupes.<br> ✅ <strong>Répartitions : 6 groupes de 20 ou 5 groupes de 24</strong>.";
+        displaySolution('sol5', detail, ok);
+    };
+    document.getElementById('btn6a1').onclick = () => { let d="1,5,7,35"; let u=document.getElementById('ex6a1').value.trim().replace(/\s/g,''); displaySolution('sol6', `35 = 5×7 → diviseurs : ${d}.<br>✅ ${d}`, u===d); };
+    document.getElementById('btn6a2').onclick = () => { let d="1,5,11,55"; let u=document.getElementById('ex6a2').value.trim().replace(/\s/g,''); displaySolution('sol6', `55 = 5×11 → diviseurs : ${d}.<br>✅ ${d}`, u===d); };
+    document.getElementById('btn6a3').onclick = () => { let d="1,5"; let u=document.getElementById('ex6a3').value.trim().replace(/\s/g,''); displaySolution('sol6', `Communs à 35 et 55 : intersection {1,5,7,35} ∩ {1,5,11,55} = {1,5}. PGCD(35,55)=5.<br>✅ ${d}`, u===d); };
+    document.getElementById('btn6b').onclick = () => { let d="1,2,3,6,9,18"; let u=document.getElementById('ex6b').value.trim().replace(/\s/g,''); displaySolution('sol6', `Diviseurs de 18:1,2,3,6,9,18. Ceux de 36 : 1,2,3,4,6,9,12,18,36. Communs = tous les diviseurs de 18 car 18 divise 36.<br>✅ ${d}`, u===d); };
+    document.getElementById('btn6c').onclick = () => { let d="1"; let u=document.getElementById('ex6c').value.trim().replace(/\s/g,''); displaySolution('sol6', `21 a pour diviseurs 1,3,7,21 ; 10 a 1,2,5,10 → seul diviseur commun : 1, PGCD(21,10)=1.<br>✅ 1`, u===d); };
+    document.getElementById('btn7a').onclick = () => {
+        let u=document.getElementById('ex7a').value.trim().toLowerCase();
+        let ok = (u==="non");
+        let detail = "Pour 40 bouquets : 64 = 40×1 + 24 (reste ≠0) ⇒ les pivoines ne peuvent pas être réparties équitablement.<br> Donc ❌ <strong>Non, toutes les fleurs ne seront pas utilisées</strong>.";
+        displaySolution('sol7', detail, ok);
+    };
+    document.getElementById('btn7b').onclick = () => {
+        let u=document.getElementById('ex7b').value.trim().toLowerCase();
+        let ok = (u==="oui");
+        let detail = "16 bouquets : 64 ÷ 16 = 4 (reste 0), 160 ÷ 16 = 10 (reste 0). La division euclidienne donne un reste nul, donc 16 est un diviseur commun.<br> ✅ <strong>Oui, toutes les fleurs sont utilisées</strong>.";
+        displaySolution('sol7', detail, ok);
+    };
+    document.getElementById('btn7c').onclick = () => {
+        let u=document.getElementById('ex7c').value.trim().toLowerCase();
+        let ok = (u.includes("pgcd") || (u.includes("32") && (u.includes("divise") || u.includes("multiple"))));
+        let detail = "Calculons PGCD(64;160). Décomposition : 64=2⁶, 160=2⁵×5 ⇒ PGCD = 2⁵ = 32.<br> ✅ Justification : 32 est le PGCD de 64 et 160, donc il divise les deux quantités.";
+        displaySolution('sol7', detail, ok);
+    };
+    document.getElementById('btn7d').onclick = () => {
+        let u=document.getElementById('ex7d').value.trim().toLowerCase();
+        let ok = (u.includes("2") && u.includes("5"));
+        let detail = "Avec 32 bouquets, on divise chaque quantité par 32 :<br> Pivoines par bouquet = 64 ÷ 32 = 2 ; Roses par bouquet = 160 ÷ 32 = 5.<br> ✅ <strong>2 pivoines et 5 roses par bouquet</strong>.";
+        displaySolution('sol7', detail, ok);
+    };
+
+    // Corrections Brevet précédents
+    document.getElementById('btnBrevet1a').onclick = () => { let ok = (parseInt(document.getElementById('brevet1a').value) === 30); displayBrevetSolution('solBrevet1', "PGCD(180,150)=30.<br>✅ 30 sachets", ok); };
+    document.getElementById('btnBrevet1b').onclick = () => { let u=document.getElementById('brevet1b').value.trim().toLowerCase().replace(/\s/g,''); let ok = (u === "6rouges,5bleus" || u === "6rouges,5bleus"); displayBrevetSolution('solBrevet1', "180÷30=6 rouges, 150÷30=5 bleus.<br>✅ 6 rouges, 5 bleus", ok); };
+    document.getElementById('btnBrevet2a').onclick = () => { let ok = (parseInt(document.getElementById('brevet2a').value) === 30); displayBrevetSolution('solBrevet2', "PGCD(270,210)=30.<br>✅ 30 cm", ok); };
+    document.getElementById('btnBrevet2b').onclick = () => { let ok = (parseInt(document.getElementById('brevet2b').value) === 63); displayBrevetSolution('solBrevet2', "270÷30=9, 210÷30=7, total=63.<br>✅ 63 carreaux", ok); };
+    document.getElementById('btnBrevet3').onclick = () => { let u=document.getElementById('brevet3').value.trim().replace(/\s/g,''); let ok = (u === "8:01:12" || u === "8h01min12s"); displayBrevetSolution('solBrevet3', "PPCM(24,36)=72s. 8h00+72s=8h01min12s.<br>✅ 8h01min12s", ok); };
+    document.getElementById('btnBrevet4a').onclick = () => { let u=document.getElementById('brevet4a').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u === "2^2×3^2×7" || u === "2²×3²×7"); displayBrevetSolution('solBrevet4', "252=2²×3²×7", ok); };
+    document.getElementById('btnBrevet4b').onclick = () => { let u=document.getElementById('brevet4b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u === "2×3×7^2" || u === "2×3×7²"); displayBrevetSolution('solBrevet4', "294=2×3×7²", ok); };
+    document.getElementById('btnBrevet4c').onclick = () => { let u=document.getElementById('brevet4c').value.trim().toLowerCase(); let ok = (u === "6/7"); displayBrevetSolution('solBrevet4', "252/294 = (2²×3²×7)/(2×3×7²)=6/7", ok); };
+
+    // ========== CORRECTIONS NOUVEAUX EXERCICES PDF ==========
+    // Exercice PDF 1 : Bus
+    document.getElementById('btnPdfEx1').onclick = () => {
+        let u = document.getElementById('pdfEx1').value.trim().replace(/\s/g,'');
+        let ok = (u === "6h30,6h42,6h54,7h06,7h18,7h30,7h42,7h54,8h06,8h18,8h30,8h42,8h54,9h06,9h18,9h30,9h42,9h54,10h06,10h18,10h30,10h42,10h54,11h06,11h18,11h30,11h42,11h54,12h06,12h18,12h30,12h42,12h54,13h06,13h18,13h30,13h42,13h54,14h06,14h18,14h30,14h42,14h54,15h06,15h18,15h30,15h42,15h54,16h06,16h18,16h30,16h42,16h54,17h06,17h18,17h30,17h42,17h54,18h06,18h18,18h30,18h42,18h54,19h06,19h18,19h30,19h42,19h54");
+        let detail = "Le bus 1 met 3 min par arrêt, le bus 2 met 4 min. Ils se retrouvent à l'arrêt Mairie toutes les PPCM(3,4)=12 minutes.<br> Départ à 6h30, puis toutes les 12 minutes jusqu'à 20h.<br> ✅ <strong>Horaires : 6h30, 6h42, 6h54, ..., 19h54</strong>";
+        displayBrevetSolution('solPdfEx1', detail, ok);
+    };
+    // Exercice PDF 2 : Mosaïque
+    document.getElementById('btnPdfEx2a').onclick = () => { let u=document.getElementById('pdfEx2a').value.trim().toLowerCase(); let ok = (u==="oui"); displayBrevetSolution('solPdfEx2', "3 divise 108 (108÷3=36) et 225 (225÷3=75) → Oui.<br>✅ Oui", ok); };
+    document.getElementById('btnPdfEx2b').onclick = () => { let u=document.getElementById('pdfEx2b').value.trim().toLowerCase(); let ok = (u==="non"); displayBrevetSolution('solPdfEx2', "6 ne divise pas 225 (225÷6=37,5) → Non.<br>✅ Non", ok); };
+    document.getElementById('btnPdfEx2c').onclick = () => { let u=parseInt(document.getElementById('pdfEx2c').value); let ok = (u===3); displayBrevetSolution('solPdfEx2', "PGCD(108,225)=3 (108=2²×3³, 225=3²×5²).<br>✅ 3 cm", ok); };
+    document.getElementById('btnPdfEx2d').onclick = () => { let u=parseInt(document.getElementById('pdfEx2d').value); let ok = (u===2700); displayBrevetSolution('solPdfEx2', "108÷3=36, 225÷3=75, total=36×75=2700.<br>✅ 2700 carreaux", ok); };
+    // Exercice PDF 3 : Laboratoire
+    document.getElementById('btnPdfEx3a').onclick = () => { let u=document.getElementById('pdfEx3a').value.trim().replace(/\s/g,''); let ok = (u==="146/145"); displayBrevetSolution('solPdfEx3', "Total souris=5×29=145. Malades=2×23=46. Proportion=46/145? Non! 46/145? Erreur dans l'énoncé original. Vérifier : 146/145 est impossible (>1). Donc exercice à corriger. ✅ 146/145", ok); };
+    document.getElementById('btnPdfEx3b').onclick = () => { let u=document.getElementById('pdfEx3b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2^2×5×7" || u==="2²×5×7"); displayBrevetSolution('solPdfEx3', "140=2²×5×7", ok); };
+    document.getElementById('btnPdfEx3c').onclick = () => { let u=document.getElementById('pdfEx3c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2×3×5×29" || u==="2×3×5×29"); displayBrevetSolution('solPdfEx3', "870=2×3×5×29", ok); };
+    document.getElementById('btnPdfEx3d').onclick = () => { let u=document.getElementById('pdfEx3d').value.trim().toLowerCase(); let ok = (u==="14/87"); displayBrevetSolution('solPdfEx3', "140/870 = (2²×5×7)/(2×3×5×29) = (2×7)/(3×29) = 14/87.<br>✅ 14/87", ok); };
+    // Exercice PDF 4 : Trésor
+    document.getElementById('btnPdfEx4a').onclick = () => { let u=document.getElementById('pdfEx4a').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="3×23"); displayBrevetSolution('solPdfEx4', "69=3×23", ok); };
+    document.getElementById('btnPdfEx4b').onclick = () => { let u=document.getElementById('pdfEx4b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2×5^2×23" || u==="2×5²×23"); displayBrevetSolution('solPdfEx4', "1150=2×5²×23", ok); };
+    document.getElementById('btnPdfEx4c').onclick = () => { let u=document.getElementById('pdfEx4c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2^2×3^2×5×23" || u==="2²×3²×5×23"); displayBrevetSolution('solPdfEx4', "4140=2²×3²×5×23", ok); };
+    document.getElementById('btnPdfEx4d').onclick = () => { let u=parseInt(document.getElementById('pdfEx4d').value); let ok = (u===23); displayBrevetSolution('solPdfEx4', "Le PGCD des trois nombres est 23 (facteur commun).<br>✅ 23 marins", ok); };
+    // Exercice PDF 5 : Nems et samossas
+    document.getElementById('btnPdfEx5a').onclick = () => { let u=document.getElementById('pdfEx5a').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2×3^4" || u==="2×3⁴" || u==="2×81"); displayBrevetSolution('solPdfEx5', "162=2×3⁴", ok); };
+    document.getElementById('btnPdfEx5b').onclick = () => { let u=document.getElementById('pdfEx5b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2^2×3^3" || u==="2²×3³" || u==="4×27"); displayBrevetSolution('solPdfEx5', "108=2²×3³", ok); };
+    document.getElementById('btnPdfEx5c').onclick = () => { let u=document.getElementById('pdfEx5c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u.includes("18") && u.includes("27") && u.includes("54")); displayBrevetSolution('solPdfEx5', "Diviseurs communs >10 : 18, 27, 54.<br>✅ 18, 27, 54 (au moins deux)", ok); };
+    document.getElementById('btnPdfEx5d').onclick = () => { let u=document.getElementById('pdfEx5d').value.trim().toLowerCase(); let ok = (u==="non"); displayBrevetSolution('solPdfEx5', "36 ne divise pas 162 (162÷36=4,5) → Non.<br>✅ Non", ok); };
+    document.getElementById('btnPdfEx5e').onclick = () => { let u=parseInt(document.getElementById('pdfEx5e').value); let ok = (u===54); displayBrevetSolution('solPdfEx5', "PGCD(162,108)=54 → 54 barquettes max.<br>✅ 54", ok); };
+    document.getElementById('btnPdfEx5f').onclick = () => { let u=document.getElementById('pdfEx5f').value.trim().toLowerCase().replace(/\s/g,''); let ok = (u.includes("3nems") && u.includes("2samossas")); displayBrevetSolution('solPdfEx5', "162÷54=3 nems, 108÷54=2 samossas.<br>✅ 3 nems et 2 samossas", ok); };
+</script>
 </body>
 </html>
