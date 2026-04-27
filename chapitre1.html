@@ -1021,59 +1021,7 @@
         displayBrevetSolution('solPdfEx5', "162÷54=3 nems, 108÷54=2 samossas.<br>✅ 3 nems et 2 samossas", ok);
     };
 </script>
-<script>
-  // Fonction pour sauvegarder automatiquement chaque réponse
-  function autoSave() {
-    // Récupère tous les champs de saisie (inputs, textareas)
-    const inputs = document.querySelectorAll('input.ans-input, textarea, input[type="text"]');
-    inputs.forEach(input => {
-      // Sauvegarde dès que l'utilisateur tape ou change la valeur
-      input.addEventListener('input', () => {
-        if (input.id) {
-          localStorage.setItem(input.id, input.value);
-        }
-      });
-    });
-  }
 
-  // Fonction pour restaurer les réponses au chargement de la page
-  function restoreAnswers() {
-    const inputs = document.querySelectorAll('input.ans-input, textarea, input[type="text"]');
-    inputs.forEach(input => {
-      if (input.id) {
-        const savedValue = localStorage.getItem(input.id);
-        if (savedValue !== null) {
-          input.value = savedValue;
-        }
-      }
-    });
-  }
-
-  // Ajouter un bouton "Effacer mes réponses" (optionnel mais pratique)
-  function addClearButton() {
-    const btn = document.createElement('button');
-    btn.textContent = '🗑️ Effacer toutes mes réponses';
-    btn.style.margin = '20px auto';
-    btn.style.display = 'block';
-    btn.style.padding = '10px 20px';
-    btn.style.backgroundColor = '#e74c3c';
-    btn.style.color = 'white';
-    btn.style.border = 'none';
-    btn.style.borderRadius = '8px';
-    btn.style.cursor = 'pointer';
-    btn.onclick = () => {
-      if (confirm('⚠️ Cela supprimera toutes vos réponses enregistrées. Continuer ?')) {
-        localStorage.clear();
-        location.reload(); // recharger la page pour effacer les champs
-      }
-    };
-    document.querySelector('.container')?.appendChild(btn);
-  }
-
-  // Lancer les fonctions au chargement
-  restoreAnswers();
-  autoSave();
-  addClearButton(); // facultatif
-</script>
 </body>
+
 </html>
