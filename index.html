@@ -250,68 +250,9 @@
 </div>
 
 <footer>
-        <p style="font-weight: 600;">© 2026 Estifanos G. Tous droits réservés.</p>
+    
+    <p style="font-weight: 600;"> © 2026 Estifanos G. Tous droits réservés.</p>
 </footer>
-<script>
-  // Fonction pour sauvegarder UNIQUEMENT les réponses des exercices (pas du cours)
-  function autoSaveExercices() {
-    // Sélectionne uniquement les champs situés dans les sections "exercices" et "brevet"
-    const inputs = document.querySelectorAll('#exercices .ans-input, #brevet .ans-input, #exercices input[type="text"], #brevet input[type="text"]');
-    inputs.forEach(input => {
-      input.addEventListener('input', () => {
-        if (input.id) {
-          localStorage.setItem(input.id, input.value);
-        }
-      });
-    });
-  }
 
-  // Restaurer les réponses uniquement pour ces mêmes champs
-  function restoreExercicesAnswers() {
-    const inputs = document.querySelectorAll('#exercices .ans-input, #brevet .ans-input, #exercices input[type="text"], #brevet input[type="text"]');
-    inputs.forEach(input => {
-      if (input.id) {
-        const savedValue = localStorage.getItem(input.id);
-        if (savedValue !== null) {
-          input.value = savedValue;
-        }
-      }
-    });
-  }
-
-  // Ajouter le bouton "Effacer" dans la zone des exercices (par exemple sous les onglets)
-  function addClearButtonToExercices() {
-    // Chercher un conteneur existant dans la section exercices ou brevet
-    const exercicesContainer = document.querySelector('#exercices .container') || document.querySelector('#exercices');
-    if (exercicesContainer) {
-      const btn = document.createElement('button');
-      btn.textContent = '🗑️ Effacer toutes mes réponses (exercices)';
-      btn.style.margin = '20px auto';
-      btn.style.display = 'block';
-      btn.style.padding = '10px 20px';
-      btn.style.backgroundColor = '#e74c3c';
-      btn.style.color = 'white';
-      btn.style.border = 'none';
-      btn.style.borderRadius = '8px';
-      btn.style.cursor = 'pointer';
-      btn.onclick = () => {
-        if (confirm('⚠️ Cela supprimera toutes vos réponses aux exercices. Continuer ?')) {
-          // Supprimer uniquement les clés commençant par "ans-" (ou les ids des inputs d'exercices)
-          const inputs = document.querySelectorAll('#exercices .ans-input, #brevet .ans-input, #exercices input[type="text"], #brevet input[type="text"]');
-          inputs.forEach(input => {
-            if (input.id) localStorage.removeItem(input.id);
-          });
-          location.reload();
-        }
-      };
-      exercicesContainer.appendChild(btn);
-    }
-  }
-
-  // Lancer au chargement
-  restoreExercicesAnswers();
-  autoSaveExercices();
-  addClearButtonToExercices();
-</script>
 </body>
 </html>
