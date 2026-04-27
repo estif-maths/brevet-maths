@@ -220,7 +220,16 @@
         <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
     </div>
 
+    <!-- SECTION COURS DÉTAILLÉ -->
     <div id="cours" class="content-section active">
+        <!-- Download box for Cours PDF -->
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
+            <a href="N1 - Arithmétique - Cours.pdf" download="N1 - Arithmétique - Cours.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 N1 - Arithmétique - Cours.pdf
+            </a>
+        </div>
+
         <h2>1. Nombres premiers</h2>
         <div class="definition-box">
             <strong>Définition :</strong> Un nombre premier est un entier naturel qui a exactement deux diviseurs distincts : 1 et lui-même.<br>
@@ -381,8 +390,16 @@
         </div>
     </div>
 
+    <!-- SECTION EXERCICES INTERACTIFS -->
     <div id="exercices" class="content-section">
         <h2>📚 Exercices d'entraînement</h2>
+        <!-- Download box for Exercices PDF -->
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices (Les bases) :</strong><br>
+            <a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 N1 - Exercices Les bases.pdf
+            </a>
+        </div>
 
         <h3>I. Applications directes</h3>
         <div class="exercice-card">
@@ -509,8 +526,6 @@
                 <div class="badge-import">Diviseurs & PGCD</div>
             </div>
             <div class="card-body">
-                
-                
                 <div class="question">Centre sportif : 120 adolescents. Groupes de même effectif, effectif par groupe strictement entre 15 et 30.</div>
                 <div class="subquestion">1) Liste des diviseurs de 120.</div>
                 <div class="input-group"><label>Diviseurs 120 :</label><input type="text" id="ex5a" placeholder="Séparez par des virgules" style="width: 360px;"><button class="verify" id="btn5a">Vérifier</button></div>
@@ -573,12 +588,20 @@
         <footer><i class="fas fa-chalkboard-teacher"></i> Toutes les corrections utilisent la division euclidienne, le PGCD ou le PPCM conformément au programme.</footer>
     </div>
 
+    <!-- SECTION EXERCICES TYPE BREVET -->
     <div id="brevet" class="content-section">
         <div class="brevet-header">
             <i class="fas fa-graduation-cap"></i> Entraînement au Brevet des Collèges
         </div>
         <h2>📝 Exercices Type Brevet</h2>
         <p style="margin-bottom: 20px;">Ces exercices sont inspirés d'annales du Diplôme National du Brevet. Ils mobilisent les notions de PGCD, PPCM, division euclidienne et nombres premiers.</p>
+        <!-- Download box for Brevet PDF -->
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger les exercices type Brevet :</strong><br>
+            <a href="N1 - Exercices Type Brevet.pdf" download="N1 - Exercices Type Brevet.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 N1 - Exercices Type Brevet.pdf
+            </a>
+        </div>
 
         <div class="exercice-card-import">
             <div class="card-header">
@@ -645,7 +668,6 @@
             </div>
         </div>
 
-        <!-- CORRECTED BREVET EXERCISE 5 - LES DEUX BUS -->
         <div class="exercice-card-import">
             <div class="card-header">
                 <h4>🚌 Exercice Brevet 5 – Les deux bus (Amérique du Nord)</h4>
@@ -658,8 +680,8 @@
                     Tous les deux vont effectuer le circuit complet un grand nombre de fois. Ils s'arrêteront juste après 20 h.<br>
                     Est-ce que les deux bus vont se retrouver à un moment de la journée à l'arrêt « Mairie » en même temps ? Si oui, donner tous les horaires précis de ces rencontres.
                 </div>
-              		 <img src="image1.png" alt="Illustration groupes d'adolescents" class="exercise-image">
-		 <div class="input-group">
+                <img src="image1.png" alt="Illustration groupes d'adolescents" class="exercise-image">
+                <div class="input-group">
                     <label>Horaires des rencontres :</label>
                     <input type="text" id="pdfEx1" placeholder="...h... Séparez par des virgules" style="width: 450px;">
                     <button class="verify" id="btnPdfEx1">🚌 Vérifier</button>
@@ -962,7 +984,6 @@
     
     document.getElementById('btnBrevet4c').onclick = () => { let u=document.getElementById('brevet4c').value.trim().toLowerCase(); let ok = (u === "6/7"); displayBrevetSolution('solBrevet4', "252/294 = (2²×3²×7)/(2×3×7²)=6/7", ok); };
 
-    // CORRECTED ANSWER FOR BREVET EXERCISE 5 - LES DEUX BUS
     document.getElementById('btnPdfEx1').onclick = () => {
         let userInput = document.getElementById('pdfEx1').value.trim().replace(/\s/g, '');
         let expected = "6h30,8h06,9h42,11h18,12h54,14h30,16h06,17h42,19h18";
@@ -1023,5 +1044,4 @@
 </script>
 
 </body>
-
 </html>
