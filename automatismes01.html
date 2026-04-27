@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automatismes 01 - Course aux Nombres</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
             --primary: #4361ee;
@@ -40,6 +42,7 @@
         th, td { border: 1px solid #edf2f7; padding: 12px; vertical-align: middle; }
         th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; }
         .num-col { width: 45px; text-align: center; font-weight: bold; color: #64748b; }
+        .question-cell { font-family: 'Poppins', sans-serif; }
         .ans-input { width: 100%; max-width: 160px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; font-family: monospace; }
         .ans-input:focus { border-color: var(--primary); outline: none; background: #f8faff; }
 
@@ -116,9 +119,9 @@
 
     <div class="hint-box">
         <strong>💡 Aide à la saisie :</strong><br>
-        • Pour les puissances, utilise le symbole <strong>^</strong> (ex: 10² → <strong>10^2</strong>).<br>
-        • Tu peux utiliser la virgule ou le point pour les nombres décimaux.<br>
-        • Les fractions sont acceptées (ex: <strong>1/2</strong> au lieu de 0,5).<br>
+        • Pour les nombres décimaux, utilise la <strong>virgule</strong> (ex: 3,14).<br>
+        • Pour les fractions, utilise la barre oblique <strong>/</strong> (ex: 3/4).<br>
+        • Pour les puissances, utilise <strong>^</strong> (ex: 10^2).<br>
         • Clique sur <strong>"Valider mes réponses"</strong> pour voir ton score.<br>
         • Clique sur <strong>"🔄 Nouvelle série"</strong> pour générer de nouvelles questions !
     </div>
@@ -162,126 +165,135 @@
 </div>
 
 <script>
-    // Structure pour générer des questions aléatoires
     let currentQuestions = [];
     let timeLeft = 540;
     let timerInterval = null;
     let resultsVisible = false;
 
-    // Génération aléatoire d'un nombre entier entre min et max
     function randomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // Génération aléatoire d'un nombre décimal
-    function randomDecimal(min, max, decimals = 2) {
+    function randomDecimal(min, max, decimals) {
         let val = min + Math.random() * (max - min);
         return parseFloat(val.toFixed(decimals));
     }
 
-    // Générer toutes les questions aléatoirement
+    function formatDecimalFr(n) {
+        return n.toString().replace('.', ',');
+    }
+
     function generateAllQuestions() {
         const q = [];
         
         // 1: Multiplication simple
         let a1 = randomInt(2, 12);
         let b1 = randomInt(2, 12);
-        q.push({ id: 1, q: `${a1} &times; ${b1}`, a: (a1 * b1).toString(), displayA: (a1 * b1).toString(), type: "simple" });
+        q.push({ id: 1, q: `Calculer : \\(${a1} \\times ${b1}\\)`, a: (a1 * b1).toString(), displayA: (a1 * b1).toString(), type: "simple" });
         
-        // 2: Fraction d'un nombre
-        let denom = randomInt(2, 6);
-        let nombre = denom * randomInt(2, 10);
-        q.push({ id: 2, q: `Le ${denom}e de ${nombre}`, a: (nombre / denom).toString(), displayA: (nombre / denom).toString(), type: "simple" });
+        // 2: Fraction d'un nombre avec "de" (1/n de nombre)
+        let denom2 = randomInt(2, 10);
+        let nombre2 = denom2 * randomInt(2, 12);
+        q.push({ id: 2, q: `Calculer : \\(\\frac{1}{${denom2}}\\) de ${nombre2}`, a: (nombre2 / denom2).toString(), displayA: (nombre2 / denom2).toString(), type: "simple" });
         
         // 3: Soustraction
         let a3 = randomInt(50, 100);
         let b3 = randomInt(20, a3 - 1);
-        q.push({ id: 3, q: `${a3} &minus; ${b3}`, a: (a3 - b3).toString(), displayA: (a3 - b3).toString(), type: "simple" });
+        q.push({ id: 3, q: `Calculer : \\(${a3} - ${b3}\\)`, a: (a3 - b3).toString(), displayA: (a3 - b3).toString(), type: "simple" });
         
-        // 4: Nombre entre X et Y (intervalle)
-        let low = randomInt(1, 9);
+        // 4: Nombre entre X et Y
+        let low = randomInt(1, 8);
         let high = low + 0.5;
-        q.push({ id: 4, q: `Nombre entre ${low} et ${high}`, a: ((low + high) / 2).toFixed(2), type: "range", displayA: `n'importe quel nombre entre ${low} et ${high} (ex: ${((low+high)/2).toFixed(2)})` });
+        let milieu = ((low + high) / 2);
+        q.push({ id: 4, q: `Donner un nombre compris entre ${low} et ${formatDecimalFr(high)}`, a: milieu.toString(), type: "range", displayA: `n'importe quel nombre entre ${low} et ${formatDecimalFr(high)} (ex: ${formatDecimalFr(milieu)})` });
         
         // 5: Addition décimale
         let d1 = randomDecimal(0.1, 9.9, 2);
         let d2 = randomDecimal(0.1, 9.9, 2);
-        q.push({ id: 5, q: `${d1} + ${d2}`, a: (d1 + d2).toFixed(2), displayA: (d1 + d2).toFixed(2), type: "simple" });
+        let somme = d1 + d2;
+        q.push({ id: 5, q: `Calculer : \\(${formatDecimalFr(d1)} + ${formatDecimalFr(d2)}\\)`, a: somme.toFixed(2), displayA: formatDecimalFr(parseFloat(somme.toFixed(2))), type: "decimal" });
         
         // 6: Durée entre deux heures
         let startHour = randomInt(8, 14);
         let duration = randomInt(15, 55);
-        let endHour = startHour + Math.floor(duration / 60);
-        let endMin = duration % 60;
         let minuteStart = randomInt(0, 30);
         let startTime = `${startHour}h${minuteStart.toString().padStart(2,'0')}`;
-        let endTime = `${endHour}h${(minuteStart + duration).toString().padStart(2,'0')}`;
-        q.push({ id: 6, q: `Durée de ${startTime} à ${endTime} (min)`, a: duration.toString(), displayA: `${duration} minutes`, type: "simple" });
+        let endMin = minuteStart + duration;
+        let endHour = startHour + Math.floor(endMin / 60);
+        endMin = endMin % 60;
+        let endTime = `${endHour}h${endMin.toString().padStart(2,'0')}`;
+        q.push({ id: 6, q: `Durée entre ${startTime} et ${endTime} (en minutes)`, a: duration.toString(), displayA: `${duration} minutes`, type: "simple" });
         
         // 7: Multiplication par 10, 100
         let dec7 = randomDecimal(12.34, 987.65, 2);
         let mult = randomInt(10, 100);
-        q.push({ id: 7, q: `${dec7} &times; ${mult}`, a: (dec7 * mult).toFixed(2), displayA: (dec7 * mult).toFixed(2), type: "simple" });
+        let produit = dec7 * mult;
+        q.push({ id: 7, q: `Calculer : \\(${formatDecimalFr(dec7)} \\times ${mult}\\)`, a: produit.toFixed(2), displayA: formatDecimalFr(parseFloat(produit.toFixed(2))), type: "decimal" });
         
-        // 8: Addition fractionnée
+        // 8: Addition de fractions décimales
         let whole = randomInt(100, 500);
         let frac1 = randomInt(1, 9);
         let frac2 = randomInt(1, 9);
-        q.push({ id: 8, q: `${whole} + ${frac1}/100 + ${frac2}/1000`, a: (whole + frac1/100 + frac2/1000).toFixed(3), displayA: (whole + frac1/100 + frac2/1000).toFixed(3), type: "simple" });
+        let result8 = whole + frac1/100 + frac2/1000;
+        q.push({ id: 8, q: `Calculer : \\(${whole} + \\frac{${frac1}}{100} + \\frac{${frac2}}{1000}\\)`, a: result8.toFixed(3), displayA: formatDecimalFr(parseFloat(result8.toFixed(3))), type: "decimal" });
         
         // 9: Conversion dm/m
         let dm = randomInt(15, 350);
-        q.push({ id: 9, q: `${dm} dm = ..... m`, a: (dm / 10).toString(), displayA: (dm / 10).toFixed(1) + " m", type: "simple" });
+        q.push({ id: 9, q: `Convertir : ${dm} dm = ... m`, a: (dm / 10).toString(), displayA: formatDecimalFr(dm / 10) + " m", type: "simple" });
         
         // 10: Proportionnalité
         let nbObjets = randomInt(2, 8);
         let prixTotal = nbObjets * randomInt(2, 12);
         let nbAchete = randomInt(5, 15);
-        q.push({ id: 10, q: `Prix de ${nbAchete} stylos (si ${nbObjets} coûtent ${prixTotal}€)`, a: ((prixTotal / nbObjets) * nbAchete).toString(), displayA: ((prixTotal / nbObjets) * nbAchete) + " €", type: "simple" });
+        let prixUnitaire = prixTotal / nbObjets;
+        let prixFinal = prixUnitaire * nbAchete;
+        q.push({ id: 10, q: `Si ${nbObjets} stylos coûtent ${prixTotal} €, quel est le prix de ${nbAchete} stylos ?`, a: prixFinal.toFixed(2), displayA: formatDecimalFr(parseFloat(prixFinal.toFixed(2))) + " €", type: "decimal" });
         
-        // 11: Équation simple
+        // 11: Équation
         let coeff = randomInt(2, 5);
         let constant = randomInt(3, 12);
         let solution = randomInt(2, 10);
         let resultat = coeff * solution - constant;
-        q.push({ id: 11, q: `${coeff}x &minus; ${constant} = ${resultat} (x = ?)`, a: solution.toString(), displayA: solution.toString(), type: "simple" });
+        q.push({ id: 11, q: `Résoudre : \\(${coeff}x - ${constant} = ${resultat}\\)`, a: solution.toString(), displayA: solution.toString(), type: "simple" });
         
         // 12: Puissances
         let exp1 = randomInt(2, 5);
         let exp2 = randomInt(1, exp1 - 1);
-        q.push({ id: 12, q: `10^${exp1} / 10^${exp2} (en décimal)`, a: Math.pow(10, exp1 - exp2).toString(), displayA: Math.pow(10, exp1 - exp2).toString(), type: "simple" });
+        let result12 = Math.pow(10, exp1 - exp2);
+        q.push({ id: 12, q: `Calculer : \\(10^{${exp1}} \\div 10^{${exp2}}\\) (écriture décimale)`, a: result12.toString(), displayA: result12.toString(), type: "simple" });
         
-        // 13: Réduction d'expression (aléatoire simple)
+        // 13: Réduction d'expression
         let coefA = randomInt(2, 8);
         let coefB = randomInt(3, 9);
         let coefC = randomInt(1, 7);
         let constTerm = randomInt(5, 20);
         let x2sum = coefA + coefB;
-        q.push({ id: 13, q: `Réduire : ${coefA}x² - ${coefC}x + ${coefB}x² + ${constTerm}`, a: `${x2sum}x^2-${coefC}x+${constTerm}`, displayA: `${x2sum}x² - ${coefC}x + ${constTerm}`, type: "algebra" });
+        q.push({ id: 13, q: `Réduire : \\(${coefA}x^2 - ${coefC}x + ${coefB}x^2 + ${constTerm}\\)`, a: `${x2sum}x^2-${coefC}x+${constTerm}`, displayA: `${x2sum}x² - ${coefC}x + ${constTerm}`, type: "algebra" });
         
         // 14: Calcul avec parenthèses
         let p1 = randomInt(-10, -1);
         let p2 = randomInt(2, 5);
         let result14 = Math.pow(p1 + p2, 2);
-        q.push({ id: 14, q: `Programme : (${p1} + ${p2})²`, a: result14.toString(), displayA: result14.toString(), type: "simple" });
+        q.push({ id: 14, q: `Calculer : \\((${p1} + ${p2})^2\\)`, a: result14.toString(), displayA: result14.toString(), type: "simple" });
         
         // 15: Soustraction de fractions
-        let num1 = randomInt(5, 20);
-        let denomComm = randomInt(5, 12);
-        let num2 = randomInt(1, denomComm - 1);
-        let result15num = num1 - num2 * (denomComm / denomComm);
-        q.push({ id: 15, q: `${num1}/${denomComm} - ${num2}/${denomComm}`, a: `${result15num}/${denomComm}`, displayA: `${result15num}/${denomComm}`, type: "simple" });
+        let denom15 = randomInt(5, 12);
+        let num1_15 = randomInt(5, denom15 * 2);
+        let num2_15 = randomInt(1, denom15 - 1);
+        let result15num = num1_15 - num2_15;
+        if (result15num === 0) result15num = 1;
+        q.push({ id: 15, q: `Calculer : \\(\\frac{${num1_15}}{${denom15}} - \\frac{${num2_15}}{${denom15}}\\)`, a: `${result15num}/${denom15}`, displayA: `\\(\\frac{${result15num}}{${denom15}}\\)`, type: "fraction" });
         
-        // 16: Aire du carré
+        // 16: Côté d'un carré
         let side = randomInt(4, 15);
         q.push({ id: 16, q: `Côté d'un carré d'aire ${side * side} cm²`, a: side.toString(), displayA: `${side} cm`, type: "simple" });
         
         // 17: Probabilité
-        let total = randomInt(8, 20);
+        let total17 = randomInt(8, 20);
         let premiers = [2,3,5,7,11,13,17,19];
-        let nbPremiers = premiers.filter(p => p <= total).length;
-        let proba = (nbPremiers / total).toFixed(2);
-        q.push({ id: 17, q: `Probabilité nb premier entre 1 et ${total}`, a: proba, displayA: `${proba} (soit ${nbPremiers}/${total})`, type: "simple" });
+        let nbPremiers = premiers.filter(p => p <= total17).length;
+        let proba = nbPremiers / total17;
+        q.push({ id: 17, q: `Probabilité d'obtenir un nombre premier entre 1 et ${total17}`, a: proba.toString(), displayA: `\\(\\frac{${nbPremiers}}{${total17}} = ${formatDecimalFr(parseFloat(proba.toFixed(2)))}\\)`, type: "simple" });
         
         // 18: Division de fractions
         let f1num = randomInt(1, 5);
@@ -290,26 +302,25 @@
         let f2den = randomInt(2, 6);
         let result18num = f1num * f2den;
         let result18den = f1den * f2num;
-        q.push({ id: 18, q: `(${f1num}/${f1den}) &divide; (${f2num}/${f2den})`, a: `${result18num}/${result18den}`, displayA: `${result18num}/${result18den}`, type: "simple" });
+        q.push({ id: 18, q: `Calculer : \\(\\frac{${f1num}}{${f1den}} \\div \\frac{${f2num}}{${f2den}}\\)`, a: `${result18num}/${result18den}`, displayA: `\\(\\frac{${result18num}}{${result18den}}\\)`, type: "fraction" });
         
-        // 19: Fraction d'un nombre
+        // 19: Fraction d'un nombre avec "de" (a/b de nombre)
         let num19 = randomInt(2, 5);
         let den19 = randomInt(2, 5);
         let total19 = den19 * randomInt(6, 15);
-        q.push({ id: 19, q: `${num19}/${den19} de ${total19}`, a: (num19 * total19 / den19).toString(), displayA: (num19 * total19 / den19).toString(), type: "simple" });
+        let result19 = (num19 * total19 / den19);
+        q.push({ id: 19, q: `Calculer : \\(\\frac{${num19}}{${den19}}\\) de ${total19}`, a: result19.toString(), displayA: result19.toString(), type: "simple" });
         
-        // 20: Image d'un nombre par fonction linéaire
-        let a20 = randomInt(-5, 5);
-        let b20 = randomInt(-10, 10);
+        // 20: Image par fonction
         let x20 = randomInt(-5, 8);
         let result20 = 4 - 2 * x20;
-        q.push({ id: 20, q: `Image de ${x20} par f(x) = 4 - 2x`, a: result20.toString(), displayA: result20.toString(), type: "simple" });
+        q.push({ id: 20, q: `\\(f(x) = 4 - 2x\\). Calculer \\(f(${x20})\\)`, a: result20.toString(), displayA: result20.toString(), type: "simple" });
         
         // 21: Distance
         let vitesse = randomInt(50, 120);
         let tempsMin = randomInt(15, 45);
-        let distance = (vitesse * tempsMin / 60).toFixed(1);
-        q.push({ id: 21, q: `Distance à ${vitesse} km/h en ${tempsMin} min (km)`, a: distance, displayA: distance + " km", type: "simple" });
+        let distance21 = (vitesse * tempsMin / 60).toFixed(1);
+        q.push({ id: 21, q: `Distance à ${vitesse} km/h pendant ${tempsMin} minutes (en km)`, a: distance21, displayA: distance21 + " km", type: "simple" });
         
         // 22: Médiane
         let valeurs = [];
@@ -318,7 +329,7 @@
         }
         valeurs.sort((a,b) => a-b);
         let mediane = valeurs[2];
-        q.push({ id: 22, q: `Médiane de : ${valeurs.join(", ")}`, a: mediane.toString(), displayA: mediane.toString(), type: "simple" });
+        q.push({ id: 22, q: `Médiane de : ${valeurs.join(" ; ")}`, a: mediane.toString(), displayA: mediane.toString(), type: "simple" });
         
         return q;
     }
@@ -331,16 +342,23 @@
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td class="num-col">${item.id}</td>
-                <td>${item.q}</td>
+                <td class="question-cell">${item.q}</td>
                 <td><input type="text" id="ans-${item.id}" class="ans-input" placeholder="" autocomplete="off"></td>
             `;
             container.appendChild(row);
         });
+        
+        // Rafraîchir MathJax
+        if (window.MathJax) {
+            MathJax.typesetPromise().catch(err => console.log(err));
+        }
     }
 
-    function normalize(val) {
+    function normalizeFr(val) {
         if (!val || val.trim() === "") return null;
-        let str = val.toString().replace(',', '.').replace(/\s/g, '').toLowerCase();
+        let str = val.toString().trim().toLowerCase();
+        str = str.replace(',', '.').replace(/\s/g, '');
+        
         if (str.includes('/')) {
             let parts = str.split('/');
             if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
@@ -363,18 +381,29 @@
         if (!userRaw || userRaw.trim() === "") return false;
         
         if (item.type === "algebra") {
-            let normalizedUser = userRaw.replace(/\s/g, '').replace('²', '^2').replace('−', '-');
+            let normalizedUser = userRaw.replace(/\s/g, '').replace('²', '^2').replace('−', '-').replace('x²', 'x^2');
             let normalizedAnswer = item.a.replace(/\s/g, '');
             return normalizedUser === normalizedAnswer;
         } 
         else if (item.type === "range") {
-            let val = normalize(userRaw);
+            let val = normalizeFr(userRaw);
             let [low, high] = item.a.split(',');
             return (val !== null && val > parseFloat(low) && val < parseFloat(high));
         } 
+        else if (item.type === "fraction") {
+            let normalizedUser = userRaw.replace(/\s/g, '').toLowerCase();
+            let normalizedAnswer = item.a.replace(/\s/g, '').toLowerCase();
+            return normalizedUser === normalizedAnswer;
+        }
+        else if (item.type === "decimal") {
+            let userVal = normalizeFr(userRaw);
+            let targetVal = parseFloat(item.a);
+            if (userVal === null) return false;
+            return Math.abs(userVal - targetVal) < 0.001;
+        }
         else {
-            let userVal = normalize(userRaw);
-            let targetVal = normalize(item.a);
+            let userVal = normalizeFr(userRaw);
+            let targetVal = normalizeFr(item.a);
             if (userVal === null) return false;
             return Math.abs(userVal - targetVal) < 0.0001;
         }
@@ -426,16 +455,13 @@
     }
     
     function generateNewQuestions() {
-        // Générer un nouveau jeu de questions
         buildTable();
         
-        // Réactiver le timer
         if (timerInterval) clearInterval(timerInterval);
         timeLeft = 540;
         document.getElementById('timer').style.opacity = "1";
         startTimer();
         
-        // Cacher la section résultats
         document.getElementById('results-section').style.display = "none";
         resultsVisible = false;
         
