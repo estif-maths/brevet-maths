@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatisimes 01 - Course aux Nombres</title>
+    <title>Automatismes 01 - Course aux Nombres</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,7 +14,7 @@
             --bg: #f8f9fe;
         }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #2b2d42; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         
         .nav-back { margin-bottom: 20px; }
         .nav-back a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.9rem; }
@@ -22,22 +22,59 @@
         header { text-align: center; margin-bottom: 30px; }
         header h1 { color: var(--primary); margin: 0; font-size: 2rem; text-transform: uppercase; }
 
-        .timer-bar { position: sticky; top: 10px; background: var(--accent); color: white; padding: 15px; text-align: center; font-size: 1.5em; font-weight: bold; border-radius: 12px; z-index: 1000; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); }
+        .timer-bar { 
+            background: var(--accent); 
+            color: white; 
+            padding: 15px; 
+            text-align: center; 
+            font-size: 1.5em; 
+            font-weight: bold; 
+            border-radius: 12px; 
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3); 
+        }
         
         .hint-box { background-color: #eef2ff; border-left: 5px solid var(--info); padding: 15px; margin: 20px 0; border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #edf2f7; padding: 15px; text-align: left; }
+        th, td { border: 1px solid #edf2f7; padding: 12px; vertical-align: middle; }
         th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; }
-        .num-col { width: 40px; text-align: center; font-weight: bold; color: #64748b; }
-        .ans-input { width: 100%; max-width: 160px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 1rem; transition: all 0.2s; }
+        .num-col { width: 45px; text-align: center; font-weight: bold; color: #64748b; }
+        .ans-input { width: 100%; max-width: 160px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; transition: all 0.2s; font-family: monospace; }
         .ans-input:focus { border-color: var(--primary); outline: none; background: #f8faff; }
 
-        .btn-finish { display: block; width: 100%; padding: 20px; background: var(--success); color: white; border: none; font-size: 1.2rem; border-radius: 12px; cursor: pointer; margin-top: 30px; font-weight: 600; transition: transform 0.2s; }
+        .btn-finish { 
+            display: block; 
+            width: 100%; 
+            padding: 20px; 
+            background: var(--success); 
+            color: white; 
+            border: none; 
+            font-size: 1.2rem; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            margin-top: 30px; 
+            font-weight: 600; 
+            transition: transform 0.2s; 
+        }
         .btn-finish:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3); }
+        
+        .btn-revalidate {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+        .btn-revalidate:hover { transform: translateY(-2px); background: #3b2c9e; }
 
-        /* Résultats & Badges */
-        #results-section { display: none; text-align: center; animation: fadeIn 0.5s ease; }
         .badge-card { padding: 40px; border-radius: 20px; background: white; border: 3px solid var(--success); margin-bottom: 30px; }
         .badge-icon { font-size: 80px; display: block; margin-bottom: 10px; }
         .score-display { font-size: 3.5rem; font-weight: 800; color: #2d3748; }
@@ -46,6 +83,19 @@
         .row-correct { background-color: #f0fff4; }
         .row-wrong { background-color: #fff5f5; }
         .text-correct { color: var(--success); font-weight: bold; }
+
+        .restart-btn { 
+            display: inline-block; 
+            margin-top: 30px; 
+            padding: 12px 25px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            border: 1px solid #cbd5e0; 
+            background: white;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .restart-btn:hover { background: #f1f5f9; transform: translateY(-1px); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -58,20 +108,22 @@
     </div>
 
     <header>
-        <h1>Automatisimes 01</h1>
+        <h1>Automatismes 01</h1>
         <p>Entraînement à la Course aux Nombres</p>
     </header>
 
-    <div id="timer" class="timer-bar">Temps restant : 09:00</div>
+    <div id="timer" class="timer-bar">⏱️ Temps restant : 09:00</div>
 
     <div class="hint-box">
         <strong>💡 Aide à la saisie :</strong><br>
         • Pour les puissances, utilise le symbole <strong>^</strong> (ex: 10² → <strong>10^2</strong>).<br>
         • Tu peux utiliser la virgule ou le point pour les nombres décimaux.<br>
-        • Les fractions sont acceptées (ex: <strong>1/2</strong> au lieu de 0,5).
+        • Les fractions sont acceptées (ex: <strong>1/2</strong> au lieu de 0,5).<br>
+        • Clique sur <strong>"Valider mes réponses"</strong> pour voir ton score.<br>
+        • Clique sur <strong>"🔄 Nouvelle série"</strong> pour générer de nouvelles questions !
     </div>
 
-    <form id="quizForm">
+    <form id="quizForm" onsubmit="return false;">
         <table>
             <thead>
                 <tr>
@@ -82,10 +134,10 @@
             </thead>
             <tbody id="questionsBody"></tbody>
         </table>
-        <button type="button" class="btn-finish" onclick="calculateResults()">Valider mes réponses</button>
+        <button type="button" class="btn-finish" onclick="calculateResults()">✅ Valider mes réponses</button>
     </form>
 
-    <div id="results-section">
+    <div id="results-section" style="display:none;">
         <div class="badge-card">
             <span id="badgeIcon" class="badge-icon"></span>
             <h2 id="badgeTitle" style="margin:0;"></h2>
@@ -93,125 +145,336 @@
             <p id="motivationalMessage" style="color: #718096;"></p>
         </div>
 
-        <h3 style="text-align:left; color: var(--primary);">Correction détaillée</h3>
+        <h3 style="text-align:left; color: var(--primary);">📋 Correction détaillée</h3>
         <table class="correction-table">
             <thead>
                 <tr>
                     <th class="num-col">N°</th>
                     <th>Ta réponse</th>
-                    <th>Correction</th>
+                    <th>Réponse attendue</th>
                 </tr>
             </thead>
             <tbody id="correctionBody"></tbody>
         </table>
-        <button onclick="location.reload()" style="margin-top: 30px; padding: 12px 25px; border-radius: 8px; cursor: pointer; border: 1px solid #cbd5e0; background: white;">Recommencer le test</button>
+        <button type="button" class="btn-revalidate" onclick="generateNewQuestions()">🔄 Nouvelle série de questions</button>
+        <button class="restart-btn" onclick="resetTimerOnly()">⏱️ Recommencer le chrono</button>
     </div>
 </div>
 
 <script>
-    const quizData = [
-        { id: 1, q: "5 &times; 9", a: "45" },
-        { id: 2, q: "Le quart de 24", a: "6" },
-        { id: 3, q: "47 &minus; 29", a: "18" },
-        { id: 4, q: "Nombre entre 3 et 3,1", a: "3.05", type: "range" },
-        { id: 5, q: "0,4 + 0,16", a: "0.56" },
-        { id: 6, q: "Durée de 8h10 à 9h05 (min)", a: "55" },
-        { id: 7, q: "308,72 &times; 10", a: "3087.2" },
-        { id: 8, q: "205 + 3/100 + 7/1000", a: "205.037" },
-        { id: 9, q: "7 dm = ..... m", a: "0.7" },
-        { id: 10, q: "Prix de 10 stylos (si 4 coûtent 8€)", a: "20" },
-        { id: 11, q: "3x &minus; 5 = 7 (x = ?)", a: "4" },
-        { id: 12, q: "10³ / 10⁵ (en décimal)", a: "0.01" },
-        { id: 13, q: "Réduire : 8x² - 10x + 6x² + 12", a: "14x^2-10x+12", type: "algebra", hint: "ex: 14x^2-10x+12" },
-        { id: 14, q: "Programme : (2 - 5)²", a: "9" },
-        { id: 15, q: "13/35 - 2/7", a: "3/35" },
-        { id: 16, q: "Côté d'un carré d'aire 36 cm²", a: "6" },
-        { id: 17, q: "Proba nb premier entre 1 et 10", a: "0.4" },
-        { id: 18, q: "(2/5) &divide; (9/2)", a: "4/45" },
-        { id: 19, q: "3/5 de 40", a: "24" },
-        { id: 20, q: "Image de 3 par f(x) = 4 - 2x", a: "-2" },
-        { id: 21, q: "Distance à 90 km/h en 20 min (km)", a: "30" },
-        { id: 22, q: "Médiane de : 5, 10, 16, 18, 27", a: "16" }
-    ];
+    // Structure pour générer des questions aléatoires
+    let currentQuestions = [];
+    let timeLeft = 540;
+    let timerInterval = null;
+    let resultsVisible = false;
 
-    const container = document.getElementById('questionsBody');
-    quizData.forEach(item => {
-        container.innerHTML += `
-            <tr>
+    // Génération aléatoire d'un nombre entier entre min et max
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Génération aléatoire d'un nombre décimal
+    function randomDecimal(min, max, decimals = 2) {
+        let val = min + Math.random() * (max - min);
+        return parseFloat(val.toFixed(decimals));
+    }
+
+    // Générer toutes les questions aléatoirement
+    function generateAllQuestions() {
+        const q = [];
+        
+        // 1: Multiplication simple
+        let a1 = randomInt(2, 12);
+        let b1 = randomInt(2, 12);
+        q.push({ id: 1, q: `${a1} &times; ${b1}`, a: (a1 * b1).toString(), displayA: (a1 * b1).toString(), type: "simple" });
+        
+        // 2: Fraction d'un nombre
+        let denom = randomInt(2, 6);
+        let nombre = denom * randomInt(2, 10);
+        q.push({ id: 2, q: `Le ${denom}e de ${nombre}`, a: (nombre / denom).toString(), displayA: (nombre / denom).toString(), type: "simple" });
+        
+        // 3: Soustraction
+        let a3 = randomInt(50, 100);
+        let b3 = randomInt(20, a3 - 1);
+        q.push({ id: 3, q: `${a3} &minus; ${b3}`, a: (a3 - b3).toString(), displayA: (a3 - b3).toString(), type: "simple" });
+        
+        // 4: Nombre entre X et Y (intervalle)
+        let low = randomInt(1, 9);
+        let high = low + 0.5;
+        q.push({ id: 4, q: `Nombre entre ${low} et ${high}`, a: ((low + high) / 2).toFixed(2), type: "range", displayA: `n'importe quel nombre entre ${low} et ${high} (ex: ${((low+high)/2).toFixed(2)})` });
+        
+        // 5: Addition décimale
+        let d1 = randomDecimal(0.1, 9.9, 2);
+        let d2 = randomDecimal(0.1, 9.9, 2);
+        q.push({ id: 5, q: `${d1} + ${d2}`, a: (d1 + d2).toFixed(2), displayA: (d1 + d2).toFixed(2), type: "simple" });
+        
+        // 6: Durée entre deux heures
+        let startHour = randomInt(8, 14);
+        let duration = randomInt(15, 55);
+        let endHour = startHour + Math.floor(duration / 60);
+        let endMin = duration % 60;
+        let minuteStart = randomInt(0, 30);
+        let startTime = `${startHour}h${minuteStart.toString().padStart(2,'0')}`;
+        let endTime = `${endHour}h${(minuteStart + duration).toString().padStart(2,'0')}`;
+        q.push({ id: 6, q: `Durée de ${startTime} à ${endTime} (min)`, a: duration.toString(), displayA: `${duration} minutes`, type: "simple" });
+        
+        // 7: Multiplication par 10, 100
+        let dec7 = randomDecimal(12.34, 987.65, 2);
+        let mult = randomInt(10, 100);
+        q.push({ id: 7, q: `${dec7} &times; ${mult}`, a: (dec7 * mult).toFixed(2), displayA: (dec7 * mult).toFixed(2), type: "simple" });
+        
+        // 8: Addition fractionnée
+        let whole = randomInt(100, 500);
+        let frac1 = randomInt(1, 9);
+        let frac2 = randomInt(1, 9);
+        q.push({ id: 8, q: `${whole} + ${frac1}/100 + ${frac2}/1000`, a: (whole + frac1/100 + frac2/1000).toFixed(3), displayA: (whole + frac1/100 + frac2/1000).toFixed(3), type: "simple" });
+        
+        // 9: Conversion dm/m
+        let dm = randomInt(15, 350);
+        q.push({ id: 9, q: `${dm} dm = ..... m`, a: (dm / 10).toString(), displayA: (dm / 10).toFixed(1) + " m", type: "simple" });
+        
+        // 10: Proportionnalité
+        let nbObjets = randomInt(2, 8);
+        let prixTotal = nbObjets * randomInt(2, 12);
+        let nbAchete = randomInt(5, 15);
+        q.push({ id: 10, q: `Prix de ${nbAchete} stylos (si ${nbObjets} coûtent ${prixTotal}€)`, a: ((prixTotal / nbObjets) * nbAchete).toString(), displayA: ((prixTotal / nbObjets) * nbAchete) + " €", type: "simple" });
+        
+        // 11: Équation simple
+        let coeff = randomInt(2, 5);
+        let constant = randomInt(3, 12);
+        let solution = randomInt(2, 10);
+        let resultat = coeff * solution - constant;
+        q.push({ id: 11, q: `${coeff}x &minus; ${constant} = ${resultat} (x = ?)`, a: solution.toString(), displayA: solution.toString(), type: "simple" });
+        
+        // 12: Puissances
+        let exp1 = randomInt(2, 5);
+        let exp2 = randomInt(1, exp1 - 1);
+        q.push({ id: 12, q: `10^${exp1} / 10^${exp2} (en décimal)`, a: Math.pow(10, exp1 - exp2).toString(), displayA: Math.pow(10, exp1 - exp2).toString(), type: "simple" });
+        
+        // 13: Réduction d'expression (aléatoire simple)
+        let coefA = randomInt(2, 8);
+        let coefB = randomInt(3, 9);
+        let coefC = randomInt(1, 7);
+        let constTerm = randomInt(5, 20);
+        let x2sum = coefA + coefB;
+        q.push({ id: 13, q: `Réduire : ${coefA}x² - ${coefC}x + ${coefB}x² + ${constTerm}`, a: `${x2sum}x^2-${coefC}x+${constTerm}`, displayA: `${x2sum}x² - ${coefC}x + ${constTerm}`, type: "algebra" });
+        
+        // 14: Calcul avec parenthèses
+        let p1 = randomInt(-10, -1);
+        let p2 = randomInt(2, 5);
+        let result14 = Math.pow(p1 + p2, 2);
+        q.push({ id: 14, q: `Programme : (${p1} + ${p2})²`, a: result14.toString(), displayA: result14.toString(), type: "simple" });
+        
+        // 15: Soustraction de fractions
+        let num1 = randomInt(5, 20);
+        let denomComm = randomInt(5, 12);
+        let num2 = randomInt(1, denomComm - 1);
+        let result15num = num1 - num2 * (denomComm / denomComm);
+        q.push({ id: 15, q: `${num1}/${denomComm} - ${num2}/${denomComm}`, a: `${result15num}/${denomComm}`, displayA: `${result15num}/${denomComm}`, type: "simple" });
+        
+        // 16: Aire du carré
+        let side = randomInt(4, 15);
+        q.push({ id: 16, q: `Côté d'un carré d'aire ${side * side} cm²`, a: side.toString(), displayA: `${side} cm`, type: "simple" });
+        
+        // 17: Probabilité
+        let total = randomInt(8, 20);
+        let premiers = [2,3,5,7,11,13,17,19];
+        let nbPremiers = premiers.filter(p => p <= total).length;
+        let proba = (nbPremiers / total).toFixed(2);
+        q.push({ id: 17, q: `Probabilité nb premier entre 1 et ${total}`, a: proba, displayA: `${proba} (soit ${nbPremiers}/${total})`, type: "simple" });
+        
+        // 18: Division de fractions
+        let f1num = randomInt(1, 5);
+        let f1den = randomInt(2, 6);
+        let f2num = randomInt(1, 5);
+        let f2den = randomInt(2, 6);
+        let result18num = f1num * f2den;
+        let result18den = f1den * f2num;
+        q.push({ id: 18, q: `(${f1num}/${f1den}) &divide; (${f2num}/${f2den})`, a: `${result18num}/${result18den}`, displayA: `${result18num}/${result18den}`, type: "simple" });
+        
+        // 19: Fraction d'un nombre
+        let num19 = randomInt(2, 5);
+        let den19 = randomInt(2, 5);
+        let total19 = den19 * randomInt(6, 15);
+        q.push({ id: 19, q: `${num19}/${den19} de ${total19}`, a: (num19 * total19 / den19).toString(), displayA: (num19 * total19 / den19).toString(), type: "simple" });
+        
+        // 20: Image d'un nombre par fonction linéaire
+        let a20 = randomInt(-5, 5);
+        let b20 = randomInt(-10, 10);
+        let x20 = randomInt(-5, 8);
+        let result20 = 4 - 2 * x20;
+        q.push({ id: 20, q: `Image de ${x20} par f(x) = 4 - 2x`, a: result20.toString(), displayA: result20.toString(), type: "simple" });
+        
+        // 21: Distance
+        let vitesse = randomInt(50, 120);
+        let tempsMin = randomInt(15, 45);
+        let distance = (vitesse * tempsMin / 60).toFixed(1);
+        q.push({ id: 21, q: `Distance à ${vitesse} km/h en ${tempsMin} min (km)`, a: distance, displayA: distance + " km", type: "simple" });
+        
+        // 22: Médiane
+        let valeurs = [];
+        for (let i = 0; i < 5; i++) {
+            valeurs.push(randomInt(10, 50));
+        }
+        valeurs.sort((a,b) => a-b);
+        let mediane = valeurs[2];
+        q.push({ id: 22, q: `Médiane de : ${valeurs.join(", ")}`, a: mediane.toString(), displayA: mediane.toString(), type: "simple" });
+        
+        return q;
+    }
+
+    function buildTable() {
+        currentQuestions = generateAllQuestions();
+        const container = document.getElementById('questionsBody');
+        container.innerHTML = "";
+        currentQuestions.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
                 <td class="num-col">${item.id}</td>
                 <td>${item.q}</td>
-                <td><input type="text" id="ans-${item.id}" class="ans-input" placeholder="${item.hint || ''}" autocomplete="off"></td>
-            </tr>`;
-    });
-
-    let timeLeft = 540;
-    const timerDisplay = document.getElementById('timer');
-    const countdown = setInterval(() => {
-        timeLeft--;
-        let min = Math.floor(timeLeft / 60);
-        let sec = timeLeft % 60;
-        timerDisplay.innerText = `Temps restant : ${min}:${sec < 10 ? '0'+sec : sec}`;
-        if (timeLeft <= 0) calculateResults();
-    }, 1000);
+                <td><input type="text" id="ans-${item.id}" class="ans-input" placeholder="" autocomplete="off"></td>
+            `;
+            container.appendChild(row);
+        });
+    }
 
     function normalize(val) {
-        if (!val) return null;
+        if (!val || val.trim() === "") return null;
         let str = val.toString().replace(',', '.').replace(/\s/g, '').toLowerCase();
         if (str.includes('/')) {
             let parts = str.split('/');
-            return parseFloat(parts[0]) / parseFloat(parts[1]);
+            if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                return parseFloat(parts[0]) / parseFloat(parts[1]);
+            }
         }
-        return parseFloat(str);
+        if (str.includes('^')) {
+            try {
+                let parts = str.split('^');
+                if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                    return Math.pow(parseFloat(parts[0]), parseFloat(parts[1]));
+                }
+            } catch(e) {}
+        }
+        let num = parseFloat(str);
+        return isNaN(num) ? null : num;
+    }
+
+    function checkAnswer(item, userRaw) {
+        if (!userRaw || userRaw.trim() === "") return false;
+        
+        if (item.type === "algebra") {
+            let normalizedUser = userRaw.replace(/\s/g, '').replace('²', '^2').replace('−', '-');
+            let normalizedAnswer = item.a.replace(/\s/g, '');
+            return normalizedUser === normalizedAnswer;
+        } 
+        else if (item.type === "range") {
+            let val = normalize(userRaw);
+            let [low, high] = item.a.split(',');
+            return (val !== null && val > parseFloat(low) && val < parseFloat(high));
+        } 
+        else {
+            let userVal = normalize(userRaw);
+            let targetVal = normalize(item.a);
+            if (userVal === null) return false;
+            return Math.abs(userVal - targetVal) < 0.0001;
+        }
     }
 
     function calculateResults() {
-        clearInterval(countdown);
+        if (timerInterval) clearInterval(timerInterval);
+        
         let score = 0;
-        const correctionBody = document.getElementById('correctionBody');
-        correctionBody.innerHTML = "";
-
-        quizData.forEach(item => {
-            let rawUser = document.getElementById(`ans-${item.id}`).value.trim();
-            let isCorrect = false;
-
-            if (item.type === "algebra") {
-                isCorrect = (rawUser.replace(/\s/g, '').replace('²', '^2') === item.a);
-            } else if (item.type === "range") {
-                let val = normalize(rawUser);
-                if (val > 3 && val < 3.1) isCorrect = true;
-            } else {
-                let userVal = normalize(rawUser);
-                let targetVal = normalize(item.a);
-                if (userVal !== null && Math.abs(userVal - targetVal) < 0.0001) isCorrect = true;
-            }
-
+        const userAnswers = [];
+        
+        currentQuestions.forEach(item => {
+            const inputField = document.getElementById(`ans-${item.id}`);
+            const userAnswer = inputField ? inputField.value.trim() : "";
+            const isCorrect = checkAnswer(item, userAnswer);
             if (isCorrect) score++;
-
-            correctionBody.innerHTML += `
-                <tr class="${isCorrect ? 'row-correct' : 'row-wrong'}">
-                    <td class="num-col">${item.id}</td>
-                    <td>${rawUser || "<em>Vide</em>"}</td>
-                    <td class="text-correct">${item.a.replace('^2', '²')}</td>
-                </tr>`;
+            userAnswers.push({ id: item.id, user: userAnswer || "(vide)", correct: isCorrect, expected: item.displayA });
         });
-
-        document.getElementById('quizForm').style.display = "none";
-        document.getElementById('timer').style.display = "none";
-        document.querySelector('.hint-box').style.display = "none";
-        document.getElementById('results-section').style.display = "block";
+        
         document.getElementById('finalScore').innerText = score;
-
+        document.getElementById('results-section').style.display = "block";
+        document.getElementById('timer').style.opacity = "0.7";
+        resultsVisible = true;
+        
         const icon = document.getElementById('badgeIcon');
         const title = document.getElementById('badgeTitle');
         const msg = document.getElementById('motivationalMessage');
-
-        if (score >= 20) { icon.innerText = "🏆"; title.innerText = "EXPERT"; title.style.color = "#d4af37"; msg.innerText = "Parfait ! Tu as une excellente maîtrise du calcul mental."; }
-        else if (score >= 15) { icon.innerText = "🥈"; title.innerText = "TRÈS BIEN"; title.style.color = "#95a5a6"; msg.innerText = "Très bon score ! Encore un petit effort pour l'or."; }
-        else if (score >= 10) { icon.innerText = "🥉"; title.innerText = "BIEN"; title.style.color = "#cd7f32"; msg.innerText = "C'est bien. Analyse tes erreurs pour progresser."; }
-        else { icon.innerText = "💪"; title.innerText = "COURAGE"; title.style.color = "#3498db"; msg.innerText = "Continue de t'entraîner régulièrement, ça va venir !"; }
         
-        window.scrollTo(0,0);
+        if (score >= 20) { icon.innerText = "🏆"; title.innerText = "EXPERT"; title.style.color = "#d4af37"; msg.innerText = "Parfait ! Nouvelle série disponible !"; }
+        else if (score >= 15) { icon.innerText = "🥈"; title.innerText = "TRÈS BIEN"; title.style.color = "#95a5a6"; msg.innerText = "Très bon score ! Essaie une nouvelle série !"; }
+        else if (score >= 10) { icon.innerText = "🥉"; title.innerText = "BIEN"; title.style.color = "#cd7f32"; msg.innerText = "Bien ! Continue avec une nouvelle série."; }
+        else { icon.innerText = "💪"; title.innerText = "ENTRAINE-TOI"; title.style.color = "#3498db"; msg.innerText = "Génère une nouvelle série et réessaie !"; }
+        
+        const correctionBody = document.getElementById('correctionBody');
+        correctionBody.innerHTML = "";
+        
+        userAnswers.forEach(ans => {
+            const row = document.createElement('tr');
+            row.className = ans.correct ? 'row-correct' : 'row-wrong';
+            row.innerHTML = `
+                <td class="num-col">${ans.id}</td>
+                <td>${escapeHtml(ans.user)}</td>
+                <td class="text-correct">${ans.expected}</td>
+            `;
+            correctionBody.appendChild(row);
+        });
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    
+    function generateNewQuestions() {
+        // Générer un nouveau jeu de questions
+        buildTable();
+        
+        // Réactiver le timer
+        if (timerInterval) clearInterval(timerInterval);
+        timeLeft = 540;
+        document.getElementById('timer').style.opacity = "1";
+        startTimer();
+        
+        // Cacher la section résultats
+        document.getElementById('results-section').style.display = "none";
+        resultsVisible = false;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function resetTimerOnly() {
+        if (timerInterval) clearInterval(timerInterval);
+        timeLeft = 540;
+        document.getElementById('timer').style.opacity = "1";
+        startTimer();
+    }
+    
+    function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    
+    function startTimer() {
+        const timerDisplay = document.getElementById('timer');
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.innerText = "⏰ Temps écoulé !";
+                if (!resultsVisible) {
+                    calculateResults();
+                }
+            } else {
+                timeLeft--;
+                let min = Math.floor(timeLeft / 60);
+                let sec = timeLeft % 60;
+                timerDisplay.innerText = `⏱️ Temps restant : ${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+            }
+        }, 1000);
+    }
+    
+    // Initialisation
+    buildTable();
+    startTimer();
 </script>
 
 </body>
