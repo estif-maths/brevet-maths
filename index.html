@@ -250,7 +250,24 @@
 </div>
 
 <footer>
-    
+    <div id="counter-area">
+    <a href='https://www.counters-free.net/'>Counters-Free.net</a>
+</div>
+
+<script type='text/javascript'>
+  // Only load the counter if the 'isAdmin' flag IS NOT found in this browser
+  if (localStorage.getItem('isAdmin') !== 'true') {
+    var script1 = document.createElement('script');
+    script1.src = 'https://www.freevisitorcounters.com/auth.php?id=58d43417d977247f1431d2cc36dfd851d16ef82f';
+    document.getElementById('counter-area').appendChild(script1);
+
+    var script2 = document.createElement('script');
+    script2.src = 'https://www.freevisitorcounters.com/en/home/counter/1541973/t/5';
+    document.getElementById('counter-area').appendChild(script2);
+  } else {
+    document.getElementById('counter-area').innerHTML = "<em>Admin view: Counter hidden.</em>";
+  }
+</script>
     <p style="font-weight: 600;"> © 2026 Estifanos G. Tous droits réservés.</p>
 </footer>
 
