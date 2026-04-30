@@ -10,7 +10,6 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
-        /* ========== STYLES COMPLETS (inchangés) ========== */
         :root {
             --primary: #4361ee;
             --secondary: #3f37c9;
@@ -87,7 +86,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* ========== STYLES DU COURS (identiques à Chapitre5.html) ========== */
         h2 {
             color: var(--primary);
             border-bottom: 2px solid #f0f2ff;
@@ -275,7 +273,6 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
-        /* ========== STYLES POUR LES EXERCICES ========== */
         .btn-new-series {
             background: var(--success);
             color: white;
@@ -333,6 +330,10 @@
             margin: 1rem 0 0.5rem 0;
             font-weight: 600;
             color: #1e40af;
+            background: #eef2ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            display: inline-block;
         }
         .input-group {
             display: flex;
@@ -396,6 +397,20 @@
             margin: 1rem 0;
             text-align: center;
         }
+        .info-box {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .info-card {
+            border: 2px solid #ccc;
+            padding: 12px;
+            border-radius: 8px;
+            background: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
@@ -414,16 +429,15 @@
         <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
     </div>
 
-    <!-- ========= SECTION COURS DÉTAILLÉ (INTÉGRALITÉ DE Chapitre5.html) ========= -->
-      <div id="cours" class="content-section active">
-        <!-- Download box for Cours PDF -->
-        <div class="utilite-box" style="background: #eef2ff;">
-            <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
-            <a href="OGD 1 Proportionnalité Cours.pdf" download="OGD 1 Proportionnalité Cours.pdf" style="color: var(--primary); font-weight: 600;">
-                📄 N1 - Arithmétique - Cours.pdf
-            </a>
-        </div>
+    <!-- COURS DÉTAILLÉ -->
     <div id="cours" class="content-section active">
+
+	<div class="utilite-box" style="background: #eef2ff;">
+    <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
+    <a href="OGD 1 Proportionnalité Cours Complet.pdf" download="OGD 1 Proportionnalité Cours Complet.pdf" style="color: var(--primary); font-weight: 600;">
+        📄 OGD 1 Proportionnalité Cours Complet.pdf
+    </a>
+</div>
         <h2>1. La proportionnalité</h2>
         <div class="definition-box">
             <strong>📘 Définition</strong><br>
@@ -471,8 +485,8 @@
             <div class="enonce">Trouver le prix de 2 kg et de 12 kg en utilisant la colonne 4 kg → 6,40 €.</div>
             <div class="table-wrapper">
                 <table class="propo-table">
-                    <thead><tr><th>Masse (kg)</th><th>4</th><th>2</th><th>12</th></td></thead>
-                    <tbody></tr><th>Prix (€)</th><td>6,4</th><th>?</th><th>?</th></tr></tbody>
+                    <thead><tr><th>Masse (kg)</th><th>4</th><th>2</th><th>12</th></tr></thead>
+                    <tbody><tr><th>Prix (€)</th><td>6,4</th><th>?</th><th>?</th></tr></tbody>
                 </table>
             </div>
             <div class="step">De 4 à 2 : division par 2 → \(6,4 \div 2 = 3,2\) €</div>
@@ -694,55 +708,226 @@
         <footer>📐 Cours complet – Proportionnalité, pourcentages, échelles, ratios, grandeurs produit/quotient, agrandissement & réduction</footer>
     </div>
 
-    <!-- ========= SECTION EXERCICES INTERACTIFS (avec graphique non proportionnel = points non alignés) ========= -->
+    <!-- EXERCICES INTERACTIFS (15 questions aléatoires) -->
     <div id="exercices" class="content-section">
-        <h2>📚 Exercices d'entraînement</h2>
-        <!-- Download box for Exercices PDF -->
-        <div class="utilite-box" style="background: #eef2ff;">
-            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices (Les bases) :</strong><br>
-            <a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" style="color: var(--primary); font-weight: 600;">
-                📄 N1 - Exercices Les bases.pdf
-            </a>
-        </div>
-          <div id="exercices" class="content-section">
+			<div class="utilite-box" style="background: #eef2ff;">
+    <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices interactifs :</strong><br>
+    <a href="OGD1 Proportionnalité - Exercices d'entrainement.pdf" download="OGD1 Proportionnalité - Exercices d'entrainement.pdf" style="color: var(--primary); font-weight: 600;">
+        📄 OGD1 Proportionnalité - Exercices d'entrainement.pdf
+    </a>
+</div>
         <button class="btn-new-series" id="newSeriesBtn">🔄 Nouvelle série (valeurs aléatoires)</button>
         <div id="exercisesContainer">Chargement...</div>
     </div>
 
-    <!-- ========= SECTION EXERCICES TYPE BREVET (en attente) ========= -->
-     <div class="utilite-box" style="background: #eef2ff;">
-            <i class="fas fa-download"></i> <strong>Télécharger les exercices type Brevet :</strong><br>
-            <a href="OGD1 Proporrionnalité - Exercices Type Brevet.pdf" download="OGD1 Proporrionnalité - Exercices Type Brevet.pdf" style="color: var(--primary); font-weight: 600;">
-                📄 N1 - Exercices Type Brevet.pdf
-            </a>
+    <!-- SECTION BREVET (CORRIGÉE) -->
+    <div id="brevet" class="content-section">
+	<div class="utilite-box" style="background: #eef2ff;">
+    <i class="fas fa-download"></i> <strong>Télécharger les exercices type Brevet :</strong><br>
+    <a href="OGD1 Proporrionnalité - Exercices Type Brevet.pdf" download="OGD1 Proporrionnalité - Exercices Type Brevet.pdf" style="color: var(--primary); font-weight: 600;">
+        📄 OGD1 Proporrionnalité - Exercices Type Brevet.pdf
+    </a>
+</div>
+        <div class="brevet-header">
+            <i class="fas fa-graduation-cap"></i> EXERCICES TYPE BREVET – Proportionnalité
         </div>
-        <div id="brevet" class="content-section">
-        <div class="brevet-header"><i class="fas fa-graduation-cap"></i> Entraînement au Brevet</div>
-        <h2>🎓 Exercices type Brevet</h2>
-        <div class="utilite-box" style="text-align:center;">
-            <i class="fas fa-hourglass-half"></i> <strong>Préparation en cours</strong><br>
-            Des exercices inspirés des annales seront bientôt disponibles.
+        <h2>🎓 Exercices Type Brevet</h2>
+        <p style="margin-bottom: 2rem;">Ces exercices sont inspirés d'annales. Pour chaque question, saisissez votre réponse puis cliquez sur "Vérifier".</p>
+
+        <!-- Exercice 1 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>📱 Exercice 1 : Téléchargement</h4><span class="badge-brevet">Brevet</span></div>
+            <div class="card-body">
+                <div class="question">
+                    On considère la fenêtre de téléchargement ci-dessous.<br>
+                    <img src="A.png" alt="Fenêtre de téléchargement" style="max-width:100%; margin:10px 0; border-radius:8px;"><br>
+                    Si la vitesse de téléchargement reste constante, faudra-t-il plus d’une minute et vingt-cinq secondes pour que le téléchargement se termine ?
+                </div>
+                <div class="input-group">
+                    <label>⏱️ Réponse (Oui / Non) :</label>
+                    <input type="text" id="brevet1_ans" placeholder="Oui ou Non">
+                    <button class="verify" data-exo="1">Vérifier</button>
+                </div>
+                <div id="brevet1_sol" class="solution"></div>
+            </div>
         </div>
-        <footer>Pensez à vous entraîner régulièrement.</footer>
+
+        <!-- Exercice 2 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>❄️ Exercice 2 : Eau et glace</h4><span class="badge-brevet">Tableau & graphique</span></div>
+            <div class="card-body">
+                <div class="question">
+                    Lorsqu’on fait geler de l’eau, le volume de glace obtenu est proportionnel au volume d’eau utilisé. En faisant geler 1,5 L d’eau on obtient 1,62 L de glace.
+                </div>
+                <div class="subquestion">1. Montrer qu’en faisant geler 1 L d’eau, on obtient 1,08 L de glace.</div>
+                <div class="input-group">
+                    <label>Volume de glace pour 1 L d’eau (L) :</label>
+                    <input type="text" id="brevet2_1_ans">
+                    <button class="verify" data-exo="2_1">Vérifier</button>
+                </div>
+                <div id="brevet2_1_sol" class="solution"></div>
+
+                <div class="subquestion">2. On souhaite compléter le tableau ci-dessous à l’aide d’un tableur. Quelle formule peut-on saisir dans la cellule B2 avant de la recopier vers la droite jusqu’à la cellule G2 ?</div>
+                <div style="text-align:center; margin:10px 0;">
+                    <img src="B.png" alt="Tableau" style="max-width:100%; border-radius:8px;">
+                </div>
+                <div class="input-group">
+                    <label>Formule :</label>
+                    <input type="text" id="brevet2_2_ans" placeholder="ex: =B1*1,08">
+                    <button class="verify" data-exo="2_2">Vérifier</button>
+                </div>
+                <div id="brevet2_2_sol" class="solution"></div>
+
+                <div class="subquestion">3. Quel graphique représente le volume de glace obtenu (en L) en fonction du volume d’eau contenu dans la bouteille au départ (en L) ?<br>
+                On rappelle que toute réponse doit être justifiée.</div>
+                <div style="text-align:center; margin:10px 0;">
+                    <img src="C.png" alt="Graphiques" style="max-width:100%; border-radius:8px;">
+                </div>
+                <div class="input-group">
+                    <label>Graphique correct (1, 2 ou 3) :</label>
+                    <input type="text" id="brevet2_3_ans" placeholder="1, 2 ou 3">
+                    <button class="verify" data-exo="2_3">Vérifier</button>
+                </div>
+                <div id="brevet2_3_sol" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- Exercice 3 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>🎨 Exercice 3 : Vrai ou faux ?</h4><span class="badge-brevet">Raisonnement</span></div>
+            <div class="card-body">
+                <div class="question">
+                    Un peintre souhaite repeindre les volets d’une maison. Il constate qu’il utilise 1 pot pour mettre une couche de peinture sur l’intérieur et l’extérieur d’un volet. Il doit peindre ses 4 paires de volets et mettre sur chaque volet 3 couches de peinture. Il affirme qu’il lui faut 2 pots de peinture. Justifier.
+                </div>
+                <div class="input-group">
+                    <label>Réponse (Vrai / Faux) :</label>
+                    <input type="text" id="brevet3_ans">
+                    <button class="verify" data-exo="3">Vérifier</button>
+                </div>
+                <div id="brevet3_sol" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- Exercice 4 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>👧📊 Exercice 4 : Répartition dans une classe</h4><span class="badge-brevet">Diagrammes & angles</span></div>
+            <div class="card-body">
+                <div class="question">
+                    Dans une classe de 24 élèves, il y a 16 filles.
+                </div>
+                <div class="subquestion">1. L’un des deux diagrammes ci-dessous peut-il représenter correctement la répartition des élèves de cette classe ? Justifier.</div>
+                <div style="text-align:center; margin:10px 0;">
+                    <img src="D.png" alt="Diagrammes" style="max-width:80%; border-radius:8px;">
+                </div>
+                <div class="input-group">
+                    <label>Réponse (1, 2 ou ni l’un ni l’autre) :</label>
+                    <input type="text" id="brevet4_1_ans" placeholder="ni l'un ni l'autre">
+                    <button class="verify" data-exo="4_1">Vérifier</button>
+                </div>
+                <div id="brevet4_1_sol" class="solution"></div>
+
+                <div class="subquestion">2. On a représenté la répartition des élèves de cette classe par un diagramme circulaire. Écrire le calcul permettant de déterminer la mesure de l’angle du secteur qui représente les garçons.</div>
+                <div style="text-align:center; margin:10px 0;">
+                    <img src="E.png" alt="Diagramme circulaire" style="max-width:50%; border-radius:8px;">
+                </div>
+                <div class="input-group">
+                    <label>Angle (degrés) :</label>
+                    <input type="text" id="brevet4_2_ans">
+                    <button class="verify" data-exo="4_2">Vérifier</button>
+                </div>
+                <div id="brevet4_2_sol" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- Exercice 5 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>🌾 Exercice 5 : Mélange de graines</h4><span class="badge-brevet">Ratios & budget</span></div>
+            <div class="card-body">
+                <div class="question">
+                    L’agriculteur souhaite semer un mélange de graines (blé, seigle et pois) en respectant les indications suivantes.
+                    <div class="info-box">
+                        <div class="info-card"><strong>💰 Prix</strong><br>• Blé : 1,40 €/kg<br>• Seigle : 1,30 €/kg<br>• Pois : 2,10 €/kg</div>
+                        <div class="info-card"><strong>📦 Répartition</strong><br>• Blé : 80 kg<br>• Seigle : 60 kg<br>• Pois : 50 kg</div>
+                    </div>
+                </div>
+                <div class="subquestion">1. Un vendeur lui propose des sacs contenant un mélange de blé, seigle, et pois selon le ratio 16 : 12 : 8. Montrer que la composition de ce sac ne respecte pas l’indication 2.</div>
+                <div class="input-group">
+                    <label>Respecte-t-il ? (Oui/Non) :</label>
+                    <input type="text" id="brevet5_1_ans">
+                    <button class="verify" data-exo="5_1">Vérifier</button>
+                </div>
+                <div id="brevet5_1_sol" class="solution"></div>
+
+                <div class="subquestion">2. L’agriculteur souhaite semer le mélange de graines sur la partie du champ représentée par le triangle CDE dont l’aire mesure 48 600 m². Il a calculé qu’il doit prévoir 388,80 kg de blé pour respecter la répartition indiquée dans l’énoncé. Justifier le calcul de l’agriculteur.</div>
+                <div class="input-group">
+                    <label>Facteur multiplicatif :</label>
+                    <input type="text" id="brevet5_2_ans">
+                    <button class="verify" data-exo="5_2">Vérifier</button>
+                </div>
+                <div id="brevet5_2_sol" class="solution"></div>
+
+                <div class="subquestion">3. L’agriculteur dispose d’un budget de 1 500 € pour semer le mélange de graines sur la totalité des 48 600 m² de terrain. Il a calculé qu’il doit acheter 388,80 kg de blé, 291,6 kg de seigle et 243 kg de pois pour respecter la répartition indiquée dans l’énoncé. L’agriculteur dispose-t-il d’un budget suffisant ?</div>
+                <div class="input-group">
+                    <label>Budget suffisant ? (Oui/Non) :</label>
+                    <input type="text" id="brevet5_3_ans">
+                    <button class="verify" data-exo="5_3">Vérifier</button>
+                </div>
+                <div id="brevet5_3_sol" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- Exercice 6 -->
+        <div class="exercice-card">
+            <div class="card-header"><h4>🏃 Exercice 6 : Course à pied (Brevet Amérique du Nord 2025)</h4><span class="badge-brevet">Brevet 2025</span></div>
+            <div class="card-body">
+                <div class="question">
+                    À l’approche d’une course organisée par son collège, Malo s’entraîne sur un parcours de 13,5 km. La courbe ci-dessous représente la distance parcourue par Malo (en kilomètres) en fonction du temps écoulé (en minutes).
+                    <div style="text-align:center; margin:10px 0;">
+                        <img src="F.png" alt="Graphique distance-temps" style="max-width:100%; border-radius:8px;">
+                    </div>
+                </div>
+                <div class="subquestion">1. Le temps et la distance parcourue par Malo sont-ils proportionnels ?</div>
+                <div class="input-group"><input type="text" id="brevet6_1_ans"><button class="verify" data-exo="6_1">Vérifier</button></div>
+                <div id="brevet6_1_sol" class="solution"></div>
+
+                <div class="subquestion">2. Quelle distance Malo a-t-il parcourue au bout de 20 minutes ? (Aucune justification n’est attendue.)</div>
+                <div class="input-group"><input type="text" id="brevet6_2_ans"><button class="verify" data-exo="6_2">Vérifier</button></div>
+                <div id="brevet6_2_sol" class="solution"></div>
+
+                <div class="subquestion">3. Combien de temps a-t-il mis pour faire les 9 premiers kilomètres ? (Aucune justification n’est attendue.)</div>
+                <div class="input-group"><input type="text" id="brevet6_3_ans"><button class="verify" data-exo="6_3">Vérifier</button></div>
+                <div id="brevet6_3_sol" class="solution"></div>
+
+                <div class="subquestion">4. Quelle est la vitesse moyenne de Malo lors de cette course ? Exprimer le résultat au dixième de km/h près.</div>
+                <div class="input-group"><input type="text" id="brevet6_4_ans"><button class="verify" data-exo="6_4">Vérifier</button></div>
+                <div id="brevet6_4_sol" class="solution"></div>
+
+                <div class="subquestion">5. Louise et Hillal ont couru sur le même parcours de 13,5 km. Louise a une vitesse régulière égale à 12 km/h et Hillal a une vitesse régulière égale à 10 km/h.<br>
+                (a) Sachant que Louise et Hillal sont partis en même temps, qui a été le premier à franchir la ligne d’arrivée ?<br>
+                (b) Quelle distance sépare Louise et Hillal, lorsque le premier des deux franchit la ligne d’arrivée ?</div>
+                <div class="input-group"><label>a) Premier arrivé :</label><input type="text" id="brevet6_5a_ans"><button class="verify" data-exo="6_5a">Vérifier</button></div>
+                <div id="brevet6_5a_sol" class="solution"></div>
+                <div class="input-group"><label>b) Distance (km) :</label><input type="text" id="brevet6_5b_ans"><button class="verify" data-exo="6_5b">Vérifier</button></div>
+                <div id="brevet6_5b_sol" class="solution"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    // ========== SCRIPT DES EXERCICES INTERACTIFS ==========
+    // ========== FONCTIONS POUR LES EXERCICES INTERACTIFS (15 questions aléatoires) ==========
     function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
     function randomDecimal(min, max, decimals = 2) { let val = Math.random() * (max - min) + min; return Math.round(val * Math.pow(10, decimals)) / Math.pow(10, decimals); }
-    
-    function formatDecimal(value, decimals = 2) {
-        return value.toFixed(decimals).replace('.', ',');
-    }
+    function formatDecimal(value, decimals = 2) { return value.toFixed(decimals).replace('.', ','); }
+    function approxEqual(actual, expected, tolerance = 0.05) { return Math.abs(actual - expected) <= tolerance; }
     
     function generateValues() {
-        const a = randomInt(2,5), prix_a = randomDecimal(3,10), coeff = prix_a / a, b = randomInt(6,12), c = randomInt(15,25);
+        const a = randomInt(2,5), prix_a = randomDecimal(3,10), coeff = prix_a / a, b = randomInt(6,12);
         const km = randomInt(50,150), L = randomDecimal(3,12), km2 = randomInt(200,400), coeffEssence = L/km, essence2 = coeffEssence*km2, targetL = randomDecimal(5,20), targetKm = targetL/coeffEssence;
         const totalEleves = randomInt(20,40), partEleves = randomInt(5,totalEleves-1), pct = Math.round((partEleves/totalEleves)*100);
         const prixInitial = randomInt(50,200), augmentation = randomInt(5,25), nouveauPrix = prixInitial*(1+augmentation/100);
         const echelleDiv = randomInt(10000,50000), cmCarte = randomInt(5,15), reelKm = (cmCarte*echelleDiv)/100000;
-        const cmPlan = randomDecimal(2,8), metresReels = randomInt(100,800), echelleRatio = cmPlan/(metresReels*100), echelleInverse = Math.round(1/echelleRatio);
+        const cmPlan = randomDecimal(2,8), metresReels = randomInt(100,800), echelleInverse = Math.round(1/(cmPlan/(metresReels*100)));
         const puissance = randomDecimal(1,3), tempsH = randomInt(2,6), energie = puissance*tempsH;
         const distanceKm = randomInt(120,350), heures = randomInt(1,4), minutes = randomInt(0,45), vitesse = Math.round(distanceKm/(heures+minutes/60));
         const cote = randomInt(3,8), rapportLong = randomDecimal(1.2,2.5), newCote = cote*rapportLong;
@@ -750,265 +935,209 @@
         const volumeInit = randomInt(8,64), rapportVol = randomInt(2,4), newVolume = volumeInit*Math.pow(rapportVol,3);
         const totalRatio2 = randomInt(100,300), r2a = randomInt(1,5), r2b = randomInt(1,5), part1 = (r2a/(r2a+r2b))*totalRatio2;
         const totalRatio3 = randomInt(40,120), r3a = randomInt(1,4), r3b = randomInt(2,5), r3c = randomInt(2,5), partCiment = (r3b/(r3a+r3b+r3c))*totalRatio3;
-        return { prop1:{a,prix_a,coeff,b,c}, prop2:{km,L,km2,coeffEssence,essence2,targetL,targetKm}, pct1:{totalEleves,partEleves,pct}, pct2:{prixInitial,augmentation,nouveauPrix}, echelle1:{echelleDiv,cmCarte,reelKm}, echelle2:{cmPlan,metresReels,echelleInverse}, produit:{puissance,tempsH,energie}, quotient:{distanceKm,heures,minutes,vitesse}, agrandissement:{cote,rapportLong,newCote}, reduction:{aireInit,rapportRed,newAire}, volume:{volumeInit,rapportVol,newVolume}, ratio2:{totalRatio2,r2a,r2b,part1}, ratio3:{totalRatio3,r3a,r3b,r3c,partCiment} };
+        return { prop1:{a,prix_a,coeff,b}, prop2:{km,L,km2,coeffEssence,essence2,targetL,targetKm}, pct1:{totalEleves,partEleves,pct}, pct2:{prixInitial,augmentation,nouveauPrix}, echelle1:{echelleDiv,cmCarte,reelKm}, echelle2:{cmPlan,metresReels,echelleInverse}, produit:{puissance,tempsH,energie}, quotient:{distanceKm,heures,minutes,vitesse}, agrandissement:{cote,rapportLong,newCote}, reduction:{aireInit,rapportRed,newAire}, volume:{volumeInit,rapportVol,newVolume}, ratio2:{totalRatio2,r2a,r2b,part1}, ratio3:{totalRatio3,r3a,r3b,r3c,partCiment} };
     }
     
     let currentData = null;
-    function approxEqual(actual, expected, tolerance = 0.05) { return Math.abs(actual - expected) <= tolerance; }
     
     function renderExercises(data) {
         const container = document.getElementById('exercisesContainer');
         container.innerHTML = `
-            <!-- Exercice 1 -->
             <div class="exercice-card"><div class="card-header"><h4>🍎 Exercice 1 – Achat de pommes</h4><span class="badge-import">Tableau de proportionnalité</span></div>
-            <div class="card-body">
-                <div class="question">Au marché, le prix des pommes est proportionnel à la masse achetée. Un client a payé ${formatDecimal(data.prop1.prix_a)} € pour ${data.prop1.a} kg.<br>
-                a) Calculez le prix pour 1 kg (coefficient de proportionnalité).<br>
-                b) Calculez le prix pour ${data.prop1.b} kg.</div>
-                <div class="input-group"><label>💰 a) Prix au kilo (€) :</label><input type="text" id="ans1_1"><button class="verify" data-type="coeff">Vérifier</button></div>
-                <div class="hint">💡 Arrondi au centième près.</div>
-                <div class="input-group"><label>💶 b) Prix pour ${data.prop1.b} kg (€) :</label><input type="text" id="ans1_2"><button class="verify" data-type="prixB">Vérifier</button></div>
-                <div class="hint">💡 Arrondi au centième près.</div>
-                <div id="sol1" class="solution"></div>
-            </div></div>
-            <!-- Exercice 2 -->
+            <div class="card-body"><div class="question">Au marché, le prix des pommes est proportionnel à la masse achetée. Un client a payé ${formatDecimal(data.prop1.prix_a)} € pour ${data.prop1.a} kg.<br>a) Calculez le prix pour 1 kg (coefficient de proportionnalité).<br>b) Calculez le prix pour ${data.prop1.b} kg.</div>
+            <div class="input-group"><label>💰 a) Prix au kilo (€) :</label><input type="text" id="ans1_1"><button class="verify" data-type="coeff">Vérifier</button></div>
+            <div class="input-group"><label>💶 b) Prix pour ${data.prop1.b} kg (€) :</label><input type="text" id="ans1_2"><button class="verify" data-type="prixB">Vérifier</button></div>
+            <div id="sol1" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🚗 Exercice 2 – Consommation d'essence</h4><span class="badge-import">Produit en croix</span></div>
-            <div class="card-body">
-                <div class="question">Une voiture consomme ${formatDecimal(data.prop2.L)} L d’essence pour parcourir ${data.prop2.km} km. La consommation est proportionnelle à la distance.<br>
-                a) Quelle quantité d’essence sera nécessaire pour parcourir ${data.prop2.km2} km ?<br>
-                b) Avec ${formatDecimal(data.prop2.targetL)} L, quelle distance peut-on parcourir ?</div>
-                <div class="input-group"><label>⛽ a) Litres pour ${data.prop2.km2} km :</label><input type="text" id="ans2_1"><button class="verify" data-type="conso">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div class="input-group"><label>🛣️ b) Distance avec ${formatDecimal(data.prop2.targetL)} L (km) :</label><input type="text" id="ans2_2"><button class="verify" data-type="dist">Vérifier</button></div>
-                <div class="hint">💡 Au dixième près.</div>
-                <div id="sol2" class="solution"></div>
-            </div></div>
-            <!-- Exercice 3 – Graphique proportionnel -->
-            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 3 – Graphique 1 (proportionnel)</h4><span class="badge-import">Points alignés avec l'origine</span></div>
-            <div class="card-body">
-                <div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="50" cy="110" r="4" fill="green"/><circle cx="80" cy="70" r="4" fill="green"/><circle cx="110" cy="30" r="4" fill="green"/><line x1="20" y1="150" x2="110" y2="30" stroke="green" stroke-dasharray="4"/></svg></div>
-                <div class="question">Les trois points verts sont-ils alignés avec l’origine O ? (Oui/Non)</div>
-                <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_1"><button class="verify" data-type="graphOui">Vérifier</button></div>
-                <div class="hint">💡 Tapez "Oui" ou "Non".</div>
-                <div id="sol3" class="solution"></div>
-            </div></div>
-            <!-- Exercice 4 – Graphique non proportionnel (courbe / points non alignés) -->
-            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 4 – Graphique 2 (non proportionnel)</h4><span class="badge-import">Points non alignés</span></div>
-            <div class="card-body">
-                <div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="40" cy="130" r="4" fill="orange"/><circle cx="80" cy="60" r="4" fill="orange"/><circle cx="120" cy="80" r="4" fill="orange"/></svg></div>
-                <div class="question">Les trois points orange sont-ils alignés avec l’origine O ? (Oui/Non)</div>
-                <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_2"><button class="verify" data-type="graphNon">Vérifier</button></div>
-                <div class="hint">💡 Tapez "Oui" ou "Non".</div>
-                <div id="sol3b" class="solution"></div>
-            </div></div>
-            <!-- Exercice 5 -->
+            <div class="card-body"><div class="question">Une voiture consomme ${formatDecimal(data.prop2.L)} L d’essence pour parcourir ${data.prop2.km} km. La consommation est proportionnelle à la distance.<br>a) Quelle quantité d’essence sera nécessaire pour parcourir ${data.prop2.km2} km ?<br>b) Avec ${formatDecimal(data.prop2.targetL)} L, quelle distance peut-on parcourir ?</div>
+            <div class="input-group"><label>⛽ a) Litres :</label><input type="text" id="ans2_1"><button class="verify" data-type="conso">Vérifier</button></div>
+            <div class="input-group"><label>🛣️ b) Distance (km) :</label><input type="text" id="ans2_2"><button class="verify" data-type="dist">Vérifier</button></div>
+            <div id="sol2" class="solution"></div></div></div>
+            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 3 – Graphique proportionnel</h4><span class="badge-import">Points alignés avec l'origine</span></div>
+            <div class="card-body"><div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="50" cy="110" r="4" fill="green"/><circle cx="80" cy="70" r="4" fill="green"/><circle cx="110" cy="30" r="4" fill="green"/><line x1="20" y1="150" x2="110" y2="30" stroke="green" stroke-dasharray="4"/></svg></div><div class="question">Les trois points verts sont-ils alignés avec l’origine O ? (Oui/Non)</div>
+            <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_1"><button class="verify" data-type="graphOui">Vérifier</button></div>
+            <div id="sol3" class="solution"></div></div></div>
+            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 4 – Graphique non proportionnel</h4><span class="badge-import">Points non alignés</span></div>
+            <div class="card-body"><div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="40" cy="130" r="4" fill="orange"/><circle cx="80" cy="60" r="4" fill="orange"/><circle cx="120" cy="80" r="4" fill="orange"/></svg></div><div class="question">Les trois points orange sont-ils alignés avec l’origine O ? (Oui/Non)</div>
+            <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_2"><button class="verify" data-type="graphNon">Vérifier</button></div>
+            <div id="sol3b" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 5 – Pourcentage d'élèves</h4><span class="badge-import">Calcul de pourcentage</span></div>
-            <div class="card-body">
-                <div class="question">Dans une classe de ${data.pct1.totalEleves} élèves, on compte ${data.pct1.partEleves} élèves qui possèdent un téléphone portable. Quel est le pourcentage d’élèves ayant un téléphone ?</div>
-                <div class="input-group"><label>📱 Pourcentage :</label><input type="text" id="ans4_1"><button class="verify" data-type="pct">Vérifier</button></div>
-                <div class="hint">💡 À l’unité près.</div>
-                <div id="sol4" class="solution"></div>
-            </div></div>
-            <!-- Exercice 6 -->
+            <div class="card-body"><div class="question">Dans une classe de ${data.pct1.totalEleves} élèves, on compte ${data.pct1.partEleves} élèves qui possèdent un téléphone portable. Quel est le pourcentage d’élèves ayant un téléphone ?</div>
+            <div class="input-group"><label>📱 Pourcentage :</label><input type="text" id="ans4_1"><button class="verify" data-type="pct">Vérifier</button></div>
+            <div id="sol4" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>📈 Exercice 6 – Augmentation de prix</h4><span class="badge-import">Pourcentage d'augmentation</span></div>
-            <div class="card-body">
-                <div class="question">Un article coûte ${data.pct2.prixInitial} €. Son prix augmente de ${data.pct2.augmentation} %. Calculez le nouveau prix.</div>
-                <div class="input-group"><label>💶 Nouveau prix (€) :</label><input type="text" id="ans4_2"><button class="verify" data-type="augm">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol4b" class="solution"></div>
-            </div></div>
-            <!-- Exercice 7 -->
+            <div class="card-body"><div class="question">Un article coûte ${data.pct2.prixInitial} €. Son prix augmente de ${data.pct2.augmentation} %. Calculez le nouveau prix.</div>
+            <div class="input-group"><label>💶 Nouveau prix (€) :</label><input type="text" id="ans4_2"><button class="verify" data-type="augm">Vérifier</button></div>
+            <div id="sol4b" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🗺️ Exercice 7 – Carte routière</h4><span class="badge-import">Échelle 1/${data.echelle1.echelleDiv}</span></div>
-            <div class="card-body">
-                <div class="question">Une carte routière est à l’échelle 1 / ${data.echelle1.echelleDiv}. Sur cette carte, la distance entre deux villes est de ${data.echelle1.cmCarte} cm. Quelle est la distance réelle en kilomètres ?</div>
-                <div class="input-group"><label>📍 Distance réelle (km) :</label><input type="text" id="ans5_1"><button class="verify" data-type="reel">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol5" class="solution"></div>
-            </div></div>
-            <!-- Exercice 8 -->
+            <div class="card-body"><div class="question">Une carte routière est à l’échelle 1 / ${data.echelle1.echelleDiv}. Sur cette carte, la distance entre deux villes est de ${data.echelle1.cmCarte} cm. Quelle est la distance réelle en kilomètres ?</div>
+            <div class="input-group"><label>📍 Distance réelle (km) :</label><input type="text" id="ans5_1"><button class="verify" data-type="reel">Vérifier</button></div>
+            <div id="sol5" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>📐 Exercice 8 – Échelle d’un plan</h4><span class="badge-import">Trouver l'échelle</span></div>
-            <div class="card-body">
-                <div class="question">Sur le plan d’une maison, une longueur de ${formatDecimal(data.echelle2.cmPlan)} cm représente ${data.echelle2.metresReels} m dans la réalité. Donnez l’échelle de ce plan sous la forme "1/..." (nombre entier).</div>
-                <div class="input-group"><label>📏 Échelle :</label><input type="text" id="ans5_2"><button class="verify" data-type="echelle">Vérifier</button></div>
-                <div class="hint">💡 Exemple : 1/5000.</div>
-                <div id="sol5b" class="solution"></div>
-            </div></div>
-            <!-- Exercice 9 -->
+            <div class="card-body"><div class="question">Sur le plan d’une maison, une longueur de ${formatDecimal(data.echelle2.cmPlan)} cm représente ${data.echelle2.metresReels} m dans la réalité. Donnez l’échelle de ce plan sous la forme "1/..." (nombre entier).</div>
+            <div class="input-group"><label>📏 Échelle :</label><input type="text" id="ans5_2"><button class="verify" data-type="echelle">Vérifier</button></div>
+            <div id="sol5b" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>⚡ Exercice 9 – Énergie électrique</h4><span class="badge-import">Grandeur produit</span></div>
-            <div class="card-body">
-                <div class="question">Un radiateur électrique a une puissance de ${formatDecimal(data.produit.puissance)} kW. Il fonctionne pendant ${data.produit.tempsH} heures. Calculez l’énergie consommée en kWh (Énergie = puissance × durée).</div>
-                <div class="input-group"><label>🔌 Énergie (kWh) :</label><input type="text" id="ans6_1"><button class="verify" data-type="energie">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol6" class="solution"></div>
-            </div></div>
-            <!-- Exercice 10 -->
+            <div class="card-body"><div class="question">Un radiateur électrique a une puissance de ${formatDecimal(data.produit.puissance)} kW. Il fonctionne pendant ${data.produit.tempsH} heures. Calculez l’énergie consommée en kWh (Énergie = puissance × durée).</div>
+            <div class="input-group"><label>🔌 Énergie (kWh) :</label><input type="text" id="ans6_1"><button class="verify" data-type="energie">Vérifier</button></div>
+            <div id="sol6" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🚗 Exercice 10 – Vitesse moyenne</h4><span class="badge-import">Grandeur quotient</span></div>
-            <div class="card-body">
-                <div class="question">Une voiture parcourt ${data.quotient.distanceKm} km en ${data.quotient.heures} h et ${data.quotient.minutes} min. Calculez sa vitesse moyenne en km/h (arrondie à l’unité).</div>
-                <div class="input-group"><label>🏁 Vitesse (km/h) :</label><input type="text" id="ans6_2"><button class="verify" data-type="vitesse">Vérifier</button></div>
-                <div class="hint">💡 À l’unité près.</div>
-                <div id="sol6b" class="solution"></div>
-            </div></div>
-            <!-- Exercice 11 -->
+            <div class="card-body"><div class="question">Une voiture parcourt ${data.quotient.distanceKm} km en ${data.quotient.heures} h et ${data.quotient.minutes} min. Calculez sa vitesse moyenne en km/h (arrondie à l’unité).</div>
+            <div class="input-group"><label>🏁 Vitesse (km/h) :</label><input type="text" id="ans6_2"><button class="verify" data-type="vitesse">Vérifier</button></div>
+            <div id="sol6b" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>📏 Exercice 11 – Agrandissement d’un carré</h4><span class="badge-import">Longueur × k</span></div>
-            <div class="card-body">
-                <div class="question">Un carré a un côté de ${data.agrandissement.cote} cm. On l’agrandit en multipliant toutes ses dimensions par ${formatDecimal(data.agrandissement.rapportLong)}. Quelle est la longueur du nouveau côté ?</div>
-                <div class="input-group"><label>📐 Nouveau côté (cm) :</label><input type="text" id="ans7_1"><button class="verify" data-type="cote">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol7" class="solution"></div>
-            </div></div>
-            <!-- Exercice 12 -->
+            <div class="card-body"><div class="question">Un carré a un côté de ${data.agrandissement.cote} cm. On l’agrandit en multipliant toutes ses dimensions par ${formatDecimal(data.agrandissement.rapportLong)}. Quelle est la longueur du nouveau côté ?</div>
+            <div class="input-group"><label>📐 Nouveau côté (cm) :</label><input type="text" id="ans7_1"><button class="verify" data-type="cote">Vérifier</button></div>
+            <div id="sol7" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🔲 Exercice 12 – Réduction d’aire</h4><span class="badge-import">Aire × k²</span></div>
-            <div class="card-body">
-                <div class="question">Un rectangle a une aire de ${data.reduction.aireInit} cm². On le réduit en multipliant ses dimensions par ${formatDecimal(data.reduction.rapportRed)}. Calculez la nouvelle aire.</div>
-                <div class="input-group"><label>📐 Nouvelle aire (cm²) :</label><input type="text" id="ans7_2"><button class="verify" data-type="aire">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol7b" class="solution"></div>
-            </div></div>
-            <!-- Exercice 13 -->
+            <div class="card-body"><div class="question">Un rectangle a une aire de ${data.reduction.aireInit} cm². On le réduit en multipliant ses dimensions par ${formatDecimal(data.reduction.rapportRed)}. Calculez la nouvelle aire.</div>
+            <div class="input-group"><label>📐 Nouvelle aire (cm²) :</label><input type="text" id="ans7_2"><button class="verify" data-type="aire">Vérifier</button></div>
+            <div id="sol7b" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🧊 Exercice 13 – Volume d’un cube</h4><span class="badge-import">Volume × k³</span></div>
-            <div class="card-body">
-                <div class="question">Un cube a un volume de ${data.volume.volumeInit} cm³. On l’agrandit en multipliant ses arêtes par ${data.volume.rapportVol}. Calculez le nouveau volume.</div>
-                <div class="input-group"><label>📦 Nouveau volume (cm³) :</label><input type="text" id="ans7_3"><button class="verify" data-type="volume">Vérifier</button></div>
-                <div class="hint">💡 À l’unité près.</div>
-                <div id="sol7c" class="solution"></div>
-            </div></div>
-            <!-- Exercice 14 -->
+            <div class="card-body"><div class="question">Un cube a un volume de ${data.volume.volumeInit} cm³. On l’agrandit en multipliant ses arêtes par ${data.volume.rapportVol}. Calculez le nouveau volume.</div>
+            <div class="input-group"><label>📦 Nouveau volume (cm³) :</label><input type="text" id="ans7_3"><button class="verify" data-type="volume">Vérifier</button></div>
+            <div id="sol7c" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>💰 Exercice 14 – Partage d’argent</h4><span class="badge-import">Ratio ${data.ratio2.r2a}:${data.ratio2.r2b}</span></div>
-            <div class="card-body">
-                <div class="question">Deux associés se partagent un bénéfice de ${data.ratio2.totalRatio2} € selon le ratio ${data.ratio2.r2a} : ${data.ratio2.r2b}. Combien reçoit le premier associé ?</div>
-                <div class="input-group"><label>💵 Première part (€) :</label><input type="text" id="ans8_1"><button class="verify" data-type="part1">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol8" class="solution"></div>
-            </div></div>
-            <!-- Exercice 15 -->
+            <div class="card-body"><div class="question">Deux associés se partagent un bénéfice de ${data.ratio2.totalRatio2} € selon le ratio ${data.ratio2.r2a} : ${data.ratio2.r2b}. Combien reçoit le premier associé ?</div>
+            <div class="input-group"><label>💵 Première part (€) :</label><input type="text" id="ans8_1"><button class="verify" data-type="part1">Vérifier</button></div>
+            <div id="sol8" class="solution"></div></div></div>
             <div class="exercice-card"><div class="card-header"><h4>🧱 Exercice 15 – Mélange de béton</h4><span class="badge-import">Ratio ${data.ratio3.r3a}:${data.ratio3.r3b}:${data.ratio3.r3c}</span></div>
-            <div class="card-body">
-                <div class="question">Pour préparer du béton, on mélange du sable, du ciment et de l’eau dans le ratio ${data.ratio3.r3a} : ${data.ratio3.r3b} : ${data.ratio3.r3c}. On veut obtenir ${data.ratio3.totalRatio3} kg de mélange. Quelle masse de ciment (en kg) faut-il utiliser ?</div>
-                <div class="input-group"><label>🏗️ Masse de ciment (kg) :</label><input type="text" id="ans8_2"><button class="verify" data-type="ciment">Vérifier</button></div>
-                <div class="hint">💡 Au centième près.</div>
-                <div id="sol8b" class="solution"></div>
-            </div></div>
+            <div class="card-body"><div class="question">Pour préparer du béton, on mélange du sable, du ciment et de l’eau dans le ratio ${data.ratio3.r3a} : ${data.ratio3.r3b} : ${data.ratio3.r3c}. On veut obtenir ${data.ratio3.totalRatio3} kg de mélange. Quelle masse de ciment (en kg) faut-il utiliser ?</div>
+            <div class="input-group"><label>🏗️ Masse de ciment (kg) :</label><input type="text" id="ans8_2"><button class="verify" data-type="ciment">Vérifier</button></div>
+            <div id="sol8b" class="solution"></div></div></div>
         `;
         attachEvents(data);
     }
     
     function attachEvents(data) {
-        const buttons = document.querySelectorAll('.verify[data-type]');
-        buttons.forEach(btn => { btn.removeEventListener('click', handler); btn.addEventListener('click', handler); });
+        document.querySelectorAll('#exercices .verify[data-type]').forEach(btn => {
+            btn.removeEventListener('click', handler);
+            btn.addEventListener('click', handler);
+        });
         function handler(e) {
             const type = e.currentTarget.getAttribute('data-type');
             let userValue = e.currentTarget.closest('.input-group').querySelector('input').value.trim().replace(',', '.').replace(/\s/g, '');
-            const parentCard = e.currentTarget.closest('.card-body');
-            const solDiv = parentCard.querySelector('.solution');
-            let isCorrect = false;
-            let detail = "";
-            let userNum = parseFloat(userValue);
+            const solDiv = e.currentTarget.closest('.card-body').querySelector('.solution');
+            let isCorrect = false, detail = "", userNum = parseFloat(userValue);
             switch(type) {
-                case 'coeff':
-                    isCorrect = approxEqual(userNum, data.prop1.coeff);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Coefficient = prix ÷ masse = ${formatDecimal(data.prop1.prix_a)} € ÷ ${data.prop1.a} kg = ${formatDecimal(data.prop1.coeff)} €/kg.<br>✅ Réponse attendue : <strong>${formatDecimal(data.prop1.coeff)} €</strong> (au centième près).`;
-                    break;
-                case 'prixB':
-                    let expectedPrix = data.prop1.coeff * data.prop1.b;
-                    isCorrect = approxEqual(userNum, expectedPrix);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Prix = masse × coefficient = ${data.prop1.b} × ${formatDecimal(data.prop1.coeff)} = ${formatDecimal(expectedPrix)} €.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedPrix)} €</strong> (au centième près).`;
-                    break;
-                case 'conso':
-                    let expectedConso = data.prop2.essence2;
-                    isCorrect = approxEqual(userNum, expectedConso);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Consommation au km = ${formatDecimal(data.prop2.L)} L ÷ ${data.prop2.km} km = ${formatDecimal(data.prop2.coeffEssence,4)} L/km.<br>Pour ${data.prop2.km2} km : ${formatDecimal(data.prop2.coeffEssence,4)} × ${data.prop2.km2} = ${formatDecimal(expectedConso)} L.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedConso)} L</strong> (au centième près).`;
-                    break;
-                case 'dist':
-                    let expectedDist = data.prop2.targetKm;
-                    isCorrect = approxEqual(userNum, expectedDist);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Distance = ${formatDecimal(data.prop2.targetL)} L ÷ ${formatDecimal(data.prop2.coeffEssence,4)} L/km = ${formatDecimal(expectedDist)} km.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedDist)} km</strong> (au dixième près).`;
-                    break;
-                case 'graphOui':
-                    isCorrect = (userValue.toLowerCase() === 'oui');
-                    detail = `🔍 <strong>Explication</strong> : Les points sont alignés sur une droite passant par l'origine (0,0). Le rapport y/x est constant. Cette situation correspond à une proportionnalité.<br>✅ Réponse attendue : <strong>Oui</strong>.`;
-                    break;
-                case 'graphNon':
-                    isCorrect = (userValue.toLowerCase() === 'non');
-                    detail = `🔍 <strong>Explication</strong> : Les points ne sont pas alignés entre eux (ils forment une "courbe"), donc ils ne peuvent pas être alignés avec l'origine. Il n'y a pas proportionnalité.<br>✅ Réponse attendue : <strong>Non</strong>.`;
-                    break;
-                case 'pct':
-                    isCorrect = (parseFloat(userValue.replace('%','')) === data.pct1.pct);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Pourcentage = (partie / total) × 100 = (${data.pct1.partEleves} / ${data.pct1.totalEleves}) × 100 = ${data.pct1.pct}%.<br>✅ Réponse attendue : <strong>${data.pct1.pct}%</strong> (à l’unité près).`;
-                    break;
-                case 'augm':
-                    let expectedAug = data.pct2.nouveauPrix;
-                    isCorrect = approxEqual(userNum, expectedAug);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau prix = ${data.pct2.prixInitial} × (1 + ${data.pct2.augmentation}/100) = ${data.pct2.prixInitial} × ${(1+data.pct2.augmentation/100).toFixed(2)} = ${formatDecimal(expectedAug)} €.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedAug)} €</strong> (au centième près).`;
-                    break;
-                case 'reel':
-                    let expectedReel = data.echelle1.reelKm;
-                    isCorrect = approxEqual(userNum, expectedReel);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Distance réelle (cm) = ${data.echelle1.cmCarte} × ${data.echelle1.echelleDiv} = ${data.echelle1.cmCarte*data.echelle1.echelleDiv} cm.<br>Conversion en km : ÷ 100000 = ${formatDecimal(expectedReel)} km.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedReel)} km</strong> (au centième près).`;
-                    break;
-                case 'echelle':
-                    let expectedEchelle = `1/${data.echelle2.echelleInverse}`;
-                    isCorrect = (userValue.replace(/\s/g,'') === expectedEchelle);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>${data.echelle2.metresReels} m = ${data.echelle2.metresReels*100} cm.<br>Échelle = ${formatDecimal(data.echelle2.cmPlan)} / ${data.echelle2.metresReels*100} = 1 / ${data.echelle2.echelleInverse}.<br>✅ Réponse attendue : <strong>1/${data.echelle2.echelleInverse}</strong>.`;
-                    break;
-                case 'energie':
-                    let expectedEnergie = data.produit.energie;
-                    isCorrect = approxEqual(userNum, expectedEnergie);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Énergie = puissance × durée = ${formatDecimal(data.produit.puissance)} kW × ${data.produit.tempsH} h = ${formatDecimal(expectedEnergie)} kWh.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedEnergie)} kWh</strong> (au centième près).`;
-                    break;
-                case 'vitesse':
-                    let expectedVitesse = data.quotient.vitesse;
-                    isCorrect = (userNum === expectedVitesse);
-                    let tempsHeures = data.quotient.heures + data.quotient.minutes/60;
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Temps total = ${data.quotient.heures} h + ${data.quotient.minutes} min = ${tempsHeures.toFixed(2)} h.<br>Vitesse = ${data.quotient.distanceKm} / ${tempsHeures.toFixed(2)} = ${expectedVitesse} km/h.<br>✅ Réponse attendue : <strong>${expectedVitesse} km/h</strong> (à l’unité près).`;
-                    break;
-                case 'cote':
-                    let expectedCote = data.agrandissement.newCote;
-                    isCorrect = approxEqual(userNum, expectedCote);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau côté = côté initial × rapport = ${data.agrandissement.cote} × ${formatDecimal(data.agrandissement.rapportLong)} = ${formatDecimal(expectedCote)} cm.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedCote)} cm</strong> (au centième près).`;
-                    break;
-                case 'aire':
-                    let expectedAire = data.reduction.newAire;
-                    isCorrect = approxEqual(userNum, expectedAire);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouvelle aire = aire initiale × (rapport)² = ${data.reduction.aireInit} × (${formatDecimal(data.reduction.rapportRed)})² = ${formatDecimal(expectedAire)} cm².<br>✅ Réponse attendue : <strong>${formatDecimal(expectedAire)} cm²</strong> (au centième près).`;
-                    break;
-                case 'volume':
-                    let expectedVolume = data.volume.newVolume;
-                    isCorrect = (userNum === expectedVolume);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau volume = volume initial × (rapport)³ = ${data.volume.volumeInit} × ${data.volume.rapportVol}³ = ${expectedVolume} cm³.<br>✅ Réponse attendue : <strong>${expectedVolume} cm³</strong> (à l’unité près).`;
-                    break;
-                case 'part1':
-                    let expectedPart1 = data.ratio2.part1;
-                    isCorrect = approxEqual(userNum, expectedPart1);
-                    let partValue = data.ratio2.totalRatio2 / (data.ratio2.r2a + data.ratio2.r2b);
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Total parts = ${data.ratio2.r2a}+${data.ratio2.r2b} = ${data.ratio2.r2a+data.ratio2.r2b}<br>Valeur d'une part = ${data.ratio2.totalRatio2} ÷ ${data.ratio2.r2a+data.ratio2.r2b} = ${formatDecimal(partValue)} €<br>Première part = ${data.ratio2.r2a} × ${formatDecimal(partValue)} = ${formatDecimal(expectedPart1)} €<br>✅ Réponse attendue : <strong>${formatDecimal(expectedPart1)} €</strong> (au centième près).`;
-                    break;
-                case 'ciment':
-                    let expectedCiment = data.ratio3.partCiment;
-                    isCorrect = approxEqual(userNum, expectedCiment);
-                    let totalParts3 = data.ratio3.r3a + data.ratio3.r3b + data.ratio3.r3c;
-                    let partValue3 = data.ratio3.totalRatio3 / totalParts3;
-                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Total parts = ${data.ratio3.r3a}+${data.ratio3.r3b}+${data.ratio3.r3c} = ${totalParts3}<br>Valeur d'une part = ${data.ratio3.totalRatio3} ÷ ${totalParts3} = ${formatDecimal(partValue3)} kg<br>Ciment (${data.ratio3.r3b} parts) = ${data.ratio3.r3b} × ${formatDecimal(partValue3)} = ${formatDecimal(expectedCiment)} kg<br>✅ Réponse attendue : <strong>${formatDecimal(expectedCiment)} kg</strong> (au centième près).`;
-                    break;
+                case 'coeff': isCorrect = approxEqual(userNum, data.prop1.coeff); detail = `Coefficient = ${formatDecimal(data.prop1.prix_a)} / ${data.prop1.a} = ${formatDecimal(data.prop1.coeff)} €/kg.`; break;
+                case 'prixB': let expectedPrix = data.prop1.coeff * data.prop1.b; isCorrect = approxEqual(userNum, expectedPrix); detail = `Prix = ${data.prop1.b} × ${formatDecimal(data.prop1.coeff)} = ${formatDecimal(expectedPrix)} €.`; break;
+                case 'conso': let expectedConso = data.prop2.essence2; isCorrect = approxEqual(userNum, expectedConso); detail = `Consommation au km = ${formatDecimal(data.prop2.L)} / ${data.prop2.km} = ${formatDecimal(data.prop2.coeffEssence,4)} L/km → pour ${data.prop2.km2} km : ${formatDecimal(expectedConso)} L.`; break;
+                case 'dist': let expectedDist = data.prop2.targetKm; isCorrect = approxEqual(userNum, expectedDist); detail = `Distance = ${formatDecimal(data.prop2.targetL)} / ${formatDecimal(data.prop2.coeffEssence,4)} = ${formatDecimal(expectedDist)} km.`; break;
+                case 'graphOui': isCorrect = (userValue.toLowerCase() === 'oui'); detail = `Les points sont alignés sur une droite passant par l'origine → proportionnalité.`; break;
+                case 'graphNon': isCorrect = (userValue.toLowerCase() === 'non'); detail = `Les points ne sont pas alignés → non proportionnel.`; break;
+                case 'pct': isCorrect = (parseFloat(userValue.replace('%','')) === data.pct1.pct); detail = `Pourcentage = (${data.pct1.partEleves} / ${data.pct1.totalEleves}) × 100 = ${data.pct1.pct}%.`; break;
+                case 'augm': let expectedAug = data.pct2.nouveauPrix; isCorrect = approxEqual(userNum, expectedAug); detail = `Nouveau prix = ${data.pct2.prixInitial} × (1 + ${data.pct2.augmentation}/100) = ${formatDecimal(expectedAug)} €.`; break;
+                case 'reel': let expectedReel = data.echelle1.reelKm; isCorrect = approxEqual(userNum, expectedReel); detail = `Distance réelle = ${data.echelle1.cmCarte} × ${data.echelle1.echelleDiv} cm = ${formatDecimal(expectedReel)} km.`; break;
+                case 'echelle': let expectedEchelle = `1/${data.echelle2.echelleInverse}`; isCorrect = (userValue.replace(/\s/g,'') === expectedEchelle); detail = `${data.echelle2.metresReels} m = ${data.echelle2.metresReels*100} cm. Échelle = ${formatDecimal(data.echelle2.cmPlan)} / ${data.echelle2.metresReels*100} = ${expectedEchelle}.`; break;
+                case 'energie': let expectedEnergie = data.produit.energie; isCorrect = approxEqual(userNum, expectedEnergie); detail = `Énergie = ${formatDecimal(data.produit.puissance)} × ${data.produit.tempsH} = ${formatDecimal(expectedEnergie)} kWh.`; break;
+                case 'vitesse': let expectedVitesse = data.quotient.vitesse; isCorrect = (userNum === expectedVitesse); let tH = data.quotient.heures + data.quotient.minutes/60; detail = `Temps = ${tH.toFixed(2)} h, vitesse = ${data.quotient.distanceKm} / ${tH.toFixed(2)} = ${expectedVitesse} km/h.`; break;
+                case 'cote': let expectedCote = data.agrandissement.newCote; isCorrect = approxEqual(userNum, expectedCote); detail = `Nouveau côté = ${data.agrandissement.cote} × ${formatDecimal(data.agrandissement.rapportLong)} = ${formatDecimal(expectedCote)} cm.`; break;
+                case 'aire': let expectedAire = data.reduction.newAire; isCorrect = approxEqual(userNum, expectedAire); detail = `Nouvelle aire = ${data.reduction.aireInit} × (${formatDecimal(data.reduction.rapportRed)})² = ${formatDecimal(expectedAire)} cm².`; break;
+                case 'volume': let expectedVolume = data.volume.newVolume; isCorrect = (userNum === expectedVolume); detail = `Volume final = ${data.volume.volumeInit} × ${data.volume.rapportVol}³ = ${expectedVolume} cm³.`; break;
+                case 'part1': let expectedPart1 = data.ratio2.part1; isCorrect = approxEqual(userNum, expectedPart1); let pv = data.ratio2.totalRatio2 / (data.ratio2.r2a+data.ratio2.r2b); detail = `Valeur d'une part = ${data.ratio2.totalRatio2} / ${data.ratio2.r2a+data.ratio2.r2b} = ${formatDecimal(pv)} € → première part = ${data.ratio2.r2a} × ${formatDecimal(pv)} = ${formatDecimal(expectedPart1)} €.`; break;
+                case 'ciment': let expectedCiment = data.ratio3.partCiment; isCorrect = approxEqual(userNum, expectedCiment); let totParts = data.ratio3.r3a+data.ratio3.r3b+data.ratio3.r3c; let pv3 = data.ratio3.totalRatio3 / totParts; detail = `Valeur d'une part = ${data.ratio3.totalRatio3} / ${totParts} = ${formatDecimal(pv3)} kg → ciment = ${data.ratio3.r3b} × ${formatDecimal(pv3)} = ${formatDecimal(expectedCiment)} kg.`; break;
                 default: return;
             }
             solDiv.style.display = 'block';
-            let badge = isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div>';
-            solDiv.innerHTML = badge + detail;
+            solDiv.innerHTML = (isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction :</div>') + detail;
         }
     }
     
     function refresh() { currentData = generateValues(); renderExercises(currentData); }
     
-    function showSection(id) {
-        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
+    // Script de vérification pour la section Brevet (corrigé)
+    (function() {
+        function norm(str) { if (!str) return NaN; return parseFloat(str.replace(',', '.').replace(/\s/g, '')); }
+        function fb(solId, ok, html) { let d = document.getElementById(solId); if(d) { d.style.display='block'; d.innerHTML = (ok ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction :</div>') + html; } }
+        
+        document.querySelector('[data-exo="1"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet1_ans').value.trim().toLowerCase();
+            let reste = 115.2 - 9.7, t = reste / 1.3, m = Math.floor(t/60), s = Math.round(t%60);
+            fb('brevet1_sol', u==='non', `Reste ${reste.toFixed(1)} Mo, temps = ${t.toFixed(2)} s = ${m} min ${s} s < 85 s → <strong>Non</strong>.`);
+        });
+        document.querySelector('[data-exo="2_1"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet2_1_ans').value);
+            fb('brevet2_1_sol', Math.abs(u-1.08)<0.01, `Coefficient = 1,62/1,5 = 1,08 → 1 L d'eau → <strong>1,08 L</strong> de glace.`);
+        });
+        document.querySelector('[data-exo="2_2"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet2_2_ans').value.trim().toLowerCase().replace(/\s/g,'');
+            let ok = ['=b1*1,08','=b1*1.08','b1*1,08','b1*1.08'].some(p=>u===p);
+            fb('brevet2_2_sol', ok, `Formule : <strong>=B1*1,08</strong> (référence relative).`);
+        });
+        document.querySelector('[data-exo="2_3"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet2_3_ans').value.trim();
+            fb('brevet2_3_sol', u === '2', `❌ Graphique 1 : courbe (non linéaire).<br>✅ Graphique 2 : droite passant par l'origine → proportionnalité.<br>❌ Graphique 3 : droite ne passant pas par l'origine.<br>Réponse : <strong>2</strong>.`);
+        });
+        document.querySelector('[data-exo="3"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet3_ans').value.trim().toLowerCase();
+            let detail = `🔍 Calcul :<br>1) 4 paires = 8 volets.<br>2) 1 pot par volet pour 1 couche → 8 pots.<br>3) 3 couches → 8×3 = 24 pots.<br>✅ L'affirmation est <strong>fausse</strong>.`;
+            fb('brevet3_sol', u==='faux', detail);
+        });
+        document.querySelector('[data-exo="4_1"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet4_1_ans').value.trim().toLowerCase();
+            let correct = "ni l'un ni l'autre";
+            let detail = `Proportions réelles : filles 16/24 = 66,7%, garçons 33,3%.<br>
+            Diagramme 1 : 50%-50% → incorrect.<br>
+            Diagramme 2 : environ 62,5%-37,5% → incorrect.<br>
+            ✅ Aucun des deux → <strong>ni l’un ni l’autre</strong>.`;
+            fb('brevet4_1_sol', u === correct, detail);
+        });
+        document.querySelector('[data-exo="4_2"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet4_2_ans').value);
+            fb('brevet4_2_sol', Math.abs(u-120)<0.5, `Garçons = 8/24 = 1/3 → angle = (1/3)×360° = <strong>120°</strong>.`);
+        });
+        document.querySelector('[data-exo="5_1"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet5_1_ans').value.trim().toLowerCase();
+            fb('brevet5_1_sol', u==='non', `80:60:50 = 16:12:10 (÷5). Vendeur donne 16:12:8 → pois insuffisant → <strong>ne respecte pas</strong>.`);
+        });
+        document.querySelector('[data-exo="5_2"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet5_2_ans').value);
+            fb('brevet5_2_sol', Math.abs(u-4.86)<0.01, `Facteur = 388,80 / 80 = <strong>4,86</strong>.`);
+        });
+        document.querySelector('[data-exo="5_3"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet5_3_ans').value.trim().toLowerCase();
+            let total = 388.80*1.40 + 291.6*1.30 + 243*2.10;
+            fb('brevet5_3_sol', u==='oui', `Coût total = ${total.toFixed(2)} € < 1500 € → budget <strong>suffisant</strong>.`);
+        });
+        document.querySelector('[data-exo="6_1"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet6_1_ans').value.trim().toLowerCase();
+            fb('brevet6_1_sol', u==='non', `La courbe n'est pas une droite passant par l'origine → <strong>non proportionnel</strong>.`);
+        });
+        document.querySelector('[data-exo="6_2"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet6_2_ans').value);
+            fb('brevet6_2_sol', Math.abs(u-4.5)<0.2, `À 20 min → <strong>4,5 km</strong>.`);
+        });
+        document.querySelector('[data-exo="6_3"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet6_3_ans').value);
+            fb('brevet6_3_sol', Math.abs(u-48)<2, `9 km → <strong>48 minutes</strong>.`);
+        });
+        document.querySelector('[data-exo="6_4"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet6_4_ans').value);
+            let v = 13.5 / (100/60);
+            fb('brevet6_4_sol', Math.abs(u-v)<0.05, `Vitesse = 13,5 / (100/60) = 13,5×60/100 = <strong>8,1 km/h</strong>.`);
+        });
+        document.querySelector('[data-exo="6_5a"]')?.addEventListener('click',()=>{
+            let u = document.getElementById('brevet6_5a_ans').value.trim().toLowerCase();
+            fb('brevet6_5a_sol', u==='louise', `Louise (12 km/h) est plus rapide → <strong>Louise</strong>.`);
+        });
+        document.querySelector('[data-exo="6_5b"]')?.addEventListener('click',()=>{
+            let u = norm(document.getElementById('brevet6_5b_ans').value);
+            let t = 13.5/12, d = 10*t, e = 13.5 - d;
+            fb('brevet6_5b_sol', Math.abs(u-e)<0.05, `Temps Louise = 13,5/12 = 1,125 h → distance Hillal = 10×1,125 = 11,25 km → écart = <strong>2,25 km</strong>.`);
+        });
+    })();
     
     refresh();
     document.getElementById('newSeriesBtn').addEventListener('click', refresh);
+    
+    window.showSection = function(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        let activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(id));
+        if (activeBtn) activeBtn.classList.add('active');
+    };
 </script>
 
 </body>
