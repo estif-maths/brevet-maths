@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre : Proportionnalité, pourcentages, échelles, ratios et transformations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* ========== STYLES COMPLETS (inchangés) ========== */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --bg: #f8f9fe;
+            --text: #2b2d42;
+            --success: #2ecc71;
+            --warning: #fab005;
+            --brevet: #e67e22;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 25px;
+            border: none;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            color: #8d99ae;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .content-section {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* ========== STYLES DU COURS (identiques à Chapitre5.html) ========== */
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid #f0f2ff;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: var(--secondary);
+            margin-top: 25px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        .definition-box {
+            background: #f0f2ff;
+            padding: 20px;
+            border-left: 6px solid var(--primary);
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+        .method-box {
+            background: #fff9db;
+            padding: 20px;
+            border: 1px solid var(--warning);
+            margin: 20px 0;
+            border-radius: 15px;
+        }
+        .example-box {
+            background: #fdfdfd;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            margin: 15px 0;
+            border-radius: 15px;
+        }
+        .utilite-box {
+            background: #e7f5ff;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            margin: 20px 0;
+            border-radius: 15px;
+        }
+        .step {
+            background: #f1f9f5;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #2c9b77;
+        }
+        .enonce {
+            background: #eef2fa;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 0.8rem 0;
+            border-left: 4px solid #e67e22;
+            font-weight: 600;
+        }
+        .enonce::before {
+            content: "📖 Énoncé : ";
+            font-weight: 800;
+            color: #e67e22;
+        }
+        .badge {
+            display: inline-block;
+            background: #2c9b77;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            margin-bottom: 0.6rem;
+        }
+        .ratio-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .part-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .ratio-bar-container {
+            display: flex;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .ratio-segment {
+            padding: 12px 0;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        .svg-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .graph-card {
+            text-align: center;
+            background: #fdfdfd;
+            border-radius: 1.2rem;
+            padding: 0.8rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .flex-cols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .flex-cols > div {
+            flex: 1;
+            min-width: 220px;
+        }
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .propo-table {
+            border-collapse: collapse;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin: 0.5rem 0;
+            width: auto;
+            min-width: 200px;
+        }
+        .propo-table th, .propo-table td {
+            padding: 10px 16px;
+            text-align: center;
+            border: 1px solid #dee9f2;
+        }
+        .propo-table th {
+            background: #2c9b77;
+            color: white;
+            font-weight: 600;
+        }
+        .highlight {
+            background: #e1f5f0;
+            color: #1f6d5c;
+            font-weight: 700;
+            padding: 0 6px;
+            border-radius: 12px;
+        }
+        .note {
+            background: #fff0e0;
+            border-radius: 1rem;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid #e67e22;
+        }
+        hr {
+            margin: 1.8rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #c3e0d6, #f0f2f5, transparent);
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        .brevet-header {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        /* ========== STYLES POUR LES EXERCICES ========== */
+        .btn-new-series {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .exercice-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .card-header {
+            background: #f8fafc;
+            padding: 1rem 1.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card-header h4 {
+            margin: 0;
+        }
+        .badge-import {
+            background: #3b82f6;
+            color: white;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+        }
+        .badge-brevet {
+            background: var(--brevet);
+            color: white;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+        }
+        .card-body {
+            padding: 1.6rem 1.8rem;
+        }
+        .question {
+            background: #f1f5f9;
+            padding: 0.9rem 1.2rem;
+            border-radius: 1rem;
+            border-left: 5px solid #3b82f6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .subquestion {
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        input {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid #cbd5e1;
+            min-width: 180px;
+        }
+        button.verify {
+            background: #0f172a;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+        .hint {
+            font-size: 0.8rem;
+            color: #2c6e6b;
+            margin-top: 0.2rem;
+            margin-left: 0.5rem;
+            font-style: italic;
+            background: #e6f7f5;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+        .solution {
+            background: #fefce8;
+            border-left: 5px solid #eab308;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback-correct {
+            color: #15803d;
+            background: #dcfce7;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .feedback-wrong {
+            color: #b91c1c;
+            background: #fee2e2;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .graph-illustration {
+            margin: 1rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapitre : Proportionnalité & transformations</h1>
+    <p>Pourcentages, échelles, ratios, agrandissement / réduction</p>
+</header>
+
+<div class="container">
+    <a href="#" class="back-link">← Retour au sommaire</a>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showSection('cours')">📖 Cours Détaillé</button>
+        <button class="tab-btn" onclick="showSection('exercices')">📝 Exercices Interactifs</button>
+        <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
+    </div>
+
+    <!-- ========= SECTION COURS DÉTAILLÉ (INTÉGRALITÉ DE Chapitre5.html) ========= -->
+    <div id="cours" class="content-section active">
+        <h2>1. La proportionnalité</h2>
+        <div class="definition-box">
+            <strong>📘 Définition</strong><br>
+            Deux grandeurs sont <strong>proportionnelles</strong> si l’on passe de l’une à l’autre en multipliant <strong>toujours par le même nombre</strong> : le <strong class="highlight">coefficient de proportionnalité</strong>.
+        </div>
+        <div class="example-box">
+            <strong>✍️ Exemple : masse et prix</strong>
+            <div class="table-wrapper">
+                <table class="propo-table">
+                    <thead><tr><th>Masse (kg)</th><th>2</th><th>5</th><th>11</th><th>14</th></tr></thead>
+                    <tbody><tr><th>Prix (€)</th><td>3</th><th>7,5</th><th>16,5</th><th>21</th></tr></tbody>
+                </table>
+            </div>
+            <p>\[ \frac{3}{2}=1,5 \quad \frac{7,5}{5}=1,5 \quad \frac{16,5}{11}=1,5 \quad \frac{21}{14}=1,5 \] → coefficient = <strong>1,5</strong></p>
+        </div>
+
+        <h3>🔢 Compléter un tableau de proportionnalité</h3>
+        <div class="method-box">
+            <strong>📌 Méthode 1 : Passage à l’unité (coefficient de proportionnalité)</strong>
+            <div class="enonce">Sachant que 4 kg de fruits coûtent 6,40 €, quel est le prix de 3 kg ?</div>
+            <div class="table-wrapper">
+                <table class="propo-table">
+                    <thead><tr><th>Masse (kg)</th><th>4</th><th>3</th></tr></thead>
+                    <tbody><tr><th>Prix (€)</th><td>6,4</th><th>?</th></tr></tbody>
+                </table>
+            </div>
+            <div class="step"><strong>Étape 1 :</strong> Coefficient = \(6,4 \div 4 = 1,6\)</div>
+            <div class="step"><strong>Étape 2 :</strong> Pour 3 kg : \(3 \times 1,6 = 4,8\) €</div>
+            <p><strong>Résultat : 3 kg coûtent 4,80 €.</strong></p>
+        </div>
+        <div class="method-box">
+            <strong>📌 Méthode 2 : Propriété additive (addition de colonnes)</strong>
+            <div class="enonce">À partir du tableau, trouver le prix de 9 kg sachant que 4 kg coûtent 6,40 € et 5 kg coûtent 8 €.</div>
+            <div class="table-wrapper">
+                <table class="propo-table">
+                    <thead><tr><th>Masse (kg)</th><th>4</th><th>5</th><th>9</th></tr></thead>
+                    <tbody><tr><th>Prix (€)</th><td>6,4</th><th>8</th><th>?</th></tr></tbody>
+                </table>
+            </div>
+            <div class="step">\(4 + 5 = 9\) donc \(6,4 + 8 = 14,4\) €</div>
+            <p><strong>Résultat : 9 kg coûtent 14,40 €.</strong></p>
+        </div>
+        <div class="method-box">
+            <strong>📌 Méthode 3 : Propriété multiplicative (multiplication/division d’une colonne)</strong>
+            <div class="enonce">Trouver le prix de 2 kg et de 12 kg en utilisant la colonne 4 kg → 6,40 €.</div>
+            <div class="table-wrapper">
+                <table class="propo-table">
+                    <thead><tr><th>Masse (kg)</th><th>4</th><th>2</th><th>12</th></td></thead>
+                    <tbody></tr><th>Prix (€)</th><td>6,4</th><th>?</th><th>?</th></tr></tbody>
+                </table>
+            </div>
+            <div class="step">De 4 à 2 : division par 2 → \(6,4 \div 2 = 3,2\) €</div>
+            <div class="step">De 2 à 12 : multiplication par 6 → \(3,2 \times 6 = 19,2\) €</div>
+            <p><strong>Résultat : 2 kg → 3,20 € ; 12 kg → 19,20 €.</strong></p>
+        </div>
+
+        <div class="definition-box">
+            <strong>✖️ Produit en croix (quatrième proportionnelle)</strong>
+            <p>\[ \frac{a}{c} = \frac{b}{d} \iff a \times d = b \times c \]</p>
+            <div class="example-box">
+                <div class="enonce">Un ouvrier gagne 120 € pour 6 heures. Combien gagne-t-il pour 35 heures ?</div>
+                <div class="step">\(6 \times x = 120 \times 35\) ⇒ \(x = \frac{4200}{6} = 700\) €</div>
+                <p>✅ Pour 35 heures, il gagne 700 €.</p>
+            </div>
+        </div>
+
+        <h2>2. Représentation graphique</h2>
+        <div class="definition-box">
+            <p>✔️ Situation proportionnelle ⇔ points <strong>alignés avec l’origine</strong>.<br>
+            ❌ Alignés sans origine ou non alignés ⇒ non proportionnel.</p>
+        </div>
+        <div class="svg-group">
+            <div class="graph-card">
+                <p class="highlight">✅ Proportionnel (avec O)</p>
+                <svg width="130" height="130" viewBox="0 0 130 130" style="background:#fafcff; border-radius:12px;">
+                    <line x1="15" y1="115" x2="115" y2="115" stroke="#555" stroke-width="1"/>
+                    <line x1="15" y1="115" x2="15" y2="15" stroke="#555" stroke-width="1"/>
+                    <circle cx="15" cy="115" r="2.5" fill="black"/><text x="8" y="124" font-size="8">O</text>
+                    <circle cx="35" cy="95" r="3.5" fill="#2c9b77"/>
+                    <circle cx="55" cy="75" r="3.5" fill="#2c9b77"/>
+                    <circle cx="75" cy="55" r="3.5" fill="#2c9b77"/>
+                    <line x1="15" y1="115" x2="75" y2="55" stroke="#2c9b77" stroke-width="1.2" stroke-dasharray="3 2"/>
+                </svg>
+            </div>
+            <div class="graph-card">
+                <p class="highlight">❌ Alignés sans O</p>
+                <svg width="130" height="130" viewBox="0 0 130 130" style="background:#fafcff; border-radius:12px;">
+                    <line x1="15" y1="115" x2="115" y2="115" stroke="#555" stroke-width="1"/>
+                    <line x1="15" y1="115" x2="15" y2="15" stroke="#555" stroke-width="1"/>
+                    <circle cx="15" cy="115" r="2.5" fill="black"/><text x="8" y="124" font-size="8">O</text>
+                    <circle cx="35" cy="85" r="3.5" fill="#e67e22"/>
+                    <circle cx="55" cy="75" r="3.5" fill="#e67e22"/>
+                    <circle cx="75" cy="65" r="3.5" fill="#e67e22"/>
+                    <line x1="35" y1="85" x2="75" y2="65" stroke="#e67e22" stroke-width="1.2" stroke-dasharray="3 2"/>
+                </svg>
+            </div>
+            <div class="graph-card">
+                <p class="highlight">❌ Points non alignés</p>
+                <svg width="130" height="130" viewBox="0 0 130 130" style="background:#fafcff; border-radius:12px;">
+                    <line x1="15" y1="115" x2="115" y2="115" stroke="#555" stroke-width="1"/>
+                    <line x1="15" y1="115" x2="15" y2="15" stroke="#555" stroke-width="1"/>
+                    <circle cx="15" cy="115" r="2.5" fill="black"/>
+                    <circle cx="35" cy="95" r="3.5" fill="#7f8c8d"/>
+                    <circle cx="65" cy="65" r="3.5" fill="#7f8c8d"/>
+                    <circle cx="85" cy="85" r="3.5" fill="#7f8c8d"/>
+                </svg>
+            </div>
+        </div>
+
+        <h2>3. Pourcentages</h2>
+        <div class="definition-box">
+            <strong>📖 Définition</strong><br>
+            Un <strong>pourcentage</strong> est une proportion exprimée sur 100. « \( t \% \) » signifie \( \frac{t}{100} \).
+        </div>
+        <div class="flex-cols">
+            <div class="definition-box">
+                <strong>📊 Prendre un pourcentage</strong>
+                <div class="enonce">560 élèves, 35% sont demi-pensionnaires. Combien ?</div>
+                <div class="step">\(560 \times 0,35 = 196\)</div>
+            </div>
+            <div class="definition-box">
+                <strong>📈 Calculer un pourcentage</strong>
+                <div class="enonce">80 demi‑pensionnaires sur 250. Quel % ?</div>
+                <div class="step">\(\frac{80}{250} = 0,32 = 32\%\)</div>
+            </div>
+        </div>
+        
+        <h3>📈 Augmentation et réduction (taux d'évolution) – Explications détaillées</h3>
+        <div class="definition-box">
+            <strong>🔍 Pourquoi ces formules ?</strong><br>
+            Augmenter un nombre de \(p\%\) signifie qu’on lui ajoute \(p\%\) de sa valeur initiale :<br>
+            \(x_{\text{final}} = x_{\text{initial}} + \frac{p}{100} \times x_{\text{initial}} = x_{\text{initial}} \times \left(1 + \frac{p}{100}\right)\).<br>
+            De même, diminuer de \(p\%\) revient à soustraire \(p\%\) de la valeur initiale :<br>
+            \(x_{\text{final}} = x_{\text{initial}} - \frac{p}{100} \times x_{\text{initial}} = x_{\text{initial}} \times \left(1 - \frac{p}{100}\right)\).<br>
+            Le facteur \(\left(1 \pm \frac{p}{100}\right)\) s’appelle le <strong>coefficient multiplicateur</strong>.
+        </div>
+        <div class="example-box">
+            <div class="enonce">Un blouson coûte 80 €. Pendant les soldes, il bénéficie d’une réduction de 40%. Quel est son nouveau prix ?</div>
+            <div class="step"><strong>Étape 1 :</strong> Coefficient multiplicateur = \(1 - \frac{40}{100} = 0,6\).</div>
+            <div class="step"><strong>Étape 2 :</strong> Nouveau prix = \(80 \times 0,6 = 48\) €.</div>
+            <p>✅ Le blouson coûte 48 € après réduction.</p>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Un téléphone à 240 € subit une baisse de 30%, puis une nouvelle baisse de 20%. Quel est le prix final ? Quelle est la baisse globale ?</div>
+            <div class="step"><strong>Étape 1 :</strong> Après -30% : coefficient = \(0,7\) → \(240 \times 0,7 = 168\) €.</div>
+            <div class="step"><strong>Étape 2 :</strong> Après -20% : coefficient = \(0,8\) → \(168 \times 0,8 = 134,40\) €.</div>
+            <div class="step"><strong>Étape 3 (global) :</strong> Coefficient global = \(0,7 \times 0,8 = 0,56\) → baisse de \(1 - 0,56 = 0,44 = 44\%\).</div>
+            <p>✅ Prix final = 134,40 € (baisse globale 44%, et non 50%).</p>
+        </div>
+        <div class="note">⚠️ Les pourcentages ne s’additionnent pas : on multiplie les coefficients.</div>
+
+        <h2>4. Échelles – Définition et exemple détaillé</h2>
+        <div class="definition-box">
+            <strong>📐 Définition</strong><br>
+            L’<strong>échelle</strong> d’une carte (ou d’un plan) est le coefficient de proportionnalité qui permet de passer des distances réelles aux distances sur le plan. Elle s’écrit généralement sous la forme \(1 / k\) (par exemple \(1/25000\)).<br>
+            \[ \text{Échelle} = \frac{\text{distance sur le plan}}{\text{distance réelle}} \quad (\text{mêmes unités}) \]
+            Cela signifie que 1 cm sur le plan représente \(k\) cm dans la réalité.
+        </div>
+        <div class="example-box">
+            <div class="enonce">Une carte routière est à l’échelle 1/25 000. a) Quelle distance réelle correspond à 12 cm sur la carte ? b) Quelle distance sur la carte représente 6 km dans la réalité ?</div>
+            <div class="step"><strong>a) Étape 1 :</strong> 1 cm sur la carte → 25 000 cm réels.</div>
+            <div class="step"><strong>Étape 2 :</strong> 12 cm sur la carte → \(12 \times 25\,000 = 300\,000\) cm.</div>
+            <div class="step"><strong>Étape 3 :</strong> Convertir en km : 300 000 cm = 3 000 m = <strong>3 km</strong>.</div>
+            <div class="step"><strong>b) Étape 1 :</strong> 6 km = 600 000 cm (même unité que le plan).</div>
+            <div class="step"><strong>Étape 2 :</strong> Distance sur la carte = \(\frac{600\,000}{25\,000} = 24\) cm.</div>
+            <p>✅ 12 cm sur la carte représentent 3 km réels ; 6 km réels sont représentés par 24 cm sur la carte.</p>
+        </div>
+
+        <h2>5. Grandeurs produit et quotient – Définitions et exemples détaillés</h2>
+        <div class="flex-cols">
+            <div class="definition-box">
+                <strong>✖️ Grandeur produit – Définition</strong><br>
+                Une <strong>grandeur produit</strong> est obtenue en <strong>multipliant deux grandeurs</strong> entre elles. Son unité est le produit des unités de chaque grandeur.<br>
+                Exemples : la surface (longueur × largeur) s’exprime en m² ; l’énergie électrique (puissance × durée) en kWh.
+            </div>
+            <div class="definition-box">
+                <strong>➗ Grandeur quotient – Définition</strong><br>
+                Une <strong>grandeur quotient</strong> est obtenue en <strong>divisant une grandeur par une autre</strong>. Son unité est le quotient des unités.<br>
+                Exemples : la vitesse (distance ÷ temps) s’exprime en km/h ou m/s ; le débit (volume ÷ temps) en L/min.
+            </div>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Exemple grandeur produit : Calculer la surface d’un champ rectangulaire de 120 m sur 80 m.</div>
+            <div class="step">Surface = longueur × largeur = \(120 \times 80 = 9600\) m².</div>
+            <p>✅ Il s’agit d’une grandeur produit car on multiplie deux grandeurs (une longueur par une longueur). L’unité m × m = m².</p>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Autre grandeur produit : Un four de 2 kW fonctionne pendant 3 heures. Quelle énergie consomme-t-il ?</div>
+            <div class="step">Énergie = puissance × durée = \(2 \times 3 = 6\) kWh.</div>
+            <p>✅ Grandeur produit : kilowatt × heure = kilowattheure.</p>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Exemple grandeur quotient : Une voiture parcourt 150 km en 2 h 30 min. Quelle est sa vitesse moyenne ?</div>
+            <div class="step">2 h 30 = 2,5 h ; vitesse = \(\frac{150}{2,5} = 60\) km/h.</div>
+            <p>✅ Grandeur quotient : distance ÷ temps. L’unité km/h est le quotient de km par h.</p>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Autre grandeur quotient : Un robinet débite 120 litres en 2 minutes. Quel est son débit ?</div>
+            <div class="step">Débit = \(\frac{120}{2} = 60\) L/min.</div>
+            <p>✅ Grandeur quotient : volume ÷ temps.</p>
+        </div>
+
+        <h2>6. Agrandissement & réduction</h2>
+        <div class="definition-box">
+            <strong>📏 Définition</strong><br>
+            Agrandir ou réduire une figure, c’est multiplier toutes ses longueurs par un même nombre strictement positif \(k\), appelé <strong>rapport d’agrandissement ou de réduction</strong>.<br>
+            - Si \(k > 1\) : agrandissement.<br>
+            - Si \(0 < k < 1\) : réduction.<br>
+            - Les aires sont multipliées par \(k^2\).<br>
+            - Les volumes sont multipliés par \(k^3\).<br>
+            - Les angles restent inchangés (la figure est « semblable »).
+        </div>
+        <div class="example-box">
+            <div class="enonce">Un rectangle mesure 6 cm sur 4 cm. On l’agrandit avec un coefficient \(k = 2,5\). Quelles sont les nouvelles dimensions ? Quelle est la nouvelle aire ?</div>
+            <div class="step">Nouvelle longueur = \(6 \times 2,5 = 15\) cm ; nouvelle largeur = \(4 \times 2,5 = 10\) cm.</div>
+            <div class="step">Aire initiale = \(6 \times 4 = 24\) cm². Aire finale = \(24 \times (2,5)^2 = 24 \times 6,25 = 150\) cm².</div>
+            <p>✅ Vérification : \(15 \times 10 = 150\) cm² (l’aire a bien été multipliée par \(k^2\)).</p>
+        </div>
+
+        <h2>7. Les ratios – Définition et exemples détaillés</h2>
+        <div class="definition-box">
+            <strong>🔢 Définition</strong><br>
+            Deux nombres \(a\) et \(b\) sont dans le <strong>ratio</strong> \(c : d\) (avec \(c\) et \(d\) strictement positifs) lorsque \(\frac{a}{c} = \frac{b}{d}\).<br>
+            Le total des parts dans le ratio est \(c + d\). Ainsi, \(a\) représente la fraction \(\frac{c}{c+d}\) du total, et \(b\) représente \(\frac{d}{c+d}\) du total.<br>
+            On peut étendre cette notion à trois grandeurs ou plus : \(a, b, c\) sont dans le ratio \(e : f : g\) si \(\frac{a}{e} = \frac{b}{f} = \frac{c}{g}\).
+        </div>
+        <div class="example-box">
+            <div class="enonce">Un pirate et son capitaine se partagent un butin de 350 pièces d’or selon le ratio 3:4. Combien chacun reçoit-il ?</div>
+            <div class="ratio-visual">
+                <div class="part-circle" style="background:#2c9b77;">3</div>
+                <span>:</span>
+                <div class="part-circle" style="background:#f39c12;">4</div>
+            </div>
+            <div class="step"><strong>Étape 1 :</strong> Total des parts = \(3 + 4 = 7\).</div>
+            <div class="step"><strong>Étape 2 :</strong> Valeur d’une part = \(350 \div 7 = 50\) pièces.</div>
+            <div class="step"><strong>Étape 3 :</strong> Pirate (3 parts) : \(3 \times 50 = 150\) pièces. Capitaine (4 parts) : \(4 \times 50 = 200\) pièces.</div>
+            <div class="ratio-bar-container">
+                <div class="ratio-segment" style="background:#2c9b77; width:42.85%;">3/7</div>
+                <div class="ratio-segment" style="background:#f39c12; width:57.15%;">4/7</div>
+            </div>
+            <p>✅ Vérification : \(150 + 200 = 350\) et \(150:200 = 3:4\).</p>
+        </div>
+        <div class="example-box">
+            <div class="enonce">Partager 330 € entre trois personnes selon le ratio 2:4:5.</div>
+            <div class="ratio-visual">
+                <div class="part-circle" style="background:#3498db;">2</div>
+                <div class="part-circle" style="background:#e67e22;">4</div>
+                <div class="part-circle" style="background:#2c9b77;">5</div>
+            </div>
+            <div class="step"><strong>Étape 1 :</strong> Total des parts = \(2+4+5 = 11\).</div>
+            <div class="step"><strong>Étape 2 :</strong> Valeur d’une part = \(330 \div 11 = 30\) €.</div>
+            <div class="step"><strong>Étape 3 :</strong> Première part : \(2 \times 30 = 60\) € ; deuxième : \(4 \times 30 = 120\) € ; troisième : \(5 \times 30 = 150\) €.</div>
+            <p>✅ Vérification : \(60 + 120 + 150 = 330\) et \(60:120:150 = 2:4:5\) (en divisant par 30).</p>
+        </div>
+
+        <hr>
+        <div class="utilite-box">
+            <strong>📌 Mémo final</strong><br>
+            ✔ Tableau → coefficient constant, produits en croix.<br>
+            ✔ Graphique → points alignés avec l’origine.<br>
+            ✔ Pourcentages → multiplier par \((1 \pm p/100)\).<br>
+            ✔ Échelle = distance plan / distance réelle (mêmes unités).<br>
+            ✔ Grandeur produit → multiplication d’unités (m², kWh).<br>
+            ✔ Grandeur quotient → division d’unités (km/h, L/min).<br>
+            ✔ Agrandissement/réduction → \(k\) pour les longueurs, \(k^2\) pour les aires, \(k^3\) pour les volumes.<br>
+            ✔ Ratio \(c:d\) → part = \(\frac{c}{c+d} \times\) total.
+        </div>
+        <footer>📐 Cours complet – Proportionnalité, pourcentages, échelles, ratios, grandeurs produit/quotient, agrandissement & réduction</footer>
+    </div>
+
+    <!-- ========= SECTION EXERCICES INTERACTIFS (avec graphique non proportionnel = points non alignés) ========= -->
+    <div id="exercices" class="content-section">
+        <button class="btn-new-series" id="newSeriesBtn">🔄 Nouvelle série (valeurs aléatoires)</button>
+        <div id="exercisesContainer">Chargement...</div>
+    </div>
+
+    <!-- ========= SECTION EXERCICES TYPE BREVET (en attente) ========= -->
+    <div id="brevet" class="content-section">
+        <div class="brevet-header"><i class="fas fa-graduation-cap"></i> Entraînement au Brevet</div>
+        <h2>🎓 Exercices type Brevet</h2>
+        <div class="utilite-box" style="text-align:center;">
+            <i class="fas fa-hourglass-half"></i> <strong>Préparation en cours</strong><br>
+            Des exercices inspirés des annales seront bientôt disponibles.
+        </div>
+        <footer>Pensez à vous entraîner régulièrement.</footer>
+    </div>
+</div>
+
+<script>
+    // ========== SCRIPT DES EXERCICES INTERACTIFS ==========
+    function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function randomDecimal(min, max, decimals = 2) { let val = Math.random() * (max - min) + min; return Math.round(val * Math.pow(10, decimals)) / Math.pow(10, decimals); }
+    
+    function formatDecimal(value, decimals = 2) {
+        return value.toFixed(decimals).replace('.', ',');
+    }
+    
+    function generateValues() {
+        const a = randomInt(2,5), prix_a = randomDecimal(3,10), coeff = prix_a / a, b = randomInt(6,12), c = randomInt(15,25);
+        const km = randomInt(50,150), L = randomDecimal(3,12), km2 = randomInt(200,400), coeffEssence = L/km, essence2 = coeffEssence*km2, targetL = randomDecimal(5,20), targetKm = targetL/coeffEssence;
+        const totalEleves = randomInt(20,40), partEleves = randomInt(5,totalEleves-1), pct = Math.round((partEleves/totalEleves)*100);
+        const prixInitial = randomInt(50,200), augmentation = randomInt(5,25), nouveauPrix = prixInitial*(1+augmentation/100);
+        const echelleDiv = randomInt(10000,50000), cmCarte = randomInt(5,15), reelKm = (cmCarte*echelleDiv)/100000;
+        const cmPlan = randomDecimal(2,8), metresReels = randomInt(100,800), echelleRatio = cmPlan/(metresReels*100), echelleInverse = Math.round(1/echelleRatio);
+        const puissance = randomDecimal(1,3), tempsH = randomInt(2,6), energie = puissance*tempsH;
+        const distanceKm = randomInt(120,350), heures = randomInt(1,4), minutes = randomInt(0,45), vitesse = Math.round(distanceKm/(heures+minutes/60));
+        const cote = randomInt(3,8), rapportLong = randomDecimal(1.2,2.5), newCote = cote*rapportLong;
+        const aireInit = randomInt(10,30), rapportRed = randomDecimal(0.3,0.8), newAire = aireInit*rapportRed*rapportRed;
+        const volumeInit = randomInt(8,64), rapportVol = randomInt(2,4), newVolume = volumeInit*Math.pow(rapportVol,3);
+        const totalRatio2 = randomInt(100,300), r2a = randomInt(1,5), r2b = randomInt(1,5), part1 = (r2a/(r2a+r2b))*totalRatio2;
+        const totalRatio3 = randomInt(40,120), r3a = randomInt(1,4), r3b = randomInt(2,5), r3c = randomInt(2,5), partCiment = (r3b/(r3a+r3b+r3c))*totalRatio3;
+        return { prop1:{a,prix_a,coeff,b,c}, prop2:{km,L,km2,coeffEssence,essence2,targetL,targetKm}, pct1:{totalEleves,partEleves,pct}, pct2:{prixInitial,augmentation,nouveauPrix}, echelle1:{echelleDiv,cmCarte,reelKm}, echelle2:{cmPlan,metresReels,echelleInverse}, produit:{puissance,tempsH,energie}, quotient:{distanceKm,heures,minutes,vitesse}, agrandissement:{cote,rapportLong,newCote}, reduction:{aireInit,rapportRed,newAire}, volume:{volumeInit,rapportVol,newVolume}, ratio2:{totalRatio2,r2a,r2b,part1}, ratio3:{totalRatio3,r3a,r3b,r3c,partCiment} };
+    }
+    
+    let currentData = null;
+    function approxEqual(actual, expected, tolerance = 0.05) { return Math.abs(actual - expected) <= tolerance; }
+    
+    function renderExercises(data) {
+        const container = document.getElementById('exercisesContainer');
+        container.innerHTML = `
+            <!-- Exercice 1 -->
+            <div class="exercice-card"><div class="card-header"><h4>🍎 Exercice 1 – Achat de pommes</h4><span class="badge-import">Tableau de proportionnalité</span></div>
+            <div class="card-body">
+                <div class="question">Au marché, le prix des pommes est proportionnel à la masse achetée. Un client a payé ${formatDecimal(data.prop1.prix_a)} € pour ${data.prop1.a} kg.<br>
+                a) Calculez le prix pour 1 kg (coefficient de proportionnalité).<br>
+                b) Calculez le prix pour ${data.prop1.b} kg.</div>
+                <div class="input-group"><label>💰 a) Prix au kilo (€) :</label><input type="text" id="ans1_1"><button class="verify" data-type="coeff">Vérifier</button></div>
+                <div class="hint">💡 Arrondi au centième près.</div>
+                <div class="input-group"><label>💶 b) Prix pour ${data.prop1.b} kg (€) :</label><input type="text" id="ans1_2"><button class="verify" data-type="prixB">Vérifier</button></div>
+                <div class="hint">💡 Arrondi au centième près.</div>
+                <div id="sol1" class="solution"></div>
+            </div></div>
+            <!-- Exercice 2 -->
+            <div class="exercice-card"><div class="card-header"><h4>🚗 Exercice 2 – Consommation d'essence</h4><span class="badge-import">Produit en croix</span></div>
+            <div class="card-body">
+                <div class="question">Une voiture consomme ${formatDecimal(data.prop2.L)} L d’essence pour parcourir ${data.prop2.km} km. La consommation est proportionnelle à la distance.<br>
+                a) Quelle quantité d’essence sera nécessaire pour parcourir ${data.prop2.km2} km ?<br>
+                b) Avec ${formatDecimal(data.prop2.targetL)} L, quelle distance peut-on parcourir ?</div>
+                <div class="input-group"><label>⛽ a) Litres pour ${data.prop2.km2} km :</label><input type="text" id="ans2_1"><button class="verify" data-type="conso">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div class="input-group"><label>🛣️ b) Distance avec ${formatDecimal(data.prop2.targetL)} L (km) :</label><input type="text" id="ans2_2"><button class="verify" data-type="dist">Vérifier</button></div>
+                <div class="hint">💡 Au dixième près.</div>
+                <div id="sol2" class="solution"></div>
+            </div></div>
+            <!-- Exercice 3 – Graphique proportionnel -->
+            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 3 – Graphique 1 (proportionnel)</h4><span class="badge-import">Points alignés avec l'origine</span></div>
+            <div class="card-body">
+                <div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="50" cy="110" r="4" fill="green"/><circle cx="80" cy="70" r="4" fill="green"/><circle cx="110" cy="30" r="4" fill="green"/><line x1="20" y1="150" x2="110" y2="30" stroke="green" stroke-dasharray="4"/></svg></div>
+                <div class="question">Les trois points verts sont-ils alignés avec l’origine O ? (Oui/Non)</div>
+                <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_1"><button class="verify" data-type="graphOui">Vérifier</button></div>
+                <div class="hint">💡 Tapez "Oui" ou "Non".</div>
+                <div id="sol3" class="solution"></div>
+            </div></div>
+            <!-- Exercice 4 – Graphique non proportionnel (courbe / points non alignés) -->
+            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 4 – Graphique 2 (non proportionnel)</h4><span class="badge-import">Points non alignés</span></div>
+            <div class="card-body">
+                <div class="graph-illustration"><svg width="180" height="180" viewBox="0 0 180 180"><line x1="20" y1="150" x2="150" y2="150" stroke="#555"/><line x1="20" y1="150" x2="20" y2="20" stroke="#555"/><circle cx="20" cy="150" r="3" fill="black"/><text x="12" y="165">O</text><circle cx="40" cy="130" r="4" fill="orange"/><circle cx="80" cy="60" r="4" fill="orange"/><circle cx="120" cy="80" r="4" fill="orange"/></svg></div>
+                <div class="question">Les trois points orange sont-ils alignés avec l’origine O ? (Oui/Non)</div>
+                <div class="input-group"><label>Réponse :</label><input type="text" id="ans3_2"><button class="verify" data-type="graphNon">Vérifier</button></div>
+                <div class="hint">💡 Tapez "Oui" ou "Non".</div>
+                <div id="sol3b" class="solution"></div>
+            </div></div>
+            <!-- Exercice 5 -->
+            <div class="exercice-card"><div class="card-header"><h4>📊 Exercice 5 – Pourcentage d'élèves</h4><span class="badge-import">Calcul de pourcentage</span></div>
+            <div class="card-body">
+                <div class="question">Dans une classe de ${data.pct1.totalEleves} élèves, on compte ${data.pct1.partEleves} élèves qui possèdent un téléphone portable. Quel est le pourcentage d’élèves ayant un téléphone ?</div>
+                <div class="input-group"><label>📱 Pourcentage :</label><input type="text" id="ans4_1"><button class="verify" data-type="pct">Vérifier</button></div>
+                <div class="hint">💡 À l’unité près.</div>
+                <div id="sol4" class="solution"></div>
+            </div></div>
+            <!-- Exercice 6 -->
+            <div class="exercice-card"><div class="card-header"><h4>📈 Exercice 6 – Augmentation de prix</h4><span class="badge-import">Pourcentage d'augmentation</span></div>
+            <div class="card-body">
+                <div class="question">Un article coûte ${data.pct2.prixInitial} €. Son prix augmente de ${data.pct2.augmentation} %. Calculez le nouveau prix.</div>
+                <div class="input-group"><label>💶 Nouveau prix (€) :</label><input type="text" id="ans4_2"><button class="verify" data-type="augm">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol4b" class="solution"></div>
+            </div></div>
+            <!-- Exercice 7 -->
+            <div class="exercice-card"><div class="card-header"><h4>🗺️ Exercice 7 – Carte routière</h4><span class="badge-import">Échelle 1/${data.echelle1.echelleDiv}</span></div>
+            <div class="card-body">
+                <div class="question">Une carte routière est à l’échelle 1 / ${data.echelle1.echelleDiv}. Sur cette carte, la distance entre deux villes est de ${data.echelle1.cmCarte} cm. Quelle est la distance réelle en kilomètres ?</div>
+                <div class="input-group"><label>📍 Distance réelle (km) :</label><input type="text" id="ans5_1"><button class="verify" data-type="reel">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol5" class="solution"></div>
+            </div></div>
+            <!-- Exercice 8 -->
+            <div class="exercice-card"><div class="card-header"><h4>📐 Exercice 8 – Échelle d’un plan</h4><span class="badge-import">Trouver l'échelle</span></div>
+            <div class="card-body">
+                <div class="question">Sur le plan d’une maison, une longueur de ${formatDecimal(data.echelle2.cmPlan)} cm représente ${data.echelle2.metresReels} m dans la réalité. Donnez l’échelle de ce plan sous la forme "1/..." (nombre entier).</div>
+                <div class="input-group"><label>📏 Échelle :</label><input type="text" id="ans5_2"><button class="verify" data-type="echelle">Vérifier</button></div>
+                <div class="hint">💡 Exemple : 1/5000.</div>
+                <div id="sol5b" class="solution"></div>
+            </div></div>
+            <!-- Exercice 9 -->
+            <div class="exercice-card"><div class="card-header"><h4>⚡ Exercice 9 – Énergie électrique</h4><span class="badge-import">Grandeur produit</span></div>
+            <div class="card-body">
+                <div class="question">Un radiateur électrique a une puissance de ${formatDecimal(data.produit.puissance)} kW. Il fonctionne pendant ${data.produit.tempsH} heures. Calculez l’énergie consommée en kWh (Énergie = puissance × durée).</div>
+                <div class="input-group"><label>🔌 Énergie (kWh) :</label><input type="text" id="ans6_1"><button class="verify" data-type="energie">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol6" class="solution"></div>
+            </div></div>
+            <!-- Exercice 10 -->
+            <div class="exercice-card"><div class="card-header"><h4>🚗 Exercice 10 – Vitesse moyenne</h4><span class="badge-import">Grandeur quotient</span></div>
+            <div class="card-body">
+                <div class="question">Une voiture parcourt ${data.quotient.distanceKm} km en ${data.quotient.heures} h et ${data.quotient.minutes} min. Calculez sa vitesse moyenne en km/h (arrondie à l’unité).</div>
+                <div class="input-group"><label>🏁 Vitesse (km/h) :</label><input type="text" id="ans6_2"><button class="verify" data-type="vitesse">Vérifier</button></div>
+                <div class="hint">💡 À l’unité près.</div>
+                <div id="sol6b" class="solution"></div>
+            </div></div>
+            <!-- Exercice 11 -->
+            <div class="exercice-card"><div class="card-header"><h4>📏 Exercice 11 – Agrandissement d’un carré</h4><span class="badge-import">Longueur × k</span></div>
+            <div class="card-body">
+                <div class="question">Un carré a un côté de ${data.agrandissement.cote} cm. On l’agrandit en multipliant toutes ses dimensions par ${formatDecimal(data.agrandissement.rapportLong)}. Quelle est la longueur du nouveau côté ?</div>
+                <div class="input-group"><label>📐 Nouveau côté (cm) :</label><input type="text" id="ans7_1"><button class="verify" data-type="cote">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol7" class="solution"></div>
+            </div></div>
+            <!-- Exercice 12 -->
+            <div class="exercice-card"><div class="card-header"><h4>🔲 Exercice 12 – Réduction d’aire</h4><span class="badge-import">Aire × k²</span></div>
+            <div class="card-body">
+                <div class="question">Un rectangle a une aire de ${data.reduction.aireInit} cm². On le réduit en multipliant ses dimensions par ${formatDecimal(data.reduction.rapportRed)}. Calculez la nouvelle aire.</div>
+                <div class="input-group"><label>📐 Nouvelle aire (cm²) :</label><input type="text" id="ans7_2"><button class="verify" data-type="aire">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol7b" class="solution"></div>
+            </div></div>
+            <!-- Exercice 13 -->
+            <div class="exercice-card"><div class="card-header"><h4>🧊 Exercice 13 – Volume d’un cube</h4><span class="badge-import">Volume × k³</span></div>
+            <div class="card-body">
+                <div class="question">Un cube a un volume de ${data.volume.volumeInit} cm³. On l’agrandit en multipliant ses arêtes par ${data.volume.rapportVol}. Calculez le nouveau volume.</div>
+                <div class="input-group"><label>📦 Nouveau volume (cm³) :</label><input type="text" id="ans7_3"><button class="verify" data-type="volume">Vérifier</button></div>
+                <div class="hint">💡 À l’unité près.</div>
+                <div id="sol7c" class="solution"></div>
+            </div></div>
+            <!-- Exercice 14 -->
+            <div class="exercice-card"><div class="card-header"><h4>💰 Exercice 14 – Partage d’argent</h4><span class="badge-import">Ratio ${data.ratio2.r2a}:${data.ratio2.r2b}</span></div>
+            <div class="card-body">
+                <div class="question">Deux associés se partagent un bénéfice de ${data.ratio2.totalRatio2} € selon le ratio ${data.ratio2.r2a} : ${data.ratio2.r2b}. Combien reçoit le premier associé ?</div>
+                <div class="input-group"><label>💵 Première part (€) :</label><input type="text" id="ans8_1"><button class="verify" data-type="part1">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol8" class="solution"></div>
+            </div></div>
+            <!-- Exercice 15 -->
+            <div class="exercice-card"><div class="card-header"><h4>🧱 Exercice 15 – Mélange de béton</h4><span class="badge-import">Ratio ${data.ratio3.r3a}:${data.ratio3.r3b}:${data.ratio3.r3c}</span></div>
+            <div class="card-body">
+                <div class="question">Pour préparer du béton, on mélange du sable, du ciment et de l’eau dans le ratio ${data.ratio3.r3a} : ${data.ratio3.r3b} : ${data.ratio3.r3c}. On veut obtenir ${data.ratio3.totalRatio3} kg de mélange. Quelle masse de ciment (en kg) faut-il utiliser ?</div>
+                <div class="input-group"><label>🏗️ Masse de ciment (kg) :</label><input type="text" id="ans8_2"><button class="verify" data-type="ciment">Vérifier</button></div>
+                <div class="hint">💡 Au centième près.</div>
+                <div id="sol8b" class="solution"></div>
+            </div></div>
+        `;
+        attachEvents(data);
+    }
+    
+    function attachEvents(data) {
+        const buttons = document.querySelectorAll('.verify[data-type]');
+        buttons.forEach(btn => { btn.removeEventListener('click', handler); btn.addEventListener('click', handler); });
+        function handler(e) {
+            const type = e.currentTarget.getAttribute('data-type');
+            let userValue = e.currentTarget.closest('.input-group').querySelector('input').value.trim().replace(',', '.').replace(/\s/g, '');
+            const parentCard = e.currentTarget.closest('.card-body');
+            const solDiv = parentCard.querySelector('.solution');
+            let isCorrect = false;
+            let detail = "";
+            let userNum = parseFloat(userValue);
+            switch(type) {
+                case 'coeff':
+                    isCorrect = approxEqual(userNum, data.prop1.coeff);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Coefficient = prix ÷ masse = ${formatDecimal(data.prop1.prix_a)} € ÷ ${data.prop1.a} kg = ${formatDecimal(data.prop1.coeff)} €/kg.<br>✅ Réponse attendue : <strong>${formatDecimal(data.prop1.coeff)} €</strong> (au centième près).`;
+                    break;
+                case 'prixB':
+                    let expectedPrix = data.prop1.coeff * data.prop1.b;
+                    isCorrect = approxEqual(userNum, expectedPrix);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Prix = masse × coefficient = ${data.prop1.b} × ${formatDecimal(data.prop1.coeff)} = ${formatDecimal(expectedPrix)} €.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedPrix)} €</strong> (au centième près).`;
+                    break;
+                case 'conso':
+                    let expectedConso = data.prop2.essence2;
+                    isCorrect = approxEqual(userNum, expectedConso);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Consommation au km = ${formatDecimal(data.prop2.L)} L ÷ ${data.prop2.km} km = ${formatDecimal(data.prop2.coeffEssence,4)} L/km.<br>Pour ${data.prop2.km2} km : ${formatDecimal(data.prop2.coeffEssence,4)} × ${data.prop2.km2} = ${formatDecimal(expectedConso)} L.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedConso)} L</strong> (au centième près).`;
+                    break;
+                case 'dist':
+                    let expectedDist = data.prop2.targetKm;
+                    isCorrect = approxEqual(userNum, expectedDist);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Distance = ${formatDecimal(data.prop2.targetL)} L ÷ ${formatDecimal(data.prop2.coeffEssence,4)} L/km = ${formatDecimal(expectedDist)} km.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedDist)} km</strong> (au dixième près).`;
+                    break;
+                case 'graphOui':
+                    isCorrect = (userValue.toLowerCase() === 'oui');
+                    detail = `🔍 <strong>Explication</strong> : Les points sont alignés sur une droite passant par l'origine (0,0). Le rapport y/x est constant. Cette situation correspond à une proportionnalité.<br>✅ Réponse attendue : <strong>Oui</strong>.`;
+                    break;
+                case 'graphNon':
+                    isCorrect = (userValue.toLowerCase() === 'non');
+                    detail = `🔍 <strong>Explication</strong> : Les points ne sont pas alignés entre eux (ils forment une "courbe"), donc ils ne peuvent pas être alignés avec l'origine. Il n'y a pas proportionnalité.<br>✅ Réponse attendue : <strong>Non</strong>.`;
+                    break;
+                case 'pct':
+                    isCorrect = (parseFloat(userValue.replace('%','')) === data.pct1.pct);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Pourcentage = (partie / total) × 100 = (${data.pct1.partEleves} / ${data.pct1.totalEleves}) × 100 = ${data.pct1.pct}%.<br>✅ Réponse attendue : <strong>${data.pct1.pct}%</strong> (à l’unité près).`;
+                    break;
+                case 'augm':
+                    let expectedAug = data.pct2.nouveauPrix;
+                    isCorrect = approxEqual(userNum, expectedAug);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau prix = ${data.pct2.prixInitial} × (1 + ${data.pct2.augmentation}/100) = ${data.pct2.prixInitial} × ${(1+data.pct2.augmentation/100).toFixed(2)} = ${formatDecimal(expectedAug)} €.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedAug)} €</strong> (au centième près).`;
+                    break;
+                case 'reel':
+                    let expectedReel = data.echelle1.reelKm;
+                    isCorrect = approxEqual(userNum, expectedReel);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Distance réelle (cm) = ${data.echelle1.cmCarte} × ${data.echelle1.echelleDiv} = ${data.echelle1.cmCarte*data.echelle1.echelleDiv} cm.<br>Conversion en km : ÷ 100000 = ${formatDecimal(expectedReel)} km.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedReel)} km</strong> (au centième près).`;
+                    break;
+                case 'echelle':
+                    let expectedEchelle = `1/${data.echelle2.echelleInverse}`;
+                    isCorrect = (userValue.replace(/\s/g,'') === expectedEchelle);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>${data.echelle2.metresReels} m = ${data.echelle2.metresReels*100} cm.<br>Échelle = ${formatDecimal(data.echelle2.cmPlan)} / ${data.echelle2.metresReels*100} = 1 / ${data.echelle2.echelleInverse}.<br>✅ Réponse attendue : <strong>1/${data.echelle2.echelleInverse}</strong>.`;
+                    break;
+                case 'energie':
+                    let expectedEnergie = data.produit.energie;
+                    isCorrect = approxEqual(userNum, expectedEnergie);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Énergie = puissance × durée = ${formatDecimal(data.produit.puissance)} kW × ${data.produit.tempsH} h = ${formatDecimal(expectedEnergie)} kWh.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedEnergie)} kWh</strong> (au centième près).`;
+                    break;
+                case 'vitesse':
+                    let expectedVitesse = data.quotient.vitesse;
+                    isCorrect = (userNum === expectedVitesse);
+                    let tempsHeures = data.quotient.heures + data.quotient.minutes/60;
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Temps total = ${data.quotient.heures} h + ${data.quotient.minutes} min = ${tempsHeures.toFixed(2)} h.<br>Vitesse = ${data.quotient.distanceKm} / ${tempsHeures.toFixed(2)} = ${expectedVitesse} km/h.<br>✅ Réponse attendue : <strong>${expectedVitesse} km/h</strong> (à l’unité près).`;
+                    break;
+                case 'cote':
+                    let expectedCote = data.agrandissement.newCote;
+                    isCorrect = approxEqual(userNum, expectedCote);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau côté = côté initial × rapport = ${data.agrandissement.cote} × ${formatDecimal(data.agrandissement.rapportLong)} = ${formatDecimal(expectedCote)} cm.<br>✅ Réponse attendue : <strong>${formatDecimal(expectedCote)} cm</strong> (au centième près).`;
+                    break;
+                case 'aire':
+                    let expectedAire = data.reduction.newAire;
+                    isCorrect = approxEqual(userNum, expectedAire);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouvelle aire = aire initiale × (rapport)² = ${data.reduction.aireInit} × (${formatDecimal(data.reduction.rapportRed)})² = ${formatDecimal(expectedAire)} cm².<br>✅ Réponse attendue : <strong>${formatDecimal(expectedAire)} cm²</strong> (au centième près).`;
+                    break;
+                case 'volume':
+                    let expectedVolume = data.volume.newVolume;
+                    isCorrect = (userNum === expectedVolume);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Nouveau volume = volume initial × (rapport)³ = ${data.volume.volumeInit} × ${data.volume.rapportVol}³ = ${expectedVolume} cm³.<br>✅ Réponse attendue : <strong>${expectedVolume} cm³</strong> (à l’unité près).`;
+                    break;
+                case 'part1':
+                    let expectedPart1 = data.ratio2.part1;
+                    isCorrect = approxEqual(userNum, expectedPart1);
+                    let partValue = data.ratio2.totalRatio2 / (data.ratio2.r2a + data.ratio2.r2b);
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Total parts = ${data.ratio2.r2a}+${data.ratio2.r2b} = ${data.ratio2.r2a+data.ratio2.r2b}<br>Valeur d'une part = ${data.ratio2.totalRatio2} ÷ ${data.ratio2.r2a+data.ratio2.r2b} = ${formatDecimal(partValue)} €<br>Première part = ${data.ratio2.r2a} × ${formatDecimal(partValue)} = ${formatDecimal(expectedPart1)} €<br>✅ Réponse attendue : <strong>${formatDecimal(expectedPart1)} €</strong> (au centième près).`;
+                    break;
+                case 'ciment':
+                    let expectedCiment = data.ratio3.partCiment;
+                    isCorrect = approxEqual(userNum, expectedCiment);
+                    let totalParts3 = data.ratio3.r3a + data.ratio3.r3b + data.ratio3.r3c;
+                    let partValue3 = data.ratio3.totalRatio3 / totalParts3;
+                    detail = `🔍 <strong>Calcul détaillé</strong> :<br>Total parts = ${data.ratio3.r3a}+${data.ratio3.r3b}+${data.ratio3.r3c} = ${totalParts3}<br>Valeur d'une part = ${data.ratio3.totalRatio3} ÷ ${totalParts3} = ${formatDecimal(partValue3)} kg<br>Ciment (${data.ratio3.r3b} parts) = ${data.ratio3.r3b} × ${formatDecimal(partValue3)} = ${formatDecimal(expectedCiment)} kg<br>✅ Réponse attendue : <strong>${formatDecimal(expectedCiment)} kg</strong> (au centième près).`;
+                    break;
+                default: return;
+            }
+            solDiv.style.display = 'block';
+            let badge = isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div>';
+            solDiv.innerHTML = badge + detail;
+        }
+    }
+    
+    function refresh() { currentData = generateValues(); renderExercises(currentData); }
+    
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    
+    refresh();
+    document.getElementById('newSeriesBtn').addEventListener('click', refresh);
+</script>
+
+</body>
+</html>
