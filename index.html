@@ -140,6 +140,30 @@
             margin-top: 5px;
         }
 
+        /* Carte en construction */
+        .card-construction {
+            opacity: 0.55;
+            cursor: not-allowed;
+            filter: grayscale(0.6);
+            position: relative;
+            pointer-events: none;
+        }
+
+        .badge-construction {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #f72585, #7209b7);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
         /* Animation d'entrée */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -189,17 +213,20 @@
             <div class="icon-circle">1</div>
             <span class="title">Nombres entiers</span>
         </a>
-        <a href="chapitre2.html" class="card card-nombres">
+        <a href="#" class="card card-nombres card-construction">
             <div class="icon-circle">2</div>
             <span class="title">Nombres rationnels</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre3.html" class="card card-nombres">
+        <a href="#" class="card card-nombres card-construction">
             <div class="icon-circle">3</div>
             <span class="title">Calcul littéral</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre4.html" class="card card-nombres">
+        <a href="#" class="card card-nombres card-construction">
             <div class="icon-circle">4</div>
             <span class="title">Équations</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
     </div>
 
@@ -209,66 +236,57 @@
             <div class="icon-circle">5</div>
             <span class="title">Proportionnalité</span>
         </a>
-        <a href="chapitre6.html" class="card card-gestion">
+        <a href="#" class="card card-gestion card-construction">
             <div class="icon-circle">6</div>
             <span class="title">Fonctions</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre7.html" class="card card-gestion">
+        <a href="#" class="card card-gestion card-construction">
             <div class="icon-circle">7</div>
             <span class="title">Fonctions affines</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre8.html" class="card card-gestion">
+        <a href="#" class="card card-gestion card-construction">
             <div class="icon-circle">8</div>
             <span class="title">Statistiques</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre9.html" class="card card-gestion">
+        <a href="#" class="card card-gestion card-construction">
             <div class="icon-circle">9</div>
             <span class="title">Probabilités</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
     </div>
 
     <h2 class="section-title">📐 Espace & Géométrie</h2>
     <div class="grid">
-        <a href="chapitre10.html" class="card card-geometrie">
+        <a href="#" class="card card-geometrie card-construction">
             <div class="icon-circle">10</div>
             <span class="title">Transformations</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre11.html" class="card card-geometrie">
+        <a href="#" class="card card-geometrie card-construction">
             <div class="icon-circle">11</div>
             <span class="title">Thalès</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre12.html" class="card card-geometrie">
+        <a href="#" class="card card-geometrie card-construction">
             <div class="icon-circle">12</div>
             <span class="title">Triangles Rectangles</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
-        <a href="chapitre13.html" class="card card-geometrie">
+        <a href="#" class="card card-geometrie card-construction">
             <div class="icon-circle">13</div>
             <span class="title">Solides</span>
+            <span class="badge-construction">🚧 En construction</span>
         </a>
     </div>
 
 </div>
 
 <footer>
-    <div id="counter-area">
-    <a href='https://www.counters-free.net/'>Counters-Free.net</a>
-</div>
-
-<script type='text/javascript'>
-  // Only load the counter if the 'isAdmin' flag IS NOT found in this browser
-  if (localStorage.getItem('isAdmin') !== 'true') {
-    var script1 = document.createElement('script');
-    script1.src = 'https://www.freevisitorcounters.com/auth.php?id=58d43417d977247f1431d2cc36dfd851d16ef82f';
-    document.getElementById('counter-area').appendChild(script1);
-
-    var script2 = document.createElement('script');
-    script2.src = 'https://www.freevisitorcounters.com/en/home/counter/1541973/t/5';
-    document.getElementById('counter-area').appendChild(script2);
-  } else {
-    document.getElementById('counter-area').innerHTML = "<em>Admin view: Counter hidden.</em>";
-  }
-</script>
-    <p style="font-weight: 600;"> © 2026 Estifanos G. Tous droits réservés.</p>
+    
+    <p style="font-weight: 600;"> © 2026 Estifanos G. </p>
 </footer>
 
 </body>
