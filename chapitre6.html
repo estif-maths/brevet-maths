@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 : Introduction aux fonctions - Maths 3ème</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* ========== STYLES INITIAUX ========== */
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --bg: #f8f9fe;
+            --text: #2b2d42;
+            --success: #2ecc71;
+            --warning: #fab005;
+            --brevet: #e67e22;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 1rem; text-align: center; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
+        
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; flex-wrap: wrap; }
+        .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        .content-section { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid #f0f2ff; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        
+        .definition-box { background: #f0f2ff; padding: 20px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .method-box { background: #fff9db; padding: 20px; border: 1px solid var(--warning); margin: 20px 0; border-radius: 15px; }
+        .example-box { background: #fdfdfd; padding: 20px; border: 1px dashed #ccc; margin: 15px 0; border-radius: 15px; }
+        .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
+        .remark-box { background: #f3e8ff; padding: 20px; border-left: 6px solid var(--secondary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .property-box { background: #e6f7e6; padding: 20px; border-left: 6px solid var(--success); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        
+        .two-columns { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+        .col-text { flex: 1; min-width: 200px; }
+        .col-img { flex: 0 0 300px; text-align: center; }
+        .col-img img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        .remark-box .vertical-img { text-align: center; margin-top: 15px; }
+        .remark-box .vertical-img img { max-width: 550px; width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        .grid-2col { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.8rem; }
+        .question-block { background: #f8fafc; border-radius: 1rem; padding: 1rem 1.3rem; margin-bottom: 1.2rem; border: 1px solid #e2edff; }
+        .qcm-group { background: #fefce8; border-left: 6px solid #eab308; }
+        .graph-holder { background: #ffffff; border-radius: 1rem; padding: 10px; margin: 0.75rem 0; border: 2px solid #94a3b8; text-align: center; display: flex; justify-content: center; align-items: center; overflow-x: auto; }
+        .graph-holder svg { background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); width: 100%; height: auto; max-width: 450px; border: 1px solid #cbd5e1; }
+        .choice { margin: 0.6rem 0; display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+        input, .expr-input { border: 1px solid #cbd5e1; border-radius: 0.75rem; padding: 0.5rem 0.8rem; width: 130px; font-size: 0.9rem; }
+        .expr-input { width: 180px; font-family: monospace; }
+        button { background-color: #3b82f6; border: none; color: white; font-weight: 600; padding: 0.45rem 1rem; border-radius: 2rem; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
+        button:hover { background-color: #2563eb; transform: scale(0.97); }
+        .feedback { font-size: 0.85rem; margin-top: 0.5rem; padding: 0.3rem 0.6rem; border-radius: 1rem; display: inline-block; }
+        .correct { background: #dcfce7; color: #15803d; border-left: 4px solid #22c55e; }
+        .incorrect { background: #fee2e2; color: #b91c1c; border-left: 4px solid #ef4444; }
+        .neutral { background: #f1f5f9; color: #1e293b; padding: 0.4rem 0.6rem; border-radius: 0.75rem; font-size: 0.8rem; margin-top: 10px; border-left: 3px solid #64748b; }
+        .math { font-family: monospace; background: #eef2ff; padding: 0.1rem 0.3rem; border-radius: 6px; }
+        table { border-collapse: collapse; width: 100%; margin: 0.5rem 0; background: white; border-radius: 12px; }
+        th, td { border: 1px solid #cbd5e1; padding: 6px 10px; text-align: center; }
+        th { background: #e2e8f0; }
+        .geometry-svg { background: #f9f9ff; border-radius: 16px; padding: 8px; margin-bottom: 12px; text-align: center; }
+        .geometry-svg svg { max-width: 180px; height: auto; background: #f9f9ff; }
+        hr { margin: 1rem 0; }
+        .attempt-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; background: #1e3c72; border-radius: 1rem; padding: 0.9rem 1.4rem; margin-bottom: 1.8rem; }
+        .attempt-bar span { color: rgba(255,255,255,0.85); font-size: 0.88rem; }
+        .attempt-bar strong { color: #fff; }
+        .btn-regen { background: #f97316; color: white; border: none; font-weight: 700; padding: 0.5rem 1.2rem; border-radius: 2rem; cursor: pointer; font-size: 0.85rem; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .btn-regen:hover { background: #ea6c05; transform: scale(0.97); }
+        .section-regen-row { display: flex; justify-content: flex-end; margin-bottom: 0.8rem; }
+        .btn-regen-sm { background: transparent; border: 1.5px solid #3b82f6; color: #3b82f6; font-weight: 600; padding: 0.3rem 0.9rem; border-radius: 2rem; cursor: pointer; font-size: 0.78rem; transition: 0.2s; }
+        .btn-regen-sm:hover { background: #3b82f6; color: white; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ========== STYLES SPÉCIFIQUES AUX EXERCICES TYPE BREVET ========== */
+        .exercice-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            margin-bottom: 48px;
+            overflow: hidden;
+            border: 1px solid #e2edf2;
+        }
+        .card-header {
+            background: #1a3668;
+            padding: 18px 28px;
+            color: white;
+        }
+        .card-header h2 { font-size: 1.5rem; font-weight: 600; display: inline-block; background: rgba(255,255,255,0.15); padding: 4px 16px; border-radius: 60px; margin: 0; }
+        .card-header .sub { font-size: 0.85rem; opacity: 0.85; margin-top: 8px; }
+        .card-content { padding: 28px 32px; }
+        .enonce {
+            background: #fefaf0;
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+            border-left: 6px solid #e67e22;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .enonce p, .enonce ul, .enonce ol { margin-bottom: 0.8rem; }
+        .enonce .question { margin-top: 1rem; font-weight: 500; }
+        .student-area {
+            margin: 24px 0 18px 0;
+            background: #f9fbfe;
+            padding: 16px 20px;
+            border-radius: 24px;
+            border: 1px solid #dce5ef;
+        }
+        .student-area label {
+            font-weight: 600;
+            color: #1a3668;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .student-area input, .student-area textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid #cbdde9;
+            font-family: 'Inter', monospace;
+            font-size: 0.9rem;
+            background: white;
+            transition: 0.1s;
+        }
+        .student-area input:focus, .student-area textarea:focus {
+            outline: none;
+            border-color: #2c7da0;
+            box-shadow: 0 0 0 2px rgba(44,125,160,0.2);
+        }
+        .btn-correction {
+            background: #eef3fc;
+            border: 1px solid #bdd4e8;
+            color: #1a3668;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.1s;
+        }
+        .btn-correction:hover {
+            background: #dfe8f2;
+        }
+        .correction-text {
+            margin-top: 12px;
+            background: #eef2fa;
+            padding: 12px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border-left: 3px solid #2c7da0;
+            display: none;
+        }
+        .correction-text.visible { display: block; }
+        .graph-container {
+            background: #ffffff;
+            margin: 22px 0;
+            border-radius: 24px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #dce7ef;
+        }
+        .graph-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+        .two-imgs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .badge-info {
+            background: #e3f0fa;
+            border-radius: 24px;
+            padding: 10px 16px;
+            margin: 12px 0;
+            font-size: 0.85rem;
+        }
+        .hero-badge {
+            background: linear-gradient(135deg, #1a3668 0%, #2c5282 100%);
+            border-radius: 40px;
+            padding: 28px 24px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 20px -8px rgba(0,0,0,0.2);
+        }
+        .hero-badge h1 { color: white; font-size: 1.8rem; font-weight: 700; margin: 0; }
+        .hero-badge p { color: #e0edff; font-size: 1rem; margin-top: 8px; }
+        .brevet-download {
+            background: #eef2ff;
+            padding: 12px 20px;
+            border-radius: 28px;
+            margin: 20px 0 30px 0;
+            text-align: center;
+        }
+        .brevet-dashed-line {
+            border: none;
+            border-top: 3px dashed #e67e22;
+            margin: 1.5rem 0;
+            opacity: 0.8;
+        }
+        /* Style pour le tableau interactif */
+        .interactive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .interactive-table th, .interactive-table td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .interactive-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+        .interactive-table input {
+            width: 100%;
+            min-width: 60px;
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid #94a3b8;
+            text-align: center;
+            background: #fff;
+            font-family: inherit;
+        }
+        .table-feedback {
+            margin-top: 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapitre 6 : Introduction aux fonctions</h1>
+    <p>Image, antécédent, représentation graphique, calculs</p>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showSection('cours', this)">📖 Cours Détaillé</button>
+        <button class="tab-btn" onclick="showSection('exercices', this)">📝 Exercices Interactifs</button>
+        <button class="tab-btn" onclick="showSection('brevet', this)">🎓 Exercices Type Brevet</button>
+    </div>
+
+    <!-- SECTION COURS (inchangée) -->
+    <div id="cours" class="content-section active">
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
+            <a href="#" style="color: var(--primary); font-weight: 600;">📄 OGD2 Cours complet.pdf</a>
+        </div>
+        <h2>1. Introduction aux fonctions</h2>
+        <div class="definition-box">
+            <strong>Vocabulaire :</strong>
+            <ul>
+                <li>Le processus qui, à un nombre donné au départ, associe un unique autre nombre, s'appelle une <strong>fonction</strong>, souvent notée \( f \).</li>
+                <li>Le nombre de départ est noté \( x \) et s'appelle un <strong>antécédent</strong>.</li>
+                <li>Le nombre associé est noté \( f(x) \) (se lit « \( f \) de \( x \) ») et s'appelle l'<strong>image</strong> de \( x \) par \( f \).</li>
+            </ul>
+        </div>
+        <div class="remark-box">
+            <div class="col-text">
+                <strong>💡 Remarque :</strong> Il ne faut pas confondre \( f \) et \( f(x) \). \( f \) désigne une fonction alors que \( f(x) \) désigne un nombre (l'image du nombre \( x \) par la fonction \( f \)).
+            </div>
+            <div class="vertical-img">
+                <img src="OGD2A.png" alt="Schéma fonction machine">
+            </div>
+        </div>
+        <iframe src="machine.html" width="100%" height="500px" frameborder="0"></iframe>
+        <div class="example-box">
+            <ul>
+                <li>Si l'on introduit 2 dans la machine, il sortira 4 puisque \(2^2 = 4\). On dit que <strong>2 a pour image 4</strong>.</li>
+                <li>Si l'on a obtenu 49, on a pu introduire 7 ou \(-7\). On dit que <strong>49 a deux antécédents : 7 et \(-7\)</strong>.</li>
+            </ul>
+            Notation : \( c : x \mapsto x^2 \) ou \( c(x)=x^2 \).
+        </div>
+        <div class="definition-box">
+            <strong>Expression algébrique d'une fonction :</strong><br>
+            On peut noter : \( f : x \mapsto \ldots \) ou \( f(x) = \ldots \).
+        </div>
+        <h2>2. Représentation graphique d'une fonction</h2>
+        <div class="definition-box">
+            <ul>
+                <li>Toute fonction \( f \) peut être représentée par une <strong>courbe représentative</strong> notée \( \mathcal{C}_f \).</li>
+                <li>La courbe est l'ensemble des points de coordonnées \((x ; f(x))\).<br>
+                 L'antécédent \(x\) se lit sur l'axe des abscisses.<br>
+                 L'image \(f(x)\) sur l'axe des ordonnées.</li>
+            </ul>
+        </div>
+        <div class="remark-box">
+            Dans certains cas, les valeurs lues sont exactes (points sur quadrillage), mais le plus souvent il s'agit de <strong>valeurs approchées</strong>.
+        </div>
+        <div class="example-box">
+            <div class="two-columns">
+                <div class="col-text">
+                    <strong>📖 Lecture graphique (fonction \(f\)) :</strong><br>
+                    Par lecture graphique ci-contre :
+                    <ul>
+                        <li>L'image de 1 par la fonction \( f \) est 2. <br>
+                        Le point A a pour coordonnées \((1 ; 2)\).</li>
+                        <li>Un antécédent de 4 par \( f \) est environ 1,7 (valeur approchée).<br>
+                         4 a un deuxième antécédent : environ \(-1,7\).</li>
+                    </ul>
+                </div>
+                <div class="col-img">
+                    <img src="OGD2B.png" alt="Graphique fonction f">
+                </div>
+            </div>
+        </div>
+        <h2>3. Tableau de valeurs d'une fonction</h2>
+        <div class="definition-box">
+            Un <strong>tableau de valeurs</strong> d'une fonction \( f \) regroupe les coordonnées d'un certain nombre de points de sa courbe.
+        </div>
+        <div class="example-box">
+            Tableau de valeurs pour une fonction \( g \) :
+            \[
+            \begin{array}{|c|c|c|c|c|c|c|}
+            \hline x & -1 & 0 & 2 & 4 & 6 & 8 \\ \hline g(x) & 2 & 3 & 5 & 4 & 2 & 0 \\ \hline
+            \end{array}
+            \]
+            <ul><li>L'image de 0 est 3.</li><li>Les antécédents de 2 sont \(-1\) et \(6\).</li></ul>
+        </div>
+        <div class="property-box">
+            <strong>À retenir :</strong>
+            <ul>
+                <li>Une fonction associe à chaque antécédent une unique image.</li>
+                <li>On note \( f : x \mapsto f(x) \).</li>
+                <li>Graphiquement, la courbe est l'ensemble des points \((x ; f(x))\).</li>
+                <li>Un tableau donne des points particuliers.</li>
+            </ul>
+        </div>
+        <h2>4. Déterminer image et antécédent</h2>
+        <h3>A - Par calcul algébrique</h3>
+        <div class="method-box">
+            <strong>📐 Calculer l'image d'un nombre :</strong> remplacer \(x\) par le nombre dans \(f(x)\).<br>
+            <strong>🔍 Trouver un antécédent :</strong> résoudre l'équation \(f(x) = b\).
+        </div>
+        <div class="example-box">
+            <strong>Exercice :</strong> Soit \(f(x)=x^2+5x\). Image de 4 : \(f(4)=16+20=36\).<br>
+            Antécédent de 7 par \(f(x)=2x-9\) : \(2x-9=7 \Rightarrow 2x=16 \Rightarrow x=8\).
+        </div>
+        <h3>B - Par lecture graphique</h3>
+        <div class="definition-box">
+            <ul>
+                <li><strong>Image de \(a\) :</strong> placer \(a\) sur les abscisses, rejoindre verticalement la courbe, lire l'ordonnée.</li>
+                <li><strong>Antécédent(s) de \(b\) :</strong> placer \(b\) sur les ordonnées, tracer une horizontale, lire les abscisses des intersections.</li>
+            </ul>
+        </div>
+        <div class="example-box">
+            <div class="two-columns">
+                <div class="col-text">
+                    <strong>📖 Exercice graphique (fonction \(h\)) :</strong><br>
+                    1) Déterminer l'image de 3 par \(h\).<br>
+                    2) Déterminer les antécédents de 2 par \(h\).<br><br>
+                    <strong>Solutions :</strong><br>
+                    ✔ Image de 3 : 5.<br>
+                    ✔ Antécédents de 2 : environ \(-0,9\) ; \(1,3\) ; \(2,5\).
+                </div>
+                <div class="col-img">
+                    <img src="OGD2C.png" alt="Courbe pour lecture graphique">
+                </div>
+            </div>
+        </div>
+        <div class="method-box">
+            <div class="two-columns">
+                <div class="col-text">
+                    <strong>Méthode pas à pas (tracés) :</strong><br>
+                    1)  Sur l’axe des abscisses, on se place au nombre dont on cherche l’image (ici 3). <br>
+                    On trace la droite verticale (rouge). <br>                
+                    L’ordonnée du point de la courbe donne l’image (ici 5) (tracé vert).<br><br><br>
+                    2)  Sur l’axe des ordonnées, on se place au nombre dont on cherche les antécédents (ici 2). <br>
+                    On trace la droite horizontale (bleue). <br>
+                    Les abscisses des points d’intersection (orange) sont les antécédents.<br>
+                    Antécédents de 2 : environ \(-0,9\) ; \(1,3\) et \(2,5\).
+                </div>
+                <div class="col-img">
+                    <img src="OGD2D.png" alt="Illustration méthode tracés">
+                </div>
+            </div>
+        </div>
+        <div class="remark-box">
+            <strong>Attention :<br>
+            </strong> Une image est toujours unique. <br>
+            Un nombre peut avoir 0, 1 ou plusieurs antécédents. <br>
+            En lecture graphique, les valeurs sont souvent approchées.<br>
+        </div>
+        <div class="remark-box">
+            <strong> À retenir pour cette section :<br>
+            </strong> Image par calcul : remplacer \(x\) par la valeur donnée. <br>
+            Antécédent par calcul : résoudre \(f(x) = valeur\). <br>
+            Image graphique : vertical → courbe → ordonnée.<br>
+            Antécédent graphique : horizontal → courbe → abscisse(s).<br>
+        </div>
+        <div class="col-img">
+            <img src="OGD2imageE.png" alt="Courbe pour lecture graphique">
+        </div>
+    </div>
+
+    <!-- SECTION EXERCICES INTERACTIFS (inchangée) -->
+    <div id="exercices" class="content-section">
+        <div class="attempt-bar">
+            <span>🔄 Les questions changent à chaque nouvelle tentative — entraîne-toi autant que tu veux ! &nbsp;|&nbsp; <strong id="attemptLabel">Tentative 1</strong></span>
+            <button class="btn-regen" id="globalRegen"><span class="spin" id="globalSpin">↻</span> Nouveaux exercices</button>
+        </div>
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices :</strong><br>
+            <a href="#" style="color: var(--primary); font-weight: 600;">📄 Fonctions_Exercices_base.pdf</a>
+        </div>
+        <div style="padding: 0 0 1.5rem 0; background: transparent; box-shadow: none;">
+            <div style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 3px solid #3b82f6; padding-bottom: 0.5rem; color: #0f172a;">📌 QCM – Choix unique (questions 1 à 4)</div>
+            <div class="section-regen-row"><button class="btn-regen-sm" data-regen="qcm">↻ Nouveau QCM</button></div>
+            <div id="qcm-grid" class="grid-2col"></div>
+        </div>
+        <div style="padding: 0; background: transparent; box-shadow: none;">
+            <div style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 3px solid #3b82f6; padding-bottom: 0.5rem; color: #0f172a;">✅ QCM – Réponses multiples (questions 5 & 6) + Graphiques</div>
+            <div class="grid-2col">
+                <div class="question-block qcm-group" id="q5-block"><p><strong>5.</strong> Courbe de la fonction <strong>k</strong> (droite). Parmi les affirmations, lesquelles sont vraies ?</p><div class="graph-holder"><svg width="420" height="300" viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="420" height="300" fill="#ffffff" stroke="#333" stroke-width="1"/><g stroke="#ddd" stroke-width="0.8"><line x1="60" y1="20" x2="60" y2="280" stroke-dasharray="4,4"/><line x1="115" y1="20" x2="115" y2="280" stroke-dasharray="4,4"/><line x1="170" y1="20" x2="170" y2="280" stroke-dasharray="4,4"/><line x1="225" y1="20" x2="225" y2="280" stroke-dasharray="4,4"/><line x1="280" y1="20" x2="280" y2="280" stroke-dasharray="4,4"/><line x1="335" y1="20" x2="335" y2="280" stroke-dasharray="4,4"/><line x1="20" y1="235" x2="390" y2="235" stroke-dasharray="4,4"/><line x1="20" y1="190" x2="390" y2="190" stroke-dasharray="4,4"/><line x1="20" y1="145" x2="390" y2="145" stroke-dasharray="4,4"/><line x1="20" y1="100" x2="390" y2="100" stroke-dasharray="4,4"/></g><line x1="60" y1="280" x2="380" y2="280" stroke="black" stroke-width="3" /><line x1="60" y1="280" x2="60" y2="30" stroke="black" stroke-width="3" /><polygon points="380,280 370,274 370,286" fill="black"/><polygon points="60,30 56,40 64,40" fill="black"/><text x="55" y="298" font-size="14" font-weight="bold">0</text><text x="115" y="298" font-size="13">1</text><text x="170" y="298" font-size="13">2</text><text x="225" y="298" font-size="13">3</text><text x="280" y="298" font-size="13">4</text><text x="335" y="298" font-size="13">5</text><text x="35" y="285" font-size="14">0</text><text x="35" y="240" font-size="13">1</text><text x="35" y="195" font-size="13">2</text><text x="35" y="150" font-size="13">3</text><text x="35" y="105" font-size="13">4</text><line x1="60" y1="235" x2="280" y2="145" stroke="#d97706" stroke-width="4" /><circle cx="60" cy="235" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="170" cy="190" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="280" cy="145" r="6" fill="red" stroke="black" stroke-width="1"/><text x="70" y="225" font-size="12" fill="#b45309" font-weight="bold">k(0)=1</text><text x="180" y="180" font-size="12" fill="#b45309" font-weight="bold">k(2)=2</text><text x="290" y="135" font-size="12" fill="#b45309" font-weight="bold">k(4)=3</text></svg></div><div id="q5-choices"></div><button id="check-q5">Vérifier (Q5)</button><div class="feedback" id="fb-q5"></div><div class="neutral" id="q5-hint"></div></div>
+                <div class="question-block qcm-group" id="q6-block"><p><strong>6.</strong> Courbe de la fonction <strong>ℓ</strong> (parabole) d'équation ℓ(x) = 0,5 x². Quelles affirmations sont vraies ?</p><div class="graph-holder"><svg width="450" height="320" viewBox="0 0 450 320" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="450" height="320" fill="#ffffff" stroke="#333" stroke-width="1"/><g stroke="#ddd" stroke-width="0.8"><line x1="80" y1="40" x2="80" y2="290" stroke-dasharray="4,4"/><line x1="130" y1="40" x2="130" y2="290" stroke-dasharray="4,4"/><line x1="180" y1="40" x2="180" y2="290" stroke-dasharray="4,4"/><line x1="230" y1="40" x2="230" y2="290" stroke-dasharray="4,4"/><line x1="280" y1="40" x2="280" y2="290" stroke-dasharray="4,4"/><line x1="330" y1="40" x2="330" y2="290" stroke-dasharray="4,4"/><line x1="380" y1="40" x2="380" y2="290" stroke-dasharray="4,4"/><line x1="40" y1="240" x2="420" y2="240" stroke-dasharray="4,4"/><line x1="40" y1="190" x2="420" y2="190" stroke-dasharray="4,4"/><line x1="40" y1="140" x2="420" y2="140" stroke-dasharray="4,4"/><line x1="40" y1="90" x2="420" y2="90" stroke-dasharray="4,4"/></g><line x1="230" y1="290" x2="420" y2="290" stroke="black" stroke-width="3" /><line x1="230" y1="290" x2="230" y2="40" stroke="black" stroke-width="3" /><polygon points="420,290 410,284 410,296" fill="black"/><polygon points="230,40 226,50 234,50" fill="black"/><text x="30" y="308" font-size="13">-3</text><text x="78" y="308" font-size="13">-2</text><text x="128" y="308" font-size="13">-1</text><text x="225" y="308" font-size="14" font-weight="bold">0</text><text x="275" y="308" font-size="13">1</text><text x="325" y="308" font-size="13">2</text><text x="375" y="308" font-size="13">3</text><text x="15" y="295" font-size="14">0</text><text x="15" y="245" font-size="13">1</text><text x="15" y="195" font-size="13">2</text><text x="15" y="145" font-size="13">3</text><text x="15" y="95" font-size="13">4</text><text x="15" y="55" font-size="13">5</text><path d="M 80 65 Q 110 160, 130 190 Q 160 250, 180 265 Q 200 285, 230 290 Q 260 285, 280 265 Q 300 250, 330 190 Q 350 160, 380 65" stroke="#0284c7" stroke-width="4" fill="none" /><circle cx="80" cy="65" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="130" cy="190" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="180" cy="265" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="230" cy="290" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="280" cy="265" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="330" cy="190" r="6" fill="red" stroke="black" stroke-width="1"/><circle cx="380" cy="65" r="6" fill="red" stroke="black" stroke-width="1"/><text x="40" y="55" font-size="11" fill="#0c4a6e" font-weight="bold">(-3;4,5)</text><text x="105" y="185" font-size="11" fill="#0c4a6e">(-2;2)</text><text x="285" y="255" font-size="11" fill="#0c4a6e">(1;0,5)</text><text x="335" y="180" font-size="11" fill="#0c4a6e" font-weight="bold">(2;2)</text><text x="250" y="50" font-size="14" fill="#0369a1" font-weight="bold">ℓ(x)=0,5x²</text></svg></div><div id="q6-choices"></div><button id="check-q6">Vérifier (Q6)</button><div class="feedback" id="fb-q6"></div><div class="neutral" id="q6-hint"></div></div>
+            </div>
+        </div>
+        <div style="padding: 0; background: transparent;"><div style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 3px solid #3b82f6; padding-bottom: 0.5rem; color: #0f172a;">🧮 Programmes A, B, C</div><div class="section-regen-row"><button class="btn-regen-sm" data-regen="prog">↻ Nouveaux nombres</button></div><div id="prog-container"></div></div>
+        <div style="padding: 0; background: transparent;"><div style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 3px solid #3b82f6; padding-bottom: 0.5rem; color: #0f172a;">📐 Géométrie : Carré ABCD & Triangle FCT</div><div class="section-regen-row"><button class="btn-regen-sm" data-regen="geo">↻ Nouvelles dimensions</button></div><div class="grid-2col" id="geo-container"></div></div>
+    </div>
+
+    <!-- SECTION EXERCICES TYPE BREVET (avec tableau interactif pour l'exercice 2) -->
+    <div id="brevet" class="content-section">
+        <!-- Ligne séparatrice de début -->
+        <hr class="brevet-dashed-line">
+        
+        <div class="hero-badge">
+            <h1>📘 EXERCICES TYPE BREVET</h1>
+            <p>Notion de fonctions et Programmes de calcul — Énoncés officiels + espace de réponses</p>
+        </div>
+        <div class="brevet-download">
+            <i class="fas fa-download"></i> <strong>Télécharger les annales :</strong> <a href="#" style="color: #1a3668; font-weight: 600;">Fonctions_Brevet_annales.pdf</a>
+        </div>
+
+        <!-- Exercice 1 : Hauteur de la mer (corrigé selon fichier) -->
+        <div class="exercice-card">
+            <div class="card-header"><h2>🏝️ Exercice 1 : Hauteur de la mer (Fort-de-France)</h2></div>
+            <div class="card-content">
+                <div class="enonce">
+                    <p>Julien dispose de 15 jours de vacances. Il contacte l'agence de voyages « À LA VOILE » pour préparer une croisière en voilier au départ de Fort-de-France. Le départ de la croisière choisie par Julien a lieu le 10 juillet (entre 0 h et 12 h). On a représenté ci-dessous la courbe représentative de la fonction \(f\) qui, à l'heure de la matinée (entre 0 h et 12 h) du 10 juillet, associe la hauteur de la mer dans le port de Fort-de-France.</p>
+                    <div class="graph-container"><img src="OGD2EXTB1.png" alt="Courbe hauteur de la mer" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22300%22%20viewBox%3D%220%200%20600%20300%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eef2fa%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%3EGraphique%20OGD2EXTB1.png%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                    <ol style="padding-left: 1.2rem; margin-top: 0.5rem;">
+                        <li>Le voilier ne peut sortir du port que si la hauteur d'eau dépasse 3,20 mètres. Quelles sont les tranches horaires de départ possibles pour ce voilier ?</li>
+                        <li>Le skipper du voilier décide de partir lorsque la hauteur d'eau est maximale. À quelle heure Julien va-t-il partir ?</li>
+                        <li>Donner l'image de 2 par la fonction \(f\). Interpréter le résultat.</li>
+                        <li>Donner le (ou les) antécédent(s) de 2 par la fonction \(f\). Interpréter le résultat.</li>
+                    </ol>
+                </div>
+                <div class="student-area"><label>📝 1. Tranches horaires de départ possibles :</label><textarea rows="2" placeholder="Saisis ta réponse ici..."></textarea><button class="btn-correction" data-target="corr1_1">🔍 Voir la correction</button><div id="corr1_1" class="correction-text">✔️ Il pourra sortir à partir d'environ 1h30 jusqu'à environ 7h40.</div></div>
+                <div class="student-area"><label>📝 2. Heure de départ (hauteur maximale) :</label><input type="text" placeholder="ex: 10h30"><button class="btn-correction" data-target="corr1_2">🔍 Voir la correction</button><div id="corr1_2" class="correction-text">✔️ Julien partira à 10h30.</div></div>
+                <div class="student-area"><label>📝 3. Image de 2 par \(f\) :</label><textarea rows="2" placeholder="f(2) = ... Interprétation : ..."></textarea><button class="btn-correction" data-target="corr1_3">🔍 Voir la correction</button><div id="corr1_3" class="correction-text">✔️ L'image de 2 par la fonction est 3. Interprétation : f(2)=3 signifie qu'à 2h du matin, la hauteur de l'eau est de 3 m.</div></div>
+                <div class="student-area"><label>📝 4. Antécédent(s) de 2 :</label><input type="text" placeholder="ex: 4 et 6h05"><button class="btn-correction" data-target="corr1_4">🔍 Voir la correction</button><div id="corr1_4" class="correction-text">✔️ Les antécédents de 2 par rapport à la fonction sont 4 et 6h05. Interprétation : la hauteur de l'eau est de 2m à 4h et à 6h05 du matin.</div></div>
+            </div>
+        </div>
+
+        <!-- Exercice 2 : Réduction et recette - AVEC TABLEAU INTERACTIF -->
+        <div class="exercice-card">
+            <div class="card-header"><h2>🎭 Exercice 2 : Réduction et recette (d'après Brevet Amérique du Nord 2011)</h2></div>
+            <div class="card-content">
+                <div class="enonce">
+                    <p>Le directeur d'un théâtre sait qu'il accueille environ 500 spectateurs quand le prix d'une place est de 20 euros. Il a constaté que chaque réduction de 1 euro du prix d'une place attire 50 spectateurs de plus. Le directeur de la salle souhaite déterminer le prix d'une place lui assurant la meilleure recette. On note \(R\) la fonction donnant la recette (en €) en fonction du montant \(x\) de la réduction (en €).</p>
+                    <ol>
+                        <li>Compléter le tableau suivant (les cases grisées sont déjà remplies).</li>
+                    </ol>
+                </div>
+                
+                <!-- Tableau interactif -->
+                <div style="margin: 20px 0; overflow-x: auto;">
+                    <table class="interactive-table" id="tableRecette">
+                        <thead>
+                            <tr><th>Réduction (€)</th><th>Prix de la place (€)</th><th>Nombre de spectateurs</th><th>Recette (€)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>20</td><td>500</td><td>10 000</td></tr>
+                            <tr><td>1</td><td>19</td><td><input type="number" id="tab_nb1" placeholder="550" step="1"></td><td><input type="number" id="tab_rec1" placeholder="10450" step="1"></td></tr>
+                            <tr><td><input type="number" id="tab_red2" placeholder="2" step="1"></td><td><input type="number" id="tab_prix2" placeholder="18" step="1"></td><td>600</td><td><input type="number" id="tab_rec2" placeholder="10800" step="1"></td></tr>
+                            <tr><td><input type="number" id="tab_red3" placeholder="4" step="1"></td><td>16</td><td><input type="number" id="tab_nb3" placeholder="700" step="1"></td><td><input type="number" id="tab_rec3" placeholder="11200" step="1"></td></tr>
+                        </tbody>
+                    </table>
+                    <button id="verifTableau" style="background-color: #2c7da0; margin-top: 8px;">✅ Vérifier le tableau</button>
+                    <div id="tableFeedback" class="table-feedback"></div>
+                </div>
+                
+                <div class="enonce">
+                    <ol start="2">
+                        <li>On donne ci-après la courbe représentative de la fonction \(R\). Par lecture graphique, répondre aux questions suivantes.
+                            <div class="graph-container"><img src="OGD2EXTB3.png" alt="Courbe recette R(x)" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22300%22%20viewBox%3D%220%200%20600%20300%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eef2fa%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%3EGraphique%20OGD2EXTB3.png%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                            <ul><li>Quelle est la recette pour une réduction de 5 € ?</li>
+                            <li>Quel est le montant de la réduction pour une recette de 4 050 € ? Quel est alors le prix d'une place ?</li></ul>
+                        </li>
+                        <li>Quelle est l'image de 8 par la fonction \(R\) ? Interpréter ce résultat pour le problème.</li>
+                        <li>Quelle est la recette maximale ? Quel est alors le prix de la place ?</li>
+                    </ol>
+                </div>
+
+                <div class="student-area"><label>📝 2a. Recette pour une réduction de 5€ :</label><input type="text" placeholder="ex: 11 200 €"><button class="btn-correction" data-target="corr2_2a">🔍 Voir la correction</button><div id="corr2_2a" class="correction-text">✔️ Pour une réduction de 5 €, la recette est d'environ 11 200 € (valeur lue sur le graphique).</div></div>
+                <div class="student-area"><label>📝 2b. Montant réduction pour une recette de 4 050 € + prix place :</label><input type="text" placeholder="ex: réduction 17€ → place à 3€"><button class="btn-correction" data-target="corr2_2b">🔍 Voir la correction</button><div id="corr2_2b" class="correction-text">✔️ Pour une recette de 4 050 €, on lit un montant de réduction de 17 € environ. Le prix d'une place est alors 20 - 17 = 3 €.</div></div>
+                <div class="student-area"><label>📝 3. Image de 8 par \(R\) et interprétation :</label><textarea rows="2" placeholder="R(8) = ...€, cela signifie ..."></textarea><button class="btn-correction" data-target="corr2_3">🔍 Voir la correction</button><div id="corr2_3" class="correction-text">✔️ L'image de 8 par la fonction R est environ 4 050 €. Pour un montant de réduction de 8 €, on obtient une recette de 4 050 €.</div></div>
+                <div class="student-area"><label>📝 4. Recette maximale et prix de la place correspondant :</label><input type="text" placeholder="ex: 11 200€ et 15€"><button class="btn-correction" data-target="corr2_4">🔍 Voir la correction</button><div id="corr2_4" class="correction-text">✔️ La recette maximale est d'environ 11 200 € et le prix de la place correspondant est 20 - 5 = 15 €.</div></div>
+            </div>
+        </div>
+
+        <!-- Exercice 3 : Programme de calcul (Brevet Polynésie 2025) - inchangé -->
+        <div class="exercice-card">
+            <div class="card-header"><h2>🧮 Exercice 3 : Programme de calcul (Brevet Polynésie 2025)</h2></div>
+            <div class="card-content">
+                <div class="enonce">
+                    <p>On considère le programme de calcul suivant :</p>
+                    <div class="graph-container"><img src="OGD2EXTB6.png" alt="Programme de calcul" style="max-width:450px;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22400%22%20height%3D%22120%22%20viewBox%3D%220%200%20400%20120%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eef2fa%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%3EProgramme%20OGD2EXTB6.png%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                    <ol>
+                        <li>Montrer que si on choisit 5 comme nombre de départ, le résultat du programme est 2.</li>
+                        <li>On choisit \(x\) comme nombre de départ.
+                            <ol type="a"><li>Parmi les expressions suivantes, quelle est celle qui permet d'exprimer le résultat de ce programme de calcul en fonction de \(x\) ? (Aucune justification n'est attendue) <br> A) \(x+4\times x-2-x^2\) &nbsp; B) \(x+4\times x-2-2x\) &nbsp; C) \((x+4)(x-2)-x^2\) &nbsp; D) \((x+4)(x-2)-2x\)</li>
+                            <li>Montrer que le résultat du programme peut s'écrire sous la forme \(2x-8\).</li></ol>
+                        </li>
+                        <li>On appelle \(f\) la fonction définie par \(f(x)=2x-8\). Voici trois représentations graphiques :
+                            <div class="two-imgs"><img src="OGD2EXTB7.png" alt="Trois graphiques" style="max-width:100%;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22500%22%20height%3D%22180%22%20viewBox%3D%220%200%20500%20180%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eef2fa%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%3EGraphique%20OGD2EXTB7.png%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                            <ol type="a"><li>La représentation graphique de \(f\) est la n°3. Expliquer pourquoi les n°1 et n°2 ne conviennent pas.</li>
+                            <li>Déterminer l'image de 4 par la fonction \(f\).</li></ol>
+                        </li>
+                        <li>Quel nombre de départ faut-il choisir pour que le résultat du programme soit égal à 100 ?</li>
+                    </ol>
+                </div>
+                <div class="student-area"><label>📝 1. Calcul avec 5 :</label><textarea rows="2" placeholder="Détaille le calcul"></textarea><button class="btn-correction" data-target="corr3_1">🔍 Voir correction</button><div id="corr3_1" class="correction-text">✔️ \((5+4)(5-2) - 5^2 = 9 \times 3 - 25 = 27 - 25 = 2\).</div></div>
+                <div class="student-area"><label>📝 2a. Expression correcte (lettre) :</label><input type="text" placeholder="ex: C"><button class="btn-correction" data-target="corr3_2a">🔍 Voir correction</button><div id="corr3_2a" class="correction-text">✔️ Expression C : \((x+4)(x-2)-x^2\).</div></div>
+                <div class="student-area"><label>📝 2b. Développement pour obtenir \(2x-8\) :</label><textarea rows="3" placeholder="Effectue le développement..."></textarea><button class="btn-correction" data-target="corr3_2b">🔍 Voir correction</button><div id="corr3_2b" class="correction-text">✔️ \((x+4)(x-2)-x^2 = (x^2+2x-8)-x^2 = 2x-8\).</div></div>
+                <div class="student-area"><label>📝 3a. Expliquer pourquoi graphiques n°1 et n°2 ne conviennent pas :</label><textarea rows="3" placeholder="Justification"></textarea><button class="btn-correction" data-target="corr3_3a">🔍 Voir correction</button><div id="corr3_3a" class="correction-text">✔️ \(f(x)=2x-8\) est affine croissante (pente 2) et coupe l'axe des ordonnées en -8. Le n°1 est horizontal (fonction constante), n°2 est décroissant (pente négative).</div></div>
+                <div class="student-area"><label>📝 3b. Image de 4 :</label><input type="text" placeholder="f(4) = ?"><button class="btn-correction" data-target="corr3_3b">🔍 Voir correction</button><div id="corr3_3b" class="correction-text">✔️ \(f(4)=2\times4-8=0\).</div></div>
+                <div class="student-area"><label>📝 4. Nombre de départ pour obtenir 100 :</label><input type="text" placeholder="x = ?"><button class="btn-correction" data-target="corr3_4">🔍 Voir correction</button><div id="corr3_4" class="correction-text">✔️ \(2x-8=100 \Rightarrow 2x=108 \Rightarrow x=54\).</div></div>
+            </div>
+        </div>
+
+        <!-- Exercice 4 : Hand-spinner (inchangé) -->
+        <div class="exercice-card">
+            <div class="card-header"><h2>🌀 Exercice 4 : Hand-spinner</h2></div>
+            <div class="card-content">
+                <div class="enonce">
+                    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start;">
+                        <div style="flex:2"><p>Le hand-spinner est une sorte de toupie plate qui tourne sur elle-même. On donne au hand-spinner une vitesse de rotation initiale au temps \(t=0\). Puis, au cours du temps, sa vitesse de rotation diminue jusqu'à l'arrêt complet. Sa vitesse est alors égale à 0. Grâce à un appareil de mesure, on a relevé la vitesse de rotation exprimée en nombre de tours par seconde.</p></div>
+                        <div style="flex:1; text-align:center;"><img src="OGD2EXTB5.png" alt="hand-spinner" style="max-width:120px;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23ddd%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2260%22%20text-anchor%3D%22middle%22%3E🌀%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                    </div>
+                    <div class="graph-container"><img src="OGD2EXTB4.png" alt="Graphique vitesse hand-spinner" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22300%22%20viewBox%3D%220%200%20600%20300%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23eef2fa%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%3EGraphique%20OGD2EXTB4.png%3C%2Ftext%3E%3C%2Fsvg%3E';"></div>
+                    <ol>
+                        <li>Le temps et la vitesse de rotation du hand-spinner sont-ils proportionnels ? Justifier.</li>
+                        <li>Par lecture graphique, répondre aux questions suivantes : <ol type="a"><li>Quelle est la vitesse de rotation initiale (en tours par seconde) ?</li><li>Quelle est la vitesse au bout d'une minute et vingt secondes ?</li><li>Au bout de combien de temps le hand-spinner va-t-il s'arrêter ?</li></ol></li>
+                        <li>Pour calculer la vitesse de rotation \(V(t)\) en fonction du temps \(t\) (en secondes), on utilise la formule \(V(t) = -0,214 \times t + V_{\text{initiale}}\), où \(V_{\text{initiale}}\) est la vitesse de rotation initiale.
+                            <ol type="a"><li>On lance le hand-spinner à une vitesse initiale de 20 tours par seconde. Calculer sa vitesse au bout de 30 secondes.</li>
+                            <li>Au bout de combien de temps s'arrêtera-t-il ? Justifier par un calcul.</li>
+                            <li>Est-il vrai que, d'une manière générale, si l'on fait tourner le hand-spinner deux fois plus vite au départ, il tournera deux fois plus longtemps ? Justifier.</li></ol>
+                        </li>
+                    </ol>
+                </div>
+                <div class="student-area"><label>📝 1. Proportionnalité ? Justification :</label><textarea rows="2" placeholder="Réponse"></textarea><button class="btn-correction" data-target="corr4_1">🔍 Voir correction</button><div id="corr4_1" class="correction-text">✔️ Non, car la fonction est affine (\(V(t)= -0,214 t + V_0\)) et ne passe pas par l'origine. Pas de proportionnalité.</div></div>
+                <div class="student-area"><label>📝 2a. Vitesse initiale :</label><input type="text" placeholder="tours/s"><button class="btn-correction" data-target="corr4_2a">🔍 Voir correction</button><div id="corr4_2a" class="correction-text">✔️ 20 tours par seconde.</div></div>
+                <div class="student-area"><label>📝 2b. Vitesse à 1min20s (80s) :</label><input type="text" placeholder="environ ... t/s"><button class="btn-correction" data-target="corr4_2b">🔍 Voir correction</button><div id="corr4_2b" class="correction-text">✔️ Environ 2,9 tours par seconde.</div></div>
+                <div class="student-area"><label>📝 2c. Temps d'arrêt (lecture graphique) :</label><input type="text" placeholder="secondes"><button class="btn-correction" data-target="corr4_2c">🔍 Voir correction</button><div id="corr4_2c" class="correction-text">✔️ Environ 93,5 secondes (1 min 33 s).</div></div>
+                <div class="student-area"><label>📝 3a. Vitesse à 30s avec \(V_0=20\) :</label><input type="text" placeholder="tours/s"><button class="btn-correction" data-target="corr4_3a">🔍 Voir correction</button><div id="corr4_3a" class="correction-text">✔️ \(V(30)=20 - 0,214\times30 = 20 - 6,42 = 13,58\) t/s.</div></div>
+                <div class="student-area"><label>📝 3b. Temps d'arrêt par calcul :</label><input type="text" placeholder="secondes"><button class="btn-correction" data-target="corr4_3b">🔍 Voir correction</button><div id="corr4_3b" class="correction-text">✔️ \(0 = -0,214 t + 20 \Rightarrow t = 20/0,214 \approx 93,46\) s.</div></div>
+                <div class="student-area"><label>📝 3c. Double vitesse initiale → double temps ? Justifier :</label><textarea rows="2" placeholder="Justification"></textarea><button class="btn-correction" data-target="corr4_3c">🔍 Voir correction</button><div id="corr4_3c" class="correction-text">✔️ Oui, car \(t_{\text{arrêt}} = \dfrac{V_{\text{initiale}}}{0,214}\) : relation de proportionnalité directe.</div></div>
+            </div>
+        </div>
+        <footer style="text-align: center; margin-top: 32px; font-size: 0.75rem; color: #446688; border-top: 1px solid #caddf0; padding-top: 20px;">📐 Énoncés conformes au Brevet – Saisis tes réponses, puis utilise les boutons pour t’auto-corriger. Bon entraînement !</footer>
+        <!-- Ligne séparatrice de fin -->
+        <hr class="brevet-dashed-line">
+    </div>
+</div>
+
+<script>
+    // Fonction pour afficher les onglets
+    function showSection(id, btn) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        if (btn) btn.classList.add('active');
+        if (window.MathJax) MathJax.typesetPromise();
+    }
+
+    // Gestion des boutons de correction pour les exercices type Brevet
+    document.addEventListener('click', function(e) {
+        if(e.target.classList.contains('btn-correction')) {
+            const targetId = e.target.getAttribute('data-target');
+            const correctionDiv = document.getElementById(targetId);
+            if(correctionDiv) {
+                correctionDiv.classList.toggle('visible');
+                e.target.textContent = correctionDiv.classList.contains('visible') ? '🙈 Cacher' : '🔍 Voir la correction';
+            }
+        }
+    });
+
+    // Vérification du tableau interactif pour l'exercice 2
+    document.getElementById('verifTableau')?.addEventListener('click', function() {
+        // Valeurs attendues
+        const expected = {
+            nb1: 550, rec1: 10450,
+            red2: 2, prix2: 18, rec2: 10800,
+            red3: 4, nb3: 700, rec3: 11200
+        };
+        // Récupération des valeurs saisies
+        let nb1 = parseFloat(document.getElementById('tab_nb1')?.value);
+        let rec1 = parseFloat(document.getElementById('tab_rec1')?.value);
+        let red2 = parseFloat(document.getElementById('tab_red2')?.value);
+        let prix2 = parseFloat(document.getElementById('tab_prix2')?.value);
+        let rec2 = parseFloat(document.getElementById('tab_rec2')?.value);
+        let red3 = parseFloat(document.getElementById('tab_red3')?.value);
+        let nb3 = parseFloat(document.getElementById('tab_nb3')?.value);
+        let rec3 = parseFloat(document.getElementById('tab_rec3')?.value);
+
+        let errors = [];
+        if (isNaN(nb1) || nb1 !== expected.nb1) errors.push(`ligne 2 : nombre de spectateurs = ${expected.nb1}`);
+        if (isNaN(rec1) || rec1 !== expected.rec1) errors.push(`ligne 2 : recette = ${expected.rec1} €`);
+        if (isNaN(red2) || red2 !== expected.red2) errors.push(`ligne 3 : réduction = ${expected.red2} €`);
+        if (isNaN(prix2) || prix2 !== expected.prix2) errors.push(`ligne 3 : prix de la place = ${expected.prix2} €`);
+        if (isNaN(rec2) || rec2 !== expected.rec2) errors.push(`ligne 3 : recette = ${expected.rec2} €`);
+        if (isNaN(red3) || red3 !== expected.red3) errors.push(`ligne 4 : réduction = ${expected.red3} €`);
+        if (isNaN(nb3) || nb3 !== expected.nb3) errors.push(`ligne 4 : nombre de spectateurs = ${expected.nb3}`);
+        if (isNaN(rec3) || rec3 !== expected.rec3) errors.push(`ligne 4 : recette = ${expected.rec3} €`);
+
+        const feedbackDiv = document.getElementById('tableFeedback');
+        if (errors.length === 0) {
+            feedbackDiv.innerHTML = '<span style="color:#15803d; background:#dcfce7; padding:4px 12px; border-radius:20px;">✔️ Tableau parfaitement complété ! Félicitations.</span>';
+        } else {
+            feedbackDiv.innerHTML = '<span style="color:#b91c1c; background:#fee2e2; padding:4px 12px; border-radius:20px;">❌ Erreur(s) : ' + errors.join(' ; ') + '.</span>';
+        }
+    });
+
+    // ========== script des exercices interactifs (QCM, programmes, géométrie) - inchangé ==========
+    document.addEventListener('DOMContentLoaded', function() {
+        let attemptCount = 0;
+        function rnd(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function r2(v) { return Math.round(v * 100) / 100; }
+        function evalExpr(expr, x) { try { return new Function('x', 'return (' + expr + ')')(x); } catch(e) { return NaN; } }
+        function setFb(id, ok, msg) {
+            const el = typeof id === 'string' ? document.getElementById(id) : id;
+            if (!el) return;
+            el.innerHTML = msg;
+            el.className = 'feedback ' + (ok ? 'correct' : 'incorrect');
+        }
+        function bumpAttempt() { attemptCount++; const lab = document.getElementById('attemptLabel'); if(lab) lab.textContent = 'Tentative ' + attemptCount; }
+
+        let qcmData = {};
+        function makeQCMCard(num, questionHTML, options, radioName) {
+            const div = document.createElement('div'); div.className = 'question-block';
+            div.innerHTML = `<p><strong>${num}.</strong> ${questionHTML}</p>${options.map(o => `<div class="choice"><label><input type="radio" name="${radioName}_${Date.now()}" value="${o.val}"> (${o.val}) ${o.text}</label></div>`).join('')}<button class="check-single" data-qn="${num}">Vérifier</button><div class="feedback" id="fb-q${num}"></div>`;
+            return div;
+        }
+        function generateQCM() {
+            const grid = document.getElementById('qcm-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            qcmData = {};
+            (function(){ const a=rnd(-5,5), fa=rnd(-10,10), b=rnd(-5,5); while(b===a) b=rnd(-5,5); const fb_val=rnd(-10,10); const opts=[{val:'A',text:`L'image de ${fa} par f est ${a}.`},{val:'B',text:`Un antécédent de ${a} par f est ${fa}.`},{val:'C',text:`L'image de ${a} par f est ${fa}.`},{val:'D',text:`Un antécédent de ${b} par f est ${fb_val}.`}]; qcmData[1]={correct:'C', explanation:`f : ${a} ↦ ${fa} signifie que l'image de ${a} est ${fa}.`}; grid.appendChild(makeQCMCard(1,`On donne f : ${a} ↦ ${fa} et f(${b}) = ${fb_val}. Quelle affirmation est vraie ?`,opts,'q1')); })();
+            (function(){ const c=rnd(-8,-1), pt=pick([-3,-2,-1,1,2,3]), img=pt*pt+c; const opts=[{val:'A',text:String(pt*2+c)},{val:'B',text:String(img)},{val:'C',text:String(pt*pt-c)},{val:'D',text:String(Math.abs(img)+rnd(1,5))}]; qcmData[2]={correct:'B', explanation:`g(${pt}) = ${pt}² ${c<0?c:'+ '+c} = ${pt*pt} ${c<0?c:'+ '+c} = ${img}`}; grid.appendChild(makeQCMCard(2,`g(x) = x² ${c<0?c:'+ '+c}. L'image de ${pt} par g est :`,opts,'q2')); })();
+            (function(){ const xs=[-2,-1,0,1], a=pick([1,2,-1,-2]), b=rnd(-3,3), ys=xs.map(x=>r2(a*x+b)); const opts=[{val:'A',text:`L'image de ${xs[0]} par h est ${ys[0]}.`},{val:'B',text:`Un antécédent de ${xs[1]} par h est ${ys[1]}.`},{val:'C',text:`L'image de ${xs[2]} par h est ${ys[3]}.`},{val:'D',text:`Un antécédent de ${xs[3]} par h est ${ys[0]}.`}]; qcmData[3]={correct:'A', explanation:`h(${xs[0]}) = ${ys[0]}`}; let tableHTML=`<table><thead><tr><th>x</th>${xs.map(v=>`<th>${v}</th>`).join('')}</tr></thead><tbody><tr><th>h(x)</th>${ys.map(v=>`<td>${v}</td>`).join('')}</tr></tbody></td>`; grid.appendChild(makeQCMCard(3,`Tableau de valeurs de h : ${tableHTML}<br>Quelle affirmation est vraie ?`,opts,'q3')); })();
+            (function(){ const a=pick([2,3,4,5,-2,-3]); let b=rnd(-6,6); while(b===0) b=rnd(-6,6); const ant=-b/a, antStr=Number.isInteger(ant)?String(ant):r2(ant).toString(); const wrong=[r2(b/a),r2(a*b),r2(-a/b)]; const bStr=b>0?`+ ${b}`:`− ${Math.abs(b)}`; const opts=[{val:'A',text:String(wrong[0])},{val:'B',text:String(wrong[1])},{val:'C',text:String(wrong[2])},{val:'D',text:antStr}]; qcmData[4]={correct:'D', explanation:`${a}x ${bStr} = 0 → x = ${antStr}`}; grid.appendChild(makeQCMCard(4,`j(x) = ${a===1?'':a===-1?'−':String(a)}x ${bStr}. Un antécédent de 0 par j est :`,opts,'q4')); })();
+            grid.querySelectorAll('.check-single').forEach(btn => { btn.addEventListener('click', () => { const qn=parseInt(btn.dataset.qn); const selected=document.querySelector(`input[name^="q${qn}"]:checked`); const fbEl=document.getElementById(`fb-q${qn}`); if(!selected){ setFb(fbEl,false,'❌ Sélectionne une réponse.'); return; } const ok=selected.value===qcmData[qn].correct; setFb(fbEl, ok, ok ? '✔️ Bonne réponse !' : `❌ Réponse = ${qcmData[qn].correct}. ${qcmData[qn].explanation}`); }); });
+        }
+
+        let q5Correct={}, q6Correct={};
+        function generateQ5(){ const pool=[{text:'Un antécédent de 1 par k est 0.',correct:true},{text:'L\'image de 0 par k est 1.',correct:true},{text:'Un antécédent de 2 par k est 2.',correct:true},{text:'L\'image de 4 par k est 3.',correct:true},{text:'Un antécédent de 2 par k est 5.',correct:false},{text:'L\'image de −1 par k est 2.',correct:false},{text:'Un antécédent de 3 par k est 1.',correct:false},{text:'L\'image de 2 par k est 4.',correct:false}]; let trues=pool.filter(s=>s.correct).sort(()=>Math.random()-0.5).slice(0,2); let falses=pool.filter(s=>!s.correct).sort(()=>Math.random()-0.5).slice(0,2); let stmts=[...trues,...falses].sort(()=>Math.random()-0.5); q5Correct={}; const div=document.getElementById('q5-choices'); if(div){ div.innerHTML=stmts.map((s,i)=>{ let id=`q5cb${i}`; q5Correct[id]=s.correct; return `<div class="choice"><label><input type="checkbox" id="${id}" class="q5-cb"> ☐ ${s.text}</label></div>`; }).join(''); } const hintDiv=document.getElementById('q5-hint'); if(hintDiv) hintDiv.innerHTML=`📈 Lecture graphique : ${stmts.filter(s=>s.correct).map(s=>s.text.replace(/\.$/,'')).join(' ; ')}.`; const fbDiv=document.getElementById('fb-q5'); if(fbDiv){ fbDiv.innerHTML=''; fbDiv.className='feedback'; } }
+        function generateQ6(){ const pool=[{text:'L\'image de 2 par ℓ est 2.',correct:true},{text:'L\'image de 0 par ℓ est 0.',correct:true},{text:'L\'image de −2 par ℓ est 2.',correct:true},{text:'Un antécédent de 4,5 par ℓ est −3.',correct:true},{text:'Un antécédent de 1 par ℓ est 1.',correct:false},{text:'Un antécédent de 0 par ℓ est −2.',correct:false},{text:'L\'image de 1 par ℓ est 1.',correct:false},{text:'Un antécédent de 2 par ℓ est 0.',correct:false}]; let trues=pool.filter(s=>s.correct).sort(()=>Math.random()-0.5).slice(0,2); let falses=pool.filter(s=>!s.correct).sort(()=>Math.random()-0.5).slice(0,2); let stmts=[...trues,...falses].sort(()=>Math.random()-0.5); q6Correct={}; const div=document.getElementById('q6-choices'); if(div){ div.innerHTML=stmts.map((s,i)=>{ let id=`q6cb${i}`; q6Correct[id]=s.correct; return `<div class="choice"><label><input type="checkbox" id="${id}" class="q6-cb"> ☐ ${s.text}</label></div>`; }).join(''); } const hintDiv=document.getElementById('q6-hint'); if(hintDiv) hintDiv.innerHTML=`📌 ${stmts.filter(s=>s.correct).map(s=>s.text.replace(/\.$/,'')).join(' ; ')}.`; const fbDiv=document.getElementById('fb-q6'); if(fbDiv){ fbDiv.innerHTML=''; fbDiv.className='feedback'; } }
+        document.getElementById('check-q5')?.addEventListener('click',()=>{ let ok=true; document.querySelectorAll('.q5-cb').forEach(cb=>{ if(cb.checked !== q5Correct[cb.id]) ok=false; }); setFb('fb-q5', ok, ok ? '✔️ Exact !' : '❌ Révise les lectures sur la courbe.'); });
+        document.getElementById('check-q6')?.addEventListener('click',()=>{ let ok=true; document.querySelectorAll('.q6-cb').forEach(cb=>{ if(cb.checked !== q6Correct[cb.id]) ok=false; }); setFb('fb-q6', ok, ok ? '✔️ Bon travail !' : '❌ Relis les affirmations et calcule ℓ(x)=0,5x².'); });
+
+        function generateProg(){ const container=document.getElementById('prog-container'); if(!container) return; container.innerHTML=''; const h=x=>x*x+x; const ptsA=[pick([0.5,1.5,-0.5,2.5]), pick([-4,-3,-2,-1]), pick([2,3,4,5]), pick([1/3,2/3,1/4,3/4])]; const ptsALabel=ptsA.map(v=>v===1/3?'1/3':v===2/3?'2/3':v===1/4?'1/4':v===3/4?'3/4':String(v)); container.insertAdjacentHTML('beforeend',`<div class="question-block"><p><strong>🎲 Programme A :</strong> « Choisir x → mettre au carré → ajouter le nombre de départ » → h(x)</p><label>1. Exprimer h(x) : <input type="text" id="exprA" placeholder="ex: x*x + x" class="expr-input"></label><button id="check-exprA">Vérifier expression</button><div class="feedback" id="fb-exprA"></div><div class="grid-2col" style="margin-top: 12px;">${ptsA.map((v,i)=>`<div>h(${ptsALabel[i]}) : <input type="text" id="imgA${i}"> <button class="check-imgA" data-val="${v}" data-id="imgA${i}" data-fb="fbA${i}">✓</button><span class="feedback" id="fbA${i}"></span></div>`).join('')}</div></div>`); document.getElementById('check-exprA')?.addEventListener('click',()=>{ let e=document.getElementById('exprA').value.trim(); let ok=Math.abs(evalExpr(e,2)-h(2))<1e-5 && Math.abs(evalExpr(e,-1)-h(-1))<1e-5; setFb('fb-exprA',ok, ok?'✔️ h(x)=x²+x correct':'❌ h(x)=x²+x'); }); container.querySelectorAll('.check-imgA').forEach(btn=>{ btn.addEventListener('click',()=>{ let xv=parseFloat(btn.dataset.val), user=parseFloat(document.getElementById(btn.dataset.id).value), correct=r2(h(xv)); setFb(btn.dataset.fb, !isNaN(user)&&Math.abs(user-correct)<1e-3, `✔️ ${correct}`); }); }); const aB=pick([2,3,4,5,-2,-3]), bB=rnd(1,5), fB=x=>aB*x-bB, antB=y=>(y+bB)/aB; const targetsB=[rnd(-3,3),rnd(-3,3),rnd(-3,3),rnd(-3,3)].map(k=>fB(k)); const aStr=aB===1?'':aB===-1?'−':String(aB); container.insertAdjacentHTML('beforeend',`<div class="question-block"><p><strong>📌 Programme B :</strong> f(x) = ${aStr}x − ${bB}. Déterminer les antécédents.</p><div class="grid-2col">${targetsB.map((t,i)=>`<div>Antécédent de ${t} : <input type="text" id="antB${i}"><button class="check-antB" data-target="${t}" data-id="antB${i}" data-fb="fbB${i}">Vérifier</button><span class="feedback" id="fbB${i}"></span></div>`).join('')}</div></div>`); container.querySelectorAll('.check-antB').forEach(btn=>{ btn.addEventListener('click',()=>{ let t=parseFloat(btn.dataset.target), user=parseFloat(document.getElementById(btn.dataset.id).value), correct=r2(antB(t)); setFb(btn.dataset.fb,!isNaN(user)&&Math.abs(user-correct)<1e-4, `✔️ ${correct}`); }); }); const cv=pick([2,3,4,5]), dv=rnd(3,9), mFn=x=>x/cv+dv, antM=y=>(y-dv)*cv; const targetsC=[dv+1, dv+pick([2,3,-1]), dv, dv+pick([-2,-3,4]), dv-1]; container.insertAdjacentHTML('beforeend',`<div class="question-block"><p><strong>📌 Programme C :</strong> Choisir x → diviser par ${cv} → ajouter ${dv} → m(x)</p><label>1. m(x) = <input type="text" id="exprC" placeholder="x/${cv} + ${dv}" class="expr-input"></label><button id="check-exprC">Vérifier</button><div class="feedback" id="fb-exprC"></div><div><strong>2. Antécédents par m :</strong></div><div class="grid-2col">${targetsC.map((t,i)=>`<div>m(x)=${t} → x = <input type="text" id="antC${i}"><button class="check-antC" data-eq="${t}" data-id="antC${i}" data-fb="fbC${i}">✓</button><span class="feedback" id="fbC${i}"></span></div>`).join('')}</div></div>`); document.getElementById('check-exprC')?.addEventListener('click',()=>{ let e=document.getElementById('exprC').value.trim(); let ok=Math.abs(evalExpr(e, cv*2)-mFn(cv*2))<1e-5 && Math.abs(evalExpr(e,0)-mFn(0))<1e-5; setFb('fb-exprC', ok, ok?`✔️ m(x)=x/${cv}+${dv}`:`❌ m(x)=x/${cv}+${dv}`); }); container.querySelectorAll('.check-antC').forEach(btn=>{ btn.addEventListener('click',()=>{ let eq=parseFloat(btn.dataset.eq), user=parseFloat(document.getElementById(btn.dataset.id).value), correct=antM(eq); setFb(btn.dataset.fb,!isNaN(user)&&Math.abs(user-correct)<1e-4, `✔️ x=${correct}`); }); }); }
+        function generateGeo(){ const container=document.getElementById('geo-container'); if(!container) return; container.innerHTML=''; const xVal=rnd(2,7), perim=4*xVal, aire=xVal*xVal, antPerimTarget=rnd(2,8)*4, antAireVal=rnd(2,6); const squareDiv=document.createElement('div'); squareDiv.className='question-block'; squareDiv.innerHTML=`<div class="geometry-svg"><svg width="140" height="140" viewBox="0 0 130 130"><rect x="15" y="15" width="100" height="100" fill="#e6f0fa" stroke="#1e3a8a" stroke-width="2"/><text x="60" y="70" font-size="12" fill="#1e3a8a" text-anchor="middle" dominant-baseline="middle">x</text><text x="20" y="35" font-size="12">A</text><text x="105" y="35" font-size="12">B</text><text x="105" y="113" font-size="12">C</text><text x="20" y="113" font-size="12">D</text><text x="50" y="12" font-size="9">côté = x</text></svg></div><p><strong>1. Déterminer l'expression algébrique :</strong></p><label>(a) f(x) = périmètre : <input type="text" id="squareExprF" placeholder="ex: 4*x" class="expr-input"></label><button id="checkSquareExprF">Vérifier f(x)</button><div class="feedback" id="fbSquareExprF"></div><label>(b) g(x) = aire : <input type="text" id="squareExprG" placeholder="ex: x*x" class="expr-input"></label><button id="checkSquareExprG">Vérifier g(x)</button><div class="feedback" id="fbSquareExprG"></div><hr><p><strong>2.</strong> Calculer le périmètre et l'aire lorsque x = ${xVal}.</p><label>Périmètre : <input type="text" id="squarePerim"></label> <label>Aire : <input type="text" id="squareAire"></label><button id="checkSquareVals">Vérifier</button><div class="feedback" id="fbSquareVals"></div><p><strong>3.</strong> Calculer l'image de ${xVal} par f et par g.</p><label>f(${xVal}) = <input type="text" id="imgF"> &nbsp; g(${xVal}) = <input type="text" id="imgG"></label><button id="checkImgFG">Vérifier</button><div class="feedback" id="fbImgFG"></div><p><strong>4.</strong> Déterminer un antécédent de ${antPerimTarget} par f.</p><label>x = <input type="text" id="antF"></label><button id="checkAntF">Vérifier</button><div class="feedback" id="fbAntF"></div><p><strong>5.</strong> Montrer qu'un antécédent de ${antAireVal*antAireVal} par g est ${antAireVal}.</p><label>Antécédent proposé : <input type="text" id="antG" placeholder="${antAireVal}"></label><button id="checkAntG">Vérifier</button><div class="feedback" id="fbAntG"></div>`; container.appendChild(squareDiv); document.getElementById('checkSquareExprF')?.addEventListener('click',()=>{ let e=document.getElementById('squareExprF').value.trim(); let ok=Math.abs(evalExpr(e,3)-12)<1e-5 && Math.abs(evalExpr(e,5)-20)<1e-5; setFb('fbSquareExprF',ok, ok?'✔️ f(x)=4x correct':'❌ f(x)=4x'); }); document.getElementById('checkSquareExprG')?.addEventListener('click',()=>{ let e=document.getElementById('squareExprG').value.trim(); let ok=Math.abs(evalExpr(e,3)-9)<1e-5 && Math.abs(evalExpr(e,5)-25)<1e-5; setFb('fbSquareExprG',ok, ok?'✔️ g(x)=x² correct':'❌ g(x)=x²'); }); document.getElementById('checkSquareVals')?.addEventListener('click',()=>{ let p=parseFloat(document.getElementById('squarePerim').value), a=parseFloat(document.getElementById('squareAire').value); setFb('fbSquareVals', Math.abs(p-perim)<1e-3 && Math.abs(a-aire)<1e-3, `✔️ P=${perim}, A=${aire}`); }); document.getElementById('checkImgFG')?.addEventListener('click',()=>{ let fv=parseFloat(document.getElementById('imgF').value), gv=parseFloat(document.getElementById('imgG').value); setFb('fbImgFG', Math.abs(fv-perim)<1e-3 && Math.abs(gv-aire)<1e-3, `✔️ f(${xVal})=${perim}, g(${xVal})=${aire}`); }); document.getElementById('checkAntF')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('antF').value); setFb('fbAntF', Math.abs(u-antPerimTarget/4)<1e-3, `✔️ x=${antPerimTarget/4}`); }); document.getElementById('checkAntG')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('antG').value); setFb('fbAntG', Math.abs(u-antAireVal)<1e-3, `✔️ ${antAireVal}²=${antAireVal*antAireVal}`); }); const base=rnd(2,7)*2, halfBase=base/2, triXVal=rnd(3,8), triAnt=rnd(2,6)*2; const triDiv=document.createElement('div'); triDiv.className='question-block'; triDiv.innerHTML=`<div class="geometry-svg"><svg width="170" height="130" viewBox="0 0 170 120"><polygon points="20,100 150,100 85,20" fill="#cffafe" stroke="#0c4a6e" stroke-width="2"/><text x="15" y="115" font-size="12">F</text><text x="145" y="115" font-size="12">C</text><text x="85" y="15" font-size="12">T</text><line x1="20" y1="100" x2="150" y2="100" stroke="black" stroke-width="1.5"/><text x="65" y="118" font-size="10">base = ${base}</text><line x1="85" y1="20" x2="85" y2="100" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="5,3"/><text x="90" y="65" font-size="10" fill="#b91c1c">hauteur = x</text></svg></div><p><strong>1. Déterminer l'expression de A(x) = aire du triangle.</strong></p><label>A(x) = <input type="text" id="triangleExpr" placeholder="ex: ${halfBase}*x" class="expr-input"></label><button id="checkTriangleExpr">Vérifier</button><div class="feedback" id="fbTriangleExpr"></div><hr><p><strong>2.</strong> Calculer l'aire quand x = ${triXVal}.</p><label>A(${triXVal}) = <input type="text" id="triVal"></label><button id="checkTriVal">Vérifier</button><div class="feedback" id="fbTriVal"></div><p><strong>3.</strong> Calculer l'image de ${triXVal} par A.</p><label>A(${triXVal}) = <input type="text" id="triImg"></label><button id="checkTriImg">Vérifier</button><div class="feedback" id="fbTriImg"></div><p><strong>4.</strong> Calculer A(2).</p><label>A(2) = <input type="text" id="triA2"></label><button id="checkTriA2">Vérifier</button><div class="feedback" id="fbTriA2"></div><p><strong>5.</strong> Déterminer un antécédent de ${halfBase*triAnt} par A.</p><label>x = <input type="text" id="triAnt"></label><button id="checkTriAnt">Vérifier</button><div class="feedback" id="fbTriAnt"></div>`; container.appendChild(triDiv); const aireTri=x=>halfBase*x; document.getElementById('checkTriangleExpr')?.addEventListener('click',()=>{ let e=document.getElementById('triangleExpr').value.trim(); let ok=Math.abs(evalExpr(e,4)-aireTri(4))<1e-5 && Math.abs(evalExpr(e,6)-aireTri(6))<1e-5; setFb('fbTriangleExpr', ok, ok?`✔️ A(x)=${halfBase}x correct`:`❌ Aire = (${base}×x)/2 = ${halfBase}x`); }); document.getElementById('checkTriVal')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('triVal').value); setFb('fbTriVal', Math.abs(u-aireTri(triXVal))<1e-3, `✔️ A(${triXVal})=${aireTri(triXVal)}`); }); document.getElementById('checkTriImg')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('triImg').value); setFb('fbTriImg', Math.abs(u-aireTri(triXVal))<1e-3, `✔️ A(${triXVal})=${aireTri(triXVal)}`); }); document.getElementById('checkTriA2')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('triA2').value); setFb('fbTriA2', Math.abs(u-aireTri(2))<1e-3, `✔️ A(2)=${aireTri(2)}`); }); document.getElementById('checkTriAnt')?.addEventListener('click',()=>{ let u=parseFloat(document.getElementById('triAnt').value); setFb('fbTriAnt', Math.abs(u-triAnt)<1e-3, `✔️ x=${triAnt}`); }); }
+        function regenerateAll(){ bumpAttempt(); generateQCM(); generateQ5(); generateQ6(); generateProg(); generateGeo(); }
+        document.getElementById('globalRegen')?.addEventListener('click', (e) => { const spin=document.getElementById('globalSpin'); if(spin){ spin.style.transform='rotate(360deg)'; setTimeout(()=>{ spin.style.transition='none'; spin.style.transform=''; setTimeout(()=>spin.style.transition='',50); },400); } regenerateAll(); });
+        document.querySelectorAll('[data-regen]').forEach(btn=>{ btn.addEventListener('click',()=>{ bumpAttempt(); if(btn.dataset.regen==='qcm'){ generateQCM(); generateQ5(); generateQ6(); } if(btn.dataset.regen==='prog') generateProg(); if(btn.dataset.regen==='geo') generateGeo(); }); });
+        generateQCM(); generateQ5(); generateQ6(); generateProg(); generateGeo(); bumpAttempt();
+    });
+</script>
+</body>
+</html>
