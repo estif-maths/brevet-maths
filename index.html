@@ -289,22 +289,8 @@
     <p style="font-weight: 600;"> © 2026 Estifanos G. </p>
 <div style="text-align: center; width: 100%;">
   <a href="https://toolszu.com/tools/real-time-website-visitor-counter/" target="_blank">
-    <img src="https://toolszu.com/tools/real-time-website-visitor-counter/tracker.php?id=5e5c6a0dd6e0465f3a5cca0d9e465f5db1bc553de1f6ef104895e748612dadf2" alt="Web Visitor Counter" border="0" style="display: inline-block;">
+    <img src="https://toolszu.com/tools/real-time-website-visitor-counter/tracker.php?id=7f8551be34ecd59018076ab4140d5637b8442f9459c639f44f7fedb484fe9a71" alt="Web Visitor Counter" border="0" style="display: inline-block;">
   </a>
 </div>
-    <script>
-  // Check local storage to see if a cookie has been set for this session
-  if (!localStorage.getItem('uniqueVisitorCounted')) {
-    // If not, send a request to increment the counter
-    fetch('https://api.countapi.xyz/hit/your-namespace/your-counter-key')
-      .then(response => response.json())
-      .then(data => {
-        // Optional: Update the counter display if you want to manage it manually
-        document.getElementById('visitor-count-display').innerText = data.value;
-      });
-    // Set the cookie so this visitor isn't counted again for 24 hours (86400000 ms)
-    localStorage.setItem('uniqueVisitorCounted', 'true');
-  }
-</script>
 </body>
 </html>
