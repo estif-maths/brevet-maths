@@ -287,36 +287,10 @@
 <footer>
     
     <p style="font-weight: 600;"> © 2026 Estifanos G. </p>
-<div id="unique-counter" style="position: fixed; bottom: 10px; right: 10px; font-size: 10px; color: #888;"></div>
-
-<script>
-(function() {
-  const STORAGE_KEY = 'brevet_unique_visit_date';
-  const COUNTER_API = 'https://api.countapi.xyz/hit/estif-maths/brevet-unique-daily';
-
-  const counterDiv = document.getElementById('unique-counter');
-  
-  // Check if we already counted today
-  const today = new Date().toDateString();
-  const lastVisit = localStorage.getItem(STORAGE_KEY);
-  
-  if (lastVisit !== today) {
-    // New unique visit today → increment the counter on the server
-    fetch(COUNTER_API)
-      .then(res => res.json())
-      .then(data => {
-        counterDiv.textContent = `👤 ${data.value}`;
-        localStorage.setItem(STORAGE_KEY, today);
-      })
-      .catch(() => { counterDiv.textContent = `👤 ?`; });
-  } else {
-    // Already counted today → just fetch current count without incrementing
-    fetch('https://api.countapi.xyz/get/estif-maths/brevet-unique-daily')
-      .then(res => res.json())
-      .then(data => { counterDiv.textContent = `👤 ${data.value}`; })
-      .catch(() => { counterDiv.textContent = `👤 ?`; });
-  }
-})();
-</script>
+<div style="text-align: center; width: 100%;">
+  <a href="https://toolszu.com/tools/real-time-website-visitor-counter/" target="_blank">
+    <img src="https://toolszu.com/tools/real-time-website-visitor-counter/tracker.php?id=f234f52e86a1e0e79ff0ad76d2f2828258cd5ad33e2ea8f115d6c15e11a4bece" alt="Web Visitor Counter" border="0" style="display: inline-block;">
+  </a>
+</div>
 </body>
 </html>
