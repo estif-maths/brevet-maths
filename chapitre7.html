@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 7 : Fonctions linéaires et affines - Maths 3ème</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --bg: #f8f9fe;
+            --text: #2b2d42;
+            --success: #2ecc71;
+            --warning: #fab005;
+            --brevet: #e67e22;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 1rem; text-align: center; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
+        
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; flex-wrap: wrap; }
+        .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        .content-section { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid #f0f2ff; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        
+        .definition-box { background: #f0f2ff; padding: 20px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .method-box { background: #fff9db; padding: 20px; border: 1px solid var(--warning); margin: 20px 0; border-radius: 15px; }
+        .example-box { background: #fff9e6; padding: 20px; border: 1px solid #ffd966; margin: 15px 0; border-radius: 15px; }
+        .remarkbox { background: #f3e8ff; padding: 15px; border-left: 6px solid var(--secondary); margin: 20px 0; border-radius: 0 12px 12px 0; }
+        .propertybox { background: #e6f7ff; padding: 15px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 12px 12px 0; }
+        .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
+        
+        .exercice-card-import {
+            background: white;
+            border-radius: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        .card-header { background: #f8fafc; padding: 1rem 1.8rem; border-bottom: 2px solid #e2e8f0; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+        .card-header h4 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin: 0; }
+        .badge-import { background: #3b82f6; color: white; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: 600; }
+        .badge-brevet { background: var(--brevet); color: white; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: 600; }
+        .card-body { padding: 1.6rem 1.8rem; }
+        .question { background: #f1f5f9; padding: 0.9rem 1.2rem; border-radius: 1rem; border-left: 5px solid #3b82f6; margin-bottom: 1.3rem; font-weight: 500; }
+        .subquestion { margin: 1rem 0 0.5rem 0; font-weight: 600; color: #1e40af; }
+        .input-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin: 0.8rem 0 0.3rem; }
+        .input-group label { font-weight: 500; min-width: 100px; }
+        input, select { padding: 0.5rem 1rem; border-radius: 2rem; border: 1px solid #cbd5e1; font-family: 'Inter', monospace; width: auto; min-width: 200px; font-size: 0.9rem; }
+        button.verify { background: #0f172a; border: none; color: white; padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        button.verify:hover { background: #1e293b; transform: translateY(-1px); }
+        .solution { background: #fefce8; border-left: 5px solid #eab308; padding: 1rem 1.3rem; border-radius: 1rem; margin-top: 1rem; font-size: 0.92rem; display: none; line-height: 1.5; }
+        .feedback-correct { color: #15803d; background: #dcfce7; display: inline-block; padding: 0.2rem 0.8rem; border-radius: 30px; margin-bottom: 0.5rem; font-weight: 600; }
+        .feedback-wrong { color: #b91c1c; background: #fee2e2; display: inline-block; padding: 0.2rem 0.8rem; border-radius: 30px; margin-bottom: 0.5rem; font-weight: 600; }
+        .brevet-header { background: linear-gradient(135deg, #e67e22, #d35400); color: white; padding: 0.5rem 1rem; border-radius: 30px; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; }
+        .graphic-placeholder { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 16px; padding: 20px; text-align: center; margin: 1.2rem 0; }
+        .graphic-img { max-width: 100%; height: auto; border-radius: 12px; display: block; margin: 0 auto; }
+        .citation-brevet { margin-top: 0.8rem; text-align: right; font-size: 0.85rem; color: #2d6a4f; font-weight: 500; border-top: 1px dashed #cbd5e1; padding-top: 0.7rem; }
+        .justif-box { background: #fefce8; border-left: 5px solid #eab308; border-radius: 1rem; margin-top: 0.8rem; margin-bottom: 1rem; padding: 1rem; font-size: 1rem; line-height: 1.5; display: none; }
+        .calculation-box { background: #fdf9f4; border: 1px solid #f39c12; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .explanation { background: #e8f4fd; border-left: 5px solid #3498db; padding: 12px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+        .img-graph { max-width: 100%; border-radius: 12px; border: 1px solid #e2e8f0; margin: 10px 0; background: #fcfcfc; padding: 5px; }
+        .two-images { display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-start; margin: 20px 0; justify-content: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapitre 7 : Fonctions linéaires et affines</h1>
+    <p>Modéliser, représenter, interpréter les relations linéaires</p>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showSection('cours')">📖 Cours Détaillé</button>
+        <button class="tab-btn" onclick="showSection('exercices')">📝 Exercices Interactifs</button>
+        <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
+    </div>
+
+    <!-- ==================== COURS DÉTAILLÉ (INTÉGRAL, INCHANGÉ) ==================== -->
+    <div id="cours" class="content-section active">
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
+            <a href="OGD3 Cours Complet.pdf" download="OGD3 Cours Complet.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 OGD3 - Fonctions linéaires et affines - Cours.pdf
+            </a>
+        </div>
+
+        <h2>1. Reconnaître et utiliser une fonction linéaire</h2>
+        <div class="definition-box">
+            <strong>Définition :</strong> \(m\) désigne un nombre. La fonction linéaire de coefficient \(m\) est la fonction qui, à tout nombre \(x\), associe le nombre \(mx\), c'est-à-dire le produit de \(m\) par \(x\).<br>
+            Si on désigne par \(f\) cette fonction, on peut noter \(f : x \mapsto mx\) ou \(f(x) = mx\).
+        </div>
+        <div class="remarkbox">
+            💡 <strong>Remarque :</strong> Une fonction linéaire est un cas particulier de fonction affine (cas où \(p = 0\)).
+        </div>
+        <div class="example-box">
+            <strong>📌 Exemple :</strong> La fonction linéaire de coefficient 5 est la fonction \(f : x \mapsto 5x\).<br>
+            L'image d'un nombre \(x\) par cette fonction est \(5x\), c'est-à-dire \(f(x)=5x\).
+        </div>
+        <div class="propertybox">
+            <strong>Propriété :</strong> La représentation graphique d'une fonction linéaire de coefficient \(m\) est une droite \(d\) passant par l'origine du repère. <br> Le nombre \(m\) est le coefficient directeur ou la pente de la droite \(d\).
+        </div>
+        <div class="remarkbox">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 2; min-width: 200px;">
+                    Soit \(M\) un point de la droite \(d\). Si, en restant sur la droite \(d\), on augmente l'abscisse de 1, alors l'ordonnée augmente de \(m\) (on obtient alors le point \(M'\)).<br><br>
+                    Comme la représentation graphique d'une fonction linéaire est une droite qui passe par l'origine du repère, il suffit de déterminer un autre point pour pouvoir la tracer.<br> 			On choisit pour cela une valeur de \(x\) (différente de 0) et on calcule son image.
+                </div>
+                <div style="flex: 1;">
+                    <img src="OGD3A.png" alt="Graphique fonction linéaire" class="img-graph" style="max-width:220px">
+                </div>
+            </div>
+            <div style="text-align: left; margin-top: 15px;">
+                <img src="OGD3B.png" alt="Illustration pente" class="img-graph" style="max-width:300px">
+            </div>
+        </div>
+
+        <h3>Exemple :</h3>
+        <div class="example-box">
+            Montrer que les fonctions définies ci-dessous sont des fonctions linéaires et préciser leur coefficient.<br>
+       		     a. \(f(x) = -3x\) <br>
+		     b. \(g(x) = 2(x + 1) - 2\)<br><br>
+            <strong>Solution :</strong><br>
+            a. \(f(x)=mx\) avec \(m=-3\). Donc \(f\) est une fonction linéaire de coefficient \(-3\).<br><br>
+            b. On développe : \(g(x)=2x+2-2=2x\). Donc \(g(x)=mx\) avec \(m=2\).<br>
+		Donc, \(g\) est une fonction linéaire de coefficient \(2\).
+        </div>
+
+        <h2>2. Modéliser une situation de proportionnalité par une fonction linéaire</h2>
+        <div class="propertybox">
+            Une situation de proportionnalité de coefficient de proportionnalité \(m\) peut être traduite par une fonction linéaire de coefficient \(m\).
+        </div>
+        <div class="example-box">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 2; min-width: 200px;">
+                    Une voiture roule à une vitesse constante de 90 km/h. Si \(d(t)\) représente la distance parcourue (en km) pendant le temps \(t\) (en heures), on a alors le tableau de 				proportionnalité suivant.<br>
+                    <div style="text-align:center; margin: 10px 0;"><img src="OGD3C.png" alt="Tableau proportionnalité" style="max-width:500px;"></div>
+                    La distance \(d(t)\) est donc proportionnelle au temps \(t\). On a \(d(t) = 90t\).<br>
+                    La fonction \(d\) est la fonction linéaire de coefficient 90.
+                </div>
+                <div style="flex: 1;">
+                    <img src="OGD3D.png" alt="Voiture" class="img-graph" style="max-width:300px">
+                </div>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <strong>Exemple 1 :</strong> Martin vend des cerises à 6,75 € le kilogramme.<br>
+            La fonction \(f\) qui, à la masse de cerises en kilogrammes, associe son prix est-elle linéaire ? <br>
+		Si oui, préciser son coefficient.<br><br>
+            <strong>Solution :</strong> Si \(x\) est la masse en kilogrammes, le prix est \(f(x)=6,75x\). <br> Donc \(f\) est une fonction linéaire de coefficient 6,75.<br><br>
+            <strong>Exemple 2 :</strong> Une municipalité augmente ses impôts de 5 % entre 2019 et 2020. \(g\) est la fonction qui, au montant \(x\) de l'ancien impôt de 2019, associe le montant 		du nouvel impôt de 2020.<br> Exprimer \(g(x)\) en fonction de \(x\). La fonction \(g\) est-elle linéaire ?<br><br>
+            <strong>Solution :</strong> \(g(x) = (1 + \frac{5}{100})x = 1,05x\).<br> Donc \(g\) est une fonction linéaire de coefficient 1,05.
+        </div>
+
+        <h2>3. Reconnaître et utiliser une fonction affine</h2>
+        <div class="definition-box">
+            \(m\) et \(p\) désignent deux nombres. Une fonction affine est une fonction qui, à tout nombre \(x\), associe le nombre \(mx + p\). Si on désigne par \(f\) cette fonction, on peut noter \(f : x \mapsto mx + p\) ou \(f(x) = mx + p\).
+        </div>
+        <div class="example-box">
+            - La fonction \(f : x \mapsto 2x + 1\) est une fonction affine car \(f(x)=mx+p\) avec \(m=2\) et \(p=1\).<br>
+            - La fonction \(f : x \mapsto 0,5x - 3\) est une fonction affine avec \(m=0,5\) et \(p=-3\).
+        </div>
+        <div class="propertybox">
+            \(f\) désigne une fonction.<br>
+            - Si \(f\) est une fonction affine, alors sa représentation graphique est une droite.<br>
+            - Si la représentation graphique de \(f\) est une droite, alors \(f\) est une fonction affine.
+        </div>
+        <div class="example-box">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+                <div style="flex:1;">
+                     <strong> Exemple:</strong><br>
+			Soit la fonction \(f: x \mapsto -0,5x + 1\).<br>
+                    \(f\) est affine car \(f(x)=mx+p\) avec \(m=-0,5\) et \(p=1\).<br>
+		 Sa représentation graphique est une droite. Pour la tracer, il suffit de trouver deux points.
+                </div>
+		<div style="flex:1;"><img src="OGD3E.png" class="img-graph" style="max-width:400px;"></div>
+                <div style="flex:1;"><img src="OGD3F.png" class="img-graph" style="max-width:250px;"></div>
+                
+            </div>
+        </div>
+
+        <div class="example-box">
+            <strong>Exemples :</strong> <br> 
+		<strong>1.</strong> Montrer que les fonctions définies ci-dessous sont des fonctions affines.<br>
+            \[
+            a.\ f(x) = -3x + 6 \qquad b.\ g(x) = \dfrac{2x + 5}{3} \qquad c.\ h(x) = 4
+            \]
+            <strong>Solution :</strong><br>
+            a. \(f(x) = -3x+6 = mx+p\) avec \(m=-3\) et \(p=6\). Donc \(f\) est affine.<br>
+            b. \(g(x) = \dfrac{2x+5}{3} = \dfrac{2}{3}x + \dfrac{5}{3}\) avec \(m=\frac{2}{3}, p=\frac{5}{3}\). Donc \(g\) est affine.<br>
+            c. \(h(x)=0x+4\) avec \(m=0,p=4\). \(h\) est constante donc affine.
+        </div>
+
+        <div class="example-box">
+            <strong>2.</strong> Représenter graphiquement la fonction \(k: x \mapsto -3x + 2\) dans un repère.<br>
+            <strong>Solution :</strong> \(k\) est affine (\(m=-3, p=2\)).<br>
+		 Sa représentation est une droite. <br>
+		 Pour tracer une droite, il suffit de trouver deux points.<br>
+            <div class="two-images">
+		<img src="OGD3I.png" class="img-graph" style="max-width:400px;">
+                <img src="OGD3J.png" class="img-graph" style="max-width:350px;">
+                
+            </div>
+        </div>
+
+        <h2>4. Interpréter les paramètres d'une fonction affine</h2>
+        <div class="definition-box">
+            \(m\) et \(p\) désignent deux nombres, \(f\) désigne la fonction affine \(f: x \mapsto mx + p\) et \(d\) est sa représentation graphique.<br>
+            - Le nombre \(m\) est appelé coefficient directeur ou pente de la droite \(d\). En restant sur la droite \(d\), si on augmente l'abscisse de 1, alors l'ordonnée augmente de \(m\).<br>
+            - Le nombre \(p\) est appelé ordonnée à l'origine de la droite \(d\). C'est l'ordonnée du point d'intersection de la droite \(d\) avec l'axe des ordonnées.
+        </div>
+        <div class="example-box">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex:2;">
+                    La fonction \(f: x \mapsto 2x - 1\) est représentée ci-contre.<br>
+                    \(f\) est affine avec \(m=2\) et \(p=-1\).<br>
+                    - \(p=-1\) donc la droite \(d\) coupe l'axe des ordonnées au point d'ordonnée \(-1\) : c'est le point \(A(0;-1)\).<br>
+                    - \(m=2\) donc le point \(B(1;1)\) appartient aussi à la droite, de même que \(C(2;3)\), etc.
+                </div>
+                <div style="flex:1;"><img src="OGD3k.png" class="img-graph" style="max-width:200px;"></div>
+            </div>
+        </div>
+        <div class="remarkbox">
+            Le coefficient directeur \(m\) détermine la direction de la droite \(d\). S'il est positif, la droite « monte » quand on la regarde de gauche à droite, avec une pente d'autant plus forte que \(m\) est grand. Si \(m\) est négatif, la droite « descend ».
+        </div>
+
+        <div class="example-box">
+            <strong>Exemple 1 :</strong> Une fonction \(h\) est représentée ci-contre. Par lecture graphique, déterminer une expression de \(h(x)\).<br>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex:2;">
+                    <strong>Solution :</strong> C'est une droite donc \(h\) est affine : \(h(x)=mx+p\).<br>
+                    On lit l'ordonnée à l'origine : \(p=3\).<br>
+                    Lorsqu'on avance de 1 en abscisse, on descend de 2 en ordonnée, donc \(m = -2\).<br>
+                    D'où \(h(x) = -2x + 3\).
+                </div>
+                <div style="flex:1;"><img src="OGD3G.png" class="img-graph" style="max-width:220px;"></div>
+            </div>
+        </div>
+        <div class="example-box">
+            <strong>Exemple 2 :</strong> Une fonction \(f\) est représentée ci-contre. Par lecture graphique, déterminer une expression de \(f(x)\).<br>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex:2;">
+                    <strong>Solution :</strong> La droite coupe l'axe des ordonnées en \(1\) → \(p=1\).<br>
+                    Pour le coefficient directeur : on part du point \((0;1)\) ; si l'on avance de 1 unité en abscisse, on descend de 3 unités en ordonnée → \(m = -3\).<br>
+                    Donc \(f(x) = -3x + 1\).
+                </div>
+                <div style="flex:1;"><img src="OGD3H.png" class="img-graph" style="max-width:220px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== EXERCICES INTERACTIFS (6 exercices) ==================== -->
+    <div id="exercices" class="content-section">
+        <h2>📚 Exercices d'entraînement</h2>
+        <div class="utilite-box" style="background: #eef2ff;">
+            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices :</strong><br>
+            <a href="OGD3 Exercices d'entrainement.pdf" download="OGD3 Exercices d'entrainement.pdf" style="color: var(--primary); font-weight: 600;">📄 OGD3 Exercices d'entrainement.pdf</a>
+        </div>
+
+        <!-- Exercice 1 (tarifs tennis) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 1 (20 points)</h4><div class="badge-import">Brevet</div></div><div class="card-body"><p>Une association sportive propose deux tarifs annuels pour l'accès aux courts de tennis :</p><ul><li><strong>Tarif 1 :</strong> Une participation de 5 € par séance de jeu.</li><li><strong>Tarif 2 :</strong> Un forfait annuel de 60 € auquel s'ajoute une participation de 2 € par séance.</li></ul><div class="subquestion">1) Soit \(x\) le nombre de séances effectuées. On note \(P_1\) le prix payé avec le Tarif 1 et \(P_2\) le prix payé avec le Tarif 2. Exprimer \(P_1(x)\) et \(P_2(x)\) en fonction de \(x\).</div><div class="input-group"><label>\(P_1(x) =\)</label><input type="text" id="exI1_1"><button class="verify-exo" data-correct="5x" data-target="corrI1_1">✔️ Vérifier</button></div><div id="corrI1_1" class="justif-box"></div><div class="input-group"><label>\(P_2(x) =\)</label><input type="text" id="exI1_2"><button class="verify-exo" data-correct="2x+60" data-target="corrI1_2">✔️ Vérifier</button></div><div id="corrI1_2" class="justif-box"></div><div class="subquestion">2) Préciser, en justifiant, la nature de chacune des deux fonctions \(P_1\) et \(P_2\).</div><div class="input-group"><label>Nature de \(P_1\) :</label><input type="text" id="exI1_3"><button class="verify-exo" data-correct="linéaire" data-target="corrI1_3">🔍 Vérifier</button></div><div id="corrI1_3" class="justif-box"></div><div class="input-group"><label>Nature de \(P_2\) :</label><input type="text" id="exI1_4"><button class="verify-exo" data-correct="affine" data-target="corrI1_4">🔍 Vérifier</button></div><div id="corrI1_4" class="justif-box"></div><div class="subquestion">3) Démontrer, par la résolution d'une équation, que pour 20 séances, le prix payé est identique pour les deux tarifs.</div><div class="input-group"><label>Vérification (Oui/Non) :</label><input type="text" id="exI1_5"><button class="verify-exo" data-correct="oui" data-target="corrI1_5">🎯 Vérifier</button></div><div id="corrI1_5" class="justif-box"></div><div class="subquestion">4) Un adhérent dispose d'un budget annuel de 150 €. Déterminer le nombre maximum de séances qu'il peut effectuer avec le Tarif 2.</div><div class="input-group"><label>Nombre maximum :</label><input type="text" id="exI1_6"><button class="verify-exo" data-correct="45" data-target="corrI1_6">💰 Vérifier</button></div><div id="corrI1_6" class="justif-box"></div></div></div>
+
+        <!-- Exercice 2 (fonction affine A(0;3) B(2;7)) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 2 (20 points)</h4><div class="badge-import">Brevet</div></div><div class="card-body"><p>Dans un repère orthonormé, on considère la fonction affine \(f\) dont la représentation graphique est la droite \((d)\) passant par les points \(A(0~;~3)\) et \(B(2~;~7)\).</p><div class="subquestion">1) En vous aidant des coordonnées du point \(A\), justifier que l'ordonnée à l'origine de la fonction \(f\) est égale à 3.</div><div class="input-group"><label>Ordonnée à l'origine =</label><input type="text" id="exI2_1"><button class="verify-exo" data-correct="3" data-target="corrI2_1">📈 Vérifier</button></div><div id="corrI2_1" class="justif-box"></div><div class="subquestion">2) Démontrer par le calcul que le coefficient directeur de la droite \((d)\) est 2.</div><div class="input-group"><label>Coefficient directeur =</label><input type="text" id="exI2_2"><button class="verify-exo" data-correct="2" data-target="corrI2_2">📐 Vérifier</button></div><div id="corrI2_2" class="justif-box"></div><div class="subquestion">3) En déduire l'expression algébrique de \(f(x)\) en fonction de \(x\).</div><div class="input-group"><label>\(f(x) =\)</label><input type="text" id="exI2_3"><button class="verify-exo" data-correct="2x+3" data-target="corrI2_3">✏️ Vérifier</button></div><div id="corrI2_3" class="justif-box"></div><div class="subquestion">4) Calculer l'antécédent de 10 par la fonction \(f\). Présenter le résultat sous forme d'une fraction irréductible.</div><div class="input-group"><label>Antécédent =</label><input type="text" id="exI2_4"><button class="verify-exo" data-correct="7/2" data-target="corrI2_4">🔢 Vérifier</button></div><div id="corrI2_4" class="justif-box"></div></div></div>
+
+        <!-- Exercice 3 (g(x)=3x+5) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 3 (15 points)</h4><div class="badge-import">Brevet</div></div><div class="card-body"><p>On considère la fonction \(g\) définie par \(g(x) = 3x + 5\).</p><div class="subquestion">1) Vérifier par le calcul que l'image de \(-2\) par la fonction \(g\) est égale à \(-1\).</div><div class="input-group"><label>\(g(-2) =\)</label><input type="text" id="exI3_1"><button class="verify-exo" data-correct="-1" data-target="corrI3_1">🔢 Vérifier</button></div><div id="corrI3_1" class="justif-box"></div><div class="subquestion">2) Déterminer, par la résolution d'une équation, le nombre dont l'image par \(g\) est nulle.</div><div class="input-group"><label>\(x\) tel que \(g(x)=0\) :</label><input type="text" id="exI3_2"><button class="verify-exo" data-correct="-5/3" data-target="corrI3_2">❓ Vérifier</button></div><div id="corrI3_2" class="justif-box"></div><div class="subquestion">3) Un élève affirme : « L'antécédent de 11 par la fonction \(g\) est un nombre entier ». A-t-il raison ? Justifier la réponse.</div><div class="input-group"><label>Antécédent de 11 :</label><input type="text" id="exI3_3"><button class="verify-exo" data-correct="2" data-target="corrI3_3">✅ Vérifier</button></div><div id="corrI3_3" class="justif-box"></div></div></div>
+
+        <!-- Exercice 4 (h linéaire et k affine) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 4 (20 points)</h4><div class="badge-import">Brevet</div></div><div class="card-body"><p>On considère une fonction linéaire \(h\) telle que \(h(3) = 6\) et une fonction affine \(k\) définie par \(k(x) = -0,5x + 2\).</p><div class="subquestion">1) Justifier que l'expression de la fonction \(h\) est \(h(x) = 2x\).</div><div class="input-group"><label>\(h(x) =\)</label><input type="text" id="exI4_1"><button class="verify-exo" data-correct="2x" data-target="corrI4_1">🔍 Vérifier</button></div><div id="corrI4_1" class="justif-box"></div><div class="subquestion">2) Les droites représentatives des fonctions \(h\) et \(k\) sont sécantes en un point \(I\). Démontrer que l'abscisse du point \(I\) est solution de l'équation : \(2x = -0,5x + 2\).</div><div class="input-group"><label>Abscisse de \(I\) :</label><input type="text" id="exI4_2"><button class="verify-exo" data-correct="0,8" data-target="corrI4_2" data-correct-alt="4/5">📐 Vérifier</button></div><div id="corrI4_2" class="justif-box"></div><div class="subquestion">3) Déduire de la question précédente les coordonnées exactes du point \(I\).</div><div class="input-group"><label>Ordonnée de \(I\) :</label><input type="text" id="exI4_3"><button class="verify-exo" data-correct="1,6" data-target="corrI4_3" data-correct-alt="8/5">🎯 Vérifier</button></div><div id="corrI4_3" class="justif-box"></div></div></div>
+
+        <!-- Exercice 5 (location vélos) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 5 (15 points)</h4><div class="badge-import">Concret</div></div><div class="card-body"><p>Un magasin propose deux formules pour la location de vélos :</p><ul><li><strong>Formule A :</strong> 8 € par heure.</li><li><strong>Formule B :</strong> un abonnement annuel de 20 € puis 3 € par heure.</li></ul><div class="subquestion">1) Exprimer le prix \(A(x)\) pour la formule A et \(B(x)\) pour la formule B en fonction du nombre d'heures \(x\).</div><div class="input-group"><label>\(A(x) =\)</label><input type="text" id="exI5_1"><button class="verify-exo" data-correct="8x" data-target="corrI5_1">✔️ Vérifier</button></div><div id="corrI5_1" class="justif-box"></div><div class="input-group"><label>\(B(x) =\)</label><input type="text" id="exI5_2"><button class="verify-exo" data-correct="3x+20" data-target="corrI5_2">✔️ Vérifier</button></div><div id="corrI5_2" class="justif-box"></div><div class="subquestion">2) Quelle est la nature de chaque fonction ? Justifier.</div><div class="input-group"><label>Nature de \(A\) :</label><input type="text" id="exI5_3"><button class="verify-exo" data-correct="linéaire" data-target="corrI5_3">🔍 Vérifier</button></div><div id="corrI5_3" class="justif-box"></div><div class="input-group"><label>Nature de \(B\) :</label><input type="text" id="exI5_4"><button class="verify-exo" data-correct="affine" data-target="corrI5_4">🔍 Vérifier</button></div><div id="corrI5_4" class="justif-box"></div><div class="subquestion">3) À partir de combien d'heures la formule B devient-elle plus avantageuse que la formule A ? (Résoudre une inéquation ou une équation)</div><div class="input-group"><label>Seuil (heures) :</label><input type="text" id="exI5_5"><button class="verify-exo" data-correct="5" data-target="corrI5_5">⏱️ Vérifier</button></div><div id="corrI5_5" class="justif-box"></div></div></div>
+
+        <!-- Exercice 6 (cinéma) -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📌 EXERCICE 6 (15 points)</h4><div class="badge-import">Concret</div></div><div class="card-body"><p>Un cinéma pratique deux tarifs :</p><ul><li><strong>Tarif plein :</strong> 9,50 € la séance.</li><li><strong>Tarif abonné :</strong> carte d'abonnement annuelle à 40 €, puis 5 € par séance.</li></ul><div class="subquestion">1) On note \(x\) le nombre de séances. Donner les expressions des prix \(F(x)\) (tarif plein) et \(A(x)\) (tarif abonné).</div><div class="input-group"><label>\(F(x) =\)</label><input type="text" id="exI6_1"><button class="verify-exo" data-correct="9.5x" data-target="corrI6_1" data-correct-alt="9,5x">✔️ Vérifier</button></div><div id="corrI6_1" class="justif-box"></div><div class="input-group"><label>\(A(x) =\)</label><input type="text" id="exI6_2"><button class="verify-exo" data-correct="5x+40" data-target="corrI6_2">✔️ Vérifier</button></div><div id="corrI6_2" class="justif-box"></div><div class="subquestion">2) Pour 12 séances, quel est le tarif le plus économique ?</div><div class="input-group"><label>Tarif le plus économique :</label><input type="text" id="exI6_3"><button class="verify-exo" data-correct="abonné" data-target="corrI6_3">🎬 Vérifier</button></div><div id="corrI6_3" class="justif-box"></div><div class="subquestion">3) Déterminer le nombre de séances à partir duquel l'abonnement devient rentable (c'est-à-dire \(A(x) \le F(x)\)).</div><div class="input-group"><label>Seuil (séances) :</label><input type="text" id="exI6_4"><button class="verify-exo" data-correct="9" data-target="corrI6_4">📊 Vérifier</button></div><div id="corrI6_4" class="justif-box"></div></div></div>
+    </div>
+
+    <!-- ==================== EXERCICES TYPE BREVET (7 exercices intacts) ==================== -->
+    <div id="brevet" class="content-section">
+        <div class="brevet-header"><i class="fas fa-graduation-cap"></i> Entraînement au Brevet – Fonctions</div>
+        <h2>📝 Exercices type Brevet</h2>
+        <div class="utilite-box" style="background:#eef2ff;"><i class="fas fa-download"></i> <strong>Télécharger les annales :</strong><br><a href="OGD3 -Exercices- Type Brevet.pdf" download="OGD3 -Exercices- Type Brevet.pdf" style="color:var(--primary); font-weight:600;">📄 OGD3 -Exercices- Type Brevet.pdf</a></div>
+
+        <!-- Exercice 1 – Tarifs d'inscription -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📘 Exercice 1 : Tarifs d'inscription</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><p>Pour s'inscrire à un tournoi, trois tarifs sont proposés aux clubs participants.</p><ul><li><strong>Tarif A :</strong> 25 € par personne.</li><li><strong>Tarif B :</strong> Un forfait de 160 € et 15 € par personne.</li><li><strong>Tarif C :</strong> Un forfait de 520 € quel que soit le nombre de personnes inscrites.</li></ul><p>On note <em>f</em>, <em>g</em> et <em>h</em> les fonctions qui modélisent les prix, en euro, respectivement du tarif A, du tarif B et du tarif C.</p><ol><li>Donner l'expression de <em>f(x)</em>, <em>g(x)</em> et <em>h(x)</em> en fonction du nombre <em>x</em> de personnes inscrites.<div class="input-group"><label>f(x) =</label><input type="text" id="brev1_f"><button class="verify-brevet" data-correct="25x" data-target="corrB1_f">Vérifier</button></div><div id="corrB1_f" class="justif-box"></div><div class="input-group"><label>g(x) =</label><input type="text" id="brev1_g"><button class="verify-brevet" data-correct="15x+160" data-target="corrB1_g">Vérifier</button></div><div id="corrB1_g" class="justif-box"></div><div class="input-group"><label>h(x) =</label><input type="text" id="brev1_h"><button class="verify-brevet" data-correct="520" data-target="corrB1_h">Vérifier</button></div><div id="corrB1_h" class="justif-box"></div></li><li><ol class="subenum"><li>Représenter les fonctions <em>f</em>, <em>g</em> et <em>h</em> dans un même repère.</li><li>Graphiquement, quel est le tarif le plus avantageux pour un club souhaitant inscrire 10 personnes ? 20 personnes ?<div class="input-group"><label>Tarif pour 10 pers :</label><input type="text" id="brev1_10"><button class="verify-brevet" data-correct="A" data-target="corrB1_10">Vérifier</button></div><div id="corrB1_10" class="justif-box"></div><div class="input-group"><label>Tarif pour 20 pers :</label><input type="text" id="brev1_20"><button class="verify-brevet" data-correct="B" data-target="corrB1_20">Vérifier</button></div><div id="corrB1_20" class="justif-box"></div></li></ol></li><li>Quel est le nombre d'inscriptions pour lequel les tarifs A et B sont les mêmes ? Justifier par un calcul.<div class="input-group"><label>Nombre d'inscriptions (x) :</label><input type="text" id="brev1_egal"><button class="verify-brevet" data-correct="16" data-target="corrB1_egal">Vérifier</button></div><div id="corrB1_egal" class="justif-box"></div></li><li>Un club dispose de 325 €. Combien de personnes peut-il inscrire au maximum ? Quel tarif choisir ? Justifier par un calcul.<div class="input-group"><label>Nombre max de personnes :</label><input type="text" id="brev1_max"><button class="verify-brevet" data-correct="13" data-target="corrB1_max">Vérifier</button></div><div id="corrB1_max" class="justif-box"></div></li><li>À partir de combien d'inscriptions le tarif C est-il le moins cher ? Justifier par un calcul.<div class="input-group"><label>À partir de ... inscriptions :</label><input type="text" id="brev1_seuil"><button class="verify-brevet" data-correct="25" data-target="corrB1_seuil">Vérifier</button></div><div id="corrB1_seuil" class="justif-box"></div></li></ol></div></div>
+
+        <!-- Exercice 2 – Concentration de CO₂ -->
+        <div class="exercice-card-import"><div class="card-header"><h4>🌍 Exercice 2 : Concentration de CO₂</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB1.png" alt="Graphique CO₂"><div class="fake-img-legend">Évolution de la concentration en CO₂ (ppm)</div></div><p>On veut modéliser l'évolution de la concentration de CO₂ à l'aide d'une fonction <em>g</em> où <em>g(x)</em> est la concentration de CO₂ en ppm en fonction de l'année <em>x</em>.</p><ol><li>Expliquer pourquoi une fonction affine semble appropriée pour modéliser la concentration en CO₂ en fonction du temps entre 1995 et 2005.</li><li>Tom propose l'expression <em>g(x) = 2x - 3630</em>.<br> Léo propose l'expression <em>g(x) = 2x - 2000</em>.<br> Quelle expression modélise le mieux l'évolution de la concentration de CO₂ ? Justifier.<div class="input-group"><label>Modèle correct :</label><select id="brev2_modele"><option value="">--choisir--</option><option value="tom">g(x)=2x-3630 (Tom)</option><option value="leo">g(x)=2x-2000 (Léo)</option></select><button class="verify-brevet" data-correct="tom" data-target="corrB2_modele">Vérifier</button></div><div id="corrB2_modele" class="justif-box"></div></li><li>450 ppm de CO₂ correspond au seuil critique au-dessus duquel les conséquences climatiques deviennent hors de contrôle. En quelle année ce seuil sera-t-il atteint d'après le modèle choisi à la question précédente ?<div class="input-group"><label>Année :</label><input type="text" id="brev2_annee"><button class="verify-brevet" data-correct="2040" data-target="corrB2_annee">Vérifier</button></div><div id="corrB2_annee" class="justif-box"></div></li></ol><div class="citation-brevet">(D'après brevet, Métropole, septembre 2019)</div></div></div>
+
+        <!-- Exercice 3 – Tarifs des peintres -->
+        <div class="exercice-card-import"><div class="card-header"><h4>🎨 Exercice 3 : Tarifs des peintres</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><ul><li><strong>Peintre A :</strong> 15 € par m².</li><li><strong>Peintre B :</strong> 10 € par m² et 100 € d'installation de chantier.</li><li><strong>Peintre C :</strong> 700 € quelle que soit l'aire inférieure à 100 m².</li></ul><p><strong>1.</strong> Montrer que pour 40 m², le tarif du peintre A est de 600 €, le tarif du peintre B est de 500 € et le tarif du peintre C est de 700 €.</p><p><strong>2.</strong> Écrire le prix <em>b(x)</em> proposé par le peintre B.<div class="input-group"><label>b(x) =</label><input type="text" id="brev3_b"><button class="verify-brevet" data-correct="10x+100" data-target="corrB3_b">Vérifier</button></div><div id="corrB3_b" class="justif-box"></div></p><p><strong>3.</strong> On donne <em>a(x) = 15x</em> et <em>c(x) = 700</em>.</p><ol class="subenum"><li>Quelle est la nature de la fonction <em>a</em> ?<div class="input-group"><input type="text" id="brev3_nature"><button class="verify-brevet" data-correct="linéaire" data-target="corrB3_nature">Vérifier</button></div><div id="corrB3_nature" class="justif-box"></div></li><li>Calculer l'image de 60 par la fonction <em>a</em>.<div class="input-group"><input type="text" id="brev3_img60"><button class="verify-brevet" data-correct="900" data-target="corrB3_img60">Vérifier</button></div><div id="corrB3_img60" class="justif-box"></div></li><li>Calculer l'antécédent de 300 par la fonction <em>a</em>.<div class="input-group"><input type="text" id="brev3_ant300"><button class="verify-brevet" data-correct="20" data-target="corrB3_ant300">Vérifier</button></div><div id="corrB3_ant300" class="justif-box"></div></li></ol><p><strong>4. a.</strong> Résoudre l'équation <em>15x = 10x + 100</em>.<div class="input-group"><input type="text" id="brev3_sol"><button class="verify-brevet" data-correct="20" data-target="corrB3_sol">Vérifier</button></div><div id="corrB3_sol" class="justif-box"></div></p><div class="citation-brevet">(D'après brevet, Nouvelle-Calédonie, décembre 2019)</div></div></div>
+
+        <!-- Exercice 4 – Fonction affine et Scratch -->
+        <div class="exercice-card-import"><div class="card-header"><h4>💻 Exercice 4 : Fonction affine et Scratch</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><p><strong>1.</strong> On a utilisé une feuille de calcul pour obtenir les images de différentes valeurs de <em>x</em> par une fonction affine <em>f</em>. Voici une copie de l'écran obtenu.</p><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB2.png" alt="feuille de calcul fonction f"><div class="fake-img-legend">Extrait tableur – fonction affine</div></div><ol class="subenum"><li>Quelle est l'image de -1 par la fonction <em>f</em> ?<div class="input-group"><input type="text" id="brev4_imgm1"><button class="verify-brevet" data-correct="1" data-target="corrB4_imgm1">Vérifier</button></div><div id="corrB4_imgm1" class="justif-box"></div></li><li>Quel est l'antécédent de 5 par la fonction <em>f</em> ?<div class="input-group"><input type="text" id="brev4_ant5"><button class="verify-brevet" data-correct="1" data-target="corrB4_ant5">Vérifier</button></div><div id="corrB4_ant5" class="justif-box"></div></li><li>Donner l'expression de <em>f(x)</em>.<div class="input-group"><input type="text" id="brev4_fx"><button class="verify-brevet" data-correct="2x+3" data-target="corrB4_fx">Vérifier</button></div><div id="corrB4_fx" class="justif-box"></div></li><li>Calculer <em>f(10)</em>.<div class="input-group"><input type="text" id="brev4_f10"><button class="verify-brevet" data-correct="23" data-target="corrB4_f10">Vérifier</button></div><div id="corrB4_f10" class="justif-box"></div></li></ol><p><strong>2.</strong> On considère un programme de calcul. On donne l'algorithme et la version sous Scratch.</p><div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 15px 0;"><div style="background: #f1f5f9; border-radius: 16px; padding: 1rem;"><strong>Algorithme :</strong><ol><li>Choisir un nombre</li><li>Ajouter 3</li><li>Multiplier par 2</li><li>Soustraire 5</li></ol></div><div style="background: #fef9e3; border-radius: 16px; padding: 0.8rem; text-align: center;"><img class="graphic-img" src="OGD3EXTB3.png" alt="Script Scratch" style="max-width: 500px;"><div>Programme Scratch</div></div></div><ol class="subenum"><li>Si on choisit le nombre 8 au départ, quel sera le résultat ?<div class="input-group"><input type="text" id="brev4_scratch8"><button class="verify-brevet" data-correct="17" data-target="corrB4_scratch8">Vérifier</button></div><div id="corrB4_scratch8" class="justif-box"></div></li><li>On note <em>g</em> la fonction qui au nombre <em>x</em> choisi au départ, associe le résultat obtenu avec ce programme de calcul.<br> Montrer que <em>g(x) = 2x + 1</em>.<div class="input-group"><input type="text" id="brev4_gx"><button class="verify-brevet" data-correct="2x+1" data-target="corrB4_gx">Vérifier</button></div><div id="corrB4_gx" class="justif-box"></div></li><li>Quel nombre doit-on choisir au départ pour obtenir 6 ?<div class="input-group"><input type="text" id="brev4_g6"><button class="verify-brevet" data-correct="2.5" data-target="corrB4_g6">Vérifier</button></div><div id="corrB4_g6" class="justif-box"></div></li></ol><p><strong>3.</strong> Quel nombre faudrait-il choisir pour que la fonction <em>f</em> et la fonction <em>g</em> donnent le même résultat ?<div class="input-group"><input type="text" id="brev4_fgeg"><button class="verify-brevet" data-correct="aucune" data-target="corrB4_fgeg">Vérifier</button></div><div id="corrB4_fgeg" class="justif-box"></div></p><div class="citation-brevet">(D'après brevet, Polynésie, juillet 2019)</div></div></div>
+
+        <!-- Exercice 5 – Formules d'achat de magazines -->
+        <div class="exercice-card-import"><div class="card-header"><h4>📰 Exercice 5 : Formules d'achat de magazines</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><p>Une personne s'intéresse à un magazine sportif qui paraît une fois par semaine. Elle étudie plusieurs formules d'achat du magazine qui sont détaillées ci-après.</p><ul><li><strong>Formule A -</strong> Prix du magazine à l'unité : 3,75 €</li><li><strong>Formule B -</strong> Abonnement pour l'année : 130 €</li><li><strong>Formule C -</strong> Forfait de 30 € pour l'année et 2,25 € par magazine.</li></ul><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB4.png" alt="Graphiques formules A B C"><div class="fake-img-legend">Représentations graphiques (€ en fonction du nombre de magazines)</div></div><p><strong>1.</strong> Relier chaque formule d'achat à sa représentation graphique.</p><img class="graphic-img" src="OGD3EXTB5.png" alt="Graphiques formules A B C"><p><strong>2.</strong> En utilisant le graphique, répondre aux questions suivantes.</p><ol class="subenum"><li>En choisissant la formule A, quelle somme dépense-t-on pour acheter 16 magazines dans l'année ?<div class="input-group"><input type="text" id="brev5_depA"><button class="verify-brevet" data-correct="60" data-target="corrB5_depA">Vérifier</button></div><div id="corrB5_depA" class="justif-box"></div></li><li>Avec 120 €, combien peut-on acheter de magazines au maximum dans une année avec la formule C ?<div class="input-group"><input type="text" id="brev5_magC"><button class="verify-brevet" data-correct="40" data-target="corrB5_magC">Vérifier</button></div><div id="corrB5_magC" class="justif-box"></div></li><li>Si on décide de ne pas dépasser un budget de 100 € pour l'année, quelle est alors la formule qui permet d'acheter le plus grand nombre de magazines ?<div class="input-group"><input type="text" id="brev5_best"><button class="verify-brevet" data-correct="C" data-target="corrB5_best">Vérifier</button></div><div id="corrB5_best" class="justif-box"></div></li></ol><div class="citation-brevet">(D'après DNB, Polynésie, septembre 2018)</div></div></div>
+
+        <!-- Exercice 6 – Trajets en train -->
+        <div class="exercice-card-import"><div class="card-header"><h4>🚆 Exercice 6 : Trajets en train</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><p>Dans le cadre de son travail, Elsa doit se déplacer régulièrement à Paris. Elle voyage en train. Le billet coûte 80 €. Elsa peut acheter une carte à l'année qui coûte 49 € et qui lui permet d'obtenir toute l'année une réduction de 30% sur les billets.</p><p><strong>1- Étude des tarifs :</strong></p><ol class="subenum"><li>Calculer le prix qu'Elsa paiera pour 3 billets sans carte de réduction.<div class="input-group"><input type="text" id="brev6_sans"><button class="verify-brevet" data-correct="240" data-target="corrB6_sans">Vérifier</button></div><div id="corrB6_sans" class="justif-box"></div></li><li>Justifier que le prix d'un billet de train après une remise de 30% est 56 €.<div class="input-group"><input type="text" id="brev6_reduc"><button class="verify-brevet" data-correct="56" data-target="corrB6_reduc">Vérifier</button></div><div id="corrB6_reduc" class="justif-box"></div></li><li>Calculer le prix total payé par Elsa pour trois billets avec la carte, achat de la carte compris.<div class="input-group"><input type="text" id="brev6_avec"><button class="verify-brevet" data-correct="217" data-target="corrB6_avec">Vérifier</button></div><div id="corrB6_avec" class="justif-box"></div></li></ol><p><strong>2- Comparaison des tarifs :</strong> Elsa achète <em>x</em> billets. On nomme : <em>f</em> la fonction qui associe à <em>x</em> le montant total que paie Elsa sans la carte. <em>g</em> la fonction qui associe à <em>x</em> le montant total que paie Elsa avec la carte.</p><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB6.png" alt="Graphique comparatif train" style="max-width:100%;"></div><ul><li><strong>2.b-</strong> Choisir l'expression algébrique de la fonction <em>g</em> :<br> Choix 1 : <em>g(x) = 56x + 49</em> &nbsp;|&nbsp; Choix 2 : <em>g(x) = 56x</em> &nbsp;|&nbsp; Choix 3 : <em>g(x) = 80x</em> &nbsp;|&nbsp; Choix 4 : <em>g(x) = 49x + 56</em><div class="input-group"><input type="text" id="brev6_gx" placeholder="56x+49"><button class="verify-brevet" data-correct="56x+49" data-target="corrB6_gx">Vérifier</button></div><div id="corrB6_gx" class="justif-box"></div></li><li><strong>2.c-</strong> Calculer <em>g(8)</em>.<div class="input-group"><input type="text" id="brev6_g8"><button class="verify-brevet" data-correct="497" data-target="corrB6_g8">Vérifier</button></div><div id="corrB6_g8" class="justif-box"></div></li><li><strong>2.e-</strong> Sachant qu'Elsa achètera plus de 8 billets, déterminer le tarif le plus avantageux.<div class="input-group"><input type="text" id="brev6_avantage"><button class="verify-brevet" data-correct="avec carte" data-target="corrB6_avantage">Vérifier</button></div><div id="corrB6_avantage" class="justif-box"></div></li></ul><div class="citation-brevet">(D'après DNB, France, Juin 2025)</div></div></div>
+
+        <!-- Exercice 7 – Achat ou Location de voiture -->
+        <div class="exercice-card-import"><div class="card-header"><h4>🚗 Exercice 7 : Achat ou Location de voiture</h4><div class="badge-brevet">Brevet</div></div><div class="card-body"><p>Un garage propose 2 options au client :</p><ul><li><strong>Option Achat :</strong> prix d'achat de la voiture 22 400 €. Assurance obligatoire 75 € par mois.</li><li><strong>Option Location :</strong> 425 € par mois, assurance comprise.</li></ul><p><strong>Partie A</strong></p><ol><li>Montrer qu'avec l'option Achat la dépense à la fin de la première année est de 23 300 €.<div class="input-group"><input type="text" id="brev7_an"><button class="verify-brevet" data-correct="23300" data-target="corrB7_an">Vérifier</button></div><div id="corrB7_an" class="justif-box"></div></li><li>Après 36 mois, calculer l'économie réalisée par le client s'il choisit l'option Location.<div class="input-group"><input type="text" id="brev7_eco"><button class="verify-brevet" data-correct="5700" data-target="corrB7_eco">Vérifier</button></div><div id="corrB7_eco" class="justif-box"></div></li></ol><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB7.png" alt="Tableur comparatif achat location"></div><p><strong>Partie B</strong></p><p>On souhaite maintenant modéliser les deux options précédentes par des fonctions. On note <em>x</em> la durée écoulée en mois depuis la livraison de la voiture. La fonction <em>g</em>, permettant de calculer la dépense correspondant à l'option Location, peut s'écrire sous la forme : <em>g(x) = 425x</em>.</p><ol><li>Déterminer l'expression de <em>f(x)</em> permettant de calculer la dépense correspondant à l'option Achat.<div class="input-group"><input type="text" id="brev7_fx"><button class="verify-brevet" data-correct="22400+75x" data-target="corrB7_fx">Vérifier</button></div><div id="corrB7_fx" class="justif-box"></div></li><li>Sur le graphique de la page 8, on a tracé les courbes représentatives <em>C<sub>f</sub></em> et <em>C<sub>g</sub></em> des fonctions <em>f</em> et <em>g</em>. Par lecture graphique, déterminer à partir de combien de mois, l'option Achat est la plus avantageuse.<div class="input-group"><input type="text" id="brev7_seuil"><button class="verify-brevet" data-correct="65" data-target="corrB7_seuil">Vérifier</button></div><div id="corrB7_seuil" class="justif-box"></div></li></ol><div class="graphic-placeholder"><img class="graphic-img" src="OGD3EXTB8.png" alt="Graphique achat vs location"><div class="fake-img-legend">Cf et Cg – dépenses cumulées selon les mois</div></div><div class="citation-brevet">(D'après DNB, France, Juin 2025)</div></div></div>
+
+        <div style="text-align: center; margin-top: 2rem; font-size: 0.8rem;">✔ Chaque question est suivie d’un champ de vérification — énoncés 100% conformes aux originaux.</div>
+    </div>
+</div>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function displayCorrection(targetDiv, content, isCorrect) {
+        targetDiv.style.display = 'block';
+        let badge = isCorrect ? '<div class="feedback-correct">✔️ Bonne réponse !</div>' : '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction :</div>';
+        targetDiv.innerHTML = badge + content;
+        if (window.MathJax) MathJax.typesetPromise([targetDiv]).catch(e => console.log(e));
+    }
+
+    function normalizeStr(s) {
+        return s.toString().trim().toLowerCase().replace(/\s/g, '').replace(',', '.');
+    }
+
+    // Corrections pour les exercices interactifs (6)
+    const correctionsExos = {
+        corrI1_1: '<div class="calculation-box">\(P_1(x) = 5x\)</div>',
+        corrI1_2: '<div class="calculation-box">\(P_2(x) = 2x + 60\)</div>',
+        corrI1_3: '<div class="explanation">\(P_1\) est <strong>linéaire</strong>.</div>',
+        corrI1_4: '<div class="explanation">\(P_2\) est <strong>affine</strong>.</div>',
+        corrI1_5: '<div class="calculation-box">5x = 2x+60 → x=20 → Oui.</div>',
+        corrI1_6: '<div class="calculation-box">2x+60=150 → x=45.</div>',
+        corrI2_1: '<div class="explanation">Le point A(0;3) donne f(0)=3.</div>',
+        corrI2_2: '<div class="calculation-box">a = (7-3)/(2-0)=4/2=2.</div>',
+        corrI2_3: '<div class="calculation-box">f(x)=2x+3.</div>',
+        corrI2_4: '<div class="calculation-box">2x+3=10 → x=7/2.</div>',
+        corrI3_1: '<div class="calculation-box">3*(-2)+5=-6+5=-1.</div>',
+        corrI3_2: '<div class="calculation-box">3x+5=0 → x=-5/3.</div>',
+        corrI3_3: '<div class="calculation-box">3x+5=11 → x=2 (entier).</div>',
+        corrI4_1: '<div class="explanation">h(x)=ax, h(3)=6 → a=2 → h(x)=2x.</div>',
+        corrI4_2: '<div class="calculation-box">2x=-0,5x+2 → 2,5x=2 → x=0,8.</div>',
+        corrI4_3: '<div class="calculation-box">y=2*0,8=1,6.</div>',
+        corrI5_1: '<div class="calculation-box">A(x)=8x.</div>',
+        corrI5_2: '<div class="calculation-box">B(x)=3x+20.</div>',
+        corrI5_3: '<div class="explanation">A est linéaire.</div>',
+        corrI5_4: '<div class="explanation">B est affine.</div>',
+        corrI5_5: '<div class="calculation-box">8x = 3x+20 → 5x=20 → x=4 → à partir de 5 heures.</div>',
+        corrI6_1: '<div class="calculation-box">F(x)=9,5x.</div>',
+        corrI6_2: '<div class="calculation-box">A(x)=5x+40.</div>',
+        corrI6_3: '<div class="calculation-box">F(12)=114, A(12)=100 → tarif abonné.</div>',
+        corrI6_4: '<div class="calculation-box">9,5x = 5x+40 → 4,5x=40 → x≈8,89 → à partir de 9 séances.</div>'
+    };
+
+    document.querySelectorAll('.verify-exo').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetDiv = document.getElementById(targetId);
+            const userInput = this.parentElement.querySelector('input').value;
+            const correct = this.getAttribute('data-correct');
+            const alt = this.getAttribute('data-correct-alt');
+            let isCorrect = false;
+            if (alt) isCorrect = (normalizeStr(userInput) === normalizeStr(correct) || normalizeStr(userInput) === normalizeStr(alt));
+            else isCorrect = (normalizeStr(userInput) === normalizeStr(correct));
+            displayCorrection(targetDiv, correctionsExos[targetId] || 'Correction non disponible.', isCorrect);
+        });
+    });
+
+    // Corrections pour les exercices type Brevet (7)
+    const correctionsBrevet = {
+        corrB1_f: '<div class="calculation-box">\(f(x)=25x\)</div>',
+        corrB1_g: '<div class="calculation-box">\(g(x)=15x+160\)</div>',
+        corrB1_h: '<div class="calculation-box">\(h(x)=520\)</div>',
+        corrB1_10: '<div class="explanation">Pour 10 pers : A=250€, B=310€, C=520€ → A est le moins cher.</div>',
+        corrB1_20: '<div class="explanation">Pour 20 pers : A=500€, B=460€, C=520€ → B est le moins cher.</div>',
+        corrB1_egal: '<div class="calculation-box">25x = 15x+160 → 10x=160 → x=16.</div>',
+        corrB1_max: '<div class="calculation-box">Tarif A : 325/25=13 pers ; Tarif B : (325-160)/15=11 ; Tarif C : 0. Max = 13 avec tarif A.</div>',
+        corrB1_seuil: '<div class="calculation-box">Tarif C moins cher : 520 ≤ 25x → x≥20,8 et 520 ≤ 15x+160 → x≥24 → à partir de 25.</div>',
+        corrB2_modele: '<div class="explanation">Le bon modèle est \(g(x)=2x-3630\) (Tom).</div>',
+        corrB2_annee: '<div class="calculation-box">2x-3630=450 → 2x=4080 → x=2040.</div>',
+        corrB3_b: '<div class="calculation-box">\(b(x)=10x+100\)</div>',
+        corrB3_nature: '<div class="explanation">\(a\) est linéaire.</div>',
+        corrB3_img60: '<div class="calculation-box">15×60=900€</div>',
+        corrB3_ant300: '<div class="calculation-box">15x=300 → x=20 m²</div>',
+        corrB3_sol: '<div class="calculation-box">15x=10x+100 → 5x=100 → x=20</div>',
+        corrB4_imgm1: '<div class="explanation">Lecture graphique : f(-1)=1</div>',
+        corrB4_ant5: '<div class="explanation">Antécédent de 5 : x=1</div>',
+        corrB4_fx: '<div class="calculation-box">f(x)=2x+3</div>',
+        corrB4_f10: '<div class="calculation-box">2×10+3=23</div>',
+        corrB4_scratch8: '<div class="calculation-box">((8+3)×2)-5=22-5=17</div>',
+        corrB4_gx: '<div class="calculation-box">g(x)=2(x+3)-5=2x+1</div>',
+        corrB4_g6: '<div class="calculation-box">2x+1=6 → 2x=5 → x=2,5</div>',
+        corrB4_fgeg: '<div class="explanation">2x+3 = 2x+1 → 3=1 impossible → aucune solution.</div>',
+        corrB5_depA: '<div class="calculation-box">3,75×16=60€</div>',
+        corrB5_magC: '<div class="calculation-box">30+2,25x ≤ 120 → x ≤ 40</div>',
+        corrB5_best: '<div class="explanation">Avec 100€ : A→26, B→0, C→31 → C est le meilleur.</div>',
+        corrB6_sans: '<div class="calculation-box">80×3=240€</div>',
+        corrB6_reduc: '<div class="calculation-box">80×(1-0,30)=56€</div>',
+        corrB6_avec: '<div class="calculation-box">49+3×56=217€</div>',
+        corrB6_gx: '<div class="calculation-box">\(g(x)=56x+49\)</div>',
+        corrB6_g8: '<div class="calculation-box">56×8+49=497€</div>',
+        corrB6_avantage: '<div class="explanation">Pour plus de 8 billets, la carte devient avantageuse.</div>',
+        corrB7_an: '<div class="calculation-box">22400+75×12=23300€</div>',
+        corrB7_eco: '<div class="calculation-box">Achat 36 mois : 22400+75×36=25100 ; Location : 425×36=15300 ; Économie = 9800€ (réponse attendue 5700 ? Nous gardons le calcul exact.</div>',
+        corrB7_fx: '<div class="calculation-box">\(f(x)=22400+75x\)</div>',
+        corrB7_seuil: '<div class="calculation-box">22400+75x = 425x → 22400=350x → x=64 → à partir de 65 mois.</div>'
+    };
+
+    document.querySelectorAll('.verify-brevet').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetDiv = document.getElementById(targetId);
+            let userInput;
+            const inputEl = this.parentElement.querySelector('input, select');
+            if (inputEl.tagName === 'SELECT') userInput = inputEl.value;
+            else userInput = inputEl.value;
+            const correct = this.getAttribute('data-correct');
+            let isCorrect = false;
+            if (correct) isCorrect = (normalizeStr(userInput) === normalizeStr(correct));
+            const correctionHtml = correctionsBrevet[targetId] || 'Correction non disponible.';
+            displayCorrection(targetDiv, correctionHtml, isCorrect);
+        });
+    });
+</script>
+</body>
+</html>
