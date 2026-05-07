@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ème - Course aux Nombres (15 min)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --bg: #f8f9fe;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #2b2d42; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        header h1 { color: var(--primary); margin: 0; font-size: 1.8rem; text-transform: uppercase; }
+        .timer-bar { background: var(--accent); color: white; padding: 15px; text-align: center; font-size: 1.5em; font-weight: bold; border-radius: 12px; margin-bottom: 20px; position: sticky; top: 10px; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #edf2f7; padding: 12px; vertical-align: middle; }
+        th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; }
+        .num-col { width: 45px; text-align: center; font-weight: bold; color: #64748b; background: #f8fafc; }
+        canvas { background: #fff; border: 1px solid #eee; margin-top: 10px; border-radius: 8px; max-width: 100%; }
+        .ans-input { width: 100%; max-width: 160px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; }
+        .ans-input:focus { border-color: var(--primary); }
+        .btn-finish { display: block; width: 100%; padding: 20px; background: var(--success); color: white; border: none; font-size: 1.2rem; border-radius: 12px; cursor: pointer; margin-top: 30px; font-weight: 600; transition: transform 0.2s; }
+        .btn-finish:hover { transform: scale(1.01); background: #219150; }
+        .correct { background-color: #f0fff4 !important; border: 2px solid var(--success) !important; }
+        .wrong { background-color: #fff5f5 !important; border: 2px solid var(--accent) !important; }
+        .result-card { display: none; text-align: center; padding: 30px; background: #f1f5f9; border-radius: 15px; margin-top: 20px; border-left: 5px solid var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Course aux Nombres - Classe de 3<sup>ème</sup></h1>
+        <p>Calcul Mental, Automatismes et Géométrie</p>
+    </header>
+
+    <div id="timer" class="timer-bar">⏱️ Temps restant : 15:00</div>
+
+    <form id="quizForm">
+        <table>
+            <thead>
+                <tr>
+                    <th class="num-col">N°</th>
+                    <th>ÉNONCÉ</th>
+                    <th>RÉPONSE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="num-col">1</td><td>\(18 \times 6\)</td><td><input type="text" class="ans-input" data-answer="108"></td></tr>
+                <tr><td class="num-col">2</td><td>Reste de la division : \(286 \div 9\)</td><td><input type="text" class="ans-input" data-answer="7"></td></tr>
+                <tr><td class="num-col">3</td><td>Le triple de 9 est :</td><td><input type="text" class="ans-input" data-answer="27"></td></tr>
+                <tr><td class="num-col">4</td><td>\(49 + 7\)</td><td><input type="text" class="ans-input" data-answer="56"></td></tr>
+                <tr><td class="num-col">5</td><td>Le quart de 8 est :</td><td><input type="text" class="ans-input" data-answer="2"></td></tr>
+                <tr><td class="num-col">6</td><td>\(53 + 17\)</td><td><input type="text" class="ans-input" data-answer="70"></td></tr>
+                <tr><td class="num-col">7</td><td>Dans 720 combien de fois 8 ?</td><td><input type="text" class="ans-input" data-answer="90"></td></tr>
+                <tr><td class="num-col">8</td><td>Dans 48,132 le chiffre des dixièmes est :</td><td><input type="text" class="ans-input" data-answer="1"></td></tr>
+                <tr><td class="num-col">9</td><td>Compléter : \(53 + \dots = 100\)</td><td><input type="text" class="ans-input" data-answer="47"></td></tr>
+                <tr><td class="num-col">10</td><td>
+                    Volume de la pyramide (Base carrée de côté 3, hauteur 4).
+                    <canvas id="canvasPyramide" width="180" height="110"></canvas>
+                </td><td><input type="text" class="ans-input" data-answer="12"></td></tr>
+
+                <tr><td class="num-col">11</td><td>\(2 + 3 \times 5\) (Priorités)</td><td><input type="text" class="ans-input" data-answer="17"></td></tr>
+                <tr><td class="num-col">12</td><td>Moyenne de : 13 ; 3 ; 17</td><td><input type="text" class="ans-input" data-answer="11"></td></tr>
+                <tr><td class="num-col">15</td><td>Entier égal à : \(\frac{1}{4} + \frac{11}{3} + \frac{3}{4} - \frac{2}{3}\)</td><td><input type="text" class="ans-input" data-answer="4"></td></tr>
+                <tr><td class="num-col">19</td><td>Compléter : \(\frac{17}{12} = \frac{\dots}{60}\)</td><td><input type="text" class="ans-input" data-answer="85"></td></tr>
+                <tr><td class="num-col">20</td><td>Calculer : \(3 \times (10 - 8)\)</td><td><input type="text" class="ans-input" data-answer="6"></td></tr>
+
+                <tr><td class="num-col">21</td><td>Le produit de 12 par \(x\) est nul. Valeur de \(x\) ?</td><td><input type="text" class="ans-input" data-answer="0"></td></tr>
+                <tr><td class="num-col">22</td><td>Calculer \(4x - 1,5\) pour \(x = 0,5\)</td><td><input type="text" class="ans-input" data-answer="0,5"></td></tr>
+                <tr><td class="num-col">23</td><td>Estimation de \(492,3 \times 19,7\) :</td><td>
+                    <select class="ans-input" data-answer="9698.31">
+                        <option value="">Choisir...</option>
+                        <option value="9698.31">9 698,31</option>
+                        <option value="1056.21">1 056,21</option>
+                        <option value="10230.21">10 230,21</option>
+                    </select>
+                </td></tr>
+                <tr><td class="num-col">24</td><td>Côté d'un carré d'aire 100 cm² :</td><td><input type="text" class="ans-input" data-answer="10"> cm</td></tr>
+                <tr><td class="num-col">25</td><td>Moyenne des températures : 6°C ; -11°C ; -4°C</td><td><input type="text" class="ans-input" data-answer="-3"> °C</td></tr>
+                <tr><td class="num-col">28</td><td>Développer et réduire : \((x-2)(x+2)\)</td><td><input type="text" class="ans-input" data-answer="x^2-4"></td></tr>
+                <tr><td class="num-col">29</td><td>
+                    (AS) // (UE). SA=5, EU=9, RA=4. Calculer <strong>RU</strong>.
+                    <canvas id="canvasThales" width="180" height="100"></canvas>
+                </td><td><input type="text" class="ans-input" data-answer="7,2"></td></tr>
+                <tr><td class="num-col">30</td><td>
+                    Le triangle ABC est rectangle en A. <br> AC = 8 cm et AB = 6 cm.<br>
+                    <strong>Calculer BC (Pythagore)</strong>.
+                    <canvas id="canvasPythagore" width="180" height="110"></canvas>
+                </td><td><input type="text" class="ans-input" data-answer="10"> cm</td></tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn-finish" onclick="validateQuiz()">✅ Valider mes réponses</button>
+    </form>
+
+    <div id="results" class="result-card">
+        <h2 id="scoreText"></h2>
+        <p id="feedbackText"></p>
+        <button onclick="location.reload()" style="padding: 10px 20px; cursor: pointer; border-radius: 8px; border: 1px solid #ccc;">🔄 Recommencer</button>
+    </div>
+</div>
+
+<script>
+    // Configuration du Timer (15 minutes = 900 secondes)
+    let time = 900;
+    const timerDisplay = document.getElementById('timer');
+    const interval = setInterval(() => {
+        if (time <= 0) {
+            clearInterval(interval);
+            validateQuiz();
+            timerDisplay.innerText = "⏰ Temps écoulé !";
+        } else {
+            time--;
+            let m = Math.floor(time / 60);
+            let s = time % 60;
+            timerDisplay.innerText = `⏱️ Temps restant : ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+    }, 1000);
+
+    // Dessin des figures géométriques
+    function drawFigures() {
+        // Pyramide
+        const cp = document.getElementById('canvasPyramide').getContext('2d');
+        cp.strokeStyle = "#4361ee"; cp.lineWidth = 2;
+        cp.beginPath(); cp.moveTo(40, 80); cp.lineTo(120, 80); cp.lineTo(150, 50); cp.lineTo(70, 50); cp.closePath();
+        cp.stroke();
+        cp.beginPath(); cp.moveTo(95, 10); cp.lineTo(40, 80); cp.moveTo(95, 10); cp.lineTo(120, 80); cp.moveTo(95, 10); cp.lineTo(150, 50);
+        cp.stroke();
+
+        // Thales
+        const ct = document.getElementById('canvasThales').getContext('2d');
+        ct.strokeStyle = "#4361ee"; ct.lineWidth = 2;
+        ct.beginPath(); ct.moveTo(10, 80); ct.lineTo(170, 80); ct.lineTo(90, 10); ct.closePath(); ct.stroke();
+        ct.moveTo(45, 45); ct.lineTo(135, 45); ct.stroke();
+        ct.font = "bold 12px Arial";
+        ct.fillText("R", 88, 10); ct.fillText("A", 30, 45); ct.fillText("S", 145, 45); ct.fillText("U", 5, 95); ct.fillText("E", 165, 95);
+
+        // Pythagore
+        const cpy = document.getElementById('canvasPythagore').getContext('2d');
+        cpy.strokeStyle = "#4361ee"; cpy.lineWidth = 2;
+        cpy.beginPath(); cpy.moveTo(40, 15); cpy.lineTo(40, 90); cpy.lineTo(140, 90); cpy.closePath(); cpy.stroke();
+        cpy.strokeRect(40, 80, 10, 10);
+        cpy.fillText("B", 35, 12); cpy.fillText("A", 25, 100); cpy.fillText("C", 145, 100);
+        cpy.fillStyle = "#666";
+        cpy.fillText("6 cm", 5, 55); cpy.fillText("8 cm", 80, 105);
+    }
+
+    function validateQuiz() {
+        clearInterval(interval);
+        let score = 0;
+        const inputs = document.querySelectorAll('.ans-input');
+        
+        inputs.forEach(input => {
+            let userVal = input.value.trim().toLowerCase().replace(',', '.');
+            let correctVal = input.getAttribute('data-answer').toLowerCase().replace(',', '.');
+            
+            if (userVal === correctVal) {
+                score++;
+                input.className = "ans-input correct";
+            } else {
+                input.className = "ans-input wrong";
+            }
+        });
+
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.style.display = 'block';
+        document.getElementById('scoreText').innerText = `Score : ${score} / ${inputs.length}`;
+        
+        let message = "";
+        if(score === inputs.length) message = "Parfait ! Félicitations !";
+        else if(score > inputs.length/2) message = "Bien joué ! Continue tes efforts.";
+        else message = "Travaille encore un peu tes automatismes.";
+        document.getElementById('feedbackText').innerText = message;
+        
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    window.onload = drawFigures;
+</script>
+
+</body>
+</html>
