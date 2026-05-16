@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triangle Rectangle : Pythagore & Trigonométrie - Maths 3ème</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --bg: #f8f9fe;
+            --text: #2b2d42;
+            --success: #2ecc71;
+            --warning: #fab005;
+            --brevet: #e67e22;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 3rem 1rem; text-align: center; }
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
+
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; flex-wrap: wrap; }
+        .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Poppins', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary); color: white; }
+
+        .content-section { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+
+        h2 { color: var(--primary); border-bottom: 2px solid #f0f2ff; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        h4 { color: var(--primary); margin-top: 18px; }
+
+        .definition-box { background: #f0f2ff; padding: 20px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .property-box { background: #fff0f6; padding: 20px; border-left: 6px solid #e64980; margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .method-box { background: #fff9db; padding: 20px; border: 1px solid var(--warning); margin: 20px 0; border-radius: 15px; }
+        .example-box { background: #fdfdfd; padding: 20px; border: 1px dashed #ccc; margin: 15px 0; border-radius: 15px; }
+        .remark-box { background: #f3f0ff; padding: 20px; border-left: 6px solid #7048e8; margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
+        .sohtoa-box { background: #fff8f0; border: 2px solid #f59f00; padding: 18px 24px; border-radius: 15px; margin: 20px 0; text-align: center; font-size: 1.05rem; }
+
+        .step-list { margin: 10px 0 0 20px; padding-left: 0; }
+        .step-list li { margin-bottom: 8px; }
+
+        /* Two-column layout for figure + text */
+        .row { display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; margin: 15px 0; }
+        .row .col-text { flex: 1 1 55%; min-width: 220px; }
+        .row .col-fig  { flex: 0 1 38%; min-width: 180px; text-align: center; }
+
+        /* SVG triangles */
+        svg.triangle { display: block; margin: 0 auto; overflow: visible; }
+
+        /* highlight colors for sides */
+        .side-adj  { stroke: #2d9648; stroke-width: 2.5; }
+        .side-opp  { stroke: #7048e8; stroke-width: 2.5; }
+        .side-hyp  { stroke: #e67e22; stroke-width: 2.5; }
+        .side-teal { stroke: #0b7285; stroke-width: 2.5; }
+        .side-purple { stroke: #6741d9; stroke-width: 2.5; }
+        .right-angle { fill: rgba(100,100,100,0.15); stroke: #555; stroke-width: 1; }
+        .angle-arc { fill: rgba(255,182,193,0.6); stroke: none; }
+        .angle-arc-green { fill: rgba(100,220,140,0.5); stroke: none; }
+        .label { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; fill: #2b2d42; }
+        .meas  { font-family: 'Poppins', sans-serif; font-size: 12px; fill: #555; }
+        .hyp-arrow { fill: none; stroke: #e67e22; stroke-width: 1.8; marker-end: url(#arrowhead); }
+        .hyp-label { font-family: 'Poppins', sans-serif; font-size: 13px; fill: #c05a00; font-weight: 600; }
+        .angle-label { font-family: 'Poppins', sans-serif; font-size: 12px; fill: #c9184a; font-weight: 600; }
+
+        /* hint box */
+        .hint-box { background: #e7f5ff; border: 1.5px solid var(--primary); border-radius: 12px; padding: 14px 18px; margin-top: 16px; font-size: 0.93rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* PDF download */
+        .download-box { background: #eef2ff; border: 1px solid var(--primary); border-radius: 12px; padding: 14px 20px; margin-bottom: 24px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Triangle Rectangle</h1>
+    <p>Théorème de Pythagore &amp; Trigonométrie — Classe de 3<sup>ème</sup></p>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showSection('cours')">📖 Cours Détaillé</button>
+        <button class="tab-btn" onclick="showSection('exercices')">📝 Exercices Interactifs</button>
+        <button class="tab-btn" onclick="showSection('brevet')">🎓 Exercices Type Brevet</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION COURS DÉTAILLÉ
+    ══════════════════════════════════════════════════════════ -->
+    <div id="cours" class="content-section active">
+
+        <div class="download-box">
+            <i class="fas fa-download"></i> <strong>Télécharger le cours complet :</strong><br>
+            <a href="G3 Théorème De Pythagore Cours.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 G3 Théorème De Pythagore Cours.pdf
+            </a>
+        </div>
+
+        <!-- ─────────────────────────────────────────
+             SECTION 1 : THÉORÈME DE PYTHAGORE
+        ───────────────────────────────────────── -->
+        <h2>1. Théorème de Pythagore</h2>
+
+        <!-- Définition : hypoténuse -->
+        <div class="definition-box">
+            <strong>Définition :</strong> Dans un triangle rectangle, <strong>l'hypoténuse</strong> est le côté opposé à l'angle droit.<br>
+            L'hypoténuse est le <strong>plus grand côté</strong> d'un triangle rectangle.
+        </div>
+
+        <!-- Exemple : identifier l'hypoténuse -->
+        <div class="example-box">
+            <strong>📌 Exemple : Identifier l'hypoténuse</strong>
+            <div class="row">
+                <div class="col-text">
+                    Soit le triangle \(ABC\) rectangle en \(C\).<br>
+                    L'angle \(\widehat{ACB}\) mesure \(90°\).<br>
+                    Le côté \([AB]\) (opposé à l'angle droit) est donc <strong>l'hypoténuse</strong>.
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="200" viewBox="-10 -10 220 220">
+                        <defs>
+                            <marker id="arr1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L8,3 z" fill="#c05a00"/>
+                            </marker>
+                        </defs>
+                        <!-- triangle fill -->
+                        <polygon points="10,190 170,190 10,30" fill="#fff3e0" stroke="none"/>
+                        <!-- sides -->
+                        <line x1="10" y1="190" x2="170" y2="190" class="side-teal"/>
+                        <line x1="10" y1="30"  x2="10"  y2="190" class="side-teal"/>
+                        <line x1="10" y1="30"  x2="170" y2="190" class="side-hyp" stroke-width="3"/>
+                        <!-- right angle mark -->
+                        <rect x="10" y="170" width="20" height="20" class="right-angle"/>
+                        <!-- vertex labels -->
+                        <text x="0"   y="215" class="label">C</text>
+                        <text x="175" y="215" class="label">A</text>
+                        <text x="0"   y="22"  class="label">B</text>
+                        <!-- hypotenuse arrow + label -->
+                        <line x1="130" y1="80" x2="95" y2="118" stroke="#c05a00" stroke-width="1.8" marker-end="url(#arr1)"/>
+                        <text x="132" y="76" class="hyp-label">Hypoténuse</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Propriété : Théorème de Pythagore -->
+        <div class="property-box">
+            <strong>🔷 Théorème de Pythagore</strong><br><br>
+            Si un triangle est <strong>rectangle</strong>, alors le carré de la longueur de l'<strong>hypoténuse</strong> est égal à la somme des carrés des longueurs des deux autres côtés (les côtés de l'angle droit).
+            <br><br>
+            Pour un triangle \(ABC\) rectangle en \(B\) avec l'hypoténuse \([AC]\) :
+            \[
+            AC^2 = AB^2 + BC^2
+            \]
+        </div>
+
+        <!-- Exemple : figure Pythagore -->
+        <div class="example-box">
+            <strong>📌 Illustration : Triangle \(ABC\) rectangle en \(B\)</strong>
+            <div class="row">
+                <div class="col-text">
+                    Le triangle \(ABC\) ci-contre est rectangle en \(B\).<br>
+                    \([AC]\) est l'hypoténuse.<br><br>
+                    D'après le théorème de Pythagore :
+                    \[AC^2 = AB^2 + BC^2\]
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="190" viewBox="-10 -10 210 200">
+                        <polygon points="10,180 10,10 160,180" fill="#f3f0ff" stroke="none"/>
+                        <line x1="10"  y1="180" x2="10"  y2="10"  class="side-purple"/>
+                        <line x1="10"  y1="180" x2="160" y2="180" class="side-purple"/>
+                        <line x1="10"  y1="10"  x2="160" y2="180" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="160" width="20" height="20" class="right-angle"/>
+                        <text x="0"   y="205" class="label">B</text>
+                        <text x="165" y="205" class="label">C</text>
+                        <text x="0"   y="8"   class="label">A</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── Méthode : Calculer une longueur ─── -->
+        <div class="method-box">
+            <strong>🛠 Méthode : Calculer une longueur avec Pythagore</strong>
+            <ol class="step-list">
+                <li>Réaliser une figure ou un schéma et coder l'angle droit.</li>
+                <li>Citer le triangle et préciser qu'il est rectangle et <em>en quel sommet</em>.</li>
+                <li>Repérer l'hypoténuse.</li>
+                <li>Appliquer le théorème de Pythagore.</li>
+                <li>Remplacer les valeurs connues.</li>
+                <li>Utiliser la touche \(\sqrt{\;}\) de la calculatrice et arrondir si nécessaire.</li>
+            </ol>
+        </div>
+
+        <!-- Exemple calcul 1 : chercher l'hypoténuse -->
+        <div class="example-box">
+            <strong>📌 Exemple 1 — Calculer l'hypoténuse</strong><br>
+            <em>Énoncé :</em> Soit \(ABC\) un triangle rectangle en \(A\) tel que \(AB = 5\) cm et \(AC = 12\) cm.
+            Calculer la longueur \(BC\).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    \(ABC\) est rectangle en \(A\). D'après le théorème de Pythagore, \([BC]\) est l'hypoténuse :
+                    \[BC^2 = AB^2 + AC^2\]
+                    \[BC^2 = 5^2 + 12^2\]
+                    \[BC^2 = 25 + 144 = 169\]
+                    \[BC = \sqrt{169} = \mathbf{13 \text{ cm}}\]
+                    Donc \([BC]\) mesure \(\mathbf{13}\) cm.
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="190" viewBox="-10 -10 210 200">
+                        <polygon points="10,180 10,10 160,180" fill="#f3f0ff" stroke="none"/>
+                        <line x1="10"  y1="180" x2="10"  y2="10"  class="side-purple"/>
+                        <line x1="10"  y1="180" x2="160" y2="180" class="side-purple"/>
+                        <line x1="10"  y1="10"  x2="160" y2="180" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="160" width="20" height="20" class="right-angle"/>
+                        <text x="0"   y="205" class="label">A</text>
+                        <text x="165" y="205" class="label">C</text>
+                        <text x="0"   y="8"   class="label">B</text>
+                        <!-- measures -->
+                        <text x="-10" y="95"  class="meas" transform="rotate(-90,0,95)">5 cm</text>
+                        <text x="80"  y="198" class="meas">12 cm</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemple calcul 2 : chercher un côté de l'angle droit -->
+        <div class="example-box">
+            <strong>📌 Exemple 2 — Calculer un côté de l'angle droit</strong><br>
+            <em>Énoncé :</em> Soit \(ABC\) un triangle rectangle en \(A\) tel que \(AB = 3\) cm et \(BC = 5\) cm.
+            Calculer la longueur \(AC\).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    \(ABC\) est rectangle en \(A\), donc \([BC]\) est l'hypoténuse :
+                    \[BC^2 = AB^2 + AC^2\]
+                    \[5^2 = 3^2 + AC^2\]
+                    \[25 = 9 + AC^2\]
+                    \[AC^2 = 25 - 9 = 16\]
+                    \[AC = \sqrt{16} = \mathbf{4 \text{ cm}}\]
+                    Donc \([AC]\) mesure \(\mathbf{4}\) cm.
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="190" viewBox="-10 -10 210 200">
+                        <polygon points="10,180 10,10 160,180" fill="#f3f0ff" stroke="none"/>
+                        <line x1="10"  y1="180" x2="10"  y2="10"  class="side-purple"/>
+                        <line x1="10"  y1="180" x2="160" y2="180" class="side-purple"/>
+                        <line x1="10"  y1="10"  x2="160" y2="180" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="160" width="20" height="20" class="right-angle"/>
+                        <text x="0"   y="205" class="label">A</text>
+                        <text x="165" y="205" class="label">C</text>
+                        <text x="0"   y="8"   class="label">B</text>
+                        <text x="-10" y="95"  class="meas" transform="rotate(-90,0,95)">3 cm</text>
+                        <!-- hypotenuse label -->
+                        <text x="88"  y="90"  class="meas" transform="rotate(48,88,90)">5 cm</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────
+             SECTION 2 : RÉCIPROQUE
+        ───────────────────────────────────────── -->
+        <h2>2. Réciproque du théorème de Pythagore</h2>
+
+        <div class="property-box">
+            <strong>🔷 Réciproque du théorème de Pythagore</strong><br><br>
+            Dans un triangle, si le <strong>carré de la longueur du plus grand côté</strong> est égal à la <strong>somme des carrés des longueurs des deux autres côtés</strong>, alors le triangle est <strong>rectangle</strong>.
+        </div>
+
+        <!-- Exemple réciproque : triangle FGH -->
+        <div class="example-box">
+            <strong>📌 Exemple — Triangle \(FGH\)</strong><br>
+            Dans le triangle \(FGH\), \([FG]\) est le plus grand côté avec \(FG = 5\), \(FH = 3\), \(GH = 4\).
+            <div class="row">
+                <div class="col-text">
+                    <strong>D'une part :</strong> \(FG^2 = 5^2 = 25\).<br>
+                    <strong>D'autre part :</strong> \(FH^2 + GH^2 = 3^2 + 4^2 = 9 + 16 = 25\).<br><br>
+                    Ainsi, \(FG^2 = FH^2 + GH^2\).<br><br>
+                    Donc, d'après la <strong>réciproque du théorème de Pythagore</strong>, le triangle \(FGH\) est <strong>rectangle en \(H\)</strong>.<br>
+                    <em>On peut aussi dire : l'égalité de Pythagore est vérifiée, donc le triangle \(FGH\) est rectangle en \(H\).</em>
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="210" viewBox="-10 -10 210 220">
+                        <polygon points="10,200 130,200 10,40" fill="#e7f5ff" stroke="none"/>
+                        <line x1="10"  y1="200" x2="130" y2="200" stroke="#0b7285" stroke-width="2.5"/>
+                        <line x1="10"  y1="200" x2="10"  y2="40"  stroke="#0b7285" stroke-width="2.5"/>
+                        <line x1="10"  y1="40"  x2="130" y2="200" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="180" width="20" height="20" class="right-angle"/>
+                        <text x="0"   y="220" class="label">H</text>
+                        <text x="135" y="220" class="label">F</text>
+                        <text x="0"   y="32"  class="label">G</text>
+                        <!-- measures -->
+                        <text x="64"  y="218" class="meas">FH = 3</text>
+                        <text x="-8"  y="120" class="meas" writing-mode="tb">GH = 4</text>
+                        <text x="75"  y="108" class="meas" transform="rotate(52,75,108)">FG = 5</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Méthode réciproque -->
+        <div class="method-box">
+            <strong>🛠 Méthode : Réciproque du théorème de Pythagore</strong>
+            <ol class="step-list">
+                <li>Repérer le <strong>plus grand côté</strong> et calculer le carré de sa longueur.</li>
+                <li>Calculer la <strong>somme des carrés</strong> des deux autres longueurs.</li>
+                <li>Si les deux résultats sont <strong>égaux</strong> → le triangle est rectangle. Sinon → il ne l'est pas.</li>
+            </ol>
+        </div>
+
+        <!-- Exemple : ABC et CDE -->
+        <div class="example-box">
+            <strong>📌 Exemple — Déterminer si des triangles sont rectangles</strong><br>
+            <em>Énoncé :</em> On donne les triangles \(ABC\) (avec \(AB=4{,}8\), \(AC=6{,}4\), \(BC=8\)) et \(CDE\) (avec \(CE=4\), \(ED=2{,}2\), \(CD=4{,}5\)). Sont-ils rectangles ?
+
+            <div class="row">
+                <div class="col-text">
+                    <strong>Triangle \(ABC\) :</strong> \([BC]\) est le plus grand côté.<br>
+                    <strong>D'une part :</strong> \(BC^2 = 8^2 = 64\)<br>
+                    <strong>D'autre part :</strong> \(AB^2 + AC^2 = 4{,}8^2 + 6{,}4^2 = 23{,}04 + 40{,}96 = 64\)<br>
+                    L'égalité est vérifiée → <strong>\(ABC\) est rectangle en \(A\).</strong>
+                    <br><br>
+                    <strong>Triangle \(CDE\) :</strong> \([CD]\) est le plus grand côté.<br>
+                    <strong>D'une part :</strong> \(CD^2 = 4{,}5^2 = 20{,}25\)<br>
+                    <strong>D'autre part :</strong> \(CE^2 + ED^2 = 4^2 + 2{,}2^2 = 16 + 4{,}84 = 20{,}84\)<br>
+                    \(20{,}25 \neq 20{,}84\) → <strong>\(CDE\) n'est pas rectangle.</strong>
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="220" height="220" viewBox="-20 -15 240 235">
+                        <!-- Triangle ABC -->
+                        <polygon points="10,200 90,200 10,60" fill="#e6fcf5" stroke="none"/>
+                        <line x1="10" y1="60"  x2="10"  y2="200" stroke="#0b7285" stroke-width="2"/>
+                        <line x1="10" y1="200" x2="90"  y2="200" stroke="#0b7285" stroke-width="2"/>
+                        <line x1="10" y1="60"  x2="90"  y2="200" class="side-hyp" stroke-width="2.5"/>
+                        <rect x="10" y="180" width="18" height="18" class="right-angle"/>
+                        <text x="-2"  y="220" class="label" font-size="12">A</text>
+                        <text x="94"  y="220" class="label" font-size="12">C</text>
+                        <text x="-2"  y="55"  class="label" font-size="12">B</text>
+                        <text x="-14" y="135" class="meas" font-size="11">4,8</text>
+                        <text x="42"  y="218" class="meas" font-size="11">6,4</text>
+                        <text x="52"  y="118" class="meas" font-size="11" transform="rotate(54,52,118)">8</text>
+
+                        <!-- Triangle CDE (shares vertex C) -->
+                        <polygon points="90,200 180,200 180,130" fill="#fff0f6" stroke="none"/>
+                        <line x1="90"  y1="200" x2="180" y2="200" stroke="#7048e8" stroke-width="2"/>
+                        <line x1="180" y1="200" x2="180" y2="130" stroke="#7048e8" stroke-width="2"/>
+                        <line x1="90"  y1="200" x2="180" y2="130" stroke="#e64980" stroke-width="2.5"/>
+                        <rect x="162" y="182" width="18" height="18" class="right-angle"/>
+                        <text x="185" y="220" class="label" font-size="12">D</text>
+                        <text x="185" y="125" class="label" font-size="12">E</text>
+                        <text x="123" y="218" class="meas" font-size="11">4</text>
+                        <text x="183" y="170" class="meas" font-size="11">2,2</text>
+                        <text x="126" y="152" class="meas" font-size="11" transform="rotate(-40,126,152)">4,5</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte mentale 1 : Pythagore -->
+        <div style="text-align:center; margin: 30px 0;">
+            <img src="G3 Carte mentale1.png"
+                 alt="Carte mentale — Théorème de Pythagore"
+                 style="max-width:100%; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.10);">
+            <p style="font-size:0.85rem; color:#888; margin-top:8px;">Carte mentale — Théorème de Pythagore &amp; sa réciproque</p>
+        </div>
+
+        <!-- ─────────────────────────────────────────
+             SECTION 3 : TRIGONOMÉTRIE
+        ───────────────────────────────────────── -->
+        <h2>3. Trigonométrie dans le triangle rectangle</h2>
+
+        <h3>3.1 Vocabulaire</h3>
+
+        <div class="definition-box">
+            <strong>Définition :</strong> Dans un triangle rectangle, pour un <strong>angle aigu</strong> donné :
+            <ul>
+                <li><strong>L'hypoténuse</strong> est le côté opposé à l'angle droit (le plus grand côté).</li>
+                <li>Le <strong>côté adjacent</strong> à l'angle est le côté qui forme cet angle avec l'hypoténuse (et qui n'est pas l'hypoténuse).</li>
+                <li>Le <strong>côté opposé</strong> à l'angle est le côté qui ne touche pas cet angle.</li>
+            </ul>
+            <div style="margin-top:16px;">
+                <svg class="triangle" width="300" height="200" viewBox="-80 -30 380 230">
+                    <defs>
+                        <marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L7,3 z" fill="#c05a00"/>
+                        </marker>
+                    </defs>
+                    <!-- triangle fill -->
+                    <polygon points="50,170 200,40 260,170" fill="#f8f9fe" stroke="none"/>
+                    <!-- sides: AB adj to B (purple), AC adj to C (teal), BC hyp (orange) -->
+                    <line x1="50"  y1="170" x2="200" y2="40"  stroke="#7048e8" stroke-width="3"/>
+                    <line x1="200" y1="40"  x2="260" y2="170" stroke="#0b7285" stroke-width="3"/>
+                    <line x1="50"  y1="170" x2="260" y2="170" stroke="#e67e22" stroke-width="3.5"/>
+                    <!--
+                      Right angle at A (200,40).
+                      Direction AB: from A(200,40) to B(50,170) → vector (-150,130), length≈198.
+                      Unit: (-0.757, 0.657). Step s=16.
+                      Direction AC: from A(200,40) to C(260,170) → vector (60,130), length≈143.
+                      Unit: (0.420, 0.908). Step s=16.
+                      Square corners:
+                        P1 = A + s*uAB         = (200-12.1, 40+10.5) = (187.9, 50.5)
+                        P2 = A + s*uAB + s*uAC  = (187.9+6.7, 50.5+14.5) = (194.6, 65.0)
+                        P3 = A + s*uAC           = (200+6.7, 40+14.5)  = (206.7, 54.5)
+                    -->
+                    <polygon points="187.9,50.5 194.6,65.0 206.7,54.5 200,40"
+                             fill="rgba(100,100,100,0.18)" stroke="#555" stroke-width="1"/>
+                    <!-- angle arcs -->
+                    <path d="M 50,170 L 80,170 A 30 30 0 0 0 71,147 Z" fill="rgba(255,182,193,0.65)"/>
+                    <path d="M 260,170 L 235,170 A 30 30 0 0 1 242,149 Z" fill="rgba(100,200,240,0.55)"/>
+                    <!-- vertex labels -->
+                    <text x="196" y="28"  class="label">A</text>
+                    <text x="30"  y="192" class="label">B</text>
+                    <text x="258" y="192" class="label">C</text>
+                    <!-- annotation arrows + labels -->
+                    <line x1="110" y1="65" x2="128" y2="96" stroke="#c05a00" stroke-width="1.6" marker-end="url(#arr2)"/>
+                    <text x="30" y="62" class="hyp-label" font-size="11">Côté adjacent à B̂</text>
+                    <line x1="240" y1="70" x2="225" y2="100" stroke="#c05a00" stroke-width="1.6" marker-end="url(#arr2)"/>
+                    <text x="222" y="62" class="hyp-label" font-size="11">Côté adjacent à Ĉ</text>
+                    <line x1="155" y1="185" x2="155" y2="175" stroke="#c05a00" stroke-width="1.6" marker-end="url(#arr2)"/>
+                    <text x="110" y="204" class="hyp-label" font-size="12">Hypoténuse</text>
+                </svg>
+            </div>
+        </div>
+
+        <h3>3.2 Définitions des rapports trigonométriques</h3>
+
+        <div class="definition-box">
+            <strong>Cosinus</strong> d'un angle aigu \(\alpha\) :
+            \[\cos\alpha = \frac{\text{longueur du côté adjacent à } \alpha}{\text{longueur de l'hypoténuse}}\]
+        </div>
+
+        <div class="definition-box">
+            <strong>Sinus</strong> d'un angle aigu \(\alpha\) :
+            \[\sin\alpha = \frac{\text{longueur du côté opposé à } \alpha}{\text{longueur de l'hypoténuse}}\]
+        </div>
+
+        <div class="definition-box">
+            <strong>Tangente</strong> d'un angle aigu \(\alpha\) :
+            \[\tan\alpha = \frac{\text{longueur du côté opposé à } \alpha}{\text{longueur du côté adjacent à } \alpha}\]
+        </div>
+
+        <div class="remark-box">
+            💡 <strong>Remarque :</strong> Le cosinus, le sinus et la tangente d'un angle aigu sont des <strong>nombres sans unité</strong>.
+        </div>
+
+        <div class="sohtoa-box">
+            <strong>SOH – CAH – TOA</strong><br><br>
+            \[\boxed{\cos\alpha = \dfrac{\text{Adjacent}}{\text{Hypoténuse}}} \qquad \boxed{\sin\alpha = \dfrac{\text{Opposé}}{\text{Hypoténuse}}} \qquad \boxed{\tan\alpha = \dfrac{\text{Opposé}}{\text{Adjacent}}}\]
+        </div>
+
+        <div class="property-box">
+            <strong>🔷 Propriété :</strong> Pour tout angle aigu \(\alpha\) :
+            <ul>
+                <li>\(\cos\alpha\) et \(\sin\alpha\) sont toujours compris entre \(0\) et \(1\).</li>
+                <li>\(\tan\alpha\) peut prendre n'importe quelle valeur positive.</li>
+            </ul>
+        </div>
+
+        <!-- Exemple : Exprimer cos, sin, tan -->
+        <div class="example-box">
+            <strong>📌 Exemple 1 — Exprimer le cosinus, le sinus et la tangente</strong><br>
+            <em>Énoncé :</em> On considère le triangle \(AMC\) rectangle en \(A\). Exprimer \(\cos(\widehat{AMC})\), \(\sin(\widehat{AMC})\) et \(\tan(\widehat{AMC})\) en fonction des longueurs des côtés.
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    Le triangle \(AMC\) est rectangle en \(A\) :
+                    <ul>
+                        <li>\([MC]\) est l'hypoténuse ;</li>
+                        <li>\([AM]\) est le côté <strong>adjacent</strong> à \(\widehat{AMC}\) ;</li>
+                        <li>\([AC]\) est le côté <strong>opposé</strong> à \(\widehat{AMC}\).</li>
+                    </ul>
+                    Par définition :
+                    \[\cos(\widehat{AMC}) = \frac{AM}{MC}, \quad \sin(\widehat{AMC}) = \frac{AC}{MC}, \quad \tan(\widehat{AMC}) = \frac{AC}{AM}\]
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="170" viewBox="-15 -15 215 185">
+                        <polygon points="10,160 170,160 10,10" fill="#e7f5ff" stroke="none"/>
+                        <line x1="10"  y1="160" x2="170" y2="160" class="side-adj"/>
+                        <line x1="10"  y1="160" x2="10"  y2="10"  class="side-opp"/>
+                        <line x1="10"  y1="10"  x2="170" y2="160" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="140" width="20" height="20" class="right-angle"/>
+                        <!-- angle arc at M -->
+                        <path d="M 170,160 L 143,160 A 27 27 0 0 1 152,138 Z" fill="rgba(255,182,193,0.65)"/>
+                        <text x="0"   y="178" class="label">A</text>
+                        <text x="174" y="178" class="label">M</text>
+                        <text x="0"   y="8"   class="label">C</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemple : Calculer valeurs exactes -->
+        <div class="example-box">
+            <strong>📌 Exemple 2 — Calculer les valeurs exactes</strong><br>
+            <em>Énoncé :</em> Dans le triangle \(AMC\) rectangle en \(A\), on donne \(AC = 3\) cm, \(AM = 4\) cm et \(MC = 5\) cm. Calculer \(\cos(\widehat{AMC})\), \(\sin(\widehat{AMC})\) et \(\tan(\widehat{AMC})\).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br><br>
+                    \(\cos(\widehat{AMC}) = \dfrac{AM}{MC} = \dfrac{4}{5} = 0{,}8\)<br><br>
+                    \(\sin(\widehat{AMC}) = \dfrac{AC}{MC} = \dfrac{3}{5} = 0{,}6\)<br><br>
+                    \(\tan(\widehat{AMC}) = \dfrac{AC}{AM} = \dfrac{3}{4} = 0{,}75\)
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="190" height="200" viewBox="-15 -15 205 215">
+                        <polygon points="10,10 10,170 100,170" fill="#e7f5ff" stroke="none"/>
+                        <line x1="10"  y1="10"  x2="10"  y2="170" class="side-opp"/>
+                        <line x1="10"  y1="170" x2="100" y2="170" class="side-adj"/>
+                        <line x1="10"  y1="10"  x2="100" y2="170" class="side-hyp" stroke-width="3"/>
+                        <rect x="10" y="150" width="20" height="20" class="right-angle"/>
+                        <!-- angle arc at M (bottom-right) -->
+                        <path d="M 100,170 L 74,170 A 26 26 0 0 1 82,149 Z" fill="rgba(255,182,193,0.65)"/>
+                        <text x="0"   y="188" class="label">A</text>
+                        <text x="104" y="188" class="label">M</text>
+                        <text x="0"   y="8"   class="label">C</text>
+                        <!-- measures -->
+                        <text x="-14" y="92"  class="meas" transform="rotate(-90,-14,92)">3 cm</text>
+                        <text x="48"  y="188" class="meas">4 cm</text>
+                        <text x="56"  y="84"  class="meas" transform="rotate(61,56,84)">5 cm</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────
+             3.3 Calculer des longueurs et des angles
+        ───────────────────────────────────────── -->
+        <h3>3.3 Calculer des longueurs et des mesures d'angles</h3>
+
+        <h4>Calculer une longueur</h4>
+
+        <div class="method-box">
+            <strong>🛠 Méthode :</strong> Dans un triangle rectangle, on peut calculer la longueur d'un côté si on connaît <strong>une longueur</strong> et la mesure d'un <strong>angle aigu</strong>.<br>
+            On choisit la bonne formule (cosinus, sinus ou tangente) selon les données disponibles.
+        </div>
+
+        <!-- Exemple longueur avec tangente -->
+        <div class="example-box">
+            <strong>📌 Exemple 3 — Calcul d'une longueur avec la tangente</strong><br>
+            <em>Énoncé :</em> On considère le triangle \(CDE\) rectangle en \(D\). On donne \(CD = 3{,}1\) cm et \(\widehat{DCE} = 64°\). Calculer \(DE\) (côté opposé).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    Par rapport à l'angle \(\widehat{DCE}\) :
+                    <ul>
+                        <li>\([CD]\) est le côté <strong>adjacent</strong> ;</li>
+                        <li>\([DE]\) est le côté <strong>opposé</strong>.</li>
+                    </ul>
+                    On utilise la <strong>tangente</strong> :
+                    \[\tan(\widehat{DCE}) = \frac{\text{Opp.}}{\text{Adj.}} = \frac{DE}{CD}\]
+                    \[\tan(64°) = \frac{DE}{3{,}1}\]
+                    \[DE = 3{,}1 \times \tan(64°) \approx \mathbf{6{,}4 \text{ cm}}\]
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="200" viewBox="-15 -15 215 215">
+                        <polygon points="10,190 170,190 10,60" fill="#f3fde8" stroke="none"/>
+                        <line x1="10"  y1="60"  x2="10"  y2="190" class="side-adj" stroke="#2d9648" stroke-width="2.5"/>
+                        <line x1="10"  y1="190" x2="170" y2="190" class="side-opp" stroke="#7048e8" stroke-width="2.5"/>
+                        <line x1="10"  y1="60"  x2="170" y2="190" class="side-hyp" stroke-width="2.5"/>
+                        <rect x="10" y="170" width="20" height="20" class="right-angle"/>
+                        <!--
+                          Angle at C(10,60). Two sides from C:
+                            CD: goes straight down → direction (0,1), angle 90°
+                            CE: goes to E(170,190) → vector (160,130), angle = atan2(130,160) ≈ 39.1° from horizontal = 39.1° → in SVG y-down, angle from positive-x = atan2(130,160) ≈ 39°
+                          In SVG degrees (y-down, clockwise from right):
+                            CD direction = 90° (straight down)
+                            CE direction ≈ 39°
+                          Arc from 39° to 90° (inside triangle), radius 38.
+                          startX = 10 + 38*cos(39°) = 10 + 38*0.777 = 39.5, startY = 60 + 38*sin(39°) = 60 + 38*0.629 = 83.9
+                          endX   = 10 + 38*cos(90°) = 10 + 0 = 10,         endY   = 60 + 38*sin(90°) = 60 + 38 = 98
+                          Sweep: large-arc=0, sweep=1 (clockwise)
+                        -->
+                        <path d="M 10,60 L 39.5,83.9 A 38 38 0 0 1 10,98 Z" fill="rgba(255,182,193,0.65)"/>
+                        <!-- label at centroid of arc sector, roughly at angle 64° midpoint = ~64.5°, r≈24 -->
+                        <text x="27" y="94" class="angle-label">64°</text>
+                        <text x="0"   y="208" class="label">D</text>
+                        <text x="174" y="208" class="label">E</text>
+                        <text x="0"   y="52"  class="label">C</text>
+                        <text x="-14" y="130" class="meas" transform="rotate(-90,-14,130)">3,1 cm</text>
+                        <text x="80"  y="208" class="meas" fill="#7048e8">?</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemple longueur avec sinus -->
+        <div class="example-box">
+            <strong>📌 Exemple 4 — Calcul d'une longueur avec le sinus</strong><br>
+            <em>Énoncé :</em> Dans le triangle \(ABC\) rectangle en \(A\), \(AC = 7\) cm et \(\widehat{ABC} = 53°\). Calculer \(BC\) (arrondie au mm).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    Par rapport à l'angle \(\widehat{ABC}\) :
+                    <ul>
+                        <li>\([AC]\) est le côté <strong>opposé</strong> ;</li>
+                        <li>\([BC]\) est l'<strong>hypoténuse</strong>.</li>
+                    </ul>
+                    On utilise le <strong>sinus</strong> :
+                    \[\sin(\widehat{ABC}) = \frac{\text{Opp.}}{\text{Hyp.}} = \frac{AC}{BC}\]
+                    \[\sin(53°) = \frac{7}{BC}\]
+                    \[BC = \frac{7}{\sin(53°)} \approx \frac{7}{0{,}7986} \approx \mathbf{8{,}8 \text{ cm}}\]
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="200" height="200" viewBox="-15 -15 215 215">
+                        <polygon points="10,190 140,190 10,30" fill="#ebfbee" stroke="none"/>
+                        <line x1="10"  y1="30"  x2="10"  y2="190" class="side-opp" stroke="#2d9648" stroke-width="2.5"/>
+                        <line x1="10"  y1="190" x2="140" y2="190" stroke="#0b7285" stroke-width="2.5"/>
+                        <line x1="10"  y1="30"  x2="140" y2="190" class="side-hyp" stroke-width="2.5"/>
+                        <rect x="10" y="170" width="20" height="20" class="right-angle"/>
+                        <!-- angle arc at B (bottom-right) -->
+                        <path d="M 140,190 L 112,190 A 28 28 0 0 1 122,168 Z" fill="rgba(100,220,140,0.55)"/>
+                        <text x="107" y="178" class="angle-label" fill="#1a7f3c">53°</text>
+                        <text x="0"   y="208" class="label">A</text>
+                        <text x="144" y="208" class="label">B</text>
+                        <text x="0"   y="22"  class="label">C</text>
+                        <text x="-14" y="112" class="meas" fill="#2d9648" transform="rotate(-90,-14,112)">7 cm</text>
+                        <text x="80"  y="115" class="meas" transform="rotate(50,80,115)">?</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image illustration J -->
+        <div style="text-align:center; margin: 28px 0;">
+            <img src="G3 imageJ.png"
+                 alt="Illustration trigonométrie"
+                 style="max-width:70%; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.10);">
+        </div>
+
+        <h4>Calculer la mesure d'un angle</h4>
+
+        <div class="method-box">
+            <strong>🛠 Méthode :</strong> Dans un triangle rectangle, on peut calculer la mesure d'un angle aigu si on connaît les longueurs de <strong>deux côtés</strong>.<br>
+            On utilise les fonctions réciproques : \(\arccos\), \(\arcsin\) ou \(\arctan\) (touche <strong>2nd</strong> ou <strong>Shift</strong> de la calculatrice).
+        </div>
+
+        <!-- Exemple angle avec arcsin -->
+        <div class="example-box">
+            <strong>📌 Exemple 5 — Calcul d'un angle avec le sinus</strong><br>
+            <em>Énoncé :</em> On considère le triangle \(CDE\) rectangle en \(D\) tel que \(CE = 5\) et \(DE = 4\). Déterminer la mesure de l'angle \(\widehat{DCE}\).
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    Par rapport à l'angle \(\widehat{DCE}\) :
+                    <ul>
+                        <li>\([CE]\) est l'<strong>hypoténuse</strong> ;</li>
+                        <li>\([DE]\) est le côté <strong>opposé</strong>.</li>
+                    </ul>
+                    On utilise le <strong>sinus</strong> :
+                    \[\sin(\widehat{DCE}) = \frac{DE}{CE} = \frac{4}{5}\]
+                    À la calculatrice :
+                    \[\widehat{DCE} = \arcsin\!\left(\frac{4}{5}\right) \approx \mathbf{53°}\]
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="190" height="200" viewBox="-15 -15 205 215">
+                        <polygon points="100,10 100,190 10,190" fill="#fff0f6" stroke="none"/>
+                        <line x1="100" y1="10"  x2="100" y2="190" class="side-opp" stroke="#7048e8" stroke-width="2.5"/>
+                        <line x1="10"  y1="190" x2="100" y2="190" class="side-adj" stroke="#2d9648" stroke-width="2.5"/>
+                        <line x1="10"  y1="190" x2="100" y2="10"  class="side-hyp" stroke-width="2.5"/>
+                        <rect x="82"  y="170" width="18" height="18" class="right-angle"/>
+                        <!--
+                          Angle at C(100,10). Two sides from C:
+                            CD: goes straight down → direction 90° (SVG y-down)
+                            CE: goes to E(10,190) → vector (-90,180), angle = atan2(180,-90) ≈ 180°-63.4° = 116.6° from x-axis (measured SVG clockwise from right)
+                                i.e. in standard math: atan2(180,-90) is in 2nd quadrant → ~116.6°
+                          Arc from 90° (CD, straight down) to ~116.6° (CE direction), radius 36.
+                            start = C + 36*(cos90°, sin90°)  = (100+0,  10+36) = (100, 46)
+                            end   = C + 36*(cos116.6°, sin116.6°) = (100+36*(-0.447), 10+36*0.894)
+                                  = (100-16.1, 10+32.2) = (83.9, 42.2)
+                          Sweep from start(100,46) to end(83.9,42.2): large-arc=0, sweep=1 (clockwise in SVG)
+                          This arc stays inside the triangle between the two sides CD and CE.
+                        -->
+                        <path d="M 100,10 L 100,46 A 36 36 0 0 1 83.9,42.2 Z" fill="rgba(255,182,193,0.65)"/>
+                        <!-- label inside: midpoint of arc ≈ angle 103°, r=22 from C -->
+                        <text x="74" y="44" class="angle-label">?</text>
+                        <text x="102" y="208" class="label">D</text>
+                        <text x="102" y="8"   class="label">C</text>
+                        <text x="0"   y="208" class="label">E</text>
+                        <text x="50"  y="208" class="meas">4</text>
+                        <text x="104" y="105" class="meas" fill="#7048e8">DE=4</text>
+                        <text x="38"  y="90"  class="meas" transform="rotate(-62,38,90)">5</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="hint-box">
+                <strong style="color:var(--primary);">💡 Coup de pouce :</strong> Si on connaît la mesure de deux des angles, on peut calculer le troisième grâce à la propriété : <em>la somme des angles d'un triangle est égale à 180°</em>.
+            </div>
+        </div>
+
+        <!-- Exemple angle avec arctan -->
+        <div class="example-box">
+            <strong>📌 Exemple 6 — Calcul d'un angle avec la tangente</strong><br>
+            <em>Énoncé :</em> Triangle \(ABC\) rectangle en \(A\), \(AB = 7\) cm, \(AC = 5\) cm. Calculer \(\widehat{ACB}\) arrondi au degré.
+            <div class="row">
+                <div class="col-text">
+                    <strong>Solution :</strong><br>
+                    Par rapport à l'angle \(\widehat{ACB}\) :
+                    <ul>
+                        <li>\([AB]\) est le côté <strong>opposé</strong> ;</li>
+                        <li>\([AC]\) est le côté <strong>adjacent</strong>.</li>
+                    </ul>
+                    On utilise la <strong>tangente</strong> :
+                    \[\tan(\widehat{ACB}) = \frac{AB}{AC} = \frac{7}{5}\]
+                    À la calculatrice :
+                    \[\widehat{ACB} = \arctan\!\left(\frac{7}{5}\right) \approx \mathbf{54°}\]
+                    <div class="method-box" style="margin-top:14px; padding:12px 16px;">
+                        <strong>⚙️ Méthode</strong>
+                        <ul class="step-list" style="margin-top:6px;">
+                            <li>Tracer une figure à main levée et identifier les côtés.</li>
+                            <li>Choisir la relation trigonométrique adaptée.</li>
+                            <li>Penser à mettre la calculatrice en <strong>mode degré</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-fig">
+                    <svg class="triangle" width="190" height="210" viewBox="-15 -15 205 225">
+                        <polygon points="10,200 10,30 110,200" fill="#ebfbee" stroke="none"/>
+                        <line x1="10"  y1="30"  x2="10"  y2="200" class="side-opp" stroke="#2d9648" stroke-width="2.5"/>
+                        <line x1="10"  y1="200" x2="110" y2="200" class="side-adj" stroke="#2d9648" stroke-width="2.5"/>
+                        <line x1="10"  y1="30"  x2="110" y2="200" class="side-hyp" stroke-width="2.5"/>
+                        <rect x="10"  y="180" width="20" height="20" class="right-angle"/>
+                        <!-- angle arc at C (bottom right) -->
+                        <path d="M 110,200 L 84,200 A 26 26 0 0 1 93,178 Z" fill="rgba(255,182,193,0.65)"/>
+                        <text x="74"  y="184" class="angle-label">?</text>
+                        <text x="0"   y="218" class="label">A</text>
+                        <text x="114" y="218" class="label">C</text>
+                        <text x="0"   y="22"  class="label">B</text>
+                        <text x="-14" y="115" class="meas" fill="#2d9648" transform="rotate(-90,-14,115)">7 cm</text>
+                        <text x="54"  y="218" class="meas" fill="#2d9648">5 cm</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Résumé SOH-CAH-TOA complet -->
+        <div class="utilite-box" style="margin-top:30px;">
+            <strong>💡 Récapitulatif — Quand utiliser quoi ?</strong>
+            <table style="width:100%; border-collapse:collapse; margin-top:12px; font-size:0.93rem;">
+                <thead>
+                    <tr style="background:#d0ebff;">
+                        <th style="padding:8px 12px; text-align:left; border-radius:8px 0 0 0;">Je connais…</th>
+                        <th style="padding:8px 12px; text-align:left;">Je cherche…</th>
+                        <th style="padding:8px 12px; text-align:left; border-radius:0 8px 0 0;">J'utilise…</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background:#f8f9fe;">
+                        <td style="padding:7px 12px;">Adj. &amp; Hyp.</td>
+                        <td style="padding:7px 12px;">Angle ou Adj./Hyp.</td>
+                        <td style="padding:7px 12px;"><strong>Cosinus</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:7px 12px;">Opp. &amp; Hyp.</td>
+                        <td style="padding:7px 12px;">Angle ou Opp./Hyp.</td>
+                        <td style="padding:7px 12px;"><strong>Sinus</strong></td>
+                    </tr>
+                    <tr style="background:#f8f9fe;">
+                        <td style="padding:7px 12px;">Opp. &amp; Adj.</td>
+                        <td style="padding:7px 12px;">Angle ou Opp./Adj.</td>
+                        <td style="padding:7px 12px;"><strong>Tangente</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:7px 12px;">Deux côtés</td>
+                        <td style="padding:7px 12px;">Le troisième côté</td>
+                        <td style="padding:7px 12px;"><strong>Pythagore</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Carte mentale 2 : Trigonométrie -->
+        <div style="text-align:center; margin: 30px 0;">
+            <img src="G3 Carte mentale2.png"
+                 alt="Carte mentale — Trigonométrie"
+                 style="max-width:100%; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.10);">
+            <p style="font-size:0.85rem; color:#888; margin-top:8px;">Carte mentale — Trigonométrie dans le triangle rectangle</p>
+        </div>
+
+    </div><!-- end #cours -->
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION EXERCICES INTERACTIFS
+    ══════════════════════════════════════════════════════════ -->
+    <div id="exercices" class="content-section">
+        <h2>📚 Exercices d'application</h2>
+
+        <div class="download-box">
+            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices :</strong><br>
+            <a href="G3 Théorème De Pythagore Exercices d_application.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 G3 – Théorème de Pythagore – Exercices d'application.pdf
+            </a>
+        </div>
+
+        <style>
+            .exercice-card-import {
+                background: white;
+                border-radius: 1.5rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+                border: 1px solid #e2e8f0;
+                overflow: hidden;
+            }
+            .card-header {
+                background: #f8fafc;
+                padding: 1rem 1.8rem;
+                border-bottom: 2px solid #e2e8f0;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .card-header h4 {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #0f172a;
+                margin: 0;
+            }
+            .badge-import {
+                background: #4361ee;
+                color: white;
+                border-radius: 40px;
+                padding: 0.2rem 1rem;
+                font-size: 0.7rem;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+            .card-body { padding: 1.6rem 1.8rem; }
+            .question {
+                background: #f1f5f9;
+                padding: 0.9rem 1.2rem;
+                border-radius: 1rem;
+                border-left: 5px solid #4361ee;
+                margin-bottom: 1.3rem;
+                font-weight: 500;
+                line-height: 1.6;
+            }
+            .subquestion {
+                margin: 1rem 0 0.5rem 0;
+                font-weight: 600;
+                color: #1e40af;
+            }
+            .input-group {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.7rem;
+                margin: 0.7rem 0 0.3rem;
+            }
+            .input-group label { font-weight: 500; min-width: 120px; }
+            .input-group input {
+                padding: 0.45rem 1rem;
+                border-radius: 2rem;
+                border: 1.5px solid #cbd5e1;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem;
+                min-width: 140px;
+                width: auto;
+            }
+            button.verify {
+                background: #0f172a;
+                border: none;
+                color: white;
+                padding: 0.45rem 1.2rem;
+                border-radius: 2rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.2s;
+                font-size: 0.85rem;
+                font-family: 'Poppins', sans-serif;
+            }
+            button.verify:hover { background: #4361ee; transform: translateY(-1px); }
+            .solution {
+                background: #fefce8;
+                border-left: 5px solid #eab308;
+                padding: 1rem 1.3rem;
+                border-radius: 1rem;
+                margin-top: 1rem;
+                font-size: 0.93rem;
+                display: none;
+                line-height: 1.6;
+            }
+            .feedback-correct {
+                color: #15803d; background: #dcfce7;
+                display: inline-block; padding: 0.2rem 0.8rem;
+                border-radius: 30px; margin-bottom: 0.6rem; font-weight: 700;
+            }
+            .feedback-wrong {
+                color: #b91c1c; background: #fee2e2;
+                display: inline-block; padding: 0.2rem 0.8rem;
+                border-radius: 30px; margin-bottom: 0.6rem; font-weight: 700;
+            }
+            .hint-small { font-size: 0.8rem; color: #64748b; margin-top: 4px; }
+        </style>
+
+        <!-- ── Exercice 1 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🛝 Exercice 1 – Longueur de la rampe du toboggan</h4>
+                <span class="badge-import">Pythagore — hypoténuse</span>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Un toboggan est fabriqué tel que l'échelle soit perpendiculaire à la rampe.
+                    L'échelle mesure \(2\) m et l'écartement entre les deux extrémités \(A\) et \(C\) du toboggan est de \(9\) m.<br>
+                    <strong>Quelle est la longueur, arrondie au cm près, de la rampe ?</strong>
+                </div>
+                <div style="text-align:center; margin: 14px 0;">
+                    <img src="G3 image1.png" alt="Toboggan" style="max-width:50%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                <div class="input-group">
+                    <label>Longueur de la rampe :</label>
+                    <input type="text" id="ex1_ramp" placeholder="en m, ex: 9,22">
+                    <button class="verify" id="btn1">✔️ Vérifier</button>
+                </div>
+                <p class="hint-small">ℹ️ Arrondir au centimètre près (2 décimales). L'écartement AC = 9 m est l'hypoténuse.</p>
+                <div id="sol1" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 2 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏎️ Exercice 2 – Distance totale du circuit</h4>
+                <span class="badge-import">Pythagore — multiple étapes</span>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Un circuit de courses a la forme d'un tracé passant par \(D\), \(F\), \(H\), \(G\), \(F\), \(E\) et revenant en \(D\).
+                    On doit faire <strong>sept tours complets</strong> de ce circuit.<br>
+                    D'après la figure : triangle \(DEF\) rectangle en \(E\) avec \(DE = 800\) m et \(EF = 1\,700\) m ; triangle \(FGH\) rectangle en \(H\) avec \(FG = 1\,300\) m et \(GH = 1\,200\) m.<br>
+                    <strong>Quelle est la distance totale parcourue à la fin des sept tours ? (arrondir au mètre près)</strong>
+                </div>
+                <div style="text-align:center; margin: 14px 0;">
+                    <img src="G3 image2.png" alt="Circuit de courses" style="max-width:80%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                <div class="subquestion">1) Calculer \(DF\) dans le triangle \(DEF\) rectangle en \(E\) (en m) :</div>
+                <div class="input-group">
+                    <label>\(DF =\)</label>
+                    <input type="text" id="ex2_DH" placeholder="en m">
+                    <button class="verify" id="btn2a">Vérifier</button>
+                </div>
+                <div class="subquestion">2) Distance totale d'un tour (\(D \to F \to H \to G \to F \to E \to D\), en m) :</div>
+                <div class="input-group">
+                    <label>1 tour =</label>
+                    <input type="text" id="ex2_tour" placeholder="en m">
+                    <button class="verify" id="btn2b">Vérifier</button>
+                </div>
+                <div class="subquestion">3) Distance totale sur 7 tours (au mètre) :</div>
+                <div class="input-group">
+                    <label>7 tours =</label>
+                    <input type="text" id="ex2_total" placeholder="en m">
+                    <button class="verify" id="btn2c">Vérifier</button>
+                </div>
+                <div id="sol2" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 3 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🪜 Exercice 3 – Échelle et sécurité</h4>
+                <span class="badge-import">Pythagore + Trigonométrie</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    Un constructeur d'échelles recommande un angle entre le sol et l'échelle compris entre \(65°\) et \(75°\) pour assurer la sécurité.
+                    On pose contre un mur vertical une échelle de \(13\) m dont les pieds sont à \(5\) m de la base du mur.
+                </div>
+                <div class="subquestion">1) Quelle hauteur peut-on atteindre ? (en m, arrondir au dixième)</div>
+                <div class="input-group">
+                    <label>Hauteur =</label>
+                    <input type="text" id="ex3_h" placeholder="en m">
+                    <button class="verify" id="btn3a">Vérifier</button>
+                </div>
+                <div class="subquestion">2) L'angle entre le sol et l'échelle est-il dans l'intervalle recommandé ? (calculer l'angle au degré près)</div>
+                <div class="input-group">
+                    <label>Angle ≈</label>
+                    <input type="text" id="ex3_angle" placeholder="en degrés">
+                    <span>°</span>
+                </div>
+                <div class="input-group">
+                    <label>Respecte la recommandation ?</label>
+                    <input type="text" id="ex3_ok" placeholder="Oui / Non" style="min-width:90px; width:90px;">
+                    <button class="verify" id="btn3b">Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image3.png" alt="Échelle contre mur" style="max-width:80%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol3" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 4 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🪑 Exercice 4 – Étagère horizontale</h4>
+                <span class="badge-import">Réciproque de Pythagore</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    Alan a installé une étagère sur un mur vertical.
+                    On sait que \(RS = 42\) cm, \(TR = 40\) cm et \(ST = 58\) cm.<br>
+                    <strong>L'étagère est-elle horizontale ? Justifier.</strong>
+                </div>
+                <div class="subquestion">Calculer \(ST^2\) :</div>
+                <div class="input-group">
+                    <label>\(ST^2 =\)</label>
+                    <input type="text" id="ex4_st2" placeholder="">
+                    <button class="verify" id="btn4a">Vérifier</button>
+                </div>
+                <div class="subquestion">Calculer \(RS^2 + TR^2\) :</div>
+                <div class="input-group">
+                    <label>\(RS^2 + TR^2 =\)</label>
+                    <input type="text" id="ex4_sum" placeholder="">
+                    <button class="verify" id="btn4b">Vérifier</button>
+                </div>
+                <div class="subquestion">L'étagère est-elle horizontale (angle droit en R) ?</div>
+                <div class="input-group">
+                    <label>Réponse :</label>
+                    <input type="text" id="ex4_ans" placeholder="Oui / Non" style="min-width:80px; width:90px;">
+                    <button class="verify" id="btn4c">Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image4.png" alt="Étagère" style="max-width:80%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol4" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 5 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏗️ Exercice 5 – Charpente et poutre verticale</h4>
+                <span class="badge-import">Trigonométrie — multi-questions</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    Le triangle \(ABC\) représente une charpente et \([AH]\) est une poutre verticale (\((AH) \perp (CB)\)).
+                    On a \(AH = 5\) m, \(AB = 8\) m et \(\widehat{ACH} = 48°\). Arrondir au dixième.
+                </div>
+                <div class="subquestion">1) Déterminer \(\widehat{HAB}\) :</div>
+                <div class="input-group">
+                    <label>\(\widehat{HAB} =\)</label>
+                    <input type="text" id="ex5_q1" placeholder="en degrés">
+                    <span>°</span>
+                    <button class="verify" id="btn5a">Vérifier</button>
+                </div>
+                <div class="subquestion">2) Calculer \(HB\) (en m, au dixième) :</div>
+                <div class="input-group">
+                    <label>\(HB \approx\)</label>
+                    <input type="text" id="ex5_q2" placeholder="en m">
+                    <span>m</span>
+                    <button class="verify" id="btn5b">Vérifier</button>
+                </div>
+                <div class="subquestion">3a) Calculer \(\widehat{HBA}\) :</div>
+                <div class="input-group">
+                    <label>\(\widehat{HBA} \approx\)</label>
+                    <input type="text" id="ex5_q3a" placeholder="en degrés">
+                    <span>°</span>
+                    <button class="verify" id="btn5c">Vérifier</button>
+                </div>
+                <div class="subquestion">3b) Calculer \(AC\) puis \(CH\) (en m, au dixième) :</div>
+                <div class="input-group">
+                    <label>\(AC \approx\)</label>
+                    <input type="text" id="ex5_AC" placeholder="m" style="min-width:80px;width:90px;">
+                    <span>m &nbsp;&nbsp; \(CH \approx\)</span>
+                    <input type="text" id="ex5_CH" placeholder="m" style="min-width:80px;width:90px;">
+                    <span>m</span>
+                    <button class="verify" id="btn5d">Vérifier</button>
+                </div>
+                <div class="subquestion">4) Aire du triangle \(ABC\) (en m², au dixième) :</div>
+                <div class="input-group">
+                    <label>Aire \(\approx\)</label>
+                    <input type="text" id="ex5_aire" placeholder="m²">
+                    <span>m²</span>
+                    <button class="verify" id="btn5e">Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image5.png" alt="Charpente" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol5" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 6 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🌳 Exercice 6 – Ombre d'un arbre</h4>
+                <span class="badge-import">Trigonométrie — tangente</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    On cherche la longueur de l'ombre d'un arbre de \(15\) m de haut lorsque le Soleil fait un angle de \(42°\) avec l'horizontale.
+                </div>
+                <div class="subquestion">2) Déterminer la longueur de l'ombre (arrondir à l'unité) :</div>
+                <div class="input-group">
+                    <label>Longueur de l'ombre ≈</label>
+                    <input type="text" id="ex6_ombre" placeholder="en m">
+                    <span>m</span>
+                    <button class="verify" id="btn6">✔️ Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image6.png" alt="Ombre d'un arbre" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol6" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 7 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏢 Exercice 7 – Angle des rayons du Soleil</h4>
+                <span class="badge-import">Trigonométrie — arctan</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    On cherche l'angle formé par les rayons du Soleil avec l'horizontale quand l'ombre d'un immeuble de \(24\) m de haut mesure \(16\) m.
+                </div>
+                <div class="subquestion">2) Donner l'angle arrondi à l'unité :</div>
+                <div class="input-group">
+                    <label>Angle ≈</label>
+                    <input type="text" id="ex7_angle" placeholder="en degrés">
+                    <span>°</span>
+                    <button class="verify" id="btn7">✔️ Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image7.png" alt="Angle rayons du Soleil" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol7" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 8 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧱 Exercice 8 – Angle de l'échelle avec le mur</h4>
+                <span class="badge-import">Trigonométrie — arccos</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    Une échelle de \(15{,}50\) m atteint \(15{,}20\) m de haut sur un mur vertical.
+                    <strong>Déterminer, au degré près, l'angle qu'elle fait avec le mur.</strong>
+                </div>
+                <div class="input-group">
+                    <label>Angle avec le mur ≈</label>
+                    <input type="text" id="ex8_angle" placeholder="en degrés">
+                    <span>°</span>
+                    <button class="verify" id="btn8">✔️ Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image8.png" alt="Angle échelle-mur" style="max-width:70%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol8" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 9 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🗼 Exercice 9 – Hauteur de la Tour Eiffel</h4>
+                <span class="badge-import">Trigonométrie — tangente</span>
+            </div>
+            <div class="card-body">
+                <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+                <div style="flex:1 1 55%; min-width:220px;">
+                <div class="question">
+                    Un observateur de \(1{,}80\) m se place à \(99{,}70\) m de la base de la Tour Eiffel. Il mesure un angle de \(72{,}8°\) entre l'horizontale (sa ligne des yeux) et le sommet de la tour.
+                    <strong>Quelle est la hauteur de la Tour Eiffel ? (arrondir au dixième)</strong>
+                </div>
+                <div class="input-group">
+                    <label>Hauteur ≈</label>
+                    <input type="text" id="ex9_h" placeholder="en m (dixième)">
+                    <span>m</span>
+                    <button class="verify" id="btn9">✔️ Vérifier</button>
+                </div>
+                </div>
+                <div style="flex:0 1 38%; min-width:160px; text-align:center;">
+                    <img src="G3 image9.png" alt="Tour Eiffel" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                </div>
+                <div id="sol9" class="solution"></div>
+            </div>
+        </div>
+
+        <!-- ── Exercice 10 ─────────────────────────────────────────── -->
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📐 Exercice 10 – Détermination de la longueur AB</h4>
+                <span class="badge-import">Pythagore + Trigonométrie</span>
+            </div>
+            <div class="card-body">
+                <div class="question">
+                    Deux figures sont données (non dessinées en vraie grandeur). Pour chacune, déterminer la longueur \(AB\) arrondie au millimètre.
+                </div>
+                <div style="text-align:center; margin: 14px 0;">
+                    <img src="G3 image10.png" alt="Figures AB" style="max-width:80%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.10);">
+                </div>
+                <div class="subquestion">Figure 1 : Triangle \(ABC\) rectangle en \(B\). \(J\) est le milieu de \([CA]\) et \(BC = CJ = JA = 6\) cm. Calculer \(AB\) (au mm près) :</div>
+                <div class="input-group">
+                    <label>\(AB \approx\)</label>
+                    <input type="text" id="ex10_f1" placeholder="en cm">
+                    <span>cm</span>
+                    <button class="verify" id="btn10a">Vérifier</button>
+                </div>
+                <div class="subquestion">Figure 2 : Triangle \(ABC\) rectangle en \(A\), \(\widehat{ACB} = 53°\), \(BC = 36\) cm. Calculer \(AB\) (au mm près) :</div>
+                <div class="input-group">
+                    <label>\(AB \approx\)</label>
+                    <input type="text" id="ex10_f2" placeholder="en cm">
+                    <span>cm</span>
+                    <button class="verify" id="btn10b">Vérifier</button>
+                </div>
+                <div id="sol10" class="solution"></div>
+            </div>
+        </div>
+
+        <footer style="text-align:center; padding: 20px; color:#8d99ae; font-size:0.9rem;">
+            <i class="fas fa-ruler-triangle"></i> Tous les exercices utilisent le Théorème de Pythagore et la Trigonométrie — Programme de 3ème.
+        </footer>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION EXERCICES TYPE BREVET (placeholder)
+    ══════════════════════════════════════════════════════════ -->
+    <div id="brevet" class="content-section">
+        <h2>🎓 Exercices Type Brevet</h2>
+        <div class="utilite-box" style="text-align:center; padding:40px;">
+            <i class="fas fa-tools" style="font-size:2rem; color:var(--brevet);"></i><br><br>
+            <strong>Cette section est en cours de construction 🚧</strong><br>
+            Les exercices type brevet seront disponibles prochainement.
+        </div>
+    </div>
+
+</div><!-- end .container -->
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    /* ── helpers ─────────────────────────────────── */
+    function norm(str) {
+        return str.trim().replace(/\s/g,'').replace(',','.');
+    }
+    function approxNum(str) {
+        return parseFloat(norm(str));
+    }
+    function isClose(a, b, tol) {
+        return Math.abs(a - b) <= tol;
+    }
+    function showSol(id, isOk, html) {
+        const d = document.getElementById(id);
+        d.style.display = 'block';
+        const badge = isOk
+            ? '<div class="feedback-correct">✔️ Bonne réponse !</div>'
+            : '<div class="feedback-wrong">❌ Pas tout à fait. Voici la correction :</div>';
+        d.innerHTML = badge + html;
+        if (window.MathJax) MathJax.typesetPromise([d]);
+    }
+
+    /* ── Exercice 1 : toboggan ───────────────────── */
+    document.getElementById('btn1').onclick = () => {
+        const val = approxNum(document.getElementById('ex1_ramp').value);
+        const ok = isClose(val, Math.sqrt(77), 0.02);
+        showSol('sol1', ok,
+            `<strong>Modélisation :</strong> Le triangle \\(ABC\\) est rectangle en \\(B\\) (l'échelle \\([AB]\\) est perpendiculaire à la rampe \\([BC]\\)).<br>
+            <ul style="margin:6px 0 6px 18px;">
+              <li>Échelle : \\(AB = 2\\) m</li>
+              <li>Écartement (hypoténuse) : \\(AC = 9\\) m</li>
+              <li>Rampe cherchée : \\([BC]\\)</li>
+            </ul>
+            <strong>Rédaction :</strong> Le triangle \\(ABC\\) est rectangle en \\(B\\). D'après le théorème de Pythagore :<br>
+            \\[AC^2 = AB^2 + BC^2\\]
+            \\[9^2 = 2^2 + BC^2\\]
+            \\[81 = 4 + BC^2\\]
+            \\[BC^2 = 81 - 4 = 77\\]
+            \\[BC = \\sqrt{77} \\approx 8{,}7749 \\text{ m}\\]
+            <strong>Conclusion :</strong> La longueur de la rampe, arrondie au cm près, est d'environ \\(\\mathbf{8{,}77 \\text{ m}}\\) (soit 877 cm). ✅`);
+    };
+
+    /* ── Exercice 2 : circuit ────────────────────── */
+    // Données réelles de la fiche :
+    // Triangle DEF rectangle en E : DE=800m, EF=1700m → DF²=EF²-DE²=2890000-640000=2250000 → DF=1500m
+    // Triangle FGH rectangle en H : FG=1300m, GH=1200m → FH²=FG²-GH²=1690000-1440000=250000 → FH... 
+    // Correction LaTeX : FG²=FH²+GH²=1300²+1200²=1690000+1440000=3130000... 
+    // La correction donne : FG = √(1300²+1200²) ≈ 1769,2 m  (mais c'est GF = hyp du triangle FGH rect en H)
+    // Un tour = DF + FH + HG + GF + FE + ED
+    //         = 1500 + 1300 + 1200 + 1769.2 + 1700 + 800 = 8269.2 m
+    // 7 tours = 7 × 8269.2 = 57844.4 m ≈ 57844 m
+    const DF_val = 1500; // sqrt(1700²-800²) = sqrt(2250000) = 1500
+    const GF_val = Math.round(10 * Math.sqrt(1300*1300 + 1200*1200)) / 10; // ≈ 1769.2
+    const tour_val = DF_val + 1300 + 1200 + GF_val + 1700 + 800; // 8269.2
+    const total_val = Math.round(7 * tour_val); // 57844
+
+    document.getElementById('btn2a').onclick = () => {
+        const val = approxNum(document.getElementById('ex2_DH').value);
+        const ok = isClose(val, DF_val, 2);
+        showSol('sol2', ok,
+            `<strong>Étape 1 — Calcul de \\(DF\\) :</strong><br>
+            Le triangle \\(DEF\\) est rectangle en \\(E\\). D'après le théorème de Pythagore :<br>
+            \\[EF^2 = DE^2 + DF^2\\]
+            \\[1\\,700^2 = 800^2 + DF^2\\]
+            \\[2\\,890\\,000 = 640\\,000 + DF^2\\]
+            \\[DF^2 = 2\\,890\\,000 - 640\\,000 = 2\\,250\\,000\\]
+            \\[DF = \\sqrt{2\\,250\\,000} = \\mathbf{1\\,500 \\text{ m}}\\]`);
+    };
+    document.getElementById('btn2b').onclick = () => {
+        const val = approxNum(document.getElementById('ex2_tour').value);
+        const ok = isClose(val, tour_val, 5);
+        showSol('sol2', ok,
+            `<strong>Étape 2 — Calcul de \\(GF\\) :</strong><br>
+            Le triangle \\(FGH\\) est rectangle en \\(H\\). D'après le théorème de Pythagore :<br>
+            \\[FG^2 = FH^2 + GH^2 = 1\\,300^2 + 1\\,200^2 = 1\\,690\\,000 + 1\\,440\\,000 = 3\\,130\\,000\\]
+            \\[GF = \\sqrt{3\\,130\\,000} \\approx 1\\,769{,}2 \\text{ m}\\]
+            <strong>Étape 3 — Distance d'un tour \\(D \\to F \\to H \\to G \\to F \\to E \\to D\\) :</strong>
+            <ul style="margin:6px 0 6px 18px;">
+              <li>\\(DF = 1\\,500\\) m</li>
+              <li>\\(FH = 1\\,300\\) m</li>
+              <li>\\(HG = 1\\,200\\) m</li>
+              <li>\\(GF \\approx 1\\,769{,}2\\) m</li>
+              <li>\\(FE = 1\\,700\\) m</li>
+              <li>\\(ED = 800\\) m</li>
+            </ul>
+            \\[1 \\text{ tour} = 1\\,500 + 1\\,300 + 1\\,200 + 1\\,769{,}2 + 1\\,700 + 800 = \\mathbf{8\\,269{,}2 \\text{ m}}\\]`);
+    };
+    document.getElementById('btn2c').onclick = () => {
+        const val = approxNum(document.getElementById('ex2_total').value);
+        const ok = isClose(val, total_val, 10);
+        showSol('sol2', ok,
+            `<strong>Étape 4 — Distance totale pour 7 tours :</strong><br>
+            \\[\\text{Distance totale} = 7 \\times 8\\,269{,}2 = \\mathbf{57\\,844{,}4 \\text{ m}}\\]
+            <strong>Conclusion :</strong> La distance totale parcourue à la fin des sept tours est d'environ \\(\\mathbf{57\\,844 \\text{ m}}\\). ✅`);
+    };
+
+    /* ── Exercice 3 : échelle ────────────────────── */
+    document.getElementById('btn3a').onclick = () => {
+        const val = approxNum(document.getElementById('ex3_h').value);
+        const ok = isClose(val, 12, 0.1);
+        showSol('sol3', ok,
+            `<strong>Question 1 — Hauteur atteinte :</strong><br>
+            On modélise la situation par un triangle \\(ABC\\) rectangle en \\(A\\) (mur vertical, sol horizontal, échelle).
+            <ul style="margin:6px 0 6px 18px;">
+              <li>Échelle (hypoténuse) : \\(BC = 13\\) m</li>
+              <li>Distance au mur : \\(AC = 5\\) m</li>
+              <li>Hauteur cherchée : \\(AB\\)</li>
+            </ul>
+            D'après le théorème de Pythagore :<br>
+            \\[BC^2 = AB^2 + AC^2\\]
+            \\[13^2 = AB^2 + 5^2\\]
+            \\[169 = AB^2 + 25\\]
+            \\[AB^2 = 169 - 25 = 144\\]
+            \\[AB = \\sqrt{144} = \\mathbf{12 \\text{ m}}\\]`);
+    };
+    document.getElementById('btn3b').onclick = () => {
+        const angle = approxNum(document.getElementById('ex3_angle').value);
+        const rep = document.getElementById('ex3_ok').value.trim().toLowerCase();
+        const expectedAngle = Math.round(10 * Math.acos(5/13) * 180 / Math.PI) / 10; // ≈ 67.4°
+        const okAngle = isClose(angle, expectedAngle, 2);
+        const okRep = (rep === 'oui');
+        const ok = okAngle && okRep;
+        showSol('sol3', ok,
+            `<strong>Question 2 — L'angle respecte-t-il la recommandation ?</strong><br>
+            On cherche l'angle \\(\\widehat{BCA}\\) entre le sol et l'échelle dans le triangle \\(ABC\\) rectangle en \\(A\\) :<br>
+            \\[\\cos(\\widehat{BCA}) = \\frac{\\text{côté adjacent}}{\\text{hypoténuse}} = \\frac{AC}{BC} = \\frac{5}{13}\\]
+            \\[\\widehat{BCA} = \\arccos\\!\\left(\\frac{5}{13}\\right) \\approx \\mathbf{67{,}4°}\\]
+            <strong>Conclusion :</strong> Puisque \\(65° \\leq 67{,}4° \\leq 75°\\), la recommandation de sécurité est <strong>respectée</strong>. ✅`);
+    };
+
+    /* ── Exercice 4 : étagère ────────────────────── */
+    document.getElementById('btn4a').onclick = () => {
+        const val = approxNum(document.getElementById('ex4_st2').value);
+        const ok = isClose(val, 3364, 1);
+        showSol('sol4', ok,
+            `On calcule le carré du plus grand côté \\([ST]\\) :<br>
+            \\[ST^2 = 58^2 = \\mathbf{3\\,364}\\]`);
+    };
+    document.getElementById('btn4b').onclick = () => {
+        const val = approxNum(document.getElementById('ex4_sum').value);
+        const ok = isClose(val, 3364, 1);
+        showSol('sol4', ok,
+            `On calcule la somme des carrés des deux autres côtés :<br>
+            \\[RS^2 + TR^2 = 42^2 + 40^2 = 1\\,764 + 1\\,600 = \\mathbf{3\\,364}\\]`);
+    };
+    document.getElementById('btn4c').onclick = () => {
+        const rep = document.getElementById('ex4_ans').value.trim().toLowerCase();
+        const ok = (rep === 'oui');
+        showSol('sol4', ok,
+            `On constate que \\(ST^2 = RS^2 + TR^2 = 3\\,364\\).<br>
+            L'égalité de Pythagore est vérifiée. D'après la <strong>réciproque du théorème de Pythagore</strong>, le triangle \\(RST\\) est <strong>rectangle en \\(R\\)</strong>.<br>
+            <strong>Conclusion :</strong> L'étagère étant perpendiculaire au mur vertical, <strong>l'étagère est bien horizontale</strong>. ✅`);
+    };
+
+    /* ── Exercice 5 : charpente ─────────────────── */
+    const AH = 5, AB = 8, ACH = 48;
+    const HAB_deg = Math.round(10 * Math.acos(AH / AB) * 180 / Math.PI) / 10;
+    const HB_val  = Math.round(10 * Math.sqrt(AB*AB - AH*AH)) / 10;
+    const HBA_deg = Math.round(10 * Math.atan(AH / Math.sqrt(AB*AB - AH*AH)) * 180 / Math.PI) / 10;
+    const HAC_deg = 90 - ACH; // 42°
+    const BAC_deg = Math.round(10 * (HAB_deg + HAC_deg)) / 10;
+    const AC_val  = Math.round(10 * AH / Math.sin(ACH * Math.PI / 180)) / 10;
+    const CH_val  = Math.round(10 * AH / Math.tan(ACH * Math.PI / 180)) / 10;
+    const BC_val  = Math.round(10 * (CH_val + HB_val)) / 10;
+    const Aire    = Math.round(10 * 0.5 * BC_val * AH) / 10;
+
+    document.getElementById('btn5a').onclick = () => {
+        const val = approxNum(document.getElementById('ex5_q1').value);
+        const ok = isClose(val, HAB_deg, 1);
+        showSol('sol5', ok,
+            `<strong>1. Déterminer \\(\\widehat{HAB}\\) :</strong><br>
+            Le triangle \\(AHB\\) est rectangle en \\(H\\) car \\((AH) \\perp (CB)\\).<br>
+            Par rapport à \\(\\widehat{HAB}\\), le côté adjacent est \\(AH = 5\\) m et l'hypoténuse est \\(AB = 8\\) m :<br>
+            \\[\\cos(\\widehat{HAB}) = \\frac{AH}{AB} = \\frac{5}{8} = 0{,}625\\]
+            \\[\\widehat{HAB} = \\arccos(0{,}625) \\approx \\mathbf{${HAB_deg}°}\\]`);
+    };
+    document.getElementById('btn5b').onclick = () => {
+        const val = approxNum(document.getElementById('ex5_q2').value);
+        const ok = isClose(val, HB_val, 0.2);
+        showSol('sol5', ok,
+            `<strong>2. Calculer \\(HB\\) :</strong><br>
+            Le triangle \\(AHB\\) est rectangle en \\(H\\). D'après le théorème de Pythagore :<br>
+            \\[AB^2 = AH^2 + HB^2\\]
+            \\[8^2 = 5^2 + HB^2\\]
+            \\[64 = 25 + HB^2\\]
+            \\[HB^2 = 64 - 25 = 39\\]
+            \\[HB = \\sqrt{39} \\approx \\mathbf{${HB_val} \\text{ m}}\\]`);
+    };
+    document.getElementById('btn5c').onclick = () => {
+        const val = approxNum(document.getElementById('ex5_q3a').value);
+        const ok = isClose(val, HBA_deg, 1);
+        showSol('sol5', ok,
+            `<strong>3a. Calculer \\(\\widehat{HBA}\\), \\(\\widehat{BAC}\\) et \\(\\widehat{HAC}\\) :</strong><br>
+            Dans le triangle \\(AHB\\) rectangle en \\(H\\), les angles aigus sont complémentaires :<br>
+            \\[\\widehat{HBA} = 90° - \\widehat{HAB} = 90° - ${HAB_deg}° = \\mathbf{${HBA_deg}°}\\]
+            Dans le triangle \\(AHC\\) rectangle en \\(H\\) :<br>
+            \\[\\widehat{HAC} = 90° - \\widehat{ACH} = 90° - 48° = 42°\\]
+            Par adjacence des angles :<br>
+            \\[\\widehat{BAC} = \\widehat{HAB} + \\widehat{HAC} = ${HAB_deg}° + 42° = \\mathbf{${BAC_deg}°}\\]`);
+    };
+    document.getElementById('btn5d').onclick = () => {
+        const ac = approxNum(document.getElementById('ex5_AC').value);
+        const ch = approxNum(document.getElementById('ex5_CH').value);
+        const ok = isClose(ac, AC_val, 0.2) && isClose(ch, CH_val, 0.2);
+        showSol('sol5', ok,
+            `<strong>3b. Calculer \\(AC\\) puis \\(CH\\) :</strong><br>
+            Dans le triangle \\(AHC\\) rectangle en \\(H\\), avec \\(\\widehat{ACH} = 48°\\) et \\(AH = 5\\) m :<br>
+            \\[\\sin(48°) = \\frac{AH}{AC} \\Rightarrow AC = \\frac{5}{\\sin(48°)} \\approx \\mathbf{${AC_val} \\text{ m}}\\]
+            \\[\\tan(48°) = \\frac{AH}{CH} \\Rightarrow CH = \\frac{5}{\\tan(48°)} \\approx \\mathbf{${CH_val} \\text{ m}}\\]`);
+    };
+    document.getElementById('btn5e').onclick = () => {
+        const val = approxNum(document.getElementById('ex5_aire').value);
+        const ok = isClose(val, Aire, 1);
+        showSol('sol5', ok,
+            `<strong>4. Aire du triangle \\(ABC\\) :</strong><br>
+            La base est \\(CB = CH + HB \\approx ${CH_val} + ${HB_val} = ${BC_val}\\) m. La hauteur est \\(AH = 5\\) m.<br>
+            \\[\\text{Aire}(ABC) = \\frac{\\text{base} \\times \\text{hauteur}}{2} = \\frac{CB \\times AH}{2} = \\frac{${BC_val} \\times 5}{2} \\approx \\mathbf{${Aire} \\text{ m}^2}\\]`);
+    };
+
+    /* ── Exercice 6 : ombre d'arbre ─────────────── */
+    const ombre6 = Math.round(15 / Math.tan(42 * Math.PI / 180));
+    document.getElementById('btn6').onclick = () => {
+        const val = approxNum(document.getElementById('ex6_ombre').value);
+        const ok = isClose(val, ombre6, 1);
+        showSol('sol6', ok,
+            `<strong>2. Déterminer la longueur de l'ombre :</strong><br>
+            On schématise par un triangle \\(XYZ\\) rectangle en \\(Y\\) :
+            <ul style="margin:6px 0 6px 18px;">
+              <li>\\([XY]\\) = arbre = 15 m (côté <strong>opposé</strong> à l'angle \\(\\widehat{XZY} = 42°\\))</li>
+              <li>\\([YZ]\\) = ombre au sol = côté <strong>adjacent</strong> (cherché)</li>
+            </ul>
+            On utilise la tangente :<br>
+            \\[\\tan(\\widehat{XZY}) = \\frac{\\text{côté opposé}}{\\text{côté adjacent}} = \\frac{XY}{YZ}\\]
+            \\[\\tan(42°) = \\frac{15}{YZ}\\]
+            \\[YZ = \\frac{15}{\\tan(42°)} \\approx 16{,}66 \\text{ m}\\]
+            <strong>Conclusion :</strong> Arrondie à l'unité, la longueur de l'ombre est de \\(\\mathbf{${ombre6} \\text{ m}}\\). ✅`);
+    };
+
+    /* ── Exercice 7 : angle soleil ──────────────── */
+    const angle7 = Math.round(Math.atan(24 / 16) * 180 / Math.PI);
+    document.getElementById('btn7').onclick = () => {
+        const val = approxNum(document.getElementById('ex7_angle').value);
+        const ok = isClose(val, angle7, 1);
+        showSol('sol7', ok,
+            `<strong>2. Calculer l'angle :</strong><br>
+            On modélise par le triangle \\(SHO\\) rectangle en \\(H\\) :
+            <ul style="margin:6px 0 6px 18px;">
+              <li>\\(SH = 24\\) m (hauteur de l'immeuble — côté <strong>opposé</strong> à \\(\\widehat{SOH}\\))</li>
+              <li>\\(HO = 16\\) m (longueur de l'ombre — côté <strong>adjacent</strong>)</li>
+            </ul>
+            On utilise la tangente :<br>
+            \\[\\tan(\\widehat{SOH}) = \\frac{SH}{HO} = \\frac{24}{16} = 1{,}5\\]
+            \\[\\widehat{SOH} = \\arctan(1{,}5) \\approx 56{,}31°\\]
+            <strong>Conclusion :</strong> L'angle formé par les rayons du Soleil avec l'horizontale est d'environ \\(\\mathbf{${angle7}°}\\). ✅`);
+    };
+
+    /* ── Exercice 8 : angle échelle-mur ─────────── */
+    const angle8 = Math.round(Math.acos(15.20 / 15.50) * 180 / Math.PI);
+    document.getElementById('btn8').onclick = () => {
+        const val = approxNum(document.getElementById('ex8_angle').value);
+        const ok = isClose(val, angle8, 1);
+        showSol('sol8', ok,
+            `<strong>Calcul de l'angle \\(\\alpha\\) avec le mur :</strong><br>
+            On note \\(\\alpha\\) l'angle entre l'échelle et le mur. Par rapport à cet angle :
+            <ul style="margin:6px 0 6px 18px;">
+              <li>côté <strong>adjacent</strong> = hauteur atteinte sur le mur = 15,20 m</li>
+              <li><strong>hypoténuse</strong> = longueur de l'échelle = 15,50 m</li>
+            </ul>
+            On utilise le cosinus :<br>
+            \\[\\cos(\\alpha) = \\frac{\\text{côté adjacent}}{\\text{hypoténuse}} = \\frac{15{,}20}{15{,}50}\\]
+            \\[\\alpha = \\arccos\\!\\left(\\frac{15{,}20}{15{,}50}\\right) \\approx 11{,}29°\\]
+            <strong>Conclusion :</strong> Au degré près, l'angle que fait l'échelle avec le mur est de \\(\\mathbf{${angle8}°}\\). ✅`);
+    };
+
+    /* ── Exercice 9 : Tour Eiffel ───────────────── */
+    const h9_partial = 99.70 * Math.tan(72.8 * Math.PI / 180);
+    const h9 = Math.round(10 * (h9_partial + 1.80)) / 10;
+    document.getElementById('btn9').onclick = () => {
+        const val = approxNum(document.getElementById('ex9_h').value);
+        const ok = isClose(val, h9, 1);
+        showSol('sol9', ok,
+            `<strong>Étape 1 — Hauteur partielle \\(h\\) au-dessus de la ligne des yeux :</strong><br>
+            Dans le triangle rectangle, l'angle d'élévation est \\(72{,}8°\\) et la distance horizontale est \\(99{,}70\\) m :<br>
+            \\[\\tan(72{,}8°) = \\frac{h}{99{,}70}\\]
+            \\[h = 99{,}70 \\times \\tan(72{,}8°) \\approx 99{,}70 \\times 3{,}230 \\approx 322{,}04 \\text{ m}\\]
+            <strong>Étape 2 — Hauteur totale de la tour :</strong><br>
+            On ajoute la taille de l'observateur (1,80 m) :<br>
+            \\[\\text{Hauteur totale} = 322{,}04 + 1{,}80 = 323{,}84 \\text{ m}\\]
+            <strong>Conclusion :</strong> La hauteur de la Tour Eiffel estimée est d'environ \\(\\mathbf{${h9} \\text{ m}}\\). ✅`);
+    };
+
+    /* ── Exercice 10 : longueurs AB ─────────────── */
+    const ab10f1 = Math.round(10 * Math.sqrt(108)) / 10;
+    const ab10f2 = Math.round(10 * 36 * Math.sin(53 * Math.PI / 180)) / 10;
+
+    document.getElementById('btn10a').onclick = () => {
+        const val = approxNum(document.getElementById('ex10_f1').value);
+        const ok = isClose(val, ab10f1, 0.05);
+        showSol('sol10', ok,
+            `<strong>Figure 1 :</strong><br>
+            D'après le codage de la figure, \\(J\\) est le milieu de \\([CA]\\) et \\(BC = CJ = JA = 6\\) cm.<br>
+            L'hypoténuse \\(CA\\) est donc le double du côté \\(BC\\) :<br>
+            \\[CA = 2 \\times BC = 2 \\times 6 = 12 \\text{ cm}\\]
+            Le triangle \\(ABC\\) est rectangle en \\(B\\). D'après le théorème de Pythagore :<br>
+            \\[CA^2 = AB^2 + BC^2\\]
+            \\[12^2 = AB^2 + 6^2\\]
+            \\[144 = AB^2 + 36\\]
+            \\[AB^2 = 144 - 36 = 108\\]
+            \\[AB = \\sqrt{108} \\approx 10{,}392 \\text{ cm}\\]
+            <strong>Conclusion :</strong> Arrondi au millimètre près, \\(AB \\approx \\mathbf{${ab10f1} \\text{ cm}}\\) (soit 104 mm). ✅`);
+    };
+    document.getElementById('btn10b').onclick = () => {
+        const val = approxNum(document.getElementById('ex10_f2').value);
+        const ok = isClose(val, ab10f2, 0.05);
+        showSol('sol10', ok,
+            `<strong>Figure 2 :</strong><br>
+            Le triangle \\(ABC\\) est rectangle en \\(A\\). On connaît \\(\\widehat{ACB} = 53°\\) et l'hypoténuse \\(BC = 36\\) cm.<br>
+            Le côté \\([AB]\\) est le côté <strong>opposé</strong> à l'angle \\(\\widehat{ACB}\\). On utilise le sinus :<br>
+            \\[\\sin(\\widehat{ACB}) = \\frac{\\text{côté opposé}}{\\text{hypoténuse}} = \\frac{AB}{BC}\\]
+            \\[\\sin(53°) = \\frac{AB}{36}\\]
+            \\[AB = 36 \\times \\sin(53°) \\approx 28{,}751 \\text{ cm}\\]
+            <strong>Conclusion :</strong> Arrondi au millimètre près, \\(AB \\approx \\mathbf{${ab10f2} \\text{ cm}}\\) (soit 288 mm). ✅`);
+    };
+</script>
+
+</body>
+</html>
