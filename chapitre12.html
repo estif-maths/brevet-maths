@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CQJMDTPESF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CQJMDTPESF');
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triangle Rectangle : Pythagore & Trigonométrie - Maths 3ème</title>
@@ -1266,16 +1256,771 @@
     </div>
 
     <!-- ══════════════════════════════════════════════════════════
-         SECTION EXERCICES TYPE BREVET (placeholder)
+         SECTION EXERCICES TYPE BREVET
     ══════════════════════════════════════════════════════════ -->
     <div id="brevet" class="content-section">
         <h2>🎓 Exercices Type Brevet</h2>
-        <div class="utilite-box" style="text-align:center; padding:40px;">
-            <i class="fas fa-tools" style="font-size:2rem; color:var(--brevet);"></i><br><br>
-            <strong>Cette section est en cours de construction 🚧</strong><br>
-            Les exercices type brevet seront disponibles prochainement.
+
+        <div class="download-box">
+            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices :</strong><br>
+            <a href="G3_Théorème_De_Pythagore_Exercices_Type_Brevet.pdf" style="color: var(--primary); font-weight: 600;">
+                📄 G3 – Exercices Type Brevet – Pythagore &amp; Trigonométrie.pdf
+            </a>
         </div>
+
+        <style>
+            .brevet-card {
+                background: white;
+                border-radius: 1.5rem;
+                margin-bottom: 2.5rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+                border: 1px solid #f0e6d6;
+                overflow: hidden;
+            }
+            .brevet-card-header {
+                background: linear-gradient(90deg, #e67e22 0%, #f39c12 100%);
+                padding: 1rem 1.8rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .brevet-card-header h4 {
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: white;
+                margin: 0;
+            }
+            .badge-brevet {
+                background: rgba(255,255,255,0.25);
+                color: white;
+                border-radius: 40px;
+                padding: 0.2rem 1rem;
+                font-size: 0.7rem;
+                font-weight: 600;
+                white-space: nowrap;
+                border: 1px solid rgba(255,255,255,0.4);
+            }
+            .brevet-body { padding: 1.6rem 1.8rem; }
+            .brevet-enonce {
+                background: #fff8f0;
+                padding: 1rem 1.3rem;
+                border-radius: 1rem;
+                border-left: 5px solid #e67e22;
+                margin-bottom: 1.3rem;
+                font-weight: 500;
+                line-height: 1.7;
+            }
+            .brevet-img {
+                text-align: center;
+                margin: 14px 0;
+            }
+            .brevet-img img {
+                max-width: 65%;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            }
+            .brevet-subq {
+                margin: 1rem 0 0.5rem 0;
+                font-weight: 600;
+                color: #c05a00;
+            }
+            .brevet-input-group {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.7rem;
+                margin: 0.7rem 0 0.3rem;
+            }
+            .brevet-input-group label { font-weight: 500; min-width: 130px; }
+            .brevet-input-group input, .brevet-input-group select {
+                padding: 0.45rem 1rem;
+                border-radius: 2rem;
+                border: 1.5px solid #f0c080;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem;
+                min-width: 140px;
+                width: auto;
+            }
+            button.brevet-verify {
+                background: #e67e22;
+                border: none;
+                color: white;
+                padding: 0.45rem 1.2rem;
+                border-radius: 2rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.2s;
+                font-size: 0.85rem;
+                font-family: 'Poppins', sans-serif;
+            }
+            button.brevet-verify:hover { background: #c05a00; transform: translateY(-1px); }
+            button.brevet-show-corr {
+                background: #f8f9fe;
+                border: 2px solid #e67e22;
+                color: #e67e22;
+                padding: 0.4rem 1rem;
+                border-radius: 2rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: 0.2s;
+                font-size: 0.82rem;
+                font-family: 'Poppins', sans-serif;
+                margin-top: 0.8rem;
+            }
+            button.brevet-show-corr:hover { background: #fff0e0; }
+            .brevet-solution {
+                background: #fefce8;
+                border-left: 5px solid #eab308;
+                padding: 1rem 1.3rem;
+                border-radius: 1rem;
+                margin-top: 1rem;
+                font-size: 0.93rem;
+                display: none;
+                line-height: 1.7;
+            }
+            .brevet-hint { font-size: 0.8rem; color: #9a6800; margin-top: 4px; font-style: italic; }
+            .corr-block {
+                background: #f0fdf4;
+                border-left: 5px solid #22c55e;
+                padding: 1rem 1.4rem;
+                border-radius: 1rem;
+                margin-top: 0.8rem;
+                font-size: 0.93rem;
+                display: none;
+                line-height: 1.7;
+            }
+            .corr-block .corr-title {
+                font-weight: 700;
+                color: #15803d;
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+            }
+        </style>
+
+        <!-- ══ EXERCICE 1 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>🚛 Exercice 1 — D'après Brevet, Nouvelle-Calédonie, 2018</h4>
+                <span class="badge-brevet">Pythagore — diagonale</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    Lors de son déménagement, Basile doit transporter son réfrigérateur dans un camion.
+                    Pour l'introduire dans le camion, Basile le pose sur le bord comme indiqué sur la figure
+                    (schéma non à l'échelle).<br><br>
+                    Le réfrigérateur a une largeur de \(AB = 59\) cm et une hauteur de \(BC = 198\) cm.
+                    La hauteur intérieure du camion est de \(2{,}05\) m.<br><br>
+                    <strong>Basile pourra-t-il redresser le réfrigérateur en position verticale pour le rentrer dans le camion sans bouger le point d'appui \(A\) ? Justifier.</strong>
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageA.png" alt="Réfrigérateur dans le camion">
+                </div>
+
+                <div class="brevet-subq">Étape 1 — Calculer la diagonale \(AC\) du réfrigérateur (en cm, arrondir au dixième) :</div>
+                <div class="brevet-input-group">
+                    <label>\(AC \approx\)</label>
+                    <input type="text" id="bex1_diag" placeholder="ex : 206,6">
+                    <span style="font-weight:500;">cm</span>
+                    <button class="brevet-verify" id="bbtn1a">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ Le triangle \(ABC\) est rectangle en \(B\). Utilise Pythagore : \(AC^2 = AB^2 + BC^2\).</p>
+
+                <div class="brevet-subq">Étape 2 — Conclusion : Basile peut-il redresser le réfrigérateur ?</div>
+                <div class="brevet-input-group">
+                    <label>Réponse :</label>
+                    <select id="bex1_rep">
+                        <option value="">— choisir —</option>
+                        <option value="non">Non, il ne peut pas</option>
+                        <option value="oui">Oui, il peut</option>
+                    </select>
+                    <button class="brevet-verify" id="bbtn1b">✔️ Vérifier</button>
+                </div>
+                <div id="bsol1" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr1')">📋 Voir la correction complète</button>
+                <div id="bcorr1" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 1</div>
+                    <p>Pour déterminer si Basile peut redresser le réfrigérateur en position verticale sans bouger le point d'appui \(A\), il faut calculer la longueur de sa diagonale \([AC]\).</p>
+                    <p>En effet, lors du mouvement de rotation autour du point \(A\), le point \(C\) va décrire un arc de cercle de rayon \(AC\). Pour que le réfrigérateur puisse être redressé à l'intérieur du camion, cette longueur maximale \(AC\) ne doit pas dépasser la hauteur intérieure du camion, qui est de \(2{,}05\text{ m}\).</p>
+                    <p><strong>1. Conversion des unités</strong></p>
+                    <ul>
+                        <li>\(AB = 59\text{ cm}\)</li>
+                        <li>\(BC = 198\text{ cm}\)</li>
+                        <li>Hauteur du camion : \(2{,}05\text{ m} = 205\text{ cm}\)</li>
+                    </ul>
+                    <p><strong>2. Calcul de la diagonale \(AC\)</strong></p>
+                    <p>Le triangle \(ABC\) est rectangle en \(B\). D'après le <strong>théorème de Pythagore</strong> dans le triangle \(ABC\) rectangle en \(B\), on a :</p>
+                    \[AC^2 = AB^2 + BC^2\]
+                    \[AC^2 = 59^2 + 198^2\]
+                    \[AC^2 = 3\,481 + 39\,204\]
+                    \[AC^2 = 42\,685\]
+                    <p>On en déduit la longueur \(AC\) :</p>
+                    \[AC = \sqrt{42\,685} \approx 206{,}6\text{ cm}\]
+                    \[AC \approx 2{,}066\text{ m}\]
+                    <p><strong>3. Conclusion</strong></p>
+                    <p>La hauteur maximale nécessaire pour redresser le réfrigérateur est d'environ \(2{,}07\text{ m}\) (ou \(206{,}6\text{ cm}\)).</p>
+                    <p>Or, la hauteur disponible dans le camion n'est que de \(2{,}05\text{ m}\) (ou \(205\text{ cm}\)). Puisque \(2{,}066\text{ m} > 2{,}05\text{ m}\), le réfrigérateur va bloquer contre le plafond du camion.</p>
+                    <p><strong>Conclusion :</strong> Basile ne pourra pas redresser le réfrigérateur en position verticale sans bouger le point d'appui \(A\).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 2 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>📐 Exercice 2 — D'après Brevet, Amérique du Nord, juin 2019</h4>
+                <span class="badge-brevet">Réciproque + Trigonométrie</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    On considère la figure ci-contre (non à l'échelle).<br>
+                    Les droites \((ER)\) et \((FT)\) sont sécantes en \(A\).<br>
+                    On donne : \(AE = 8\) cm, \(AF = 10\) cm, \(EF = 6\) cm, \(AR = 12\) cm et \(AT = 14\) cm.
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageB.png" alt="Figure exercice 2">
+                </div>
+
+                <div class="brevet-subq">Question 1 — Démontrer que le triangle \(EAF\) est rectangle en \(E\).</div>
+                <p style="margin:0.4rem 0 0.6rem; color:#555; font-size:0.93rem;">
+                    Pour démontrer qu'un triangle est rectangle, on vérifie l'égalité de Pythagore sur le grand côté (l'hypoténuse candidate).
+                </p>
+                <div class="brevet-input-group">
+                    <label>\(AF^2 =\)</label>
+                    <input type="text" id="bex2_af2" placeholder="ex : 100">
+                    <button class="brevet-verify" id="bbtn2a">✔️ Vérifier</button>
+                </div>
+                <div class="brevet-input-group">
+                    <label>\(AE^2 + EF^2 =\)</label>
+                    <input type="text" id="bex2_sum" placeholder="ex : 100">
+                    <button class="brevet-verify" id="bbtn2b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 2 — Déduire la mesure de l'angle \(\widehat{RAT}\) au degré près.</div>
+                <div class="brevet-input-group">
+                    <label>\(\widehat{RAT} \approx\)</label>
+                    <input type="text" id="bex2_angle" placeholder="ex : 37">
+                    <span style="font-weight:500;">°</span>
+                    <button class="brevet-verify" id="bbtn2c">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ Les angles \(\widehat{EAF}\) et \(\widehat{RAT}\) sont opposés par le sommet. Utilise \(\cos(\widehat{EAF}) = \frac{AE}{AF}\).</p>
+                <div id="bsol2" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr2')">📋 Voir la correction complète</button>
+                <div id="bcorr2" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 2</div>
+                    <p><strong>1) Démontrer que le triangle \(EAF\) est rectangle en \(E\)</strong></p>
+                    <p>Dans le triangle \(EAF\), le côté le plus long est \(AF = 10\text{ cm}\). Calculons séparément le carré du côté le plus long et la somme des carrés des deux autres côtés.</p>
+                    <p>D'une part, on a :</p>
+                    \[AF^2 = 10^2 = 100\]
+                    <p>D'autre part, on a :</p>
+                    \[AE^2 + EF^2 = 8^2 + 6^2 = 64 + 36 = 100\]
+                    <p>On constate que \(AF^2 = AE^2 + EF^2\). L''galité de Pythagore étant vérifiée, d'après la réciproque du théorème de Pythagore, <strong>le triangle \(EAF\) est rectangle en \(E\)</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2) En déduire la mesure de l'angle \(\widehat{RAT}\) au degré près</strong></p>
+                    <p>Les droites \((ER)\) et \((FT)\) sont sécantes en \(A\). Les angles \(\widehat{EAF}\) et \(\widehat{RAT}\) sont opposés par le sommet, ils ont donc exactement la même mesure : \(\widehat{RAT} = \widehat{EAF}\).</p>
+                    <p>Puisque le triangle \(EAF\) est rectangle en \(E\), utilisons la formule du cosinus pour l'angle \(\widehat{EAF}\) :</p>
+                    \[\cos(\widehat{EAF}) = \frac{\text{Côté adjacent}}{\text{Hypoténuse}} = \frac{AE}{AF}\]
+                    \[\cos(\widehat{EAF}) = \frac{8}{10} = 0{,}8\]
+                    \[\widehat{EAF} = \arccos(0{,}8) \approx 36{,}87°\]
+                    <p>En arrondissant au degré près, la mesure de l'angle \(\widehat{RAT}\) est de <strong>\(37°\)</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 3 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>⛵ Exercice 3 — D'après Brevet, Polynésie, juillet 2019</h4>
+                <span class="badge-brevet">Pythagore + Trigonométrie — voiliers</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    Lorsqu'un voilier est face au vent, il ne peut pas avancer. Il progresse en faisant des zigzags.<br><br>
+                    <strong>Comparer les trajectoires de ces deux voiliers en calculant la distance, en kilomètre arrondie au dixième, que chacun a parcourue.</strong>
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageC.png" alt="Voiliers">
+                </div>
+
+                <div class="brevet-subq">Voilier n°1 — Calculer \(CB\) (km, au dixième) :</div>
+                <div class="brevet-input-group">
+                    <label>\(CB \approx\)</label>
+                    <input type="text" id="bex3_cb" placeholder="ex : 2,9">
+                    <span style="font-weight:500;">km</span>
+                    <button class="brevet-verify" id="bbtn3a">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ Triangle \(ABC\) rectangle en \(B\) : \(AC = 5{,}6\) km (hyp.) et \(BA = 4{,}8\) km. Trouver \(CB\).</p>
+
+                <div class="brevet-subq">Voilier n°1 — Distance totale parcourue (km, au dixième) :</div>
+                <div class="brevet-input-group">
+                    <label>\(d_1 \approx\)</label>
+                    <input type="text" id="bex3_d1" placeholder="ex : 7,7">
+                    <span style="font-weight:500;">km</span>
+                    <button class="brevet-verify" id="bbtn3b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Voilier n°2 — Calculer \(DC\) et \(DA\) (trigonométrie, \(\widehat{DCA} = 24°\), \(CA = 5{,}6\) km) :</div>
+                <div class="brevet-input-group">
+                    <label>\(DC \approx\)</label>
+                    <input type="text" id="bex3_dc" placeholder="ex : 5,1">
+                    <span style="font-weight:500;">km</span>
+                    <button class="brevet-verify" id="bbtn3c">✔️ Vérifier</button>
+                </div>
+                <div class="brevet-input-group">
+                    <label>\(DA \approx\)</label>
+                    <input type="text" id="bex3_da" placeholder="ex : 2,3">
+                    <span style="font-weight:500;">km</span>
+                    <button class="brevet-verify" id="bbtn3d">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Voilier n°2 — Distance totale et comparaison :</div>
+                <div class="brevet-input-group">
+                    <label>\(d_2 \approx\)</label>
+                    <input type="text" id="bex3_d2" placeholder="ex : 7,4">
+                    <span style="font-weight:500;">km</span>
+                    <button class="brevet-verify" id="bbtn3e">✔️ Vérifier</button>
+                </div>
+                <div id="bsol3" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr3')">📋 Voir la correction complète</button>
+                <div id="bcorr3" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 3</div>
+                    <p>L'objectif est de comparer les trajectoires des deux voiliers en calculant la distance totale parcourue par chacun d'eux entre le point de départ \(C\) et le point d'arrivée \(A\).</p>
+                    <p><strong>1. Étude du Voilier n°1</strong></p>
+                    <p>La trajectoire du voilier n°1 est composée des segments \([CB]\) puis \([BA]\). Le triangle \(ABC\) est rectangle en \(B\).</p>
+                    <ul>
+                        <li>L'hypoténuse : \(AC = 5{,}6\text{ km}\)</li>
+                        <li>Un côté de l'angle droit : \(BA = 4{,}8\text{ km}\)</li>
+                    </ul>
+                    <p>D'après le <strong>théorème de Pythagore</strong> dans le triangle \(ABC\) rectangle en \(B\) :</p>
+                    \[AC^2 = CB^2 + BA^2\]
+                    \[CB^2 = AC^2 - BA^2 = 5{,}6^2 - 4{,}8^2 = 31{,}36 - 23{,}04 = 8{,}32\]
+                    \[CB = \sqrt{8{,}32} \approx 2{,}9\text{ km}\]
+                    <p><strong>Distance totale du Voilier n°1 :</strong> \(d_1 = CB + BA \approx 2{,}9 + 4{,}8 = 7{,}7\text{ km}\)</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2. Étude du Voilier n°2</strong></p>
+                    <p>La trajectoire du voilier n°2 est composée des segments \([CD]\) puis \([DA]\). Le triangle \(ADC\) est rectangle en \(D\).</p>
+                    <ul>
+                        <li>L'hypoténuse : \(CA = 5{,}6\text{ km}\)</li>
+                        <li>L'angle aigu : \(\widehat{DCA} = 24°\)</li>
+                    </ul>
+                    <ul>
+                        <li><strong>Calcul du côté opposé \(DA\) :</strong>
+                        \[\sin(\widehat{DCA}) = \frac{\text{côté opposé}}{\text{hypoténuse}} = \frac{DA}{CA}\]
+                        \[DA = 5{,}6 \times \sin(24°) \approx 2{,}3\text{ km}\]
+                        </li>
+                        <li><strong>Calcul du côté adjacent \(DC\) :</strong>
+                        \[\cos(\widehat{DCA}) = \frac{\text{côté adjacent}}{\text{hypoténuse}} = \frac{DC}{CA}\]
+                        \[DC = 5{,}6 \times \cos(24°) \approx 5{,}1\text{ km}\]
+                        </li>
+                    </ul>
+                    <p><strong>Distance totale du Voilier n°2 :</strong> \(d_2 = DC + DA \approx 5{,}1 + 2{,}3 = 7{,}4\text{ km}\)</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>3. Comparaison et Conclusion</strong></p>
+                    <ul>
+                        <li>Distance parcourue par le voilier n°1 : \(7{,}7\text{ km}\)</li>
+                        <li>Distance parcourue par le voilier n°2 : \(7{,}4\text{ km}\)</li>
+                    </ul>
+                    <p>Puisque \(7{,}4\text{ km} &lt; 7{,}7\text{ km}\), la trajectoire du <strong>voilier n°2 est plus courte</strong> que celle du voilier n°1 d'environ \(0{,}3\text{ km}\) (soit \(300\text{ mètres}\)).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 4 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>🏗️ Exercice 4 — D'après Brevet, Amérique du Nord, juin 2018</h4>
+                <span class="badge-brevet">Trigonométrie — terrasse</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    Mme Martin souhaite réaliser une terrasse en béton inclinée pour l'écoulement des eaux de pluie.<br>
+                    La terrasse est un prisme droit de base \(ABCD\). \(P\) est tel que \(BCDP\) est un rectangle.<br>
+                    On sait que : \(CD = BP = 5\) m, \(BC = DP = 0{,}15\) m et \(AD = 0{,}27\) m.<br><br>
+                    <strong>L'angle \(\widehat{ABP}\) doit mesurer entre \(1°\) et \(1{,}5°\). Le projet de Mme Martin vérifie-t-il cette condition ?</strong>
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageD.png" alt="Terrasse Mme Martin">
+                </div>
+
+                <div class="brevet-subq">Étape 1 — Calculer \(AP = AD - DP\) (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>\(AP =\)</label>
+                    <input type="text" id="bex4_ap" placeholder="ex : 0,12">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn4a">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Étape 2 — Calculer l'angle \(\widehat{ABP}\) en utilisant \(\tan(\widehat{ABP}) = \frac{AP}{BP}\) :</div>
+                <div class="brevet-input-group">
+                    <label>\(\widehat{ABP} \approx\)</label>
+                    <input type="text" id="bex4_angle" placeholder="ex : 1,4">
+                    <span style="font-weight:500;">°</span>
+                    <button class="brevet-verify" id="bbtn4b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Étape 3 — Le projet respecte-t-il la condition ?</div>
+                <div class="brevet-input-group">
+                    <label>Réponse :</label>
+                    <select id="bex4_rep">
+                        <option value="">— choisir —</option>
+                        <option value="oui">Oui, la condition est respectée</option>
+                        <option value="non">Non, la condition n'est pas respectée</option>
+                    </select>
+                    <button class="brevet-verify" id="bbtn4c">✔️ Vérifier</button>
+                </div>
+                <div id="bsol4" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr4')">📋 Voir la correction complète</button>
+                <div id="bcorr4" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 4</div>
+                    <p>Pour déterminer si le projet de Mme Martin respecte les conditions d'inclinaison du sol, il est nécessaire de calculer la mesure de l'angle \(\widehat{ABP}\).</p>
+                    <p><strong>1) Détermination des longueurs du triangle \(ABP\)</strong></p>
+                    <p>Le quadrilatère \(BCDP\) étant un rectangle, ses côtés opposés possèdent des longueurs égales :</p>
+                    <ul>
+                        <li>\(BP = CD = 5\text{ m}\)</li>
+                        <li>\(DP = BC = 0{,}15\text{ m}\)</li>
+                    </ul>
+                    <p>Le point \(P\) appartenant au segment \([AD]\) :</p>
+                    \[AP = AD - DP = 0{,}27\text{ m} - 0{,}15\text{ m} = 0{,}12\text{ m}\]
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2) Calcul de la mesure de l'angle \(\widehat{ABP}\)</strong></p>
+                    <p>Le triangle \(ABP\) est rectangle en \(P\). On utilise la formule de la tangente :</p>
+                    \[\tan(\widehat{ABP}) = \frac{\text{Côté opposé}}{\text{Côté adjacent}} = \frac{AP}{BP}\]
+                    \[\tan(\widehat{ABP}) = \frac{0{,}12}{5} = 0{,}024\]
+                    \[\widehat{ABP} = \arctan(0{,}024) \approx 1{,}37°\]
+                    <p>En arrondissant au dixième, la mesure de l'angle est de \(1{,}4°\). On constate que :</p>
+                    \[1° \leq 1{,}4° \leq 1{,}5°\]
+                    <p>Par conséquent, <strong>le projet de Mme Martin vérifie bien cette condition</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 5 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>📏 Exercice 5 — D'après Brevet, Amérique du Nord, juin 2025</h4>
+                <span class="badge-brevet">Pythagore + Thalès + Trigonométrie</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    D'après la figure (voir ci-dessous) : triangle \(ABC\) rectangle en \(B\) avec \(AC = 50\) m et \(BC = 30\) m ;
+                    triangle \(ADE\) rectangle en \(E\) ; \(AD = 70\) m ; angle \(\widehat{DME} = 60°\).
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageE.png" alt="Figure exercice 5">
+                </div>
+
+                <div class="brevet-subq">Question 1 — Calculer \(AB\) (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>\(AB =\)</label>
+                    <input type="text" id="bex5_ab" placeholder="ex : 40">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn5a">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ Triangle \(ABC\) rectangle en \(B\) : \(AC^2 = AB^2 + BC^2\). Isoler \(AB\).</p>
+
+                <div class="brevet-subq">Question 2 — Pourquoi les droites \((DE)\) et \((BC)\) sont-elles parallèles ? Choisir la bonne justification :</div>
+                <div class="brevet-input-group">
+                    <select id="bex5_justif" style="min-width:320px;">
+                        <option value="">— choisir —</option>
+                        <option value="ok">Toutes deux perpendiculaires à \((EB)\), donc parallèles entre elles</option>
+                        <option value="bad1">Elles ont la même longueur</option>
+                        <option value="bad2">Elles passent par le même point</option>
+                    </select>
+                    <button class="brevet-verify" id="bbtn5b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 3 — Montrer que \(DE = 42\) m (Thalès : \(\frac{AD}{AC} = \frac{DE}{BC}\)) :</div>
+                <div class="brevet-input-group">
+                    <label>\(DE =\)</label>
+                    <input type="text" id="bex5_de" placeholder="ex : 42">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn5c">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 4 — Montrer que \(EM \approx 24{,}2\) m (triangle \(DEM\) rectangle en \(E\), \(\widehat{DME}=60°\)) :</div>
+                <div class="brevet-input-group">
+                    <label>\(EM \approx\)</label>
+                    <input type="text" id="bex5_em" placeholder="ex : 24,2">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn5d">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 5 — Calculer l'aire du triangle \(AMD\) (en m²) :</div>
+                <div class="brevet-input-group">
+                    <label>\(\text{Aire}(AMD) \approx\)</label>
+                    <input type="text" id="bex5_aire" placeholder="ex : 667,8">
+                    <span style="font-weight:500;">m²</span>
+                    <button class="brevet-verify" id="bbtn5e">✔️ Vérifier</button>
+                </div>
+                <div id="bsol5" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr5')">📋 Voir la correction complète</button>
+                <div id="bcorr5" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 5</div>
+                    <p><strong>1) Calculer la longueur \(AB\)</strong></p>
+                    <p>Le triangle \(ABC\) est rectangle en \(B\). D'après le théorème de Pythagore :</p>
+                    \[AC^2 = AB^2 + BC^2\]
+                    \[AB^2 = AC^2 - BC^2 = 50^2 - 30^2 = 2500 - 900 = 1600\]
+                    \[AB = \sqrt{1600} = 40\text{ m}\]
+                    <p>La longueur \(AB\) est donc de <strong>40 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2) Montrer que les droites \((DE)\) et \((BC)\) sont parallèles</strong></p>
+                    <ul>
+                        <li>La droite \((DE)\) est perpendiculaire à la droite \((EB)\) (car le triangle \(ADE\) est rectangle en \(E\)).</li>
+                        <li>La droite \((BC)\) est perpendiculaire à la droite \((EB)\) (car le triangle \(ABC\) est rectangle en \(B\)).</li>
+                    </ul>
+                    <p>Or, si deux droites sont perpendiculaires à une même troisième droite, alors ces deux droites sont parallèles entre elles. Par conséquent, <strong>les droites \((DE)\) et \((BC)\) sont parallèles</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>3) Montrer que la longueur \(DE\) est égale à \(42\text{ m}\)</strong></p>
+                    <p>Les points \(A, C, D\) sont alignés et les points \(A, B, E\) sont alignés. Les droites \((DE)\) et \((BC)\) sont parallèles. On applique le théorème de Thalès (configuration « papillon » de centre \(A\)) :</p>
+                    \[\frac{AD}{AC} = \frac{AE}{AB} = \frac{DE}{BC}\]
+                    \[\frac{70}{50} = \frac{DE}{30}\]
+                    \[DE = \frac{70 \times 30}{50} = \frac{2100}{50} = 42\text{ m}\]
+                    <p>La longueur \(DE\) est bien égale à <strong>42 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>4) Montrer que la longueur \(EM\) est environ égale à \(24{,}2\text{ m}\)</strong></p>
+                    <p>Le triangle \(DEM\) est rectangle en \(E\). On cherche le côté adjacent \(EM\) à l'angle \(\widehat{DME} = 60°\), avec le côté opposé \(DE = 42\text{ m}\). On utilise la tangente :</p>
+                    \[\tan(\widehat{DME}) = \frac{\text{Côté opposé}}{\text{Côté adjacent}} = \frac{DE}{EM}\]
+                    \[\tan(60°) = \frac{42}{EM}\]
+                    \[EM = \frac{42}{\tan(60°)} = \frac{42}{\sqrt{3}} \approx \frac{42}{1{,}732} \approx 24{,}248\text{ m}\]
+                    <p>En arrondissant au dixième, la longueur \(EM\) est bien d'environ <strong>24,2 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>5) En déduire l'aire du triangle \(AMD\)</strong></p>
+                    \[\text{Aire}(AMD) = \text{Aire}(ADE) - \text{Aire}(DEM)\]
+                    <p><strong>Calcul de \(AE\) par Thalès :</strong></p>
+                    \[\frac{AE}{AB} = \frac{AD}{AC} \implies \frac{AE}{40} = \frac{70}{50} \implies AE = \frac{70 \times 40}{50} = 56\text{ m}\]
+                    \[\text{Aire}(ADE) = \frac{AE \times DE}{2} = \frac{56 \times 42}{2} = 1176\text{ m}^2\]
+                    \[\text{Aire}(DEM) = \frac{EM \times DE}{2} \approx \frac{24{,}2 \times 42}{2} \approx 508{,}2\text{ m}^2\]
+                    \[\text{Aire}(AMD) \approx 1176 - 508{,}2 = 667{,}8\text{ m}^2\]
+                    <p>L'aire du triangle \(AMD\) est d'environ <strong>667,8 m²</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 6 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>🌿 Exercice 6 — D'après Brevet, Polynésie, juin 2025</h4>
+                <span class="badge-brevet">Pythagore + Thalès + Trigonométrie — Jardin botanique</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    Le jardin botanique est représenté par le quadrilatère \(ABCD\).<br>
+                    On sait que : \(AB = 500\) m, \(BE = 250\) m, \(DE = 750\) m ; les segments \([AC]\) et \([BD]\) se coupent en \(E\).
+                    (Figure non à l'échelle.)
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageF.png" alt="Jardin botanique">
+                </div>
+
+                <div class="brevet-subq">Question 1 — Calculer \(DB\) (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>\(DB =\)</label>
+                    <input type="text" id="bex6_db" placeholder="ex : 1000">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn6a">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 2 — Calculer \(AD\) arrondi au mètre (triangle \(ABD\) rectangle en \(A\)) :</div>
+                <div class="brevet-input-group">
+                    <label>\(AD \approx\)</label>
+                    <input type="text" id="bex6_ad" placeholder="ex : 866">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn6b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 3a — Calculer \(\sin(\widehat{EAB})\) dans le triangle \(EAB\) rectangle en \(E\) :</div>
+                <div class="brevet-input-group">
+                    <label>\(\sin(\widehat{EAB}) =\)</label>
+                    <input type="text" id="bex6_sin" placeholder="ex : 0,5">
+                    <button class="brevet-verify" id="bbtn6c">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 3b — En déduire la mesure de \(\widehat{EAB}\) en degrés :</div>
+                <div class="brevet-input-group">
+                    <label>\(\widehat{EAB} =\)</label>
+                    <input type="text" id="bex6_angle" placeholder="ex : 30">
+                    <span style="font-weight:500;">°</span>
+                    <button class="brevet-verify" id="bbtn6d">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 4b — Calculer \(CD\) par le théorème de Thalès (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>\(CD =\)</label>
+                    <input type="text" id="bex6_cd" placeholder="ex : 1500">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn6e">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 5 — Le tour du jardin est-il inférieur à 1 heure à 1,1 m/s ? (\(BC \approx 1\,323\) m)</div>
+                <div class="brevet-input-group">
+                    <label>Réponse :</label>
+                    <select id="bex6_rep">
+                        <option value="">— choisir —</option>
+                        <option value="non">Non, le temps est supérieur à 1 heure</option>
+                        <option value="oui">Oui, le temps est inférieur à 1 heure</option>
+                    </select>
+                    <button class="brevet-verify" id="bbtn6f">✔️ Vérifier</button>
+                </div>
+                <div id="bsol6" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr6')">📋 Voir la correction complète</button>
+                <div id="bcorr6" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 6</div>
+                    <p><strong>1) Quelle est la longueur du segment \([DB]\) ?</strong></p>
+                    <p>Les points \(D\), \(E\) et \(B\) sont alignés. La longueur totale du segment \([DB]\) est :</p>
+                    \[DB = DE + EB = 750 + 250 = 1000\text{ m}\]
+                    <p>La longueur du segment \([DB]\) est donc de <strong>1000 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2) Montrer que la longueur du segment \([AD]\), arrondie au mètre, est égale à \(866\text{ m}\)</strong></p>
+                    <p>Le triangle \(ABD\) est rectangle en \(A\). D'après le théorème de Pythagore :</p>
+                    \[DB^2 = AD^2 + AB^2\]
+                    \[AD^2 = DB^2 - AB^2 = 1000^2 - 500^2 = 1\,000\,000 - 250\,000 = 750\,000\]
+                    \[AD = \sqrt{750\,000} \approx 866{,}025\text{ m}\]
+                    <p>En arrondissant à l'unité près, la longueur du segment \([AD]\) est bien de <strong>866 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>3) a. Calculer le sinus de l'angle \(\widehat{EAB}\)</strong></p>
+                    <p>Dans le triangle \(EAB\) rectangle en \(E\), le côté \([AB]\) est l'hypoténuse et le côté \([EB]\) est le côté opposé à l'angle \(\widehat{EAB}\). Par définition du sinus :</p>
+                    \[\sin(\widehat{EAB}) = \frac{\text{Côté opposé}}{\text{Hypoténuse}} = \frac{EB}{AB} = \frac{250}{500} = 0{,}5\]
+                    <p>Le sinus de l'angle \(\widehat{EAB}\) est donc égal à <strong>0,5</strong>.</p>
+                    <p><strong>3) b. En déduire la mesure en degrés de l'angle \(\widehat{EAB}\)</strong></p>
+                    \[\widehat{EAB} = \arcsin(0{,}5) = 30°\]
+                    <p>L'angle \(\widehat{EAB}\) mesure précisément <strong>30°</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>4) a. Montrer que les droites \((AB)\) et \((DC)\) sont parallèles</strong></p>
+                    <ul>
+                        <li>La droite \((AB)\) est perpendiculaire à la droite \((AD)\) (angle droit en \(A\)).</li>
+                        <li>La droite \((DC)\) est perpendiculaire à la droite \((AD)\) (angle droit en \(D\)).</li>
+                    </ul>
+                    <p>Or, si deux droites distinctes sont perpendiculaires à une même troisième droite, alors elles sont nécessairement parallèles entre elles. Par conséquent, <strong>les droites \((AB)\) et \((DC)\) sont parallèles</strong>.</p>
+                    <p><strong>4) b. Montrer que la longueur du segment \([CD]\) est égale à \(1\,500\text{ m}\)</strong></p>
+                    <p>D'après le théorème de Thalès (configuration « papillon » de centre \(E\)) :</p>
+                    \[\frac{EB}{ED} = \frac{EA}{EC} = \frac{AB}{DC}\]
+                    \[\frac{750}{250} = \frac{CD}{500}\]
+                    \[CD = \frac{750 \times 500}{250} = 3 \times 500 = 1500\text{ m}\]
+                    <p>La longueur du segment \([CD]\) est bien égale à <strong>1500 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>5) Le temps mis par le piéton pour faire le tour du jardin botanique est-il inférieur à une heure ?</strong></p>
+                    <p><strong>Calcul du périmètre total :</strong></p>
+                    \[\text{Périmètre} = AB + BC + CD + DA = 500 + 1323 + 1500 + 866 = 4189\text{ m}\]
+                    <p><strong>Calcul de la durée de la marche :</strong></p>
+                    \[\text{Temps} = \frac{\text{Distance}}{\text{Vitesse}} = \frac{4189}{1{,}1} \approx 3808{,}18\text{ s}\]
+                    <p><strong>Comparaison avec une heure :</strong> \(1\text{ h} = 60 \times 60 = 3600\text{ s}\)</p>
+                    <p>On compare : \(3808{,}18\text{ s} > 3600\text{ s}\).</p>
+                    <p>Le temps nécessaire au piéton est supérieur à une heure. Par conséquent, <strong>le temps mis par le piéton n'est pas inférieur à une heure</strong>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EXERCICE 7 ══ -->
+        <div class="brevet-card">
+            <div class="brevet-card-header">
+                <h4>⛷️ Exercice 7 — D'après Brevet, Polynésie, septembre 2025</h4>
+                <span class="badge-brevet">Pythagore + Thalès + Trigonométrie — Ski de fond</span>
+            </div>
+            <div class="brevet-body">
+                <div class="brevet-enonce">
+                    Un skieur dispose d'un plan. Sur la figure :<br>
+                    — Triangle \(ACF\) rectangle en \(C\) : \(AC = 400\) m et \(\widehat{CAF} = 30°\)<br>
+                    — Triangle \(BED\) rectangle en \(D\) : \(ED = 300\) m et \(BD = 400\) m<br>
+                    — \(FE = ED = DH = 300\) m ; points \(C, F, E, D, H\) alignés<br>
+                    — \(K\) appartient à \([BH]\) ; droites \((EB)\) et \((KD)\) parallèles.
+                </div>
+                <div class="brevet-img">
+                    <img src="G3 imageG.png" alt="Ski de fond" style="max-width:85%;">
+                </div>
+
+                <div class="brevet-subq">Question 1 — Calculer \(FD = FE + ED\) (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>\(FD =\)</label>
+                    <input type="text" id="bex7_fd" placeholder="ex : 600">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn7a">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 2 — Calculer \(AF\) arrondi au mètre (triangle \(ACF\) rectangle en \(C\), \(\cos(30°) = \frac{AC}{AF}\)) :</div>
+                <div class="brevet-input-group">
+                    <label>\(AF \approx\)</label>
+                    <input type="text" id="bex7_af" placeholder="ex : 462">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn7b">✔️ Vérifier</button>
+                </div>
+
+                <div class="brevet-subq">Question 3a — Montrer que \(EB = 500\) m (triangle \(BED\) rectangle en \(D\)) :</div>
+                <div class="brevet-input-group">
+                    <label>\(EB =\)</label>
+                    <input type="text" id="bex7_eb" placeholder="ex : 500">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn7c">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ \(EB^2 = ED^2 + BD^2 = 300^2 + 400^2\)</p>
+
+                <div class="brevet-subq">Question 3b — Calculer \(DK\) par le théorème de Thalès dans le triangle \(HEB\) :</div>
+                <div class="brevet-input-group">
+                    <label>\(DK =\)</label>
+                    <input type="text" id="bex7_dk" placeholder="ex : 250">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn7d">✔️ Vérifier</button>
+                </div>
+                <p class="brevet-hint">ℹ️ \(HE = HD + DE = 600\) m. Thalès : \(\frac{HD}{HE} = \frac{DK}{EB}\)</p>
+
+                <div class="brevet-subq">Question 4 — Longueur totale du parcours \(A \to F \to E \to D \to K\) (en m) :</div>
+                <div class="brevet-input-group">
+                    <label>Longueur \(\approx\)</label>
+                    <input type="text" id="bex7_total" placeholder="ex : 1312">
+                    <span style="font-weight:500;">m</span>
+                    <button class="brevet-verify" id="bbtn7e">✔️ Vérifier</button>
+                </div>
+                <div id="bsol7" class="brevet-solution"></div>
+                <br>
+                <button class="brevet-show-corr" onclick="toggleCorr('bcorr7')">📋 Voir la correction complète</button>
+                <div id="bcorr7" class="corr-block">
+                    <div class="corr-title">✅ Correction de l'exercice 7</div>
+                    <p><strong>1) Quelle est la longueur du segment \([FD]\) ?</strong></p>
+                    <p>Les points \(C, F, E, D\) et \(H\) sont alignés. De plus, \(FE = ED = 300\text{ m}\). Le segment \([FD]\) correspond à la réunion des segments juxtaposés \([FE]\) et \([ED]\) :</p>
+                    \[FD = FE + ED = 300 + 300 = 600\text{ m}\]
+                    <p>La longueur du segment \([FD]\) est donc de <strong>600 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>2) Calculer la longueur du segment \([AF]\) arrondie au mètre</strong></p>
+                    <p>Le triangle \(ACF\) est rectangle en \(C\). Nous connaissons le côté adjacent \(AC = 400\text{ m}\) et l'angle \(\widehat{CAF} = 30°\). On cherche l'hypoténuse \(AF\). On applique la formule du cosinus :</p>
+                    \[\cos(\widehat{CAF}) = \frac{\text{Côté adjacent}}{\text{Hypoténuse}} = \frac{AC}{AF}\]
+                    \[\cos(30°) = \frac{400}{AF}\]
+                    \[AF = \frac{400}{\cos(30°)}\]
+                    <p>Comme \(\cos(30°) = \frac{\sqrt{3}}{2} \approx 0{,}866025\) :</p>
+                    \[AF \approx \frac{400}{0{,}866025} \approx 461{,}88\text{ m}\]
+                    <p>En arrondissant à l'unité, la longueur du segment \([AF]\) est égale à <strong>462 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>3) a. Montrer que la longueur du segment \([EB]\) est égale à \(500\text{ m}\)</strong></p>
+                    <p>Le triangle \(BED\) est rectangle en \(D\). D'après le théorème de Pythagore :</p>
+                    \[EB^2 = ED^2 + BD^2 = 300^2 + 400^2 = 90\,000 + 160\,000 = 250\,000\]
+                    \[EB = \sqrt{250\,000} = 500\text{ m}\]
+                    <p>La longueur du segment \([EB]\) est bien égale à <strong>500 m</strong>.</p>
+                    <p><strong>3) b. Calculer la longueur du segment \([DK]\)</strong></p>
+                    <p>Les droites \((EB)\) et \((KD)\) sont parallèles, et les points \(H, D, E\) ainsi que \(H, K, B\) sont alignés. On applique le théorème de Thalès dans le triangle \(HEB\) :</p>
+                    \[\frac{HD}{HE} = \frac{HK}{HB} = \frac{DK}{EB}\]
+                    <p>On détermine d'abord : \(HE = HD + DE = 300 + 300 = 600\text{ m}\).</p>
+                    \[\frac{300}{600} = \frac{DK}{500}\]
+                    \[\frac{1}{2} = \frac{DK}{500}\]
+                    \[DK = \frac{1 \times 500}{2} = 250\text{ m}\]
+                    <p>La longueur du segment \([DK]\) est donc de <strong>250 m</strong>.</p>
+                    <hr style="border:none;border-top:1px solid #d1fae5;margin:1rem 0;">
+                    <p><strong>4) En déduire la longueur du parcours qui passe par les points \(A, F, E, D\) et \(K\)</strong></p>
+                    <p>La longueur totale de la piste suivie par le skieur s'obtient par l'addition des segments successifs :</p>
+                    \[\text{Longueur} = AF + FE + ED + DK\]
+                    \[\text{Longueur} \approx 462 + 300 + 300 + 250\]
+                    \[\text{Longueur} \approx 1312\text{ m}\]
+                    <p>La longueur totale du parcours de ski de fond est d'environ <strong>1312 m</strong>.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 
 </div><!-- end .container -->
 
@@ -1608,8 +2353,270 @@
             \\[AB = 36 \\times \\sin(53°) \\approx 28{,}751 \\text{ cm}\\]
             <strong>Conclusion :</strong> Arrondi au millimètre près, \\(AB \\approx \\mathbf{${ab10f2} \\text{ cm}}\\) (soit 288 mm). ✅`);
     };
+
+    /* ══════════════════════════════════════════════════════════
+       JAVASCRIPT — EXERCICES TYPE BREVET
+    ══════════════════════════════════════════════════════════ */
+
+    function toggleCorr(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'block') {
+            el.style.display = 'none';
+        } else {
+            el.style.display = 'block';
+            if (window.MathJax) MathJax.typesetPromise([el]);
+        }
+    }
+
+    function bShowSol(id, isOk, html) {
+        const d = document.getElementById(id);
+        d.style.display = 'block';
+        const badge = isOk
+            ? '<div class="feedback-correct">✔️ Bonne réponse !</div>'
+            : '<div class="feedback-wrong">❌ Pas tout à fait. Consulte la correction ci-dessous.</div>';
+        d.innerHTML = badge + html;
+        if (window.MathJax) MathJax.typesetPromise([d]);
+    }
+
+    /* ── Exercice B1 : Réfrigérateur ── */
+    document.getElementById('bbtn1a').onclick = () => {
+        const val = approxNum(document.getElementById('bex1_diag').value);
+        const expected = Math.round(10 * Math.sqrt(59*59 + 198*198)) / 10;
+        const ok = isClose(val, expected, 0.2);
+        bShowSol('bsol1', ok,
+            ok ? '\\(AC = \\sqrt{59^2 + 198^2} = \\sqrt{42\\,685} \\approx \\mathbf{' + expected + '\\text{ cm}}\\) ✅'
+               : '\\(AC = \\sqrt{59^2 + 198^2} = \\sqrt{42\\,685} \\approx \\mathbf{' + expected + '\\text{ cm}}\\)');
+    };
+    document.getElementById('bbtn1b').onclick = () => {
+        const rep = document.getElementById('bex1_rep').value;
+        const ok = (rep === 'non');
+        bShowSol('bsol1', ok,
+            ok ? '✅ Correct ! \\(AC \\approx 206{,}6 \\text{ cm} > 205 \\text{ cm}\\) → Basile <strong>ne peut pas</strong> redresser le réfrigérateur sans bouger le point \\(A\\).'
+               : 'Réfléchis : \\(AC \\approx 206{,}6\\text{ cm} > 205\\text{ cm}\\). Le réfrigérateur est trop grand → Basile <strong>ne peut pas</strong> le redresser.');
+    };
+
+    /* ── Exercice B2 : Angle RAT ── */
+    document.getElementById('bbtn2a').onclick = () => {
+        const val = approxNum(document.getElementById('bex2_af2').value);
+        const ok = isClose(val, 100, 0.5);
+        bShowSol('bsol2', ok,
+            ok ? '\\(AF^2 = 10^2 = \\mathbf{100}\\) ✅'
+               : '\\(AF^2 = 10^2 = 100\\)');
+    };
+    document.getElementById('bbtn2b').onclick = () => {
+        const val = approxNum(document.getElementById('bex2_sum').value);
+        const ok = isClose(val, 100, 0.5);
+        bShowSol('bsol2', ok,
+            ok ? '\\(AE^2 + EF^2 = 8^2 + 6^2 = 64 + 36 = \\mathbf{100}\\). Comme \\(AF^2 = AE^2 + EF^2\\), le triangle \\(EAF\\) est <strong>rectangle en \\(E\\)</strong>. ✅'
+               : '\\(AE^2 + EF^2 = 8^2 + 6^2 = 64 + 36 = 100\\)');
+    };
+    document.getElementById('bbtn2c').onclick = () => {
+        const val = approxNum(document.getElementById('bex2_angle').value);
+        const expected = Math.round(Math.acos(8/10) * 180 / Math.PI);
+        const ok = isClose(val, expected, 1);
+        bShowSol('bsol2', ok,
+            ok ? '✅ \\(\\cos(\\widehat{EAF}) = \\frac{8}{10} = 0{,}8\\) → \\(\\widehat{EAF} = \\arccos(0{,}8) \\approx ' + expected + '°\\). Donc \\(\\widehat{RAT} \\approx \\mathbf{' + expected + '°}\\).'
+               : '\\(\\cos(\\widehat{EAF}) = \\frac{AE}{AF} = \\frac{8}{10} = 0{,}8\\) → \\(\\widehat{EAF} = \\arccos(0{,}8) \\approx ' + expected + '°\\) → \\(\\widehat{RAT} \\approx \\mathbf{' + expected + '°}\\) (angles opposés par le sommet).');
+    };
+
+    /* ── Exercice B3 : Voiliers ── */
+    const bcb3 = Math.round(10 * Math.sqrt(5.6*5.6 - 4.8*4.8)) / 10;
+    const bd1_3 = Math.round(10 * (bcb3 + 4.8)) / 10;
+    const bdc3 = Math.round(10 * 5.6 * Math.cos(24 * Math.PI/180)) / 10;
+    const bda3 = Math.round(10 * 5.6 * Math.sin(24 * Math.PI/180)) / 10;
+    const bd2_3 = Math.round(10 * (bdc3 + bda3)) / 10;
+
+    document.getElementById('bbtn3a').onclick = () => {
+        const val = approxNum(document.getElementById('bex3_cb').value);
+        const ok = isClose(val, bcb3, 0.15);
+        bShowSol('bsol3', ok,
+            ok ? '\\(CB = \\sqrt{5{,}6^2 - 4{,}8^2} = \\sqrt{8{,}32} \\approx \\mathbf{' + bcb3 + '\\text{ km}}\\) ✅'
+               : '\\(CB = \\sqrt{AC^2 - BA^2} = \\sqrt{5{,}6^2 - 4{,}8^2} \\approx ' + bcb3 + '\\text{ km}\\)');
+    };
+    document.getElementById('bbtn3b').onclick = () => {
+        const val = approxNum(document.getElementById('bex3_d1').value);
+        const ok = isClose(val, bd1_3, 0.15);
+        bShowSol('bsol3', ok,
+            ok ? '\\(d_1 = CB + BA \\approx ' + bcb3 + ' + 4{,}8 = \\mathbf{' + bd1_3 + '\\text{ km}}\\) ✅'
+               : '\\(d_1 = CB + BA \\approx ' + bcb3 + ' + 4{,}8 = ' + bd1_3 + '\\text{ km}\\)');
+    };
+    document.getElementById('bbtn3c').onclick = () => {
+        const val = approxNum(document.getElementById('bex3_dc').value);
+        const ok = isClose(val, bdc3, 0.15);
+        bShowSol('bsol3', ok,
+            ok ? '\\(DC = 5{,}6 \\times \\cos(24°) \\approx \\mathbf{' + bdc3 + '\\text{ km}}\\) ✅'
+               : '\\(DC = CA \\times \\cos(24°) = 5{,}6 \\times \\cos(24°) \\approx ' + bdc3 + '\\text{ km}\\)');
+    };
+    document.getElementById('bbtn3d').onclick = () => {
+        const val = approxNum(document.getElementById('bex3_da').value);
+        const ok = isClose(val, bda3, 0.15);
+        bShowSol('bsol3', ok,
+            ok ? '\\(DA = 5{,}6 \\times \\sin(24°) \\approx \\mathbf{' + bda3 + '\\text{ km}}\\) ✅'
+               : '\\(DA = CA \\times \\sin(24°) = 5{,}6 \\times \\sin(24°) \\approx ' + bda3 + '\\text{ km}\\)');
+    };
+    document.getElementById('bbtn3e').onclick = () => {
+        const val = approxNum(document.getElementById('bex3_d2').value);
+        const ok = isClose(val, bd2_3, 0.15);
+        bShowSol('bsol3', ok,
+            ok ? '\\(d_2 = DC + DA \\approx ' + bdc3 + ' + ' + bda3 + ' = \\mathbf{' + bd2_3 + '\\text{ km}}\\). Comme \\(' + bd2_3 + ' < ' + bd1_3 + '\\), le <strong>voilier n°2 parcourt moins de distance</strong>. ✅'
+               : '\\(d_2 \\approx ' + bdc3 + ' + ' + bda3 + ' = ' + bd2_3 + '\\text{ km}\\). Le voilier n°2 a la trajectoire la plus courte.');
+    };
+
+    /* ── Exercice B4 : Terrasse ── */
+    document.getElementById('bbtn4a').onclick = () => {
+        const val = approxNum(document.getElementById('bex4_ap').value);
+        const ok = isClose(val, 0.12, 0.005);
+        bShowSol('bsol4', ok,
+            ok ? '\\(AP = AD - DP = 0{,}27 - 0{,}15 = \\mathbf{0{,}12\\text{ m}}\\) ✅'
+               : '\\(AP = AD - DP = 0{,}27 - 0{,}15 = 0{,}12\\text{ m}\\)');
+    };
+    document.getElementById('bbtn4b').onclick = () => {
+        const val = approxNum(document.getElementById('bex4_angle').value);
+        const expected = Math.round(10 * Math.atan(0.12/5) * 180/Math.PI) / 10;
+        const ok = isClose(val, expected, 0.2);
+        bShowSol('bsol4', ok,
+            ok ? '\\(\\tan(\\widehat{ABP}) = \\frac{0{,}12}{5} = 0{,}024\\) → \\(\\widehat{ABP} = \\arctan(0{,}024) \\approx \\mathbf{' + expected + '°}\\) ✅'
+               : '\\(\\tan(\\widehat{ABP}) = \\frac{AP}{BP} = \\frac{0{,}12}{5} = 0{,}024\\) → \\(\\widehat{ABP} \\approx ' + expected + '°\\)');
+    };
+    document.getElementById('bbtn4c').onclick = () => {
+        const rep = document.getElementById('bex4_rep').value;
+        const ok = (rep === 'oui');
+        bShowSol('bsol4', ok,
+            ok ? '✅ \\(1° \\leq 1{,}4° \\leq 1{,}5°\\) → La condition est <strong>respectée</strong>. Le projet de Mme Martin est valide.'
+               : "L'angle \\(\\widehat{ABP} \\approx 1{,}4°\\). Comme \\(1° \\leq 1{,}4° \\leq 1{,}5°\\), la condition est bien <strong>respectée</strong>.");
+    };
+
+    /* ── Exercice B5 : Géométrie complexe ── */
+    document.getElementById('bbtn5a').onclick = () => {
+        const val = approxNum(document.getElementById('bex5_ab').value);
+        const ok = isClose(val, 40, 0.5);
+        bShowSol('bsol5', ok,
+            ok ? '\\(AB^2 = AC^2 - BC^2 = 50^2 - 30^2 = 2500 - 900 = 1600\\) → \\(AB = \\sqrt{1600} = \\mathbf{40\\text{ m}}\\) ✅'
+               : '\\(AB^2 = AC^2 - BC^2 = 50^2 - 30^2 = 1600\\) → \\(AB = 40\\text{ m}\\)');
+    };
+    document.getElementById('bbtn5b').onclick = () => {
+        const rep = document.getElementById('bex5_justif').value;
+        const ok = (rep === 'ok');
+        bShowSol('bsol5', ok,
+            ok ? '✅ Correct ! \\((DE) \\perp (EB)\\) et \\((BC) \\perp (EB)\\) → deux droites perpendiculaires à une même droite sont <strong>parallèles</strong>.'
+               : '\\((DE) \\perp (EB)\\) (triangle \\(ADE\\) rect. en \\(E\\)) et \\((BC) \\perp (EB)\\) (triangle \\(ABC\\) rect. en \\(B\\)) → \\((DE) \\parallel (BC)\\).');
+    };
+    document.getElementById('bbtn5c').onclick = () => {
+        const val = approxNum(document.getElementById('bex5_de').value);
+        const ok = isClose(val, 42, 0.5);
+        bShowSol('bsol5', ok,
+            ok ? 'Thalès : \\(\\frac{AD}{AC} = \\frac{DE}{BC}\\) → \\(\\frac{70}{50} = \\frac{DE}{30}\\) → \\(DE = \\frac{70 \\times 30}{50} = \\mathbf{42\\text{ m}}\\) ✅'
+               : 'Thalès : \\(\\frac{70}{50} = \\frac{DE}{30}\\) → \\(DE = \\frac{70 \\times 30}{50} = 42\\text{ m}\\)');
+    };
+    document.getElementById('bbtn5d').onclick = () => {
+        const val = approxNum(document.getElementById('bex5_em').value);
+        const expected = Math.round(10 * 42 / Math.tan(60 * Math.PI/180)) / 10;
+        const ok = isClose(val, expected, 0.3);
+        bShowSol('bsol5', ok,
+            ok ? '\\(\\tan(60°) = \\frac{DE}{EM}\\) → \\(EM = \\frac{42}{\\tan(60°)} = \\frac{42}{\\sqrt{3}} \\approx \\mathbf{' + expected + '\\text{ m}}\\) ✅'
+               : '\\(\\tan(60°) = \\frac{DE}{EM}\\) → \\(EM = \\frac{42}{\\sqrt{3}} \\approx ' + expected + '\\text{ m}\\)');
+    };
+    document.getElementById('bbtn5e').onclick = () => {
+        const val = approxNum(document.getElementById('bex5_aire').value);
+        const AE5 = 40 * 70/50;
+        const aireADE5 = AE5 * 42 / 2;
+        const EM5 = Math.round(10 * 42 / Math.tan(60 * Math.PI/180)) / 10;
+        const aireDEM5 = Math.round(10 * EM5 * 42 / 2) / 10;
+        const aireAMD5 = Math.round(10 * (aireADE5 - aireDEM5)) / 10;
+        const ok = isClose(val, aireAMD5, 5);
+        bShowSol('bsol5', ok,
+            ok ? '\\(\\text{Aire}(ADE) = \\frac{56 \\times 42}{2} = 1176\\text{ m}^2\\), \\(\\text{Aire}(DEM) \\approx \\frac{' + EM5 + ' \\times 42}{2} \\approx ' + aireDEM5 + '\\text{ m}^2\\)<br>\\(\\text{Aire}(AMD) \\approx 1176 - ' + aireDEM5 + ' = \\mathbf{' + aireAMD5 + '\\text{ m}^2}\\) ✅'
+               : '\\(\\text{Aire}(AMD) = \\text{Aire}(ADE) - \\text{Aire}(DEM) \\approx 1176 - ' + aireDEM5 + ' = ' + aireAMD5 + '\\text{ m}^2\\)');
+    };
+
+    /* ── Exercice B6 : Jardin botanique ── */
+    document.getElementById('bbtn6a').onclick = () => {
+        const val = approxNum(document.getElementById('bex6_db').value);
+        const ok = isClose(val, 1000, 1);
+        bShowSol('bsol6', ok,
+            ok ? '\\(DB = DE + EB = 750 + 250 = \\mathbf{1000\\text{ m}}\\) ✅'
+               : '\\(DB = DE + EB = 750 + 250 = 1000\\text{ m}\\)');
+    };
+    document.getElementById('bbtn6b').onclick = () => {
+        const val = approxNum(document.getElementById('bex6_ad').value);
+        const expected = Math.round(Math.sqrt(1000*1000 - 500*500));
+        const ok = isClose(val, expected, 2);
+        bShowSol('bsol6', ok,
+            ok ? '\\(AD^2 = DB^2 - AB^2 = 1000^2 - 500^2 = 750\\,000\\) → \\(AD = \\sqrt{750\\,000} \\approx \\mathbf{' + expected + '\\text{ m}}\\) ✅'
+               : '\\(AD = \\sqrt{1000^2 - 500^2} = \\sqrt{750\\,000} \\approx ' + expected + '\\text{ m}\\)');
+    };
+    document.getElementById('bbtn6c').onclick = () => {
+        const val = approxNum(document.getElementById('bex6_sin').value);
+        const ok = isClose(val, 0.5, 0.01);
+        bShowSol('bsol6', ok,
+            ok ? '\\(\\sin(\\widehat{EAB}) = \\frac{EB}{AB} = \\frac{250}{500} = \\mathbf{0{,}5}\\) ✅'
+               : 'Dans le triangle \\(EAB\\) rect. en \\(E\\) : \\(\\sin(\\widehat{EAB}) = \\frac{EB}{AB} = \\frac{250}{500} = 0{,}5\\)');
+    };
+    document.getElementById('bbtn6d').onclick = () => {
+        const val = approxNum(document.getElementById('bex6_angle').value);
+        const ok = isClose(val, 30, 1);
+        bShowSol('bsol6', ok,
+            ok ? '\\(\\widehat{EAB} = \\arcsin(0{,}5) = \\mathbf{30°}\\) ✅'
+               : '\\(\\widehat{EAB} = \\arcsin(0{,}5) = 30°\\)');
+    };
+    document.getElementById('bbtn6e').onclick = () => {
+        const val = approxNum(document.getElementById('bex6_cd').value);
+        const ok = isClose(val, 1500, 5);
+        bShowSol('bsol6', ok,
+            ok ? 'Thalès : \\(\\frac{EB}{ED} = \\frac{AB}{DC}\\) → \\(\\frac{250}{750} = \\frac{500}{CD}\\) → \\(CD = \\frac{750 \\times 500}{250} = \\mathbf{1500\\text{ m}}\\) ✅'
+               : 'Thalès : \\(\\frac{250}{750} = \\frac{500}{CD}\\) → \\(CD = 1500\\text{ m}\\)');
+    };
+    document.getElementById('bbtn6f').onclick = () => {
+        const rep = document.getElementById('bex6_rep').value;
+        const ok = (rep === 'non');
+        const perim6 = 500 + 1323 + 1500 + 866;
+        const temps6 = Math.round(perim6 / 1.1);
+        bShowSol('bsol6', ok,
+            ok ? '✅ Périmètre = ' + perim6 + ' m. Temps = ' + perim6 + ' ÷ 1,1 ≈ ' + temps6 + ' s > 3600 s. <strong>Non, le temps est supérieur à une heure.</strong>'
+               : 'Périmètre = ' + perim6 + ' m → Temps ≈ ' + temps6 + ' s > 3600 s → <strong>Non</strong>, il faut plus d\'une heure.');
+    };
+
+    /* ── Exercice B7 : Ski de fond ── */
+    document.getElementById('bbtn7a').onclick = () => {
+        const val = approxNum(document.getElementById('bex7_fd').value);
+        const ok = isClose(val, 600, 1);
+        bShowSol('bsol7', ok,
+            ok ? '\\(FD = FE + ED = 300 + 300 = \\mathbf{600\\text{ m}}\\) ✅'
+               : '\\(FD = FE + ED = 300 + 300 = 600\\text{ m}\\)');
+    };
+    document.getElementById('bbtn7b').onclick = () => {
+        const val = approxNum(document.getElementById('bex7_af').value);
+        const expected7 = Math.round(400 / Math.cos(30 * Math.PI/180));
+        const ok = isClose(val, expected7, 2);
+        bShowSol('bsol7', ok,
+            ok ? '\\(\\cos(30°) = \\frac{AC}{AF}\\) → \\(AF = \\frac{400}{\\cos(30°)} \\approx \\mathbf{' + expected7 + '\\text{ m}}\\) ✅'
+               : '\\(AF = \\frac{400}{\\cos(30°)} \\approx ' + expected7 + '\\text{ m}\\)');
+    };
+    document.getElementById('bbtn7c').onclick = () => {
+        const val = approxNum(document.getElementById('bex7_eb').value);
+        const ok = isClose(val, 500, 1);
+        bShowSol('bsol7', ok,
+            ok ? '\\(EB^2 = ED^2 + BD^2 = 300^2 + 400^2 = 90\\,000 + 160\\,000 = 250\\,000\\) → \\(EB = \\mathbf{500\\text{ m}}\\) ✅'
+               : '\\(EB^2 = 300^2 + 400^2 = 250\\,000\\) → \\(EB = 500\\text{ m}\\)');
+    };
+    document.getElementById('bbtn7d').onclick = () => {
+        const val = approxNum(document.getElementById('bex7_dk').value);
+        const ok = isClose(val, 250, 2);
+        bShowSol('bsol7', ok,
+            ok ? '\\(HE = HD + DE = 300 + 300 = 600\\text{ m}\\). Thalès : \\(\\frac{HD}{HE} = \\frac{DK}{EB}\\) → \\(\\frac{300}{600} = \\frac{DK}{500}\\) → \\(DK = \\mathbf{250\\text{ m}}\\) ✅'
+               : 'Thalès dans triangle \\(HEB\\) : \\(\\frac{300}{600} = \\frac{DK}{500}\\) → \\(DK = 250\\text{ m}\\)');
+    };
+    document.getElementById('bbtn7e').onclick = () => {
+        const val = approxNum(document.getElementById('bex7_total').value);
+        const AF7 = Math.round(400 / Math.cos(30 * Math.PI/180));
+        const total7 = AF7 + 300 + 300 + 250;
+        const ok = isClose(val, total7, 5);
+        bShowSol('bsol7', ok,
+            ok ? '\\(AF + FE + ED + DK \\approx ' + AF7 + ' + 300 + 300 + 250 = \\mathbf{' + total7 + '\\text{ m}}\\) ✅'
+               : 'Parcours \\(= AF + FE + ED + DK \\approx ' + AF7 + ' + 300 + 300 + 250 = ' + total7 + '\\text{ m}\\)');
+    };
+
 </script>
-<p style="font-weight: 600;"> © 2026 Estifanos G. </p>
-<div style="text-align: center; width: 100%;">
+
 </body>
 </html>
