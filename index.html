@@ -3,247 +3,566 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réussis ton brevet en maths en autonomie ! Bientôt complet</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Estif-Maths — Brevet 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #4361ee;
-      --bg: #f8f9fe;
+      --ink:    #0f0e17;
+      --paper:  #fffcf5;
+      --cream:  #f5f0e8;
+      --gold:   #c8964c;
+      --gold-lt:#e8c87a;
+      --blue:   #2563c8;
+      --violet: #6b3fa0;
+      --teal:   #0d8a72;
+      --rose:   #c23b5a;
+      --card:   #ffffff;
+      --border: rgba(0,0,0,.08);
+      --shadow: 0 4px 24px rgba(0,0,0,.07);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--bg);
-      color: #1e1e2f;
-      line-height: 1.5;
+      font-family: 'Sora', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 100vh;
     }
 
-    header {
-      background: linear-gradient(145deg, #4361ee 0%, #7209b7 100%);
-      color: white;
-      padding: 4rem 1.5rem 5rem;
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+      padding: 0 20px 36px;
       text-align: center;
-      border-bottom-left-radius: 50% 20%;
-      border-bottom-right-radius: 50% 20%;
-      box-shadow: 0 12px 30px rgba(67, 97, 238, 0.25);
     }
 
-    header h1 {
-      font-size: 3rem;
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 50% -10%, #2a1f5a 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, #0d3a4a 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 60%, #3a1f2a 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: 
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.15), transparent),
+        radial-gradient(1.5px 1.5px at 60% 70%, rgba(255,255,255,.1), transparent),
+        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.12), transparent),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.08), transparent),
+        radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.1), transparent);
+      pointer-events: none;
+      animation: twinkle 6s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0%   { opacity: .5; }
+      100% { opacity: 1; }
+    }
+
+    .hero-deco {
+      position: absolute;
+      font-family: 'DM Serif Display', serif;
+      color: rgba(255,255,255,.035);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-deco.d1 { font-size: 12rem; top: -30px; left: -20px; }
+    .hero-deco.d2 { font-size: 9rem; bottom: -25px; right: -10px; }
+    .hero-deco.d3 { font-size: 6rem; top: 25px; right: 15%; }
+    .hero-deco.d4 { font-size: 5rem; bottom: 30px; left: 12%; color: rgba(255,255,255,.025); }
+
+    .hero-inner {
+      position: relative;
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .hero-logo {
+      width: 120px;
+      height: auto;
+      margin: 20px auto 6px;
+      display: block;
+      filter: drop-shadow(0 6px 24px rgba(200,150,76,.35));
+      animation: floatLogo 5s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-5px); }
+    }
+
+    .hero-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1rem, 2.3vw, 1.25rem);
+      color: var(--gold-lt);
+      font-style: italic;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      text-shadow: 0 2px 12px rgba(200,150,76,.25);
+    }
+
+    .free-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(200,150,76,.2), rgba(200,150,76,.08));
+      border: 1.5px solid var(--gold);
+      border-radius: 100px;
+      padding: 6px 20px;
+      margin-bottom: 18px;
+      color: var(--gold-lt);
+      font-size: .76rem;
       font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.3rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      animation: fadeSlide .8s ease both .3s;
+      box-shadow: 0 0 20px rgba(200,150,76,.12);
+    }
+    .free-badge svg { flex-shrink: 0; width: 14px; height: 14px; }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    header p {
-      font-weight: 300;
-      opacity: 0.9;
-      font-size: 1.15rem;
+    .mission {
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 14px 26px;
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto 6px;
+      color: rgba(255,255,255,.82);
+      font-size: .88rem;
+      line-height: 1.6;
+      animation: fadeSlide .8s ease both .5s;
+      backdrop-filter: blur(4px);
+    }
+    .mission .line1 {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mission .line2 {
+      display: block;
+      margin-top: 4px;
+      font-size: .82rem;
+      color: rgba(255,255,255,.65);
+    }
+    .mission strong { color: var(--gold-lt); }
+
+    @media (max-width: 680px) {
+      .mission .line1 {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+      }
     }
 
+    .wave-divider {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      background: var(--paper);
+    }
+    .wave-divider svg { display: block; }
+
+    /* ─── MAIN CONTAINER ────────────────────────────────────────── */
     .container {
       max-width: 1100px;
-      margin: -2.5rem auto 3rem;
-      padding: 0 1.25rem;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
 
-    /* ---------- message d'avancement principal ---------- */
-    .avancement-banner {
-      background: white;
-      padding: 1.5rem 2rem;
-      border-radius: 60px;
-      box-shadow: 0 12px 28px rgba(67, 97, 238, 0.10);
-      margin-bottom: 3.5rem;
+    /* ─── SECTION HEADERS ───────────────────────────────────────── */
+    .section-head {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 14px;
+      margin: 48px 0 24px;
+    }
+    .section-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .section-label { flex: 1; }
+    .section-label h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+    .section-label p {
+      font-size: .78rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    /* ─── GRIDS ─────────────────────────────────────────────────── */
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+
+    /* ─── CHAPTER CARD ──────────────────────────────────────────── */
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      text-decoration: none;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1),
+                  box-shadow .25s ease,
+                  border-color .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: '→';
+      position: absolute;
+      right: 14px;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity .2s, transform .2s;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 12px 36px rgba(0,0,0,.12);
+    }
+    .card:hover::after { opacity: .6; transform: translateX(0); }
+
+    .card-num {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: .95rem;
+      flex-shrink: 0;
+    }
+    .card-info { flex: 1; min-width: 0; }
+    .card-info strong { font-size: .9rem; font-weight: 600; display: block; }
+    .card-info span   { font-size: .74rem; color: #888; margin-top: 2px; display: block; }
+
+    /* ─── CATEGORY COLOUR SCHEMES ───────────────────────────────── */
+    .cat-special .card-num  { background: #fff0f4; color: var(--rose); }
+    .cat-special .card:hover { border-color: var(--rose); }
+    .cat-special .section-icon { background: #fff0f4; }
+    .section-head.cat-special .section-label h2 { color: var(--rose); }
+
+    .cat-nombres .card-num  { background: #eef4ff; color: var(--blue); }
+    .cat-nombres .card:hover { border-color: var(--blue); }
+    .cat-nombres .section-icon { background: #eef4ff; }
+    .section-head.cat-nombres .section-label h2 { color: var(--blue); }
+
+    .cat-gestion .card-num  { background: #f0faf7; color: var(--teal); }
+    .cat-gestion .card:hover { border-color: var(--teal); }
+    .cat-gestion .section-icon { background: #f0faf7; }
+    .section-head.cat-gestion .section-label h2 { color: var(--teal); }
+
+    .cat-geo .card-num  { background: #f5f0ff; color: var(--violet); }
+    .cat-geo .card:hover { border-color: var(--violet); }
+    .cat-geo .section-icon { background: #f5f0ff; }
+    .section-head.cat-geo .section-label h2 { color: var(--violet); }
+
+    /* ─── LOCKED CARD ────────────────────────────────────────────── */
+    .card-locked {
+      opacity: .55;
+      filter: grayscale(.4);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .card-locked .card-num { background: #f4f4f4 !important; color: #bbb !important; }
+    .badge-wip {
+      background: linear-gradient(135deg, #e8b84b, #c8964c);
+      color: #fff;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 9px;
+      border-radius: 20px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    /* ─── AI CREDITS ─────────────────────────────────────────────── */
+    .ai-credits {
+      margin: 48px 0 0;
+      background: var(--cream);
+      border: 1px solid rgba(0,0,0,.07);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+    .ai-credits h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 14px;
+      color: #444;
+    }
+    .ai-chips {
+      display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem 1.5rem;
-      border: 1px solid rgba(67, 97, 238, 0.12);
-      backdrop-filter: blur(2px);
-    }
-
-    .avancement-banner .badge-progress {
-      background: linear-gradient(145deg, #4361ee, #7209b7);
-      color: white;
-      font-weight: 600;
-      font-size: 0.8rem;
-      padding: 0.35rem 1.2rem;
-      border-radius: 30px;
-      letter-spacing: 0.3px;
-      box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
-    }
-
-    .avancement-banner .message {
-      font-weight: 400;
-      font-size: 1.05rem;
-      color: #1e1e2f;
-    }
-
-    .avancement-banner .message strong {
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    /* on garde les titres de sections */
-    .section-title {
-      margin: 3rem 0 1.5rem;
-      font-weight: 600;
-      font-size: 1.6rem;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
       gap: 10px;
     }
-
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 2px;
-      background: linear-gradient(to right, #d0d9ff, transparent);
+    .ai-chip {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 16px;
+      font-size: .8rem;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    .ai-chip span { font-weight: 600; color: var(--ink); }
 
-    /* ----- on masque TOUTES les cartes (grid) ----- */
-    .grid {
-      display: none;  /* cache toutes les cartes */
-    }
-
-    /* on supprime également les éventuels margin/padding hérités */
-    .grid > * {
-      display: none;
-    }
-
-    /* message "contenu masqué" sous chaque section */
-    .placeholder-message {
-      background: #f0f4ff;
-      border-radius: 40px;
-      padding: 1rem 1.8rem;
-      font-weight: 300;
-      color: #2b3a5a;
-      border: 1px dashed #b7c9f0;
-      display: inline-block;
-      margin-top: 0.2rem;
-      font-size: 0.95rem;
-      backdrop-filter: blur(2px);
-    }
-
-    .placeholder-message span {
-      font-weight: 500;
-      color: var(--primary);
-    }
-
-    /* petite phrase d'attente sous chaque section */
-    .section-placeholder {
-      margin-bottom: 2.5rem;
-    }
-
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
     footer {
-      background: #1e1e2f;
-      color: #cdd4e0;
+      background: var(--ink);
+      color: rgba(255,255,255,.5);
       text-align: center;
-      padding: 3rem 1.5rem;
-      margin-top: 2.5rem;
-      border-top-left-radius: 40px 20px;
-      border-top-right-radius: 40px 20px;
+      padding: 32px 20px;
+      font-size: .8rem;
+      letter-spacing: .02em;
     }
+    footer strong { color: var(--gold-lt); }
 
-    footer p {
-      font-weight: 300;
-      opacity: 0.8;
+    /* ─── ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .grid > *, .mega-card {
+      animation: cardIn .45s ease both;
     }
-
-    .avancement-banner {
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    .section-title {
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    .placeholder-message {
-      animation: fadeIn 0.7s ease forwards;
-    }
+    .grid > *:nth-child(1) { animation-delay: .04s; }
+    .grid > *:nth-child(2) { animation-delay: .08s; }
+    .grid > *:nth-child(3) { animation-delay: .12s; }
+    .grid > *:nth-child(4) { animation-delay: .16s; }
+    .grid > *:nth-child(5) { animation-delay: .20s; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>📐 Réussis ton brevet en maths en autonomie !</h1>
-  <p>Révise avec méthode · Tous les chapitres arrivent</p>
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<header class="hero">
+  <div class="hero-deco d1">∑</div>
+  <div class="hero-deco d2">π</div>
+  <div class="hero-deco d3">√</div>
+  <div class="hero-deco d4">∞</div>
+
+  <div class="hero-inner">
+    <img
+      class="hero-logo"
+      src="Estif_logo.jpg"
+      alt="Estif-Maths — Réussir ton brevet en toute autonomie"
+    />
+
+    <p class="hero-tagline">Réussir ton brevet en toute autonomie!!!</p>
+
+    <div class="free-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      100 % gratuit!!!
+    </div>
+
+    <div class="mission">
+      <span class="line1">
+        Ce site est un <strong>espace de révision interactif</strong> conçu spécialement pour la <strong>classe de 3ème</strong>.
+      </span>
+      <span class="line2">
+        Toutes les ressources sont <strong>gratuites</strong>. Bonne révision !!!
+      </span>
+    </div>
+  </div>
 </header>
 
+<svg class="wave-divider" viewBox="0 0 1440 54" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect width="1440" height="54" fill="#0f0e17"/>
+  <path d="M0,54 C360,0 1080,54 1440,20 L1440,54 Z" fill="#fffcf5"/>
+</svg>
+
+<!-- ═══════════════════════════════ CONTENT ═══════════════════════════ -->
 <div class="container">
 
-  <!-- BANNIÈRE D'AVANCEMENT (message principal) -->
-  <div class="avancement-banner">
-    
-    <span class="message">
-      <strong>Bientôt 100% fonctionnel</strong> · tous les chapitres sont en cours d’intégration
-    </span>
-    <span style="display: inline-flex; gap: 0.2rem; font-size: 0.9rem;">
-      <span style="color: #4361ee;">⬤</span><span style="color: #4cc9f0;">⬤</span><span style="color: #7209b7;">⬤</span>
-    </span>
+  <!-- ── NOMBRES & CALCULS ── -->
+  <div class="section-head cat-nombres">
+    <div class="section-icon">🔢</div>
+    <div class="section-label">
+      <h2>Nombres &amp; Calculs</h2>
+      <p>Fondamentaux arithmétiques et algébriques</p>
+    </div>
+    <div class="section-line"></div>
   </div>
 
-  <!-- ====== INDISPENSABLES ====== -->
-  <h2 class="section-title">⚡ Les Indispensables</h2>
-  <div class="section-placeholder">
-    <div class="placeholder-message">
-      ⏳ <span>Contenu en préparation</span> — automatismes, algorithmique, etc.
+  <div class="grid grid-3 cat-nombres">
+    <a href="chapitreI.html" class="card">
+      <div class="card-num">1</div>
+      <div class="card-info">
+        <strong>Nombres entiers</strong>
+        <span>Divisibilité, PGCD, PPCM</span>
+      </div>
+    </a>
+    <div class="card card-locked">
+      <div class="card-num">2</div>
+      <div class="card-info">
+        <strong>Nombres rationnels</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">3</div>
+      <div class="card-info">
+        <strong>Calcul littéral</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">4</div>
+      <div class="card-info">
+        <strong>Équations</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
     </div>
   </div>
-  <!-- grid masquée (ne s'affiche pas) -->
-  <div class="grid"></div>
 
-  <!-- ====== NOMBRES & CALCULS ====== -->
-  <h2 class="section-title">🔢 Nombres & Calculs</h2>
-  <div class="section-placeholder">
-    <div class="placeholder-message">
-      ⏳ <span>Chapitres 1 à 4</span> — entiers, rationnels, littéral, équations
+  <!-- ── ORGANISATION & FONCTIONS ── -->
+  <div class="section-head cat-gestion">
+    <div class="section-icon">📊</div>
+    <div class="section-label">
+      <h2>Organisation &amp; Fonctions</h2>
+      <p>Proportionnalité, stats, probabilités</p>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid grid-3 cat-gestion">
+    <a href="chapitreV.html" class="card">
+      <div class="card-num">5</div>
+      <div class="card-info">
+        <strong>Proportionnalité</strong>
+        <span>Tableaux, règle de trois</span>
+      </div>
+    </a>
+    <div class="card card-locked">
+      <div class="card-num">6</div>
+      <div class="card-info">
+        <strong>Fonctions</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">7</div>
+      <div class="card-info">
+        <strong>Fonctions affines</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">8</div>
+      <div class="card-info">
+        <strong>Statistiques</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">9</div>
+      <div class="card-info">
+        <strong>Probabilités</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
     </div>
   </div>
-  <div class="grid"></div>
 
-  <!-- ====== ORGANISATION & FONCTIONS ====== -->
-  <h2 class="section-title">📊 Organisation & Fonctions</h2>
-  <div class="section-placeholder">
-    <div class="placeholder-message">
-      ⏳ <span>Chapitres 5 à 9</span> — proportionnalité, fonctions, stats, probas
+  <!-- ── ESPACE & GÉOMÉTRIE ── -->
+  <div class="section-head cat-geo">
+    <div class="section-icon">📐</div>
+    <div class="section-label">
+      <h2>Espace &amp; Géométrie</h2>
+      <p>Transformations, théorèmes, solides</p>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid grid-3 cat-geo">
+    <div class="card card-locked">
+      <div class="card-num">10</div>
+      <div class="card-info">
+        <strong>Transformations</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <div class="card card-locked">
+      <div class="card-num">11</div>
+      <div class="card-info">
+        <strong>Thalès</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
+    </div>
+    <!-- ⬇️ CHAPITRE 12 — ACTIVÉ ⬇️ -->
+    <a href="chapitreXII.html" class="card">
+      <div class="card-num">12</div>
+      <div class="card-info">
+        <strong>Triangles Rectangles</strong>
+        <span>Pythagore &amp; Trigonométrie</span>
+      </div>
+    </a>
+    <!-- ⬆️ FIN CHAPITRE 12 ⬆️ -->
+    <div class="card card-locked">
+      <div class="card-num">13</div>
+      <div class="card-info">
+        <strong>Solides</strong>
+        <span class="badge-wip">🚧 En construction</span>
+      </div>
     </div>
   </div>
-  <div class="grid"></div>
 
-  <!-- ====== ESPACE & GÉOMÉTRIE ====== -->
-  <h2 class="section-title">📐 Espace & Géométrie</h2>
-  <div class="section-placeholder">
-    <div class="placeholder-message">
-      ⏳ <span>Chapitres 10 à 13</span> — transformations, Thalès, triangles, solides
+  <!-- ── AI CREDITS ── -->
+  <div class="ai-credits">
+    <h3>🤝 Outils IA utilisés dans ce projet</h3>
+    <div class="ai-chips">
+      <div class="ai-chip">🖼️ <span>Gemini</span> — Génération du logo</div>
+      <div class="ai-chip">✏️ <span>Claude (Anthropic)</span> — Contenu & design interactif</div>
+      <div class="ai-chip">🎨 <span>ChatGPT</span> — Aide à la rédaction</div>
     </div>
   </div>
-  <div class="grid"></div>
 
-  <!-- petit message complémentaire -->
-  <div style="margin-top: 3.5rem; text-align: center; font-weight: 300; color: #5a6a7a; background: #eef2fa80; padding: 1.2rem; border-radius: 60px; backdrop-filter: blur(2px); border: 1px solid #ffffff;">
-    ⏳ Chaque chapitre sera déployé progressivement avec exercices interactifs et corrections.
-    <span style="display: block; font-weight: 400; margin-top: 0.3rem; color: #2b2d42;">📅 Mise à jour complète prévue pour septembre 2026</span>
-  </div>
+</div><!-- end .container -->
 
-</div>
-
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════ -->
 <footer>
-  <p style="font-weight: 300; letter-spacing: 0.5px;">© 2026 · Estifanos G.</p>
-  <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 0.5rem;">version d’intégration · tous les contenus sont en cours de finalisation</p>
+  <p>© 2026 <strong>Estifanos G.</strong> — Estif-Maths · Tout le contenu est libre d'accès.<br>
+  <small>Fait avec ❤️ pour les élèves de 3ème</small></p>
 </footer>
 
 </body>
