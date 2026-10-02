@@ -421,6 +421,61 @@
             padding: 0 4px;
         }
         .frac-lg { font-size: 1.35em; }
+    
+
+        /* ===== Message « écris d'abord ta réponse » ===== */
+        .need-answer { display: none; flex-basis: 100%; background: #fff5f5; color: #c53030; border-left: 4px solid #e53e3e; border-radius: 0 8px 8px 0; padding: 6px 12px; font-size: 0.9rem; font-weight: 600; }
+        .need-answer.show { display: block; }
+        @keyframes shakeField { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .shake-field { animation: shakeField 0.3s; border-color: #e53e3e !important; }
+
+        /* ===== Encadré « Piège à éviter » ===== */
+        .warning-box { background: #fff5f5; padding: 20px; border-left: 6px solid #e53e3e; margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .warning-box ul { margin: 8px 0 0 20px; padding-left: 0; }
+        .warning-box li { margin-bottom: 6px; }
+
+        /* ===== Affichage sur téléphone et tablette ===== */
+        mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+        img, video { max-width: 100%; height: auto; }
+        @media (max-width: 768px) {
+            .container { margin: 1rem auto; padding: 0 10px; }
+            .content-section { padding: 20px 14px; border-radius: 16px; }
+            .tabs { padding: 6px; gap: 6px; }
+            .tab-btn { flex: 1 1 45%; padding: 10px 6px; font-size: 0.85rem; }
+            .definition-box, .method-box, .example-box, .utilite-box, .warning-box { padding: 14px; margin: 14px 0; }
+            .step-list { margin-left: 4px; padding-left: 14px; }
+            .section-inner table { display: block; max-width: 100%; overflow-x: auto; }
+            .card-header { padding: 0.8rem 1rem; }
+            .card-body { padding: 1.1rem 1rem; }
+            .question { padding: 0.7rem 0.9rem; }
+            .input-group label { min-width: 0; width: 100%; }
+            .input-group input[type="text"], .input-group input[type="number"] { max-width: 100%; }
+            .exp-toolbar { margin-left: 0; flex-wrap: wrap; }
+            .quiz-block, .scoreboard, .auto-card { padding: 16px; }
+            .auto-answer-zone input { width: 80px; }
+            .download-cert-btn { width: 100%; padding: 12px 10px; }
+            .progress-step { font-size: 0.78rem; padding: 6px 10px; }
+        }
+        @media (max-width: 480px) {
+            header { padding: 0 12px 36px; }
+            .header-logo { width: 80px; }
+            .tab-btn { flex: 1 1 100%; }
+        }
+
+        /* ===== Impression / enregistrement en PDF ===== */
+        @media print {
+            header, .wave-divider, .tabs, .back-link, .lock-overlay, .quiz-block, .progress-tracker, .scoreboard,
+            button, video, .exp-toolbar, footer, [class*="completion"],
+            .definition-box:has(video), .utilite-box:has(a[download]) { display: none !important; }
+            body { background: #fff; color: #000; font-size: 12pt; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .content-section { box-shadow: none; padding: 0; animation: none; }
+            .course-section.locked .section-inner { display: block !important; }
+            .definition-box, .method-box, .example-box, .utilite-box, .warning-box, .exercice-card-import {
+                break-inside: avoid; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+            h2 { break-after: avoid; }
+        }
     </style>
 </head>
 <body>
@@ -530,6 +585,15 @@
             <strong>💡 Ça sert à quoi ?</strong> Les critères de divisibilité permettent de tester très rapidement, sans poser de division, si un nombre est divisible par un autre. C'est très utile pour simplifier des fractions ou repérer des diviseurs communs.
         </div>
 
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li>« Divisible par 4 » se teste sur les <strong>deux derniers chiffres</strong>, pas sur le dernier : 1 638 se termine par 8, mais 38 n'est pas un multiple de 4.</li>
+                <li>Un nombre pair n'est pas forcément divisible par 4, et un nombre divisible par 5 n'est pas forcément divisible par 10 (il faut qu'il se termine par 0).</li>
+                <li>Pour 3 et 9, on additionne <strong>tous</strong> les chiffres, puis on regarde si la somme est un multiple de 3 ou de 9.</li>
+            </ul>
+        </div>
+
         <div class="quiz-block" id="quiz-1">
             <h3>🤔 Ai-je bien compris ? (Section 1 : Critères de divisibilité)</h3>
             <div class="quiz-container" id="quiz-container-1"></div>
@@ -586,6 +650,15 @@
         </div>
 
         
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li>Le reste doit toujours être <strong>strictement inférieur au diviseur</strong>. Écrire 47 = 5 × 8 + 7 est faux (7 ≥ 5) : on continue jusqu'à 47 = 5 × 9 + 2.</li>
+                <li>Dans un problème de répartition, s'il reste des éléments, il faut <strong>une unité de plus</strong> que le quotient (200 = 45 × 4 + 20 → 5 bus, pas 4).</li>
+                <li>Ne pas confondre le quotient et le reste dans la réponse finale : relis la question posée.</li>
+            </ul>
+        </div>
+
         <div class="quiz-block" id="quiz-2">
             <h3>🤔 Ai-je bien compris ? (Section 2 : Division euclidienne)</h3>
             <div class="quiz-container" id="quiz-container-2"></div>
@@ -643,6 +716,15 @@
         </div>
 
         
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li><strong>1 n'est pas premier</strong>, et <strong>2 est le seul nombre premier pair</strong>.</li>
+                <li>Impair ne veut pas dire premier : 9, 15, 21 ou 27 sont impairs mais ne sont pas premiers.</li>
+                <li>Pour tester un nombre, il faut essayer <strong>tous</strong> les nombres premiers jusqu'à sa racine carrée, sans en oublier (2, 3, 5, 7…).</li>
+            </ul>
+        </div>
+
         <div class="quiz-block" id="quiz-3">
             <h3>🤔 Ai-je bien compris ? (Section 3 : Nombres premiers)</h3>
             <div class="quiz-container" id="quiz-container-3"></div>
@@ -703,176 +785,85 @@
 
 <h2>Simplification des fractions par décomposition en facteurs premiers</h2>
 
-<div style="background:#eaf4fc; border-left:5px solid #3498db; padding:15px 20px; border-radius:6px; margin:20px 0;">
-    <strong>Définition :</strong> Simplifier une fraction, c'est trouver une fraction <em>égale</em> dont le numérateur et le dénominateur sont plus petits. Pour cela, on divise le numérateur et le dénominateur par un même nombre.
-</div>
+        <div class="definition-box">
+            <strong>Définition :</strong> Simplifier une fraction, c'est trouver une fraction <strong>égale</strong> dont le numérateur et le dénominateur sont plus petits. Pour cela, on divise le numérateur et le dénominateur par un même nombre.<br><br>
+            La méthode la plus fiable pour simplifier complètement une fraction consiste à <strong>décomposer le numérateur et le dénominateur en facteurs premiers</strong>, puis à <strong>supprimer les facteurs communs</strong>.
+        </div>
 
-<p>
-    La méthode la plus fiable pour simplifier complètement une fraction consiste à 
-    <strong>décomposer le numérateur et le dénominateur en facteurs premiers</strong>, 
-    puis à supprimer les facteurs communs.
-</p>
+        <div class="definition-box">
+            <strong>Rappel : nombre premier.</strong> Un nombre premier est un nombre entier supérieur à 1 qui n'a que deux diviseurs : <strong>1</strong> et <strong>lui-même</strong>.<br>
+            Les premiers nombres premiers sont : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31…
+        </div>
 
-<h2>1. Rappel : nombre premier</h2>
-<p>
-    Un <strong>nombre premier</strong> est un nombre entier supérieur à 1 qui n'a que deux diviseurs : 
-    <span style="background:#ffeaa7; padding:2px 6px; border-radius:3px; font-weight:bold;">1</span> et 
-    <span style="background:#ffeaa7; padding:2px 6px; border-radius:3px; font-weight:bold;">lui-même</span>.
-</p>
-<p>
-    Les premiers nombres premiers sont : <strong>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31…</strong>
-</p>
+        <div class="example-box">
+            <strong>📌 Exemple détaillé : décomposer 60 en facteurs premiers</strong> (on divise successivement par les plus petits nombres premiers)<br>
+            <ul class="step-list">
+                <li>Étape 1 : 60 ÷ 2 = 30</li>
+                <li>Étape 2 : 30 ÷ 2 = 15</li>
+                <li>Étape 3 : 15 ÷ 3 = 5</li>
+                <li>Étape 4 : 5 ÷ 5 = 1</li>
+                <li><strong>Résultat : 60 = 2 × 2 × 3 × 5 = 2² × 3 × 5</strong></li>
+            </ul>
+        </div>
 
-<h2>2. Décomposition en facteurs premiers</h2>
-<p>
-    Décomposer un nombre en facteurs premiers, c'est l'écrire sous forme d'un 
-    <strong>produit de nombres premiers</strong>.
-</p>
+        <div class="method-box">
+            <strong>Méthode de simplification :</strong>
+            <ol class="step-list">
+                <li>Décomposer le <strong>numérateur</strong> en facteurs premiers.</li>
+                <li>Décomposer le <strong>dénominateur</strong> en facteurs premiers.</li>
+                <li>Écrire la fraction sous forme de produit de facteurs.</li>
+                <li><strong>Supprimer (barrer)</strong> les facteurs communs au numérateur et au dénominateur.</li>
+                <li>Multiplier les facteurs restants pour obtenir la fraction irréductible.</li>
+            </ol>
+        </div>
 
-<div style="background:#eafaf1; border-left:5px solid #27ae60; padding:15px 20px; border-radius:6px; margin:20px 0;">
-    <h3>Exemple : décomposer 60</h3>
-    <p>On divise successivement par les plus petits nombres premiers :</p>
-    <table style="border-collapse:collapse; margin:20px auto; font-size:1.05em;">
-        <tr>
-            <th style="border:1px solid #bdc3c7; padding:8px 18px; background:#3498db; color:#fff;">Division</th>
-            <th style="border:1px solid #bdc3c7; padding:8px 18px; background:#3498db; color:#fff;">Résultat</th>
-        </tr>
-        <tr><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">60 ÷ 2</td><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">30</td></tr>
-        <tr><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">30 ÷ 2</td><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">15</td></tr>
-        <tr><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">15 ÷ 3</td><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">5</td></tr>
-        <tr><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">5 ÷ 5</td><td style="border:1px solid #bdc3c7; padding:8px 18px; text-align:center;">1</td></tr>
-    </table>
-    <p>Donc : <strong>60 = 2 × 2 × 3 × 5 = 2² × 3 × 5</strong></p>
-</div>
-
-<h2>3. Méthode de simplification</h2>
-<ol style="padding-left:25px;">
-    <li>Décomposer le <strong>numérateur</strong> en facteurs premiers.</li>
-    <li>Décomposer le <strong>dénominateur</strong> en facteurs premiers.</li>
-    <li>Écrire la fraction sous forme de produit de facteurs.</li>
-    <li><strong>Supprimer (barrer)</strong> les facteurs communs au numérateur et au dénominateur.</li>
-    <li>Multiplier les facteurs restants pour obtenir la fraction irréductible.</li>
-		<video width="640" height="360" controls>
-    		<source src="N1-Rendre une fraction irréductible.mp4" type="video/mp4">
-    		</video>
-</ol>
-
-<h2>4. Exemple détaillé</h2>
-
-<div style="background:#eafaf1; border-left:5px solid #27ae60; padding:15px 20px; border-radius:6px; margin:20px 0;">
-    <h3>Simplifier la fraction <span class="frac frac-lg"><span class="num">84</span><span class="den">126</span></span></h3>
-
-    <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; margin-top:15px;">
-        <div style="flex:1 1 260px;">
-            <p><strong>Étape 1 :</strong> Décomposer 84</p>
-            <div style="font-family:'Courier New', monospace; background:#f8f9fa; padding:15px 25px; border-radius:6px; display:inline-block; margin:10px 0; line-height:1.5;">
-                84 = 2 × 42<br>
-                42 = 2 × 21<br>
-                21 = 3 × 7<br>
-                <strong>84 = 2 × 2 × 3 × 7</strong>
+        <div class="definition-box">
+            <div style="max-width: 800px; margin: auto;">
+                <video controls style="width: 100%; height: auto;">
+                    <source src="N1-Rendre une fraction irréductible.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
 
-        <div style="flex:1 1 260px;">
-            <p><strong>Étape 2 :</strong> Décomposer 126</p>
-            <div style="font-family:'Courier New', monospace; background:#f8f9fa; padding:15px 25px; border-radius:6px; display:inline-block; margin:10px 0; line-height:1.5;">
-                126 = 2 × 63<br>
-                63 = 3 × 21<br>
-                21 = 3 × 7<br>
-                <strong>126 = 2 × 3 × 3 × 7</strong>
-            </div>
-        </div>
-    </div>
-
-    <p><strong>Étape 3 :</strong> Écrire la fraction avec les décompositions</p>
-    <p style="text-align:center; font-size:1.2em;">
-        <span class="frac frac-lg"><span class="num">84</span><span class="den">126</span></span>
-        =
-        <span class="frac frac-lg"><span class="num">2 × 2 × 3 × 7</span><span class="den">2 × 3 × 3 × 7</span></span>
-    </p>
-
-    <p><strong>Étape 4 :</strong> Supprimer les facteurs communs (2, 3 et 7)</p>
-    <p style="text-align:center; font-size:1.2em;">
-        =
-        <span class="frac frac-lg"><span class="num"><s>2</s> × 2 × <s>3</s> × <s>7</s></span><span class="den"><s>2</s> × 3 × <s>3</s> × <s>7</s></span></span>
-    </p>
-
-    <p><strong>Étape 5 :</strong> Multiplier les facteurs restants</p>
-    <p style="text-align:center; font-size:1.3em;">
-        =
-        <span class="frac frac-lg"><span class="num">2</span><span class="den">3</span></span>
-        &nbsp;→&nbsp;
-        <span style="background:#27ae60; color:#fff; padding:3px 8px; border-radius:4px; font-weight:bold;">Fraction irréductible</span>
-    </p>
-
-    <p style="text-align:center;">
-        Donc : <span class="frac frac-lg"><span class="num">84</span><span class="den">126</span></span>
-        =
-        <span class="frac frac-lg"><span class="num">2</span><span class="den">3</span></span>
-    </p>
-</div>
-
-<h2>5. Deuxième exemple</h2>
-
-<div style="background:#eafaf1; border-left:5px solid #27ae60; padding:15px 20px; border-radius:6px; margin:20px 0;">
-    <h3>Simplifier <span class="frac frac-lg"><span class="num">180</span><span class="den">240</span></span></h3>
-
-    <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; margin-top:15px;">
-        <div style="flex:1 1 260px;">
-            <p><strong>Décomposition de 180 :</strong></p>
-            <div style="font-family:'Courier New', monospace; background:#f8f9fa; padding:15px 25px; border-radius:6px; display:inline-block; margin:10px 0; line-height:1.5;">
-                180 = 2 × 90 = 2 × 2 × 45 = 2 × 2 × 3 × 15<br>
-                <strong>180 = 2² × 3² × 5</strong>
-            </div>
+        <div class="example-box">
+            <strong>📌 Exemple détaillé : simplifier la fraction <span class="frac"><span class="num">84</span><span class="den">126</span></span></strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : décomposer 84 → 84 = 2 × 42 ; 42 = 2 × 21 ; 21 = 3 × 7. Donc <strong>84 = 2 × 2 × 3 × 7</strong>.</li>
+                <li>Étape 2 : décomposer 126 → 126 = 2 × 63 ; 63 = 3 × 21 ; 21 = 3 × 7. Donc <strong>126 = 2 × 3 × 3 × 7</strong>.</li>
+                <li>Étape 3 : écrire la fraction avec les décompositions : <span class="frac"><span class="num">84</span><span class="den">126</span></span> = <span class="frac"><span class="num">2 × 2 × 3 × 7</span><span class="den">2 × 3 × 3 × 7</span></span></li>
+                <li>Étape 4 : supprimer les facteurs communs (2, 3 et 7) : <span class="frac"><span class="num">84</span><span class="den">126</span></span> = <span class="frac"><span class="num"><s>2</s> × 2 × <s>3</s> × <s>7</s></span><span class="den"><s>2</s> × 3 × <s>3</s> × <s>7</s></span></span></li>
+                <li>Étape 5 : multiplier les facteurs restants : <span class="frac"><span class="num">2</span><span class="den">3</span></span> → fraction irréductible.</li>
+                <li><strong>Résultat : <span class="frac"><span class="num">84</span><span class="den">126</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span></strong></li>
+            </ul>
+            <br>
+            <strong>📌 Deuxième exemple : simplifier <span class="frac"><span class="num">180</span><span class="den">240</span></span></strong><br>
+            <ul class="step-list">
+                <li>Étape 1 : décomposer 180 → 180 = 2 × 90 = 2 × 2 × 45 = 2 × 2 × 3 × 15. Donc <strong>180 = 2² × 3² × 5</strong>.</li>
+                <li>Étape 2 : décomposer 240 → 240 = 2 × 120 = 2 × 2 × 60 = 2 × 2 × 2 × 30 = 2 × 2 × 2 × 2 × 15. Donc <strong>240 = 2⁴ × 3 × 5</strong>.</li>
+                <li>Étape 3 : écrire la fraction : <span class="frac"><span class="num">180</span><span class="den">240</span></span> = <span class="frac"><span class="num">2 × 2 × 3 × 3 × 5</span><span class="den">2 × 2 × 2 × 2 × 3 × 5</span></span></li>
+                <li>Étape 4 : supprimer les facteurs communs (2 × 2 × 3 × 5) : <span class="frac"><span class="num">180</span><span class="den">240</span></span> = <span class="frac"><span class="num"><s>2 × 2</s> × 3 × <s>3</s> × <s>5</s></span><span class="den"><s>2 × 2</s> × 2 × 2 × <s>3</s> × <s>5</s></span></span> = <span class="frac"><span class="num">3</span><span class="den">2 × 2</span></span> = <span class="frac"><span class="num">3</span><span class="den">4</span></span></li>
+                <li><strong>Résultat : <span class="frac"><span class="num">180</span><span class="den">240</span></span> = <span class="frac"><span class="num">3</span><span class="den">4</span></span></strong></li>
+            </ul>
         </div>
 
-        <div style="flex:1 1 260px;">
-            <p><strong>Décomposition de 240 :</strong></p>
-            <div style="font-family:'Courier New', monospace; background:#f8f9fa; padding:15px 25px; border-radius:6px; display:inline-block; margin:10px 0; line-height:1.5;">
-                240 = 2 × 120 = 2 × 2 × 60 = 2 × 2 × 2 × 30<br>
-                = 2 × 2 × 2 × 2 × 15<br>
-                <strong>240 = 2⁴ × 3 × 5</strong>
-            </div>
+        <div class="utilite-box">
+            <strong>💡 À retenir :</strong>
+            <ul>
+                <li>Une fraction est <strong>irréductible</strong> quand le numérateur et le dénominateur n'ont plus de facteur commun (autre que 1).</li>
+                <li>La décomposition en facteurs premiers permet de simplifier <strong>en une seule fois</strong>, sans chercher les diviseurs communs un par un.</li>
+                <li>On peut aussi utiliser le <strong>PGCD</strong> : on divise le numérateur et le dénominateur par leur PGCD.</li>
+            </ul>
+            <strong>Astuce :</strong> pour vérifier ta simplification, multiplie le numérateur et le dénominateur de la fraction simplifiée par un même nombre : tu dois retrouver la fraction de départ.
         </div>
-    </div>
 
-    <p><strong>On écrit :</strong></p>
-    <p style="text-align:center; font-size:1.15em;">
-        <span class="frac frac-lg"><span class="num">180</span><span class="den">240</span></span>
-        =
-        <span class="frac frac-lg"><span class="num">2 × 2 × 3 × 3 × 5</span><span class="den">2 × 2 × 2 × 2 × 3 × 5</span></span>
-    </p>
-
-    <p><strong>On supprime les facteurs communs :</strong> 2 × 2 × 3 × 5</p>
-    <p style="text-align:center; font-size:1.15em;">
-        =
-        <span class="frac frac-lg"><span class="num"><s>2 × 2</s> × 3 × <s>3</s> × <s>5</s></span><span class="den"><s>2 × 2</s> × 2 × 2 × <s>3</s> × <s>5</s></span></span>
-        =
-        <span class="frac frac-lg"><span class="num">3</span><span class="den">2 × 2</span></span>
-        =
-        <span class="frac frac-lg"><span class="num">3</span><span class="den">4</span></span>
-    </p>
-
-    <p style="text-align:center;">
-        <strong>Résultat :</strong>
-        <span class="frac frac-lg"><span class="num">180</span><span class="den">240</span></span>
-        =
-        <span class="frac frac-lg"><span class="num">3</span><span class="den">4</span></span>
-    </p>
-</div>
-
-<h2>6. À retenir</h2>
-<div style="background:#fef9e7; border-left:5px solid #f1c40f; padding:15px 20px; border-radius:6px; margin:20px 0;">
-    <ul>
-        <li>Une fraction est <strong>irréductible</strong> quand le numérateur et le dénominateur n'ont plus de facteur commun (autre que 1).</li>
-        <li>La décomposition en facteurs premiers permet de simplifier <strong>en une seule fois</strong>, sans chercher les diviseurs communs un par un.</li>
-        <li>On peut aussi utiliser le <strong>PGCD</strong> : on divise le numérateur et le dénominateur par leur PGCD.</li>
-    </ul>
-</div>
-
-<p style="margin-top:30px; padding-top:20px; border-top:1px dashed #bdc3c7; font-style:italic; color:#7f8c8d; font-size:0.95em;">
-    Astuce : Pour vérifier ta simplification, divise le numérateur et le dénominateur de la fraction simplifiée — tu dois retrouver la fraction de départ.
-</p>
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li>Ne pas s'arrêter trop tôt : on continue de diviser jusqu'à obtenir <strong>1</strong>. Vérifie ensuite en multipliant les facteurs trouvés.</li>
+                <li>N'oublie pas les exposants : 2 × 2 × 3 = 2² × 3, et non 2 × 3.</li>
+                <li>On ne peut barrer que des <strong>facteurs d'un produit</strong>, jamais des termes d'une somme : \(\dfrac{2+3}{2+5}\) n'est <strong>pas</strong> égal à \(\dfrac{3}{5}\).</li>
+            </ul>
+        </div>
 
         <div class="quiz-block" id="quiz-4">
             <h3>🤔 Ai-je bien compris ? (Section 4 : Décomposition en facteurs premiers)</h3>
@@ -923,6 +914,15 @@
         </div>
 
         
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li>Ne pas confondre PGCD et PPCM : le PGCD utilise les facteurs <strong>communs</strong> avec la <strong>plus petite</strong> puissance.</li>
+                <li>Le PGCD de deux nombres ne peut jamais dépasser le plus petit des deux (PGCD(60 ; 84) = 12 ≤ 60).</li>
+                <li>Un facteur présent dans un seul des deux nombres ne figure pas dans le PGCD.</li>
+            </ul>
+        </div>
+
         <div class="quiz-block" id="quiz-5">
             <h3>🤔 Ai-je bien compris ? (Section 5 : PGCD)</h3>
             <div class="quiz-container" id="quiz-container-5"></div>
@@ -969,6 +969,15 @@
             <ul class="step-list">
                 <li>Étape 1 : On cherche PPCM(15 ; 20) = 60.</li>
                 <li><strong>Conclusion : Ils se retrouveront ensemble toutes les 60 minutes (1 heure).</strong></li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Pièges à éviter :</strong>
+            <ul>
+                <li>Le PPCM utilise <strong>tous</strong> les facteurs avec la <strong>plus grande</strong> puissance, y compris ceux présents dans un seul nombre.</li>
+                <li>Le PPCM est toujours supérieur ou égal au plus grand des deux nombres (PPCM(84 ; 150) = 2 100).</li>
+                <li>Multiplier les deux nombres donne un multiple commun, mais pas forcément le plus petit : 15 × 20 = 300, alors que PPCM(15 ; 20) = 60.</li>
             </ul>
         </div>
 
@@ -1047,13 +1056,7 @@
     <div id="exercices" class="content-section">
         <h2>📚 Exercices d'entraînement</h2>
         <!-- Download box for Exercices PDF -->
-        <div class="utilite-box" style="background: #eef2ff;">
-            <i class="fas fa-download"></i> <strong>Télécharger la fiche d'exercices (Les bases) :</strong><br>
-            <a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" style="color: var(--primary); font-weight: 600;">
-                📄 N1 - Exercices Les bases.pdf
-            </a>
-        </div>
-
+        
         <h3>I. Applications directes</h3>
 
         <div class="exercice-card-import">
@@ -1259,6 +1262,16 @@
             <button class="download-cert-btn" id="download-interactifs" disabled onclick="downloadCertificate('interactifs')">Termine les 27 questions restantes</button>
         </div>
 
+        <div class="scoreboard" id="pdf-box-interactifs" style="display:none;">
+            <h3>🎉 Bravo, tu as réussi au moins 75 % des questions !</h3>
+            <div class="score-display">Tu as bien maîtrisé ces exercices. Télécharge la fiche d'exercices en PDF pour t'entraîner encore hors ligne :</div>
+            <p style="text-align:center; margin-top:12px;">
+                <a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;">
+                    📄 Télécharger la fiche d'exercices (PDF)
+                </a>
+            </p>
+        </div>
+
         <footer><i class="fas fa-chalkboard-teacher"></i> Toutes les corrections utilisent la division euclidienne, le PGCD ou le PPCM conformément au programme.</footer>
     </div>
 
@@ -1270,13 +1283,7 @@
         <h2>📝 Exercices Type Brevet</h2>
         <p style="margin-bottom: 20px;">Ces exercices sont inspirés d'annales du Diplôme National du Brevet. Ils mobilisent les notions de PGCD, PPCM, division euclidienne et nombres premiers.</p>
         <!-- Download box for Brevet PDF -->
-        <div class="utilite-box" style="background: #eef2ff;">
-            <i class="fas fa-download"></i> <strong>Télécharger les exercices type Brevet :</strong><br>
-            <a href="N1 - Exercices Type Brevet.pdf" download="N1 - Exercices Type Brevet.pdf" style="color: var(--primary); font-weight: 600;">
-                📄 N1 - Exercices Type Brevet.pdf
-            </a>
-        </div>
-
+        
         <div class="exercice-card-import">
             <div class="card-header">
                 <h4>🏆 Exercice Brevet 1 – Le problème des confettis</h4>
@@ -1448,6 +1455,16 @@
             <h3>📊 Mon score sur cette série Brevet</h3>
             <div class="score-display" id="score-brevet">Score : 0 / 27 (0%) — 0/27 questions faites</div>
             <button class="download-cert-btn" id="download-brevet" disabled onclick="downloadCertificate('brevet')">Termine les 27 questions restantes</button>
+        </div>
+
+        <div class="scoreboard" id="pdf-box-brevet" style="display:none;">
+            <h3>🎉 Bravo, tu as réussi au moins 75 % des questions !</h3>
+            <div class="score-display">Tu es bien préparé(e) pour le Brevet. Télécharge les exercices type Brevet en PDF pour t'entraîner encore hors ligne :</div>
+            <p style="text-align:center; margin-top:12px;">
+                <a href="N1 - Exercices Type Brevet.pdf" download="N1 - Exercices Type Brevet.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;">
+                    📄 Télécharger les exercices type Brevet (PDF)
+                </a>
+            </p>
         </div>
 
         <footer><i class="fas fa-graduation-cap"></i> Ces exercices sont similaires à ceux du Diplôme National du Brevet. Pense à bien justifier tes réponses !</footer>
@@ -2268,6 +2285,8 @@
         const pct = totalKeys.length ? Math.round((correct / totalKeys.length) * 100) : 0;
         const el = document.getElementById('score-' + tab);
         if (el) el.innerText = `Score : ${correct} / ${totalKeys.length} (${pct}%) — ${attempted}/${totalKeys.length} questions faites`;
+        const pdfBox = document.getElementById('pdf-box-' + tab);
+        if (pdfBox) pdfBox.style.display = (attempted === totalKeys.length && pct >= 75) ? 'block' : 'none';
         const dlBtn = document.getElementById('download-' + tab);
         if (dlBtn) {
             if (attempted === totalKeys.length && pct >= 75) {
@@ -2680,6 +2699,26 @@
         registerAutoAnswer('prime', ok);
     }
 
+
+    /* ================= L'ÉLÈVE DOIT ESSAYER DE RÉPONDRE AVANT DE VÉRIFIER ================= */
+    document.querySelectorAll('#exercices button.verify, #brevet button.verify').forEach(btn => {
+        const group = btn.closest('.input-group');
+        const original = btn.onclick;
+        if (!group || !original) return;
+        btn.onclick = function (e) {
+            const fields = Array.from(group.querySelectorAll('input[type="text"], input[type="number"], textarea'));
+            if (fields.length && fields.every(f => f.value.trim() === '')) {
+                let msg = group.querySelector('.need-answer');
+                if (!msg) { msg = document.createElement('div'); msg.className = 'need-answer'; msg.textContent = "✍️ Essaie d'abord de répondre : écris ta réponse dans le champ, puis clique sur « Vérifier »."; group.appendChild(msg); }
+                msg.classList.add('show');
+                clearTimeout(msg._t); msg._t = setTimeout(() => msg.classList.remove('show'), 4000);
+                fields[0].focus(); fields[0].classList.remove('shake-field'); void fields[0].offsetWidth; fields[0].classList.add('shake-field');
+                return;
+            }
+            const m = group.querySelector('.need-answer'); if (m) m.classList.remove('show');
+            return original.call(this, e);
+        };
+    });
 </script>
 
 </body>
