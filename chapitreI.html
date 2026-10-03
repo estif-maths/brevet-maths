@@ -508,7 +508,7 @@
 </svg>
 
 <div class="container">
-    <a href="index.html" class="back-link">← Retour au menu principal</a>
+    <a href="index1.html" class="back-link">← Retour au menu principal</a>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="showSection('cours', event)">📖 Cours Détaillé</button>
@@ -617,7 +617,7 @@
             <strong>📌 Exemple détaillé : Partage de 47 bonbons entre 5 enfants</strong><br>
             <ul class="step-list">
                 <li>Étape 1 : On cherche combien de fois 5 (nombre d'enfants) va dans 47 (nombre de bonbons).</li>
-                <li>Étape 2 : 5 × 9 = 45 (9 enfants reçoivent 5 bonbons chacun → 45 bonbons distribués).</li>
+                <li>Étape 2 : 5 × 9 = 45 (chacun des 5 enfants reçoit 9 bonbons → 45 bonbons distribués).</li>
                 <li>Étape 3 : On calcule le reste : 47 − 45 = 2 bonbons non distribués.</li>
                 <li>Étape 4 : On vérifie que le reste (2) est bien inférieur au diviseur (5).</li>
                 <li><strong>Résultat : 47 = 5 × 9 + 2 → Chaque enfant reçoit 9 bonbons, il reste 2 bonbons.</strong></li>
@@ -1230,9 +1230,9 @@
                 <div class="input-group"><label>55 :</label><input type="text" id="ex6a2" placeholder="Séparez par des virgules" style="width: 180px;"><button class="verify" id="btn6a2">Vérifier</button></div>
                 <div class="input-group"><label>Communs (35;55) :</label><input type="text" id="ex6a3" placeholder="Séparez par des virgules" style="width: 180px;"><button class="verify" id="btn6a3">Vérifier</button></div>
                 <hr>
-                <div class="subquestion">b) Diviseurs communs à 18 et 36 (PGCD(18,36)=18).</div>
+                <div class="subquestion">b) Donne tous les diviseurs communs à 18 et à 36 : liste les diviseurs de chaque nombre, puis garde ceux qui apparaissent dans les deux listes.</div>
                 <div class="input-group"><label>Communs (18;36) :</label><input type="text" id="ex6b" placeholder="Séparez par des virgules" style="width: 260px;"><button class="verify" id="btn6b">Vérifier</button></div>
-                <div class="subquestion">c) Diviseurs communs à 21 et 10.</div>
+                <div class="subquestion">c) Donne tous les diviseurs communs à 21 et à 10 (même méthode qu'en b).</div>
                 <div class="input-group"><label>Communs (21;10) :</label><input type="text" id="ex6c" placeholder="Séparez par des virgules" style="width: 120px;"><button class="verify" id="btn6c">Vérifier</button></div>
                 <div class="hint">ℹ️ L'ordre des nombres n'a pas d'importance.</div>
                 <div id="sol6" class="solution"></div>
@@ -1290,10 +1290,10 @@
                 <div class="badge-brevet">Brevet 2021 (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Pour une fête, on dispose de 180 confettis rouges et 150 confettis bleus. On veut faire des sachets identiques contenant chacun le même nombre de confettis rouges et le même nombre de confettis bleus, en utilisant tous les confettis.</div>
-                <div class="subquestion">1) Quel est le plus grand nombre de sachets que l'on peut réaliser ?</div>
+                <div class="question">Pour préparer une fête, on dispose de <strong>180 confettis rouges</strong> et de <strong>150 confettis bleus</strong>. On veut remplir des sachets <strong>identiques</strong> : chaque sachet doit contenir le même nombre de confettis rouges et le même nombre de confettis bleus, et <strong>tous les confettis doivent être utilisés</strong> (il ne doit rien rester).</div>
+                <div class="subquestion">1) Quel est le plus grand nombre de sachets que l'on peut réaliser ? <em>(Le nombre de sachets doit diviser à la fois 180 et 150.)</em></div>
                 <div class="input-group"><label>Nombre maximal de sachets :</label><input type="number" id="brevet1a" placeholder="" style="width: 120px;"><button class="verify" id="btnBrevet1a">🎯 Vérifier</button></div>
-                <div class="subquestion">2) Dans ce cas, combien y aura-t-il de confettis rouges et de confettis bleus par sachet ?</div>
+                <div class="subquestion">2) Dans ce cas, combien y aura-t-il de confettis rouges et de confettis bleus dans chaque sachet ?</div>
                 <div class="input-group">
                     <input type="number" id="br1_r" placeholder="Rouges" style="min-width:100px; width:110px">
                     <span>confettis rouges et</span>
@@ -1311,10 +1311,10 @@
                 <div class="badge-brevet">Brevet 2019 (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Une salle rectangulaire mesure 270 cm de longueur et 210 cm de largeur. On veut la carreler avec des carreaux carrés identiques, sans découpe, en utilisant les plus grands carreaux possibles.</div>
-                <div class="subquestion">1) Quelle est la longueur du côté d'un carreau ?</div>
+                <div class="question">Une salle rectangulaire mesure <strong>270 cm de longueur</strong> et <strong>210 cm de largeur</strong>. On veut recouvrir entièrement son sol avec des carreaux <strong>carrés identiques</strong>, posés <strong>sans découpe</strong> (il doit y avoir un nombre entier de carreaux dans la longueur et dans la largeur). On cherche à utiliser les <strong>plus grands carreaux possibles</strong>.</div>
+                <div class="subquestion">1) Quelle est la longueur du côté d'un carreau (en cm) ?</div>
                 <div class="input-group"><label>Côté du carreau (en cm) :</label><input type="text" id="brevet2a" placeholder="" style="width: 120px;"><button class="verify" id="btnBrevet2a">🎯 Vérifier</button></div>
-                <div class="subquestion">2) Combien de carreaux seront nécessaires ?</div>
+                <div class="subquestion">2) Combien de carreaux faut-il pour carreler toute la salle ?</div>
                 <div class="input-group"><label>Nombre de carreaux :</label><input type="text" id="brevet2b" placeholder="" style="width: 120px;"><button class="verify" id="btnBrevet2b">🎯 Vérifier</button></div>
                 <div id="solBrevet2" class="solution"></div>
             </div>
@@ -1326,8 +1326,8 @@
                 <div class="badge-brevet">Brevet 2022 (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Un feu rouge clignote toutes les 24 secondes, un feu vert clignote toutes les 36 secondes. Ils s'allument ensemble à 8h00.</div>
-                <div class="subquestion">À quelle heure s'allumeront-ils à nouveau ensemble pour la première fois ?</div>
+                <div class="question">Un feu rouge clignote <strong>toutes les 24 secondes</strong> et un feu vert clignote <strong>toutes les 36 secondes</strong>. À <strong>8 h 00 min 00 s</strong>, les deux feux clignotent exactement en même temps.</div>
+                <div class="subquestion">À quelle heure clignoteront-ils de nouveau ensemble pour la première fois ? <em>(Écris l'heure sous la forme HH:MM:SS, par exemple 9:05:30.)</em></div>
                 <div class="input-group"><label>Heure (format HH:MM:SS) :</label><input type="text" id="brevet3" placeholder="" style="width: 150px;"><button class="verify" id="btnBrevet3">🎯 Vérifier</button></div>
                 <div id="solBrevet3" class="solution"></div>
             </div>
@@ -1339,11 +1339,11 @@
                 <div class="badge-brevet">Brevet 2020 (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">On considère la fraction \(\frac{252}{294}\).</div>
-                <div class="subquestion">1) Décomposer 252 et 294 en produits de facteurs premiers.</div>
+                <div class="question">On considère la fraction \( \frac{252}{294} \). L'objectif est de la rendre <strong>irréductible</strong> grâce à la décomposition en facteurs premiers.</div>
+                <div class="subquestion">1) Décompose 252 et 294 en produits de facteurs premiers. <em>(Utilise les boutons × et x² pour écrire un produit avec des exposants, par exemple 2² × 5.)</em></div>
                 <div class="input-group"><label>252 =</label><input type="text" id="brevet4a" placeholder="" style="width: 200px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4a','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4a','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4a','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4a','⁴')">x⁴</button></span><button class="verify" id="btnBrevet4a">Vérifier</button></div>
                 <div class="input-group"><label>294 =</label><input type="text" id="brevet4b" placeholder="" style="width: 200px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('brevet4b','⁴')">x⁴</button></span><button class="verify" id="btnBrevet4b">Vérifier</button></div>
-                <div class="subquestion">2) En déduire la fraction irréductible égale à \(\frac{252}{294}\).</div>
+                <div class="subquestion">2) À l'aide de ces décompositions, donne la fraction irréductible égale à \( \frac{252}{294} \).</div>
                 <div class="input-group"><label>Fraction irréductible :</label><span class="fraction-input"><input type="number" id="brevet4c_num" placeholder="num"><span class="fraction-bar"></span><input type="number" id="brevet4c_den" placeholder="dén"></span><button class="verify" id="btnBrevet4c">Vérifier</button></div>
                 <div id="solBrevet4" class="solution"></div>
             </div>
@@ -1355,13 +1355,8 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">
-                    C'est à 6 h 30 que les deux bus des lignes 1 et 2 partent de l'arrêt « Mairie » dans le sens des aiguilles d'une montre.<br>
-                    Le bus de la ligne 1 met 3 minutes entre chaque arrêt (temps de stationnement compris), tandis que le bus de la ligne 2 met 4 minutes.<br>
-                    Tous les deux vont effectuer le circuit complet un grand nombre de fois. Ils s'arrêteront juste après 20 h.<br>
-                    Est-ce que les deux bus vont se retrouver à un moment de la journée à l'arrêt « Mairie » en même temps ? Si oui, donner tous les horaires précis de ces rencontres.
-                </div>
-                <img src="image1.png" alt="Illustration groupes d'adolescents" class="exercise-image">
+                <div class="question">À <strong>6 h 30</strong>, deux bus (ligne 1 et ligne 2) partent <strong>en même temps</strong> de l'arrêt « Mairie » et parcourent le même circuit dans le sens des aiguilles d'une montre. Ce circuit comporte <strong>8 arrêts</strong> : pour faire un tour complet et revenir à « Mairie », chaque bus effectue donc 8 trajets d'un arrêt au suivant.<br>• Le bus de la ligne 1 met <strong>3 minutes</strong> entre deux arrêts consécutifs (temps de stationnement compris).<br>• Le bus de la ligne 2 met <strong>4 minutes</strong> entre deux arrêts consécutifs.<br>Les deux bus font le circuit un grand nombre de fois et s'arrêtent juste après <strong>20 h</strong>.<br><strong>Question :</strong> les deux bus se retrouveront-ils au même moment à l'arrêt « Mairie » ? Si oui, donne tous les horaires de ces rencontres (en comptant le départ de 6 h 30). <em>Écris les horaires séparés par des virgules, par exemple : 7h05, 9h40.</em></div>
+                <img src="image1.png" alt="Illustration de l'exercice : les deux bus" class="exercise-image">
                 <div class="input-group">
                     <label>Horaires des rencontres :</label>
                     <input type="text" id="pdfEx1" placeholder="...h... Séparez par des virgules" style="width: 450px;">
@@ -1377,13 +1372,11 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">
-                    Carole souhaite réaliser une mosaïque sur un mur de sa maison. La surface à paver est un rectangle de dimensions 108 cm et 225 cm et doit être entièrement recouverte par des carreaux de faïence carrés de même dimension sans découpe.
-                </div>
-                <div class="subquestion">1) Carole peut-elle utiliser des carreaux de 3 cm de côté ? De 6 cm de côté ?</div>
+                <div class="question">Carole veut réaliser une mosaïque sur un mur de sa maison. La surface à recouvrir est un rectangle de <strong>108 cm sur 225 cm</strong>. Elle doit être entièrement recouverte de carreaux de faïence <strong>carrés, tous de même dimension</strong>, posés <strong>sans découpe</strong>.</div>
+                <div class="subquestion">1) Carole peut-elle utiliser des carreaux de 3 cm de côté ? Et des carreaux de 6 cm de côté ? <em>(Réponds par Oui ou Non pour chaque cas.)</em></div>
                 <div class="input-group"><label>Carreaux 3 cm (Oui/Non) :</label><input type="text" id="pdfEx2a" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2a">Vérifier</button></div>
                 <div class="input-group"><label>Carreaux 6 cm (Oui/Non) :</label><input type="text" id="pdfEx2b" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2b">Vérifier</button></div>
-                <div class="subquestion">2) Quelle est la dimension maximale des carreaux que Carole peut poser ? Combien de carreaux utilisera-t-elle ?</div>
+                <div class="subquestion">2) Quelle est la dimension maximale (en cm) du côté des carreaux que Carole peut poser ? Combien de carreaux utilisera-t-elle alors ?</div>
                 <div class="input-group"><label>Dimension max (cm) :</label><input type="text" id="pdfEx2c" placeholder="" style="width: 80px;"><button class="verify" id="btnPdfEx2c">Vérifier</button></div>
                 <div class="input-group"><label>Nombre de carreaux :</label><input type="text" id="pdfEx2d" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2d">Vérifier</button></div>
                 <div id="solPdfEx2" class="solution"></div>
@@ -1396,13 +1389,10 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">
-                    Laboratoire A : 5 groupes de 29 souris. 3 groupes vaccinés (aucune malade), 2 groupes non vaccinés (23 malades par groupe).<br>
-                    Laboratoire B : proportion \( \frac{140}{870} \) de souris malades.
-                </div>
-                <div class="subquestion">1) a) Montrer que la proportion de souris malades dans le labo A est \( \frac{146}{145} \). b) Justifier la non-simplification.</div>
+                <div class="question">Pour tester l'efficacité d'un vaccin contre la grippe, deux laboratoires étudient des souris.<br><strong>Laboratoire A :</strong> l'expérience porte sur <strong>5 groupes de 29 souris</strong>. Trois groupes ont été vaccinés : aucune souris n'est tombée malade. Les deux autres groupes n'ont pas été vaccinés : dans chacun d'eux, <strong>23 souris</strong> sont tombées malades.<br><strong>Laboratoire B :</strong> la proportion de souris malades est égale à \( \frac{140}{870} \).</div>
+                <div class="subquestion">1) a) Montre que la proportion de souris malades dans le laboratoire A est égale à \( \frac{46}{145} \) <em>(proportion = nombre de souris malades ÷ nombre total de souris ; écris ton résultat dans les cases pour vérifier)</em>. b) Justifie que cette fraction ne peut pas être simplifiée.</div>
                 <div class="input-group"><label>Vérification (taper la fraction) :</label><span class="fraction-input"><input type="number" id="pdfEx3a_num" placeholder="num"><span class="fraction-bar"></span><input type="number" id="pdfEx3a_den" placeholder="dén"></span><button class="verify" id="btnPdfEx3a">Vérifier</button></div>
-                <div class="subquestion">2) Décomposer 140 et 870 en produits de facteurs premiers, puis donner la forme irréductible de \( \frac{140}{870} \).</div>
+                <div class="subquestion">2) Décompose 140 et 870 en produits de facteurs premiers, puis donne la forme irréductible de \( \frac{140}{870} \).</div>
                 <div class="input-group"><label>140 =</label><input type="text" id="pdfEx3b" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','⁴')">x⁴</button></span><button class="verify" id="btnPdfEx3b">Vérifier</button></div>
                 <div class="input-group"><label>870 =</label><input type="text" id="pdfEx3c" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','⁴')">x⁴</button></span><button class="verify" id="btnPdfEx3c">Vérifier</button></div>
                 <div class="input-group"><label>Fraction irréductible :</label><span class="fraction-input"><input type="number" id="pdfEx3d_num" placeholder="num"><span class="fraction-bar"></span><input type="number" id="pdfEx3d_den" placeholder="dén"></span><button class="verify" id="btnPdfEx3d">Vérifier</button></div>
@@ -1416,14 +1406,12 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">
-                    Un capitaine possède un trésor constitué de 69 diamants, 1 150 perles et 4 140 pièces d'or. Il partage équitablement le trésor entre les marins. Toutes les pièces, perles et diamants ont été distribués.
-                </div>
-                <div class="subquestion">1) Décomposer 69, 1 150 et 4 140 en produits de facteurs premiers.</div>
+                <div class="question">Un capitaine pirate possède un trésor composé de <strong>69 diamants</strong>, <strong>1 150 perles</strong> et <strong>4 140 pièces d'or</strong>. Il le partage <strong>équitablement</strong> entre ses marins : chaque marin reçoit le même nombre de diamants, le même nombre de perles et le même nombre de pièces d'or, et <strong>tout le trésor est distribué</strong> (il ne reste rien). Il y a <strong>plus d'un marin</strong>.</div>
+                <div class="subquestion">1) Décompose 69, 1 150 et 4 140 en produits de facteurs premiers.</div>
                 <div class="input-group"><label>69 =</label><input type="text" id="pdfEx4a" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','⁴')">x⁴</button></span><button class="verify" id="pdfEx4aBtn">Vérifier</button></div>
                 <div class="input-group"><label>1150 =</label><input type="text" id="pdfEx4b" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','⁴')">x⁴</button></span><button class="verify" id="pdfEx4bBtn">Vérifier</button></div>
                 <div class="input-group"><label>4140 =</label><input type="text" id="pdfEx4c" placeholder="" style="width: 200px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','⁴')">x⁴</button></span><button class="verify" id="pdfEx4cBtn">Vérifier</button></div>
-                <div class="subquestion">2) Combien y a-t-il de marins ?</div>
+                <div class="subquestion">2) Combien y a-t-il de marins ? <em>(Le nombre de marins doit diviser 69, 1 150 et 4 140.)</em></div>
                 <div class="input-group"><label>Nombre de marins :</label><input type="text" id="pdfEx4d" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx4dBtn">Vérifier</button></div>
                 <div id="solPdfEx4" class="solution"></div>
             </div>
@@ -1435,15 +1423,13 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">
-                    Un snack vend des barquettes composées de nems et de samossas. Le cuisinier a préparé 162 nems et 108 samossas. Dans chaque barquette : le nombre de nems doit être le même ; le nombre de samossas doit être le même ; tous les nems et tous les samossas doivent être utilisés.
-                </div>
-                <div class="subquestion">1) Décomposer 162 et 108 en produits de facteurs premiers.</div>
+                <div class="question">Un snack vend des barquettes composées de nems et de samossas. Le cuisinier a préparé <strong>162 nems</strong> et <strong>108 samossas</strong>. Il veut remplir des barquettes <strong>identiques</strong> : chaque barquette contient le même nombre de nems et le même nombre de samossas, et <strong>tous les nems et tous les samossas doivent être utilisés</strong>.</div>
+                <div class="subquestion">1) Décompose 162 et 108 en produits de facteurs premiers.</div>
                 <div class="input-group"><label>162 =</label><input type="text" id="pdfEx5a" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','⁴')">x⁴</button></span><button class="verify" id="pdfEx5aBtn">Vérifier</button></div>
                 <div class="input-group"><label>108 =</label><input type="text" id="pdfEx5b" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','⁴')">x⁴</button></span><button class="verify" id="pdfEx5bBtn">Vérifier</button></div>
-                <div class="subquestion">2) Déterminer deux diviseurs communs à 162 et 108 plus grands que 10.</div>
+                <div class="subquestion">2) Détermine <strong>deux</strong> diviseurs communs à 162 et 108 qui sont <strong>supérieurs à 10</strong> (ce sont des nombres de barquettes possibles). <em>Sépare-les par des virgules.</em></div>
                 <div class="input-group"><label>Diviseurs >10 :</label><input type="text" id="pdfEx5c" placeholder="Séparez par des virgules" style="width: 150px;"><button class="verify" id="pdfEx5cBtn">Vérifier</button></div>
-                <div class="subquestion">3) a) Peut-il réaliser 36 barquettes ? b) Nombre maximal de barquettes ? c) Combien de nems et samossas par barquette dans ce cas ?</div>
+                <div class="subquestion">3) a) Le cuisinier peut-il réaliser <strong>36 barquettes</strong> identiques (Oui/Non) ? b) Quel est le <strong>nombre maximal</strong> de barquettes qu'il peut réaliser ? c) Dans ce cas, combien y a-t-il de nems et de samossas dans chaque barquette ? <em>(Écris par exemple : « 5 nems et 7 samossas ».)</em></div>
                 <div class="input-group"><label>36 barquettes ? (Oui/Non) :</label><input type="text" id="pdfEx5d" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx5dBtn">Vérifier</button></div>
                 <div class="input-group"><label>Nombre max de barquettes :</label><input type="text" id="pdfEx5e" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx5eBtn">Vérifier</button></div>
                 <div class="input-group"><label>Composition (nems, samossas) :</label><input type="text" id="pdfEx5f" placeholder="" style="width: 200px;"><button class="verify" id="pdfEx5fBtn">Vérifier</button></div>
@@ -1807,7 +1793,7 @@
     
     document.getElementById('btnBrevet2a').onclick = () => { let ok = (parseInt(document.getElementById('brevet2a').value) === 30); displayBrevetSolution('solBrevet2', "PGCD(270,210)=30.<br>✅ 30 cm", ok, 'brevet2a'); };
     document.getElementById('btnBrevet2b').onclick = () => { let ok = (parseInt(document.getElementById('brevet2b').value) === 63); displayBrevetSolution('solBrevet2', "270÷30=9, 210÷30=7, total=63.<br>✅ 63 carreaux", ok, 'brevet2b'); };
-    document.getElementById('btnBrevet3').onclick = () => { let u=document.getElementById('brevet3').value.trim().replace(/\s/g,''); let ok = (u === "8:01:12" || u === "8h01min12s"); displayBrevetSolution('solBrevet3', "PPCM(24,36)=72s. 8h00+72s=8h01min12s.<br>✅ 8h01min12s", ok, 'brevet3'); };
+    document.getElementById('btnBrevet3').onclick = () => { let u=document.getElementById('brevet3').value.trim().replace(/\s/g,''); let ok = /^0?8(:|h)0?1(:|min)12s?$/i.test(u); displayBrevetSolution('solBrevet3', "PPCM(24,36)=72s. 8h00+72s=8h01min12s.<br>✅ 8h01min12s", ok, 'brevet3'); };
     
     document.getElementById('btnBrevet4a').onclick = () => {
         let u = document.getElementById('brevet4a').value.trim().replace(/\s/g, '').toLowerCase();
@@ -1842,7 +1828,7 @@
     document.getElementById('btnPdfEx2c').onclick = () => { let u=parseInt(document.getElementById('pdfEx2c').value); let ok = (u===3); displayBrevetSolution('solPdfEx2', "PGCD(108,225)=3 (108=2²×3³, 225=3²×5²).<br>✅ 3 cm", ok, 'pdfEx2c'); };
     document.getElementById('btnPdfEx2d').onclick = () => { let u=parseInt(document.getElementById('pdfEx2d').value); let ok = (u===2700); displayBrevetSolution('solPdfEx2', "108÷3=36, 225÷3=75, total=36×75=2700.<br>✅ 2700 carreaux", ok, 'pdfEx2d'); };
     
-    document.getElementById('btnPdfEx3a').onclick = () => { let u = getFraction('pdfEx3a_num','pdfEx3a_den'); let ok = (u==="146/145"); displayBrevetSolution('solPdfEx3', "Total souris=5×29=145. Malades=2×23=46. Proportion=46/145? Non! 146/145 est impossible (>1). Donc exercice à corriger. ✅ 146/145", ok, 'pdfEx3a'); };
+    document.getElementById('btnPdfEx3a').onclick = () => { let u = getFraction('pdfEx3a_num','pdfEx3a_den'); let ok = (u==="46/145"); displayBrevetSolution('solPdfEx3', "<strong>a)</strong> Nombre total de souris : 5 × 29 = 145. Seuls les 2 groupes non vaccinés ont des souris malades : 2 × 23 = 46 souris malades.<br>Proportion de souris malades = 46/145.<br><strong>b)</strong> 46 = 2 × 23 et 145 = 5 × 29 : les deux nombres n'ont aucun facteur premier en commun, donc la fraction ne peut pas être simplifiée (elle est irréductible).<br>✅ <strong>46/145</strong>", ok, 'pdfEx3a'); };
     document.getElementById('btnPdfEx3b').onclick = () => { let u=document.getElementById('pdfEx3b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2^2×5×7" || u==="2²×5×7"); displayBrevetSolution('solPdfEx3', "140=2²×5×7", ok, 'pdfEx3b'); };
     document.getElementById('btnPdfEx3c').onclick = () => { let u=document.getElementById('pdfEx3c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = (u==="2×3×5×29"); displayBrevetSolution('solPdfEx3', "870=2×3×5×29", ok, 'pdfEx3c'); };
     document.getElementById('btnPdfEx3d').onclick = () => { let u = getFraction('pdfEx3d_num','pdfEx3d_den'); let ok = (u==="14/87"); displayBrevetSolution('solPdfEx3', "140/870 = (2²×5×7)/(2×3×5×29) = (2×7)/(3×29) = 14/87.<br>✅ 14/87", ok, 'pdfEx3d'); };
