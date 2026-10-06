@@ -2706,6 +2706,22 @@
         };
     });
 </script>
-
+<script data-goatcounter="https://estifmaths.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a[href]');
+  if (!a) return;
+  var href = a.getAttribute('href');
+  if (a.hasAttribute('download') || /\.(pdf|docx?|pptx?|xlsx?|zip|tex)$/i.test(href)) {
+    window.goatcounter && window.goatcounter.count({
+      path: 'download/' + href,
+      title: 'Téléchargement : ' + href,
+      event: true
+    });
+  }
+});
+</script>
+				
 </body>
 </html>
