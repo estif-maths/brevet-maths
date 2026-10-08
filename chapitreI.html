@@ -493,6 +493,11 @@
         .column-method td { padding: 4px 18px; font-weight: 600; }
         .column-method td:first-child, .column-method th:first-child { border-right: 2px solid #4361ee; text-align: right; }
         .column-method td:last-child { text-align: left; color: #4361ee; }
+        .col-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+        .col-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 10px; box-shadow: var(--shadow); min-width: 190px; }
+        .col-card table { font-size: 1rem; }
+        .col-card th, .col-card td { padding: 4px 12px; }
+        .col-result { margin: 10px 0 0; font-size: .92rem; line-height: 1.5; }
         .column-method figcaption { font-size: .88rem; color: #4b5563; margin-top: 8px; max-width: 520px; margin-left: auto; margin-right: auto; }
         .math-warning { background: #fff7e6; border-left: 5px solid #fab005; padding: 10px 14px; border-radius: 8px; margin: 12px 0; font-size: .9rem; }
         @media (prefers-reduced-motion: reduce) {
@@ -768,18 +773,33 @@
             <strong>Méthode en colonne :</strong> On divise successivement le nombre par les nombres premiers dans l'ordre.
         </div>
         <figure class="column-method">
-            <table aria-describedby="col-cap">
-                <caption>Disposition en colonne pour 84</caption>
-                <thead><tr><th scope="col">Nombre</th><th scope="col">Diviseur premier</th></tr></thead>
-                <tbody>
-                    <tr><td>84</td><td>2</td></tr>
-                    <tr><td>42</td><td>2</td></tr>
-                    <tr><td>21</td><td>3</td></tr>
-                    <tr><td>7</td><td>7</td></tr>
-                    <tr><td>1</td><td></td></tr>
-                </tbody>
-            </table>
-            <figcaption id="col-cap">À gauche, le nombre qui reste à décomposer ; à droite, le nombre premier utilisé pour le diviser. On s'arrête quand on arrive à <strong>1</strong>, puis on lit la colonne de droite : <strong>84 = 2 × 2 × 3 × 7 = 2² × 3 × 7</strong>.</figcaption>
+            <div class="col-grid">
+            <div class="col-card">
+                <table>
+                    <caption>Décomposer 84</caption>
+                    <thead><tr><th scope="col">Nombre</th><th scope="col">Diviseur premier</th></tr></thead>
+                    <tbody><tr><td>84</td><td>2</td></tr><tr><td>42</td><td>2</td></tr><tr><td>21</td><td>3</td></tr><tr><td>7</td><td>7</td></tr><tr><td>1</td><td></td></tr></tbody>
+                </table>
+                <p class="col-result">84 = 2 × 2 × 3 × 7<br><strong>= 2² × 3 × 7</strong></p>
+            </div>
+            <div class="col-card">
+                <table>
+                    <caption>Décomposer 60</caption>
+                    <thead><tr><th scope="col">Nombre</th><th scope="col">Diviseur premier</th></tr></thead>
+                    <tbody><tr><td>60</td><td>2</td></tr><tr><td>30</td><td>2</td></tr><tr><td>15</td><td>3</td></tr><tr><td>5</td><td>5</td></tr><tr><td>1</td><td></td></tr></tbody>
+                </table>
+                <p class="col-result">60 = 2 × 2 × 3 × 5<br><strong>= 2² × 3 × 5</strong></p>
+            </div>
+            <div class="col-card">
+                <table>
+                    <caption>Décomposer 150</caption>
+                    <thead><tr><th scope="col">Nombre</th><th scope="col">Diviseur premier</th></tr></thead>
+                    <tbody><tr><td>150</td><td>2</td></tr><tr><td>75</td><td>3</td></tr><tr><td>25</td><td>5</td></tr><tr><td>5</td><td>5</td></tr><tr><td>1</td><td></td></tr></tbody>
+                </table>
+                <p class="col-result">150 = 2 × 3 × 5 × 5<br><strong>= 2 × 3 × 5²</strong></p>
+            </div>
+            </div>
+            <figcaption>À gauche, le nombre qui reste à décomposer ; à droite, le plus petit nombre premier qui le divise. On s'arrête quand on arrive à <strong>1</strong>, puis on lit la colonne de droite. <br>👉 Remarque que le même nombre premier peut revenir plusieurs fois (2 deux fois pour 84 et 60, 5 deux fois pour 150) : on le regroupe avec un <strong>exposant</strong>.</figcaption>
         </figure>
         <div class="example-box">
 			<div style="max-width: 800px; margin: auto;">
