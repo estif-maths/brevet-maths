@@ -486,6 +486,14 @@
         .exercise-figure { margin: 14px auto; text-align: center; }
         .exercise-figure svg { max-width: 100%; height: auto; }
         .exercise-figure figcaption { font-size: .85rem; color: #4b5563; margin-top: 4px; }
+        .column-method { margin: 14px auto; text-align: center; }
+        .column-method table { margin: 0 auto; border-collapse: collapse; font-size: 1.05rem; }
+        .column-method caption { font-weight: 700; margin-bottom: 6px; color: #2b2d42; }
+        .column-method th { font-size: .8rem; color: #4b5563; padding: 4px 18px; border-bottom: 2px solid #4361ee; }
+        .column-method td { padding: 4px 18px; font-weight: 600; }
+        .column-method td:first-child, .column-method th:first-child { border-right: 2px solid #4361ee; text-align: right; }
+        .column-method td:last-child { text-align: left; color: #4361ee; }
+        .column-method figcaption { font-size: .88rem; color: #4b5563; margin-top: 8px; max-width: 520px; margin-left: auto; margin-right: auto; }
         .math-warning { background: #fff7e6; border-left: 5px solid #fab005; padding: 10px 14px; border-radius: 8px; margin: 12px 0; font-size: .9rem; }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -759,6 +767,20 @@
         <div class="method-box">
             <strong>Méthode en colonne :</strong> On divise successivement le nombre par les nombres premiers dans l'ordre.
         </div>
+        <figure class="column-method">
+            <table aria-describedby="col-cap">
+                <caption>Disposition en colonne pour 84</caption>
+                <thead><tr><th scope="col">Nombre</th><th scope="col">Diviseur premier</th></tr></thead>
+                <tbody>
+                    <tr><td>84</td><td>2</td></tr>
+                    <tr><td>42</td><td>2</td></tr>
+                    <tr><td>21</td><td>3</td></tr>
+                    <tr><td>7</td><td>7</td></tr>
+                    <tr><td>1</td><td></td></tr>
+                </tbody>
+            </table>
+            <figcaption id="col-cap">À gauche, le nombre qui reste à décomposer ; à droite, le nombre premier utilisé pour le diviser. On s'arrête quand on arrive à <strong>1</strong>, puis on lit la colonne de droite : <strong>84 = 2 × 2 × 3 × 7 = 2² × 3 × 7</strong>.</figcaption>
+        </figure>
         <div class="example-box">
 			<div style="max-width: 800px; margin: auto;">
     			<video controls style="width: 100%; height: auto;">
@@ -1172,15 +1194,15 @@
 
         <div class="exercice-card-import">
             <div class="card-header">
-                <h4>🖼️ Exercice 3 – Photographies dans des salles</h4>
+                <h4>📅 Exercice 3 – Quel jour de la semaine ?</h4>
                 <div class="badge-import">Division euclidienne</div>
             </div>
             <div class="card-body">
-                <div class="question">Un photographe doit répartir <strong>250 photographies</strong> dans les salles d'une galerie. Chaque salle peut contenir <strong>au plus 18 photographies</strong>.<br>Effectue la division euclidienne de 250 par 18, puis déduis-en le nombre minimal de salles à prévoir pour exposer toutes les photographies.</div>
+                <div class="question">Aujourd'hui, nous sommes <strong>mercredi</strong>. Quel jour de la semaine serons-nous dans <strong>100 jours</strong> ?<br>Effectue la division euclidienne de 100 par 7, puis déduis-en le jour. <em>(Réponds avec le nom du jour.)</em></div>
                 <div class="input-group">
-                    <label>Nombre minimal de salles :</label>
-                    <input type="text" id="ex3" placeholder="" style="width: 100px;">
-                    <button class="verify" id="btn3">🏛️ Vérifier</button>
+                    <label>Jour de la semaine :</label>
+                    <input type="text" id="ex3" placeholder="" style="width: 160px;" aria-label="Jour de la semaine">
+                    <button class="verify" id="btn3">📅 Vérifier</button>
                 </div>
                 <div id="sol3" class="solution"></div>
             </div>
@@ -1264,7 +1286,8 @@
                 <div class="input-group"><label>a) 40 bouquets ? (Oui/Non)</label><input type="text" id="ex7a" placeholder="" style="width: 100px;"><button class="verify" id="btn7a">Vérifier</button></div>
                 <div class="input-group"><label>b) 16 bouquets ? (Oui/Non)</label><input type="text" id="ex7b" placeholder="" style="width: 100px;"><button class="verify" id="btn7b">Vérifier</button></div>
                 <div class="subquestion">2) Avec 32 bouquets identiques : a) Justifie, en utilisant le PGCD, qu'il ne restera aucune fleur. b) Combien de pivoines et de roses y aura-t-il dans chaque bouquet ? (écris par exemple « X pivoines et Y roses »)</div>
-                <div class="input-group"><label>Justification (PGCD) :</label><input type="text" id="ex7c" placeholder="" style="width: 300px;"><button class="verify" id="btn7c">Vérifier</button></div>
+                <div class="hint">ℹ️ Une bonne justification cite le PGCD de 64 et 160, sa valeur, et dit pourquoi 32 convient (ex : « PGCD(64 ; 160) = 32, donc 32 divise 64 et 160 »).</div>
+                <div class="input-group"><label>Justification (PGCD) :</label><input type="text" id="ex7c" placeholder="ex : PGCD(64 ; 160) = … donc …" style="width: 340px;" aria-label="Justification avec le PGCD"><button class="verify" id="btn7c">Vérifier</button></div>
                 <div class="input-group"><label>Pivoines/ bouquet & roses/ bouquet :</label><input type="text" id="ex7d" placeholder="" style="width: 260px;"><button class="verify" id="btn7d">Vérifier</button></div>
                 <div id="sol7" class="solution"></div>
             </div>
@@ -1707,12 +1730,13 @@
     };
 
     document.getElementById('btn3').onclick = () => {
-        let val = parseInt(document.getElementById('ex3').value.trim(), 10);
-        let ok = (val === 14);
-        let detail = "<strong>Étape 1 – Division euclidienne de 250 par 18 :</strong> 18 × 13 = 234 et 18 × 14 = 252 &gt; 250. Donc 250 = 18 × 13 + 16 (reste 16 &lt; 18).<br>" +
-            "<strong>Étape 2 – Interprétation :</strong> 13 salles contiennent 13 × 18 = 234 photos ; il reste 16 photos, qu'il faut placer dans une 14<sup>e</sup> salle.<br>" +
-            "✅ <strong>Nombre minimal de salles : 14</strong>.<br>" +
-            "<em>Vérification : 13 salles → 234 places (&lt; 250, insuffisant) ; 14 salles → 252 places (≥ 250).</em>";
+        const u = document.getElementById('ex3').value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        let ok = (u === 'vendredi');
+        let detail = "<strong>Étape 1 – Division euclidienne de 100 par 7 :</strong> 7 × 14 = 98 et 100 = 7 × 14 + 2, avec 0 ≤ 2 &lt; 7.<br>" +
+            "<strong>Étape 2 – Interprétation :</strong> une semaine dure 7 jours. 14 semaines complètes (98 jours) nous ramènent au même jour : un mercredi. Il reste alors 2 jours à ajouter.<br>" +
+            "Mercredi + 1 jour = jeudi, + 2 jours = vendredi.<br>" +
+            "✅ <strong>Dans 100 jours, nous serons un vendredi.</strong><br>" +
+            "<em>Ici, c'est le <strong>reste</strong> de la division par 7 qui donne la réponse, et non le quotient.</em>";
         displaySolution('sol3', detail, ok, 'ex3');
     };
 
@@ -1803,7 +1827,7 @@
 
     document.getElementById('btn7c').onclick = () => {
         let u = document.getElementById('ex7c').value.trim().toLowerCase();
-        let ok = (u.includes("pgcd") || (u.includes("32") && (u.includes("divise") || u.includes("multiple"))));
+        let ok = u.includes("pgcd") && u.includes("32") && u.includes("64") && u.includes("160");
         let detail = "Il ne reste aucune fleur si 32 divise à la fois 64 et 160, c'est-à-dire si 32 est un diviseur commun de 64 et de 160.<br>" +
             "<strong>Avec le PGCD :</strong> 64 = 2⁶ et 160 = 2⁵ × 5. Les facteurs communs sont les 2, avec le plus petit exposant (5) : PGCD(64 ; 160) = 2⁵ = 32.<br>" +
             "Le PGCD est un diviseur commun de 64 et 160 : 64 = 32 × 2 et 160 = 32 × 5, sans reste.<br>" +
