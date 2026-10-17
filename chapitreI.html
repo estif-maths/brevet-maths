@@ -503,7 +503,65 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
         }
-    </style>
+    
+/* --- Animation engrenages / PPCM --- */
+
+/* Tous les styles sont limités à #ppmc : aucun conflit avec votre site */
+#ppmc{--ink:#0e1a2b;--ink2:#16263d;--line:#2a3d59;--txt:#eaf1fb;--mut:#92a5c0;--a:#ff5d62;--b:#4aa8ff;--ok:#3ddc97;
+  max-width:980px;margin:8px auto;padding:12px 14px;border-radius:18px;background:linear-gradient(160deg,var(--ink2),var(--ink));
+  color:var(--txt);font:16px/1.5 "Avenir Next","Nunito","Segoe UI",system-ui,sans-serif;box-shadow:0 12px 40px rgba(8,16,30,.35);box-sizing:border-box}
+#ppmc *{box-sizing:border-box}
+#ppmc h2{margin:0;font-size:1.3rem;letter-spacing:.2px;color:var(--txt)}
+#ppmc .sub{margin:0 0 8px;font-size:.9rem;color:var(--mut)}
+#ppmc .stage{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0b1522}
+#ppmc canvas{width:100%;height:auto;display:block}
+#ppmc .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#ppmc .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:6px 12px 8px}
+#ppmc .card.a{border-top:4px solid var(--a)} #ppmc .card.b{border-top:4px solid var(--b)}
+#ppmc .head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:0}
+#ppmc .name{font-weight:800;font-size:1.05rem}
+#ppmc .a .name b{color:var(--a)} #ppmc .b .name b{color:var(--b)}
+#ppmc .stepper{display:flex;align-items:center;gap:8px}
+#ppmc .stepper output{min-width:2.2ch;text-align:center;font-size:1.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+#ppmc .stepper button{width:34px;height:34px;padding:0;font-size:1.2rem;line-height:1}
+#ppmc input[type=range]{width:100%;margin:2px 0 0}
+#ppmc .a input[type=range]{accent-color:var(--a)} #ppmc .b input[type=range]{accent-color:var(--b)}
+#ppmc .stats{margin-top:2px;display:flex;justify-content:space-between;color:var(--mut);font-size:.9rem}
+#ppmc .stats strong{color:var(--txt);font-size:1.15rem;font-variant-numeric:tabular-nums}
+#ppmc .bar{height:8px;border-radius:6px;background:rgba(255,255,255,.1);margin-top:4px;overflow:hidden}
+#ppmc .bar i{display:block;height:100%;width:0;border-radius:6px}
+#ppmc .a .bar i{background:var(--a)} #ppmc .b .bar i{background:var(--b)}
+#ppmc .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+#ppmc button{font:inherit;font-weight:700;color:var(--txt);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:7px 14px;cursor:pointer;transition:background .15s,transform .1s}
+#ppmc button:hover{background:rgba(255,255,255,.16)} #ppmc button:active{transform:scale(.96)}
+#ppmc button.go{background:linear-gradient(135deg,#ffb347,#ff7a45);border-color:transparent;color:#2a1200;padding:8px 20px}
+#ppmc button:focus-visible,#ppmc input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#ppmc .speed{display:flex;align-items:center;gap:8px;color:var(--mut)}
+#ppmc .speed input{width:120px;margin:0;accent-color:#ffb347}
+#ppmc .total{display:flex;align-items:center;gap:8px}
+#ppmc .total span{color:var(--mut)} #ppmc .total strong{font-size:1.5rem;font-variant-numeric:tabular-nums}
+#ppmc .msg{margin-top:10px;padding:8px 14px;border-radius:12px;border:1px dashed var(--line);color:var(--mut);min-height:6.6em;font-size:.95rem;line-height:1.45}
+#ppmc .msg.win{border:2px solid var(--ok);color:var(--txt);background:rgba(61,220,151,.12)}
+#ppmc .chk{margin-left:auto;font-size:.9rem;display:flex;gap:8px;align-items:center;color:var(--mut);margin:0}
+#ppmc .chk input{width:18px;height:18px;accent-color:var(--ok)}
+@media(max-width:640px){#ppmc{padding:12px;border-radius:12px}#ppmc .grid{grid-template-columns:1fr}#ppmc .speed{width:100%}#ppmc .speed input{flex:1}}
+#ppmc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+#ppmc .top select{font:inherit;font-size:.9rem;color:var(--txt);background:#0b1522;border:1px solid var(--line);border-radius:10px;padding:6px 10px;max-width:100%;cursor:pointer}
+#ppmc .lists{margin-top:8px;display:grid;gap:4px}
+#ppmc .lrow{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:3px 10px;min-height:32px}
+#ppmc .lab{font-size:.85rem;font-weight:700;min-width:8.2em}
+#ppmc .lrow.a .lab{color:var(--a)} #ppmc .lrow.b .lab{color:var(--b)}
+#ppmc .chips{display:flex;gap:6px;overflow:hidden;white-space:nowrap;flex:1}
+#ppmc .chips:empty::before{content:"Pas encore de tour complet";color:var(--mut);font-size:.85rem}
+#ppmc .chip{flex:none;padding:1px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-weight:700;font-variant-numeric:tabular-nums}
+#ppmc .chip.com{background:var(--ok);color:#06251a}
+#ppmc .pred{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:4px;color:var(--txt)}
+#ppmc .pred input{width:90px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:#0b1522;color:var(--txt);font:inherit;font-weight:700}
+#ppmc .pred button{padding:5px 12px}
+#ppmc #ppmc-fb{font-size:.9rem}
+#ppmc #ppmc-fb.ok{color:var(--ok)} #ppmc #ppmc-fb.no{color:#ffb347}
+@media print{#ppmc{display:none}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#cours">Aller au contenu</a>
@@ -536,7 +594,7 @@
 </svg>
 
 <div class="container">
-    <a href="index1.html" class="back-link">← Retour au menu principal</a>
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
 
     <div class="tabs" role="tablist" aria-label="Rubriques du chapitre">
         <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="cours" onclick="showSection('cours', event)">📖 Cours Détaillé</button>
@@ -993,7 +1051,254 @@
             <strong>Définition :</strong> Le <strong>PPCM</strong> de deux entiers naturels non nuls \(a\) et \(b\) est le <strong>plus petit entier strictement positif qui est à la fois un multiple de \(a\) et un multiple de \(b\)</strong>. On le note PPCM(\(a\) ; \(b\)).<br>
             <em>Exemple rapide :</em> multiples de 6 : 6, 12, 18, <strong>24</strong>, 30… ; multiples de 8 : 8, 16, <strong>24</strong>, 32… Le premier multiple commun est 24, donc PPCM(6 ; 8) = 24.
         </div>
-        <div class="method-box">
+        <div style="margin:18px 0 10px"><strong>⚙️ À toi de jouer :</strong> deux engrenages tournent en même temps. La dent colorée de chacun est son point de départ. Essaie avec 6 et 8 : tu retrouveras l'exemple ci-dessus.</div>
+<div id="ppmc">
+  <div class="top">
+    <div><h2>⚙️ Deux engrenages, un PPCM</h2>
+    <p class="sub">La dent colorée marque le point de départ de chaque engrenage. Après combien de tours se retrouvent-elles ?</p></div>
+    <select id="ppmc-ex" aria-label="Exemples">
+      <option value="">💡 Exemples à découvrir…</option>
+      <option value="7,9">7 et 9 : premiers entre eux</option>
+      <option value="6,12">6 et 12 : l’un est multiple de l’autre</option>
+      <option value="8,8">8 et 8 : nombres égaux</option>
+      <option value="12,18">12 et 18 : ils ont des diviseurs en commun</option>
+    </select>
+  </div>
+
+  <div class="stage"><canvas id="ppmc-cv" width="900" height="360" role="img" aria-label="Animation de deux engrenages A et B"></canvas></div>
+  <div class="lists">
+    <div class="lrow a"><span class="lab">Multiples de A</span><div class="chips" id="ppmc-lA"></div></div>
+    <div class="lrow b"><span class="lab">Multiples de B</span><div class="chips" id="ppmc-lB"></div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card a">
+      <div class="head"><span class="name">Engrenage <b>A</b></span>
+        <span class="stepper"><button id="ppmc-aM" aria-label="Moins de dents pour A">−</button><output id="ppmc-vA">6</output><button id="ppmc-aP" aria-label="Plus de dents pour A">+</button><span style="color:var(--mut)">dents</span></span></div>
+      <input id="ppmc-nA" type="range" min="3" max="40" value="6" aria-label="Dents de A">
+      <div class="stats"><span>Tours : <strong id="ppmc-sA">0</strong></span></div>
+      <div class="bar"><i id="ppmc-bA"></i></div>
+    </div>
+    <div class="card b">
+      <div class="head"><span class="name">Engrenage <b>B</b></span>
+        <span class="stepper"><button id="ppmc-bM" aria-label="Moins de dents pour B">−</button><output id="ppmc-vB">8</output><button id="ppmc-bP" aria-label="Plus de dents pour B">+</button><span style="color:var(--mut)">dents</span></span></div>
+      <input id="ppmc-nB" type="range" min="3" max="40" value="8" aria-label="Dents de B">
+      <div class="stats"><span>Tours : <strong id="ppmc-sB">0</strong></span></div>
+      <div class="bar"><i id="ppmc-bB"></i></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="ppmc-play" class="go">▶ Lancer</button>
+    <button id="ppmc-step">+1 dent</button>
+    <button id="ppmc-reset">↺ Recommencer</button>
+    <span class="total"><span>Dents passées</span><strong id="ppmc-sT">0</strong></span>
+    <label class="chk"><input type="checkbox" id="ppmc-ans"> Afficher le PPCM</label>
+    <label class="speed">🐢 <input id="ppmc-spd" type="range" min="0.2" max="8" step="0.1" value="1.5" aria-label="Vitesse"> 🐇</label>
+  </div>
+
+  <div id="ppmc-msg" class="msg">
+    <div class="pred">🤔 Ma prédiction : PPCM(<b id="ppmc-pa">6</b> ; <b id="ppmc-pb">8</b>) =
+      <input id="ppmc-guess" type="number" min="1" inputmode="numeric" aria-label="Ma prédiction du PPCM">
+      <button id="ppmc-check">Vérifier</button><span id="ppmc-fb"></span></div>
+    <div id="ppmc-txt" role="status" aria-live="polite"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $ = id => document.getElementById('ppmc-'+id);
+  const cv = $('cv'), ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height, TAU = Math.PI*2;
+  const COL = {a:'#ff5d62', b:'#4aa8ff', ok:'#3ddc97', mut:'#92a5c0', bg:'#0b1522'};
+  const gcd = (a,b)=> b ? gcd(b,a%b) : a;
+  let n, m, L, g, t = 0, nextMeet, playing = false, met = false, last = 0, hold = 0, flash = null;
+  const HOLD_MS = 1600; // durée de la pause à chaque tour complet
+  const nextTurnAfter = x => Math.min((Math.floor(x/n+1e-9)+1)*n, (Math.floor(x/m+1e-9)+1)*m);
+  function setFlash(until){ const who = t%n===0 ? 'A' : (t%m===0 ? 'B' : null); flash = who ? {who, until} : null; }
+
+  let note = '', lk = '';
+  const NOTES = {
+    '7,9':'7 et 9 sont premiers entre eux (aucun diviseur commun, sauf 1) : le PPCM est leur produit, 7 × 9 = 63.',
+    '6,12':'12 est déjà un multiple de 6 : le PPCM est simplement le plus grand des deux nombres.',
+    '8,8':'Deux engrenages identiques se retrouvent dès le premier tour.',
+    '12,18':'12 et 18 sont tous les deux divisibles par 2, 3 et 6. Ils se retrouvent donc après 36 dents, bien avant 12 × 18 = 216.'
+  };
+  function setFb(txt, cls){ const f=$('fb'); f.textContent = txt; f.className = cls||''; }
+  function check(){
+    const v = parseInt($('guess').value,10);
+    if(!v){ setFb('Écris un nombre, puis clique sur Vérifier.','no'); return; }
+    if(v === L) setFb('✔ Bravo ! Lance l’animation pour le vérifier.','ok');
+    else if(v < Math.max(n,m)) setFb('Trop petit : le PPCM est au moins aussi grand que '+Math.max(n,m)+'.','no');
+    else {
+      const bad = []; if(v%n) bad.push('A ('+n+')'); if(v%m) bad.push('B ('+m+')');
+      setFb(bad.length ? v+' n’est pas un multiple de '+bad.join(' ni de ')+'.' : 'C’est un multiple commun, mais pas le plus petit. Cherche plus petit !','no');
+    }
+  }
+  function renderLists(){
+    const ka = Math.floor(t/n+1e-9), kb = Math.floor(t/m+1e-9), key = ka+','+kb;
+    if(key === lk) return; lk = key;
+    const build = (k, a, b) => { let h=''; for(let i=1;i<=k;i++){ const v=i*a, com = v%b===0 && v<=t+1e-9;
+      h += '<span class="chip'+(com?' com':'')+'">'+v+(com&&v===L?' ★':'')+'</span>'; } return h; };
+    $('lA').innerHTML = build(ka,n,m); $('lB').innerHTML = build(kb,m,n);
+    $('lA').scrollLeft = $('lA').scrollWidth; $('lB').scrollLeft = $('lB').scrollWidth;
+  }
+  function setup(){
+    n = +$('nA').value; m = +$('nB').value;
+    $('vA').textContent = n; $('vB').textContent = m; $('pa').textContent = n; $('pb').textContent = m;
+    $('guess').value = ''; setFb('',''); note = ''; lk = '';
+    g = gcd(n,m); L = n*m/g;
+    t = 0; nextMeet = L; playing = false; met = false; hold = 0; flash = null;
+    $('play').textContent = '▶ Lancer';
+    updateUI();
+  }
+
+  function toothPts(a, d, rr, rt){ return [[a-0.30*d,rr],[a-0.16*d,rt],[a+0.16*d,rt],[a+0.30*d,rr]]; }
+  function gearPath(N, r, p, rot){
+    const d = TAU/N, h = p*0.34, rr = r-h/2, rt = r+h/2;
+    ctx.beginPath();
+    for(let i=0;i<N;i++){
+      const a = rot + i*d;
+      toothPts(a,d,rr,rt).forEach((q,k)=>{ const x=Math.cos(q[0])*q[1], y=Math.sin(q[0])*q[1]; (i===0&&k===0)?ctx.moveTo(x,y):ctx.lineTo(x,y); });
+      ctx.arc(0,0,rr,a+0.30*d,a+d-0.30*d);
+    }
+    ctx.closePath();
+  }
+  function markTooth(N, r, p, a, color){
+    const d = TAU/N, h = p*0.34, rr = r-h/2, rt = r+h/2;
+    ctx.save(); ctx.shadowColor = color; ctx.shadowBlur = 14;
+    ctx.beginPath();
+    toothPts(a,d,rr,rt).forEach((q,k)=>{ const x=Math.cos(q[0])*q[1], y=Math.sin(q[0])*q[1]; k?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+    ctx.closePath(); ctx.fillStyle = color; ctx.fill(); ctx.restore();
+    ctx.beginPath(); ctx.moveTo(Math.cos(a)*r*0.28, Math.sin(a)*r*0.28); ctx.lineTo(Math.cos(a)*(rr-1), Math.sin(a)*(rr-1));
+    ctx.strokeStyle = color; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.stroke();
+  }
+  function drawGear(cx, cy, N, r, p, rot, color, label){
+    ctx.save(); ctx.translate(cx,cy);
+    ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+    gearPath(N,r,p,rot);
+    const gr = ctx.createRadialGradient(-r*0.3,-r*0.35,r*0.1,0,0,r+p*0.2);
+    gr.addColorStop(0,'#8aa0bd'); gr.addColorStop(1,'#33465f');
+    ctx.fillStyle = gr; ctx.fill();
+    ctx.shadowColor = 'transparent'; ctx.lineWidth = 2; ctx.strokeStyle = '#b9c9de'; ctx.stroke();
+    // trous d'allègement
+    if(r > 38){
+      const k = 6, hr = r*0.52, hs = Math.min(r*0.16, 18);
+      for(let i=0;i<k;i++){ const a = rot + (i+0.5)*TAU/k; ctx.beginPath(); ctx.arc(Math.cos(a)*hr, Math.sin(a)*hr, hs, 0, TAU); ctx.fillStyle = COL.bg; ctx.fill(); ctx.strokeStyle='#5f7390'; ctx.lineWidth=1.5; ctx.stroke(); }
+    }
+    markTooth(N,r,p,rot,color);
+    const hubR = Math.max(12, Math.min(r*0.24, 30));
+    ctx.beginPath(); ctx.arc(0,0,hubR,0,TAU); ctx.fillStyle = '#0e1a2b'; ctx.fill();
+    ctx.lineWidth = 3; ctx.strokeStyle = color; ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold '+Math.round(hubR*1.0)+'px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(label,0,1);
+    ctx.restore();
+  }
+
+  function background(){
+    ctx.fillStyle = COL.bg; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = 'rgba(146,165,192,.14)';
+    for(let x=20;x<W;x+=30) for(let y=20;y<H;y+=30) ctx.fillRect(x,y,2,2);
+  }
+
+  function draw(){
+    background();
+    const p = Math.min(24, (W-90)*Math.PI/(n+m+4), (H-130)*Math.PI/(Math.max(n,m)+2));
+    const rA = n*p/TAU, rB = m*p/TAU;
+    const xA = W/2-(rA+rB)/2, xB = xA+rA+rB, cy = H/2+16;
+    const aA = t*TAU/n;
+    const aB = Math.PI - Math.PI/m - t*TAU/m;
+    drawGear(xA,cy,n,rA,p,aA,COL.a,'A');
+    drawGear(xB,cy,m,rB,p,aB,COL.b,'B');
+    const cx = xA+rA, big = Math.max(rA,rB)+p;
+    ctx.save(); ctx.setLineDash([4,5]); ctx.strokeStyle = 'rgba(146,165,192,.6)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx,cy-big); ctx.lineTo(cx,cy+big); ctx.stroke(); ctx.restore();
+    ctx.fillStyle = COL.mut; ctx.font = '13px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('point de contact', cx, cy+big+16);
+    const now = performance.now();
+    if(flash && !met && now < flash.until){
+      const isA = flash.who === 'A', col = isA ? COL.a : COL.b, pulse = 0.5+0.5*Math.sin(now/150);
+      ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 3+2*pulse; ctx.shadowColor = col; ctx.shadowBlur = 16;
+      ctx.beginPath(); ctx.arc(isA?xA:xB, cy, (isA?rA:rB)+p*0.8+4*pulse, 0, TAU); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = col; ctx.font = 'bold 24px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('Tour complet de '+flash.who+' ! (tour n°'+(isA ? t/n : t/m)+')', W/2, 34);
+    }
+    if(met){
+      const pulse = 0.5+0.5*Math.sin(now/160);
+      ctx.save(); ctx.strokeStyle = COL.ok; ctx.lineWidth = 4+3*pulse; ctx.shadowColor = COL.ok; ctx.shadowBlur = 20;
+      ctx.beginPath(); ctx.arc(cx,cy,Math.max(16,p*1.3)+6*pulse,0,TAU); ctx.stroke(); ctx.restore();
+      ctx.fillStyle = COL.ok; ctx.font = 'bold 26px sans-serif'; ctx.textAlign='center';
+      ctx.fillText('✔ Ils se retrouvent !', W/2, 36);
+    }
+  }
+
+  function fmt(x){ return Number.isInteger(x) ? String(x) : x.toFixed(2).replace(/0+$/,'').replace(/\.$/,''); }
+  function frac(r){ const f = r-Math.floor(r+1e-9); return (f<1e-9 && r>0) ? 1 : f; }
+  function updateUI(){
+    $('sT').textContent = Math.floor(t + 1e-9);
+    $('sA').textContent = fmt(Math.round(t/n*100)/100);
+    $('sB').textContent = fmt(Math.round(t/m*100)/100);
+    $('bA').style.width = (frac(t/n)*100)+'%';
+    $('bB').style.width = (frac(t/m)*100)+'%';
+    renderLists();
+    const box = $('msg'), txt = $('txt');
+    if(met){
+      box.className = 'msg win';
+      txt.innerHTML = `<b>✔ Après ${L} dents</b> : A a fait <b style="color:${COL.a}">${L/n}</b> tour${L/n>1?'s':''} (${L/n} × ${n}) et `+
+        `B a fait <b style="color:${COL.b}">${L/m}</b> tour${L/m>1?'s':''} (${L/m} × ${m}). Donc PPCM(${n} ; ${m}) = <b>${L}</b>.`+
+        (note ? `<br>💡 ${note}` : '');
+    } else {
+      box.className = 'msg';
+      txt.innerHTML = $('ans').checked
+        ? `Réponse : PPCM(${n} ; ${m}) = <b>${L}</b>. A fera ${L/n} tour${L/n>1?'s':''}, B ${L/m} tour${L/m>1?'s':''}.`
+        : `Observe les deux dents colorées : quand seront-elles de nouveau côte à côte au point de contact ?`;
+    }
+  }
+  function checkMeet(){
+    if(t >= nextMeet - 1e-9){ t = nextMeet; met = true; playing = false; $('play').textContent = '▶ Continuer'; }
+  }
+  function loop(now){
+    const dt = Math.min(0.05,(now-last)/1000); last = now;
+    if(playing && now >= hold){
+      const nt = nextTurnAfter(t);
+      t += (+$('spd').value)*dt;
+      if(t >= nt - 1e-9){ t = nt; checkMeet(); if(!met){ hold = now + HOLD_MS; setFlash(hold); } }
+      updateUI();
+    }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  function resumeIfMet(){ if(met){ met = false; nextMeet += L; } }
+
+  $('play').onclick = ()=>{
+    if(playing){ playing = false; $('play').textContent = '▶ Continuer'; return; }
+    resumeIfMet(); playing = true; $('play').textContent = '⏸ Pause'; updateUI();
+  };
+  $('step').onclick = ()=>{
+    playing = false; $('play').textContent = '▶ Continuer';
+    resumeIfMet(); hold = 0; t = Math.floor(t+1e-9)+1; checkMeet();
+    if(!met) setFlash(performance.now()+HOLD_MS); else flash = null;
+    updateUI();
+  };
+  $('reset').onclick = setup;
+  $('nA').oninput = setup; $('nB').oninput = setup;
+  const bump = (id,d)=>{ const e=$(id); e.value = Math.max(3,Math.min(40,+e.value+d)); setup(); };
+  $('aM').onclick=()=>bump('nA',-1); $('aP').onclick=()=>bump('nA',1);
+  $('bM').onclick=()=>bump('nB',-1); $('bP').onclick=()=>bump('nB',1);
+  $('ans').onchange = updateUI;
+  $('check').onclick = check;
+  $('guess').onkeydown = e => { if(e.key === 'Enter') check(); };
+  $('ex').onchange = e => {
+    const v = e.target.value; if(!v) return;
+    const [x,y] = v.split(',');
+    $('nA').value = x; $('nB').value = y; setup(); note = NOTES[v] || '';
+    e.target.value = '';
+  };
+
+  setup();
+  requestAnimationFrame(ts=>{ last = ts; loop(ts); });
+})();
+</script>
+<div class="method-box">
             <strong>Méthode :</strong> On décompose, puis on multiplie <strong>tous les facteurs</strong> munis de leur <strong>plus grande puissance</strong>.
         </div>
         <div class="example-box">
