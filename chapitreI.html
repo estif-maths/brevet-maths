@@ -561,6 +561,68 @@
 #ppmc #ppmc-fb{font-size:.9rem}
 #ppmc #ppmc-fb.ok{color:var(--ok)} #ppmc #ppmc-fb.no{color:#ffb347}
 @media print{#ppmc{display:none}}
+
+/* --- Animation carrelage / PGCD --- */
+
+
+#pgcd{--ink:#0e1a2b;--ink2:#16263d;--line:#2a3d59;--txt:#eaf1fb;--mut:#92a5c0;--a:#ff5d62;--b:#4aa8ff;--ok:#3ddc97;
+  max-width:980px;margin:8px auto;padding:12px 14px;border-radius:18px;background:linear-gradient(160deg,var(--ink2),var(--ink));
+  color:var(--txt);font:16px/1.5 "Avenir Next","Nunito","Segoe UI",system-ui,sans-serif;box-shadow:0 12px 40px rgba(8,16,30,.35);box-sizing:border-box}
+#pgcd *{box-sizing:border-box}
+#pgcd h2{margin:0;font-size:1.3rem;letter-spacing:.2px;color:var(--txt)}
+#pgcd .sub{margin:0 0 8px;font-size:.9rem;color:var(--mut)}
+#pgcd .stage{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#0b1522}
+#pgcd canvas{width:100%;height:auto;display:block}
+#pgcd .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+#pgcd .card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:6px 12px 8px}
+#pgcd .card.a{border-top:4px solid var(--a)} #pgcd .card.b{border-top:4px solid var(--b)}
+#pgcd .head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:0}
+#pgcd .name{font-weight:800;font-size:1.05rem}
+#pgcd .a .name b{color:var(--a)} #pgcd .b .name b{color:var(--b)}
+#pgcd .stepper{display:flex;align-items:center;gap:8px}
+#pgcd .stepper output{min-width:2.2ch;text-align:center;font-size:1.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+#pgcd .stepper button{width:34px;height:34px;padding:0;font-size:1.2rem;line-height:1}
+#pgcd input[type=range]{width:100%;margin:2px 0 0}
+#pgcd .a input[type=range]{accent-color:var(--a)} #pgcd .b input[type=range]{accent-color:var(--b)}
+#pgcd .stats{margin-top:2px;display:flex;justify-content:space-between;color:var(--mut);font-size:.9rem}
+#pgcd .stats strong{color:var(--txt);font-size:1.15rem;font-variant-numeric:tabular-nums}
+#pgcd .bar{height:8px;border-radius:6px;background:rgba(255,255,255,.1);margin-top:4px;overflow:hidden}
+#pgcd .bar i{display:block;height:100%;width:0;border-radius:6px}
+#pgcd .a .bar i{background:var(--a)} #pgcd .b .bar i{background:var(--b)}
+#pgcd .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+#pgcd button{font:inherit;font-weight:700;color:var(--txt);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:7px 14px;cursor:pointer;transition:background .15s,transform .1s}
+#pgcd button:hover{background:rgba(255,255,255,.16)} #pgcd button:active{transform:scale(.96)}
+#pgcd button.go{background:linear-gradient(135deg,#ffb347,#ff7a45);border-color:transparent;color:#2a1200;padding:8px 20px}
+#pgcd button:focus-visible,#pgcd input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+#pgcd .speed{display:flex;align-items:center;gap:8px;color:var(--mut)}
+#pgcd .speed input{width:120px;margin:0;accent-color:#ffb347}
+#pgcd .total{display:flex;align-items:center;gap:8px}
+#pgcd .total span{color:var(--mut)} #pgcd .total strong{font-size:1.5rem;font-variant-numeric:tabular-nums}
+#pgcd .msg{margin-top:10px;padding:8px 14px;border-radius:12px;border:1px dashed var(--line);color:var(--mut);min-height:6.6em;font-size:.95rem;line-height:1.45}
+#pgcd .msg.win{border:2px solid var(--ok);color:var(--txt);background:rgba(61,220,151,.12)}
+#pgcd .chk{margin-left:auto;font-size:.9rem;display:flex;gap:8px;align-items:center;color:var(--mut);margin:0}
+#pgcd .chk input{width:18px;height:18px;accent-color:var(--ok)}
+@media(max-width:640px){#pgcd{padding:12px;border-radius:12px}#pgcd .grid{grid-template-columns:1fr}#pgcd .speed{width:100%}#pgcd .speed input{flex:1}}
+#pgcd .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+#pgcd .top select{font:inherit;font-size:.9rem;color:var(--txt);background:#0b1522;border:1px solid var(--line);border-radius:10px;padding:6px 10px;max-width:100%;cursor:pointer}
+#pgcd .lists{margin-top:8px;display:grid;gap:4px}
+#pgcd .lrow{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:3px 10px;min-height:32px}
+#pgcd .lab{font-size:.85rem;font-weight:700;min-width:8.2em}
+#pgcd .lrow.a .lab{color:var(--a)} #pgcd .lrow.b .lab{color:var(--b)}
+#pgcd .chips{display:flex;gap:6px;overflow:hidden;white-space:nowrap;flex:1}
+#pgcd .chips:empty::before{content:"Pas encore de tour complet";color:var(--mut);font-size:.85rem}
+#pgcd .chip{flex:none;padding:1px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-weight:700;font-variant-numeric:tabular-nums}
+#pgcd .chip.com{background:var(--ok);color:#06251a}
+#pgcd .pred{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:4px;color:var(--txt)}
+#pgcd .pred input{width:90px;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:#0b1522;color:var(--txt);font:inherit;font-weight:700}
+#pgcd .pred button{padding:5px 12px}
+#pgcd #pgcd-fb{font-size:.9rem}
+#pgcd #pgcd-fb.ok{color:var(--ok)} #pgcd #pgcd-fb.no{color:#ffb347}
+#pgcd .chip.bad{background:rgba(255,93,98,.18);color:#ffb3b5}
+#pgcd .lab{min-width:7.5em}
+#pgcd .chip.cur{outline:2px solid #fff}
+#pgcd .chip.ghost{opacity:.55}
+@media print{#pgcd{display:none}}
 </style>
 </head>
 <body>
@@ -983,7 +1045,148 @@
             <em>Exemple rapide :</em> diviseurs de 12 : 1, 2, 3, 4, 6, 12 ; diviseurs de 18 : 1, 2, 3, 6, 9, 18. Les diviseurs communs sont 1, 2, 3 et 6, donc PGCD(12 ; 18) = 6.<br>
             Si PGCD(\(a\) ; \(b\)) = 1, on dit que \(a\) et \(b\) sont <strong>premiers entre eux</strong> (par exemple 21 et 10).
         </div>
-        <div class="method-box">
+        <div style="margin:18px 0 10px"><strong>🟦 À toi de jouer :</strong> on veut recouvrir un rectangle avec des carrés identiques, sans reste. Le plus grand carré possible a pour côté le PGCD des deux dimensions. Essaie avec 12 et 18.</div>
+<div id="pgcd">
+  <div class="top">
+    <div><h2>🟦 Le plus grand carré : PGCD</h2>
+    <p class="sub">On veut recouvrir un rectangle avec des carrés identiques, sans aucun reste. Quel est le plus grand carré possible ?</p></div>
+    <select id="pgcd-ex" aria-label="Exemples">
+      <option value="">💡 Exemples à découvrir…</option>
+      <option value="7,9">7 et 9 : aucun diviseur commun (sauf 1)</option>
+      <option value="6,12">6 et 12 : l’un divise l’autre</option>
+      <option value="10,10">10 et 10 : nombres égaux</option>
+      <option value="12,18">12 et 18 : plusieurs diviseurs communs</option>
+    </select>
+  </div>
+  <div class="stage"><canvas id="pgcd-cv" width="900" height="360" role="img" aria-label="Rectangle recouvert par des carrés"></canvas></div>
+  <div class="lists"><div class="lrow a"><span class="lab">Diviseurs de a</span><div class="chips" id="pgcd-lA"></div></div><div class="lrow b"><span class="lab">Diviseurs de b</span><div class="chips" id="pgcd-lB"></div></div></div>
+  <div class="grid">
+    <div class="card a">
+      <div class="head"><span class="name">Largeur <b>a</b></span>
+        <span class="stepper"><button id="pgcd-aM" aria-label="Moins pour a">−</button><output id="pgcd-vA">12</output><button id="pgcd-aP" aria-label="Plus pour a">+</button></span></div>
+      <input id="pgcd-nA" type="range" min="2" max="60" value="12" aria-label="Largeur a">
+    </div>
+    <div class="card b">
+      <div class="head"><span class="name">Hauteur <b>b</b></span>
+        <span class="stepper"><button id="pgcd-bM" aria-label="Moins pour b">−</button><output id="pgcd-vB">18</output><button id="pgcd-bP" aria-label="Plus pour b">+</button></span></div>
+      <input id="pgcd-nB" type="range" min="2" max="60" value="18" aria-label="Hauteur b">
+    </div>
+  </div>
+  <div class="row">
+    <button id="pgcd-play" class="go">▶ Chercher</button>
+    <button id="pgcd-step">Diviseur suivant</button>
+    <button id="pgcd-reset">↺ Recommencer</button>
+    <label class="chk"><input type="checkbox" id="pgcd-ans"> Afficher le PGCD</label>
+    <label class="speed">🐢 <input id="pgcd-spd" type="range" min="0.3" max="3" step="0.1" value="0.8" aria-label="Vitesse"> 🐇</label>
+  </div>
+  <div id="pgcd-msg" class="msg">
+    <div class="pred">🤔 Ma prédiction : PGCD(<b id="pgcd-pa">12</b> ; <b id="pgcd-pb">18</b>) =
+      <input id="pgcd-guess" type="number" min="1" inputmode="numeric" aria-label="Ma prédiction du PGCD">
+      <button id="pgcd-check">Vérifier</button><span id="pgcd-fb"></span></div>
+    <div id="pgcd-txt" role="status" aria-live="polite"></div>
+  </div>
+</div>
+<script>(function(){
+  const $ = id => document.getElementById('pgcd-'+id);
+  const cv = $('cv'), ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
+  const C = {a:'#ff5d62', b:'#4aa8ff', ok:'#3ddc97', sq:'#ffb347', mut:'#92a5c0', bg:'#0b1522'};
+  const gcd = (x,y)=> y ? gcd(y,x%y) : x;
+  let a, b, G, divs = [], da = [], db = [], cur = null, found = false, tried = [], playing = false, lastTick = 0, note = '';
+  const NOTES = {
+    '7,9':'7 et 9 n’ont aucun diviseur commun à part 1 : seuls des carrés de côté 1 conviennent. On dit qu’ils sont premiers entre eux.',
+    '6,12':'6 divise 12 : le plus grand carré a pour côté 6, le plus petit des deux nombres.',
+    '10,10':'Deux nombres égaux : un seul carré de côté 10 recouvre tout.',
+    '12,18':'12 et 18 ont plusieurs diviseurs communs (1, 2, 3 et 6) : le plus grand est 6.'
+  };
+  const hatch = (()=>{ const c=document.createElement('canvas'); c.width=c.height=10; const x=c.getContext('2d');
+    x.strokeStyle='rgba(255,93,98,.85)'; x.lineWidth=2; x.beginPath(); x.moveTo(-2,12); x.lineTo(12,-2); x.stroke(); return ctx.createPattern(c,'repeat'); })();
+  const ok = s => a%s===0 && b%s===0;
+  function setFb(t,c){ const f=$('fb'); f.textContent=t; f.className=c||''; }
+
+  function setup(){
+    a = +$('nA').value; b = +$('nB').value; G = gcd(a,b);
+    da = []; db = []; for(let d=1; d<=a; d++) if(a%d===0) da.push(d); for(let d=1; d<=b; d++) if(b%d===0) db.push(d);
+    divs = [...new Set([...da,...db])].sort((x,y)=>y-x);
+    $('vA').textContent=a; $('vB').textContent=b; $('pa').textContent=a; $('pb').textContent=b;
+    cur = null; found = false; tried = []; playing = false; note = '';
+    $('guess').value=''; setFb('',''); $('play').textContent='▶ Chercher'; updateUI();
+  }
+  function showS(s){ cur = s; if(!tried.includes(s)) tried.push(s); found = ok(s); if(found){ playing=false; $('play').textContent='▶ Rejouer'; } }
+  function step(){ if(found) return; showS(cur===null ? divs[0] : divs[divs.indexOf(cur)+1]); updateUI(); }
+
+  function draw(){
+    ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle = 'rgba(146,165,192,.14)'; for(let x=20;x<W;x+=30) for(let y=20;y<H;y+=30) ctx.fillRect(x,y,2,2);
+    const u = Math.min((W-200)/a, (H-120)/b, 44), rw = a*u, rh = b*u, x0 = (W-rw)/2, y0 = (H-rh)/2+16, now = performance.now();
+    ctx.textAlign='center'; ctx.font='bold 20px sans-serif';
+    ctx.fillStyle=C.a; ctx.fillText('a = '+a, W/2, y0-12);
+    ctx.save(); ctx.translate(x0-14, y0+rh/2); ctx.rotate(-Math.PI/2); ctx.fillStyle=C.b; ctx.fillText('b = '+b, 0, 0); ctx.restore();
+    let none = false;
+    if(cur!==null){
+      const s=cur, qa=Math.floor(a/s), qb=Math.floor(b/s), ra=a-qa*s, rb=b-qb*s; none = qa*qb===0;
+      ctx.fillStyle='rgba(255,93,98,.16)'; ctx.fillRect(x0,y0,rw,rh);
+      if(ra>0){ ctx.fillStyle=hatch; ctx.fillRect(x0+qa*s*u, y0, ra*u, rh); }
+      if(rb>0){ ctx.fillStyle=hatch; ctx.fillRect(x0, y0+qb*s*u, qa*s*u, rb*u); }
+      for(let i=0;i<qa;i++) for(let j=0;j<qb;j++){
+        ctx.fillStyle = found ? 'rgba(61,220,151,.55)' : 'rgba(255,179,71,.5)';
+        ctx.fillRect(x0+i*s*u, y0+j*s*u, s*u, s*u);
+        ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=1.5; ctx.strokeRect(x0+i*s*u, y0+j*s*u, s*u, s*u);
+      }
+    }
+    ctx.save(); ctx.strokeStyle = found ? C.ok : '#eaf1fb'; ctx.lineWidth = found ? 4+2*(0.5+0.5*Math.sin(now/180)) : 2.5;
+    if(found){ ctx.shadowColor=C.ok; ctx.shadowBlur=18; } ctx.strokeRect(x0,y0,rw,rh); ctx.restore();
+    ctx.font='bold 22px sans-serif'; ctx.textAlign='center';
+    if(cur===null){ ctx.fillStyle=C.mut; ctx.font='16px sans-serif'; ctx.fillText('Clique sur « Chercher » : on essaie les diviseurs de a et de b, du plus grand au plus petit', W/2, 30); }
+    else if(found){ ctx.fillStyle=C.ok; ctx.fillText('✔ Le plus grand carré possible : côté '+cur+' = PGCD', W/2, 30); }
+    else { ctx.fillStyle=C.sq; ctx.fillText(none ? 'Carré de côté '+cur+' : il ne rentre pas' : 'Carrés de côté '+cur+' : il reste des morceaux', W/2, 30); }
+  }
+
+  function updateUI(){
+    const chip = s => { let c='chip'; if(tried.includes(s)) c += ok(s)?' com':' bad'; else if(found && ok(s)) c += ' com ghost';
+      if(s===cur) c += ' cur'; return '<span class="'+c+'">'+s+(found&&s===G?' ★':'')+'</span>'; };
+    $('lA').innerHTML = da.map(chip).join(''); $('lB').innerHTML = db.map(chip).join('');
+    const box=$('msg'), txt=$('txt');
+    if(cur!==null){
+      const s=cur, qa=Math.floor(a/s), qb=Math.floor(b/s), ra=a-qa*s, rb=b-qb*s;
+      const l = `${a} = ${qa} × ${s} + ${ra} ${ra?'✗':'✓'} &nbsp;·&nbsp; ${b} = ${qb} × ${s} + ${rb} ${rb?'✗':'✓'}`;
+      if(found){ box.className='msg win';
+        const com = da.filter(x=>db.includes(x));
+        txt.innerHTML = `<b>✔ Le plus grand carré possible a pour côté ${s}.</b><br>${l}<br>`+
+          (com.length>1 ? `Les carrés de côté ${com.join(', ')} marchent tous, mais ${s} est le plus grand : ` : `Seul le côté 1 marche : `)+
+          `PGCD(${a} ; ${b}) = <b>${s}</b>.`+(note?`<br>💡 ${note}`:''); return; }
+      box.className='msg';
+      const x = a%s===0 ? a : b, y = a%s===0 ? b : a;
+      txt.innerHTML = `Côté <b>${s}</b> : ${l}<br>${s} divise ${x} mais pas ${y} : `+(qa*qb===0 ? `le carré ne rentre même pas dans le rectangle.` : `il reste des morceaux (hachurés), ça ne convient pas.`); return;
+    }
+    box.className='msg';
+    txt.innerHTML = $('ans').checked ? `Réponse : PGCD(${a} ; ${b}) = <b>${G}</b>.` : 'On essaie tous les diviseurs de a et de b, du plus grand au plus petit. Lequel marchera le premier ?';
+  }
+  function check(){
+    const v = parseInt($('guess').value,10);
+    if(!v){ setFb('Écris un nombre, puis clique sur Vérifier.','no'); return; }
+    if(v===G) setFb('✔ Bravo ! Lance la recherche pour le vérifier.','ok');
+    else if(v>Math.min(a,b)) setFb('Trop grand : un carré ne peut pas dépasser le plus petit côté, '+Math.min(a,b)+'.','no');
+    else { const bad=[]; if(a%v) bad.push(a); if(b%v) bad.push(b);
+      setFb(bad.length ? v+' ne divise pas '+bad.join(' ni ')+'.' : 'C’est un diviseur commun, mais pas le plus grand. Cherche plus grand !','no'); }
+  }
+  function loop(now){
+    if(playing && now-lastTick >= 1000/(+$('spd').value)){ step(); lastTick = now; }
+    draw(); requestAnimationFrame(loop);
+  }
+  $('play').onclick = ()=>{
+    if(playing){ playing=false; $('play').textContent='▶ Continuer'; return; }
+    if(found){ cur=null; found=false; tried=[]; }
+    playing=true; $('play').textContent='⏸ Pause'; step(); lastTick=performance.now();
+  };
+  $('step').onclick = ()=>{ playing=false; $('play').textContent='▶ Continuer'; step(); };
+  $('reset').onclick = setup; $('nA').oninput = setup; $('nB').oninput = setup;
+  const bump=(id,d)=>{ const e=$(id); e.value=Math.max(2,Math.min(60,+e.value+d)); setup(); };
+  $('aM').onclick=()=>bump('nA',-1); $('aP').onclick=()=>bump('nA',1); $('bM').onclick=()=>bump('nB',-1); $('bP').onclick=()=>bump('nB',1);
+  $('ans').onchange = updateUI; $('check').onclick = check; $('guess').onkeydown = e=>{ if(e.key==='Enter') check(); };
+  $('ex').onchange = e=>{ const v=e.target.value; if(!v) return; const [x,y]=v.split(','); $('nA').value=x; $('nB').value=y; setup(); note=NOTES[v]||''; e.target.value=''; };
+  setup(); requestAnimationFrame(t=>{ lastTick=t; loop(t); });
+})();</script>
+<div class="method-box">
             <strong>Méthode :</strong> On décompose, puis on multiplie les <strong>facteurs communs</strong> munis de leur <strong>plus petite puissance</strong>.
         </div>
         <div class="example-box">
