@@ -1073,11 +1073,10 @@
     </div>
   </div>
   <div class="row">
-    <button id="pgcd-play" class="go">▶ Chercher</button>
-    <button id="pgcd-step">Diviseur suivant</button>
+    <button id="pgcd-play" class="go">▶ Commencer</button>
     <button id="pgcd-reset">↺ Recommencer</button>
     <label class="chk"><input type="checkbox" id="pgcd-ans"> Afficher le PGCD</label>
-    <label class="speed">🐢 <input id="pgcd-spd" type="range" min="0.3" max="3" step="0.1" value="0.8" aria-label="Vitesse"> 🐇</label>
+    <label class="chk" style="margin-left:0"><input type="checkbox" id="pgcd-auto"> Défilement automatique (6 s)</label>
   </div>
   <div id="pgcd-msg" class="msg">
     <div class="pred">🤔 Ma prédiction : PGCD(<b id="pgcd-pa">12</b> ; <b id="pgcd-pb">18</b>) =
@@ -1091,7 +1090,7 @@
   const cv = $('cv'), ctx = cv.getContext('2d'), W = cv.width, H = cv.height;
   const C = {a:'#ff5d62', b:'#4aa8ff', ok:'#3ddc97', sq:'#ffb347', mut:'#92a5c0', bg:'#0b1522'};
   const gcd = (x,y)=> y ? gcd(y,x%y) : x;
-  let a, b, G, divs = [], da = [], db = [], cur = null, found = false, tried = [], playing = false, lastTick = 0, note = '';
+  let a, b, G, divs = [], da = [], db = [], idx = -1, cur = null, found = false, tried = [], playing = false, lastTick = 0, note = '';
   const NOTES = {
     '7,9':'7 et 9 n’ont aucun diviseur commun à part 1 : seuls des carrés de côté 1 conviennent. On dit qu’ils sont premiers entre eux.',
     '6,12':'6 divise 12 : le plus grand carré a pour côté 6, le plus petit des deux nombres.',
@@ -1106,13 +1105,20 @@
   function setup(){
     a = +$('nA').value; b = +$('nB').value; G = gcd(a,b);
     da = []; db = []; for(let d=1; d<=a; d++) if(a%d===0) da.push(d); for(let d=1; d<=b; d++) if(b%d===0) db.push(d);
-    divs = [...new Set([...da,...db])].sort((x,y)=>y-x);
+    divs = [...new Set([...da,...db])].sort((x,y)=>x-y);
     $('vA').textContent=a; $('vB').textContent=b; $('pa').textContent=a; $('pb').textContent=b;
-    cur = null; found = false; tried = []; playing = false; note = '';
-    $('guess').value=''; setFb('',''); $('play').textContent='▶ Chercher'; updateUI();
+    cur = null; idx = -1; found = false; tried = []; playing = false; note = '';
+    $('guess').value=''; setFb('',''); $('play').textContent='▶ Commencer'; updateUI();
   }
-  function showS(s){ cur = s; if(!tried.includes(s)) tried.push(s); found = ok(s); if(found){ playing=false; $('play').textContent='▶ Rejouer'; } }
-  function step(){ if(found) return; showS(cur===null ? divs[0] : divs[divs.indexOf(cur)+1]); updateUI(); }
+  function step(){
+    if(found) return;
+    idx++;
+    if(idx < divs.length){ cur = divs[idx]; tried.push(cur); }
+    else { cur = G; found = true; }      // bilan : le plus grand qui marche
+    lastTick = performance.now();
+    $('play').textContent = found ? '▶ Rejouer' : (idx >= divs.length-1 ? 'Voir le bilan ▶' : 'Diviseur suivant ▶');
+    updateUI();
+  }
 
   function draw(){
     ctx.fillStyle = C.bg; ctx.fillRect(0,0,W,H);
@@ -1136,9 +1142,10 @@
     ctx.save(); ctx.strokeStyle = found ? C.ok : '#eaf1fb'; ctx.lineWidth = found ? 4+2*(0.5+0.5*Math.sin(now/180)) : 2.5;
     if(found){ ctx.shadowColor=C.ok; ctx.shadowBlur=18; } ctx.strokeRect(x0,y0,rw,rh); ctx.restore();
     ctx.font='bold 22px sans-serif'; ctx.textAlign='center';
-    if(cur===null){ ctx.fillStyle=C.mut; ctx.font='16px sans-serif'; ctx.fillText('Clique sur « Chercher » : on essaie les diviseurs de a et de b, du plus grand au plus petit', W/2, 30); }
-    else if(found){ ctx.fillStyle=C.ok; ctx.fillText('✔ Le plus grand carré possible : côté '+cur+' = PGCD', W/2, 30); }
-    else { ctx.fillStyle=C.sq; ctx.fillText(none ? 'Carré de côté '+cur+' : il ne rentre pas' : 'Carrés de côté '+cur+' : il reste des morceaux', W/2, 30); }
+    if(cur===null){ ctx.fillStyle=C.mut; ctx.font='16px sans-serif'; ctx.fillText('Clique sur « Commencer » : on essaie tous les diviseurs de a et de b, du plus petit au plus grand', W/2, 30); }
+    else if(found){ ctx.fillStyle=C.ok; ctx.fillText('✔ Le plus grand qui marche : côté '+cur+' = PGCD', W/2, 30); }
+    else if(ok(cur)){ ctx.fillStyle=C.sq; ctx.fillText('Carrés de côté '+cur+' : ça recouvre exactement ✓', W/2, 30); }
+    else { ctx.fillStyle=C.a; ctx.fillText(none ? 'Carré de côté '+cur+' : il ne rentre pas ✗' : 'Carrés de côté '+cur+' : il reste des morceaux ✗', W/2, 30); }
   }
 
   function updateUI(){
@@ -1151,15 +1158,16 @@
       const l = `${a} = ${qa} × ${s} + ${ra} ${ra?'✗':'✓'} &nbsp;·&nbsp; ${b} = ${qb} × ${s} + ${rb} ${rb?'✗':'✓'}`;
       if(found){ box.className='msg win';
         const com = da.filter(x=>db.includes(x));
-        txt.innerHTML = `<b>✔ Le plus grand carré possible a pour côté ${s}.</b><br>${l}<br>`+
-          (com.length>1 ? `Les carrés de côté ${com.join(', ')} marchent tous, mais ${s} est le plus grand : ` : `Seul le côté 1 marche : `)+
-          `PGCD(${a} ; ${b}) = <b>${s}</b>.`+(note?`<br>💡 ${note}`:''); return; }
+        txt.innerHTML = `<b>✔ Bilan :</b> les côtés qui recouvrent exactement le rectangle sont les diviseurs communs de ${a} et ${b} : ${com.join(', ')}.<br>Le plus grand carré possible a pour côté <b>${s}</b>, donc PGCD(${a} ; ${b}) = <b>${s}</b>.`+(note?`<br>💡 ${note}`:''); return; }
       box.className='msg';
-      const x = a%s===0 ? a : b, y = a%s===0 ? b : a;
-      txt.innerHTML = `Côté <b>${s}</b> : ${l}<br>${s} divise ${x} mais pas ${y} : `+(qa*qb===0 ? `le carré ne rentre même pas dans le rectangle.` : `il reste des morceaux (hachurés), ça ne convient pas.`); return;
+      const best = Math.max(...tried.filter(ok), 0), x = a%s===0 ? a : b, y = a%s===0 ? b : a;
+      txt.innerHTML = `Côté <b>${s}</b> : ${l}<br>`+
+        (ok(s) ? `✓ ${s} divise ${a} et ${b} : ça recouvre exactement, avec ${qa*qb} carrés.`
+               : `✗ ${s} divise ${x} mais pas ${y} : `+(qa*qb===0 ? `le carré ne rentre même pas dans le rectangle.` : `il reste des morceaux (hachurés).`))+
+        `<br>Plus grand carré qui marche jusqu’ici : côté <b>${best}</b>.`; return;
     }
     box.className='msg';
-    txt.innerHTML = $('ans').checked ? `Réponse : PGCD(${a} ; ${b}) = <b>${G}</b>.` : 'On essaie tous les diviseurs de a et de b, du plus grand au plus petit. Lequel marchera le premier ?';
+    txt.innerHTML = $('ans').checked ? `Réponse : PGCD(${a} ; ${b}) = <b>${G}</b>.` : 'On essaie tous les diviseurs de a et de b, du plus petit au plus grand. Lesquels vont marcher ?';
   }
   function check(){
     const v = parseInt($('guess').value,10);
@@ -1170,15 +1178,14 @@
       setFb(bad.length ? v+' ne divise pas '+bad.join(' ni ')+'.' : 'C’est un diviseur commun, mais pas le plus grand. Cherche plus grand !','no'); }
   }
   function loop(now){
-    if(playing && now-lastTick >= 1000/(+$('spd').value)){ step(); lastTick = now; }
+    // pause après chaque test : on n'avance que sur clic (ou, si la case est cochée, toutes les 6 s)
+    if($('auto').checked && cur!==null && !found && now-lastTick >= 6000) step();
     draw(); requestAnimationFrame(loop);
   }
   $('play').onclick = ()=>{
-    if(playing){ playing=false; $('play').textContent='▶ Continuer'; return; }
-    if(found){ cur=null; found=false; tried=[]; }
-    playing=true; $('play').textContent='⏸ Pause'; step(); lastTick=performance.now();
+    if(found){ cur=null; idx=-1; found=false; tried=[]; }
+    step();
   };
-  $('step').onclick = ()=>{ playing=false; $('play').textContent='▶ Continuer'; step(); };
   $('reset').onclick = setup; $('nA').oninput = setup; $('nB').oninput = setup;
   const bump=(id,d)=>{ const e=$(id); e.value=Math.max(2,Math.min(60,+e.value+d)); setup(); };
   $('aM').onclick=()=>bump('nA',-1); $('aP').onclick=()=>bump('nA',1); $('bM').onclick=()=>bump('nB',-1); $('bP').onclick=()=>bump('nB',1);
@@ -1297,6 +1304,7 @@
     <button id="ppmc-reset">↺ Recommencer</button>
     <span class="total"><span>Dents passées</span><strong id="ppmc-sT">0</strong></span>
     <label class="chk"><input type="checkbox" id="ppmc-ans"> Afficher le PPCM</label>
+    <label class="chk" style="margin-left:0"><input type="checkbox" id="ppmc-auto"> Reprise automatique (6 s)</label>
     <label class="speed">🐢 <input id="ppmc-spd" type="range" min="0.2" max="8" step="0.1" value="1.5" aria-label="Vitesse"> 🐇</label>
   </div>
 
@@ -1315,7 +1323,7 @@
   const COL = {a:'#ff5d62', b:'#4aa8ff', ok:'#3ddc97', mut:'#92a5c0', bg:'#0b1522'};
   const gcd = (a,b)=> b ? gcd(b,a%b) : a;
   let n, m, L, g, t = 0, nextMeet, playing = false, met = false, last = 0, hold = 0, flash = null;
-  const HOLD_MS = 1600; // durée de la pause à chaque tour complet
+  let autoAt = 0;   // reprise automatique (si la case est cochée)
   const nextTurnAfter = x => Math.min((Math.floor(x/n+1e-9)+1)*n, (Math.floor(x/m+1e-9)+1)*m);
   function setFlash(until){ const who = t%n===0 ? 'A' : (t%m===0 ? 'B' : null); flash = who ? {who, until} : null; }
 
@@ -1453,7 +1461,7 @@
       box.className = 'msg';
       txt.innerHTML = $('ans').checked
         ? `Réponse : PPCM(${n} ; ${m}) = <b>${L}</b>. A fera ${L/n} tour${L/n>1?'s':''}, B ${L/m} tour${L/m>1?'s':''}.`
-        : `Observe les deux dents colorées : quand seront-elles de nouveau côte à côte au point de contact ?`;
+        : (flash && flash.until === Infinity ? `Un engrenage vient de finir un tour (A : ${fmt(t/n)} tour${t/n>1?'s':''}, B : ${fmt(t/m)} tour${t/m>1?'s':''}). Observe, puis clique sur « Continuer ».` : `Observe les deux dents colorées : quand seront-elles de nouveau côte à côte au point de contact ?`);
     }
   }
   function checkMeet(){
@@ -1461,11 +1469,17 @@
   }
   function loop(now){
     const dt = Math.min(0.05,(now-last)/1000); last = now;
-    if(playing && now >= hold){
+    if(playing){
       const nt = nextTurnAfter(t);
       t += (+$('spd').value)*dt;
-      if(t >= nt - 1e-9){ t = nt; checkMeet(); if(!met){ hold = now + HOLD_MS; setFlash(hold); } }
+      if(t >= nt - 1e-9){
+        t = nt; checkMeet();
+        // pause après chaque tour complet : on attend le clic de l'élève
+        if(!met){ playing = false; $('play').textContent = '▶ Continuer'; setFlash(Infinity); autoAt = now + 6000; }
+      }
       updateUI();
+    } else if(!met && flash && $('auto').checked && now >= autoAt){
+      flash = null; playing = true; $('play').textContent = '⏸ Pause'; updateUI();   // reprise automatique
     }
     draw();
     requestAnimationFrame(loop);
@@ -1474,12 +1488,12 @@
 
   $('play').onclick = ()=>{
     if(playing){ playing = false; $('play').textContent = '▶ Continuer'; return; }
-    resumeIfMet(); playing = true; $('play').textContent = '⏸ Pause'; updateUI();
+    resumeIfMet(); flash = null; playing = true; $('play').textContent = '⏸ Pause'; updateUI();
   };
   $('step').onclick = ()=>{
     playing = false; $('play').textContent = '▶ Continuer';
-    resumeIfMet(); hold = 0; t = Math.floor(t+1e-9)+1; checkMeet();
-    if(!met) setFlash(performance.now()+HOLD_MS); else flash = null;
+    resumeIfMet(); flash = null; t = Math.floor(t+1e-9)+1; checkMeet();
+    if(!met){ setFlash(Infinity); autoAt = performance.now() + 6000; }
     updateUI();
   };
   $('reset').onclick = setup;
@@ -1611,6 +1625,36 @@
             </div>
             <div class="auto-feedback" id="auto-prime-feedback"></div>
             <div class="auto-session-score" id="auto-prime-final"></div>
+        </div>
+
+        <div class="auto-card">
+            <h3>🤝 PGCD éclair <span style="font-size:0.8rem; color:#8d99ae;">(10 questions — 4 min 10)</span></h3>
+            <p style="font-size:0.9rem; color:#8d99ae; margin:4px 0 0;">💡 Cherche le plus grand diviseur du plus petit nombre qui divise aussi l’autre.</p>
+            <div class="timer-display" id="auto-pgcd-timer">⏱ 04:10</div>
+            <div class="auto-score" id="auto-pgcd-progress">Question 0/10 — Score : 0/0</div>
+            <div class="auto-question-zone" id="auto-pgcd-question">Clique sur « Démarrer » pour commencer la série chronométrée.</div>
+            <div class="auto-answer-zone">
+                <label>PGCD = <input type="number" id="auto-pgcd-ans" disabled></label>
+                <button class="auto-btn" id="auto-pgcd-verify" onclick="answerPgcd()" disabled>✔️ Vérifier</button>
+                <button class="auto-btn secondary" id="auto-pgcd-start" onclick="startAutoSession('pgcd')">▶️ Démarrer</button>
+            </div>
+            <div class="auto-feedback" id="auto-pgcd-feedback"></div>
+            <div class="auto-session-score" id="auto-pgcd-final"></div>
+        </div>
+
+        <div class="auto-card">
+            <h3>🔁 PPCM éclair <span style="font-size:0.8rem; color:#8d99ae;">(10 questions — 4 min 10)</span></h3>
+            <p style="font-size:0.9rem; color:#8d99ae; margin:4px 0 0;">💡 Écris les multiples du plus grand nombre jusqu’à en trouver un qui est aussi multiple de l’autre.</p>
+            <div class="timer-display" id="auto-ppcm-timer">⏱ 04:10</div>
+            <div class="auto-score" id="auto-ppcm-progress">Question 0/10 — Score : 0/0</div>
+            <div class="auto-question-zone" id="auto-ppcm-question">Clique sur « Démarrer » pour commencer la série chronométrée.</div>
+            <div class="auto-answer-zone">
+                <label>PPCM = <input type="number" id="auto-ppcm-ans" disabled></label>
+                <button class="auto-btn" id="auto-ppcm-verify" onclick="answerPpcm()" disabled>✔️ Vérifier</button>
+                <button class="auto-btn secondary" id="auto-ppcm-start" onclick="startAutoSession('ppcm')">▶️ Démarrer</button>
+            </div>
+            <div class="auto-feedback" id="auto-ppcm-feedback"></div>
+            <div class="auto-session-score" id="auto-ppcm-final"></div>
         </div>
 
         <footer><i class="fas fa-bolt"></i> Répète ces séries chronométrées régulièrement pour gagner en rapidité le jour du contrôle.</footer>
@@ -3174,7 +3218,9 @@
     const autoConfig = {
         div:   { total: 10, timePerQ: 12 },
         eucl:  { total: 10, timePerQ: 20 },
-        prime: { total: 10, timePerQ: 15 }
+        prime: { total: 10, timePerQ: 15 },
+        pgcd:  { total: 10, timePerQ: 25 },
+        ppcm:  { total: 10, timePerQ: 25 }
     };
     const autoSession = {};
 
@@ -3195,6 +3241,9 @@
         } else if (type === 'prime') {
             document.getElementById('auto-prime-yes').disabled = !enabled;
             document.getElementById('auto-prime-no').disabled = !enabled;
+        } else if (type === 'pgcd' || type === 'ppcm') {
+            document.getElementById(`auto-${type}-verify`).disabled = !enabled;
+            document.getElementById(`auto-${type}-ans`).disabled = !enabled;
         }
     }
 
@@ -3202,6 +3251,8 @@
         if (type === 'div') newDivQuestion();
         else if (type === 'eucl') newDivEuclQuestion();
         else if (type === 'prime') newPrimeQuestion();
+        else if (type === 'pgcd') newPgcdQuestion();
+        else if (type === 'ppcm') newPpcmQuestion();
     }
 
     function updateAutoProgress(type) {
@@ -3286,8 +3337,9 @@
     // --- Générateur 2 : Division euclidienne éclair ---
     let currentA, currentB;
     function newDivEuclQuestion() {
-        currentB = Math.floor(Math.random() * 18) + 2;
-        currentA = Math.floor(Math.random() * 280) + 20;
+        currentB = Math.floor(Math.random() * 8) + 2;                       // diviseur de 2 à 9 (tables de multiplication)
+        const q0 = Math.floor(Math.random() * 11) + 2;                     // quotient de 2 à 12
+        currentA = currentB * q0 + Math.floor(Math.random() * currentB);   // dividende < 120 : calcul mental possible
         document.getElementById('auto-eucl-question').innerText = `${currentA} = ${currentB} × ... + ...`;
         document.getElementById('auto-eucl-q').value = '';
         document.getElementById('auto-eucl-r').value = '';
@@ -3322,6 +3374,60 @@
         fb.innerText = (ok ? '✔️ Exact ! ' : '❌ Pas tout à fait. ') + `${currentPrimeNumber} ${isP ? "est" : "n'est pas"} un nombre premier.`;
         registerAutoAnswer('prime', ok);
     }
+
+
+    // --- Générateurs 4 et 5 : PGCD éclair et PPCM éclair (petits nombres, calcul mental) ---
+    const autoGcd = (x, y) => y ? autoGcd(y, x % y) : x;
+    const autoLcm = (x, y) => x / autoGcd(x, y) * y;
+    let curPgcdA, curPgcdB, curPpcmA, curPpcmB;
+    function newAutoField(type) {
+        const input = document.getElementById(`auto-${type}-ans`);
+        input.value = '';
+        document.getElementById(`auto-${type}-feedback`).style.display = 'none';
+        input.focus();
+    }
+    function newPgcdQuestion() {
+        const facteurs = [1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 12];
+        do {
+            const g = facteurs[Math.floor(Math.random() * facteurs.length)];
+            curPgcdA = g * (Math.floor(Math.random() * 7) + 1);
+            curPgcdB = g * (Math.floor(Math.random() * 7) + 1);
+        } while (curPgcdA === curPgcdB || curPgcdA < 4 || curPgcdB < 4 || curPgcdA > 60 || curPgcdB > 60);
+        document.getElementById('auto-pgcd-question').innerText = `PGCD(${curPgcdA} ; ${curPgcdB}) = ?`;
+        newAutoField('pgcd');
+    }
+    function answerPgcd() {
+        const v = parseInt(document.getElementById('auto-pgcd-ans').value, 10);
+        const g = autoGcd(curPgcdA, curPgcdB);
+        const ok = (v === g);
+        const fb = document.getElementById('auto-pgcd-feedback');
+        fb.className = 'auto-feedback ' + (ok ? 'success' : 'fail');
+        fb.style.display = 'block';
+        fb.innerText = (ok ? '✔️ Exact ! ' : '❌ Pas tout à fait. ') + `PGCD(${curPgcdA} ; ${curPgcdB}) = ${g} car ${curPgcdA} = ${g} × ${curPgcdA / g} et ${curPgcdB} = ${g} × ${curPgcdB / g}.`;
+        registerAutoAnswer('pgcd', ok);
+    }
+    function newPpcmQuestion() {
+        do {
+            curPpcmA = Math.floor(Math.random() * 11) + 2;
+            curPpcmB = Math.floor(Math.random() * 11) + 2;
+        } while (curPpcmA === curPpcmB || autoLcm(curPpcmA, curPpcmB) > 60);
+        document.getElementById('auto-ppcm-question').innerText = `PPCM(${curPpcmA} ; ${curPpcmB}) = ?`;
+        newAutoField('ppcm');
+    }
+    function answerPpcm() {
+        const v = parseInt(document.getElementById('auto-ppcm-ans').value, 10);
+        const m = autoLcm(curPpcmA, curPpcmB);
+        const ok = (v === m);
+        const fb = document.getElementById('auto-ppcm-feedback');
+        fb.className = 'auto-feedback ' + (ok ? 'success' : 'fail');
+        fb.style.display = 'block';
+        fb.innerText = (ok ? '✔️ Exact ! ' : '❌ Pas tout à fait. ') + `PPCM(${curPpcmA} ; ${curPpcmB}) = ${m} car ${m} = ${curPpcmA} × ${m / curPpcmA} = ${curPpcmB} × ${m / curPpcmB}.`;
+        registerAutoAnswer('ppcm', ok);
+    }
+    ['pgcd', 'ppcm'].forEach(t => {
+        const inp = document.getElementById(`auto-${t}-ans`);
+        if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') (t === 'pgcd' ? answerPgcd : answerPpcm)(); });
+    });
 
 
     /* ================= L'ÉLÈVE DOIT ESSAYER DE RÉPONDRE AVANT DE VÉRIFIER ================= */
