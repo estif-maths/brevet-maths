@@ -665,6 +665,41 @@
 .fs-q-title { font-weight: 700; margin-bottom: 4px; }
 .fs-nudge { margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; background: #fff7e0; border: 1px solid #f0d58a; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 @media print { .full-solution-box, .fs-nudge { display: none !important; } }
+.fs-results { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.fs-results .fs-q { margin-top: 0; padding: 6px 12px; }
+.fs-howto { margin: 12px 0 4px; padding: 10px 14px; background: #fff7e0; border: 1px solid #f0d58a; border-radius: 10px; font-size: .95rem; }
+.fs-step { background: #fff; border-radius: 10px; padding: 10px 14px; margin-top: 10px; border-left: 5px solid var(--primary); line-height: 1.7; }
+.fs-step-title { font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+.fs-answer { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: #e8f7ee; border: 2px solid #2e9e5b; }
+.copy-notice { margin: 14px 0 20px; padding: 14px 18px; border-radius: 12px; background: #fff7e0; border: 2px solid #f0b429; line-height: 1.6; }
+.copy-notice strong.t { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+
+/* --- Crible d'Ératosthène (section 3) --- */
+#crible{--ink:#0e1a2b;--ink2:#16263d;--line:#2a3d59;--txt:#eaf1fb;--mut:#92a5c0;--ok:#3ddc97;max-width:760px;margin:18px auto;padding:14px 16px;border-radius:18px;background:linear-gradient(160deg,var(--ink2),var(--ink));color:var(--txt);font:16px/1.5 "Avenir Next","Nunito","Segoe UI",system-ui,sans-serif;box-shadow:0 12px 40px rgba(8,16,30,.35);box-sizing:border-box}
+#crible *{box-sizing:border-box}
+#crible h2{margin:0;font-size:1.3rem;color:var(--txt)}
+#crible .sub{margin:2px 0 10px;font-size:.92rem;color:var(--mut)}
+#crible .cr-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;font-size:.8rem}
+#crible .cr-legend span{padding:2px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);white-space:nowrap}
+#crible .cr-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
+#crible .cr-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+#crible .cr-cell{aspect-ratio:1;min-height:28px;padding:0;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.07);color:var(--txt);font:700 clamp(.7rem,2.7vw,1.05rem)/1 inherit;cursor:pointer;transition:background .2s,transform .1s;touch-action:manipulation}
+#crible .cr-cell:hover{background:rgba(255,255,255,.16)} #crible .cr-cell:active{transform:scale(.93)}
+#crible .cr-cell.one{opacity:.4;text-decoration:line-through}
+#crible .cr-cell.x{background:color-mix(in srgb,var(--c) 28%,transparent);border-color:var(--c);color:var(--mut);text-decoration:line-through;text-decoration-color:var(--c);text-decoration-thickness:2px}
+#crible .cr-cell.chosen{background:var(--c);border-color:#fff;color:#0e1a2b;box-shadow:0 0 12px var(--c)}
+#crible .cr-cell.prime{background:var(--ok);border-color:#fff;color:#06251a;box-shadow:0 0 10px var(--ok)}
+#crible .cr-cell.hint{animation:crpulse .6s ease-in-out 4;outline:3px solid #fff}
+@keyframes crpulse{50%{transform:scale(1.18)}}
+#crible .cr-status{margin-top:8px;color:var(--mut);font-size:.9rem}
+#crible .msg{margin-top:8px;padding:9px 14px;border-radius:12px;border:1px dashed var(--line);color:var(--txt);min-height:5.2em;font-size:.95rem}
+#crible .msg.warn{border-color:#ffb347;background:rgba(255,179,71,.1)}
+#crible .msg.win{border:2px solid var(--ok);background:rgba(61,220,151,.12)}
+#crible .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#crible button.cr-btn{font:inherit;font-weight:700;color:var(--txt);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;min-height:44px}
+#crible button.cr-btn:hover{background:rgba(255,255,255,.16)} #crible button.go{background:linear-gradient(135deg,#ffb347,#ff7a45);border-color:transparent;color:#2a1200}
+#crible button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media print{#crible{display:none}}
 </style>
 </head>
 <body>
@@ -902,7 +937,69 @@
                 <li><strong>Conclusion : 29 est un nombre premier.</strong></li>
             </ul>
         </div>
-        <div class="utilite-box">
+        <div id="crible">
+    <h2>🧮 Le crible d'Ératosthène</h2>
+    <p class="sub">Trouve tous les nombres premiers jusqu'à 100. À chaque étape, clique sur le <strong>plus petit nombre non barré</strong> : tous ses multiples seront barrés.</p>
+    <div class="cr-legend">
+      <span><i style="--c:#7d8ba0"></i>1 : ni premier ni composé</span><span><i style="--c:#ff5d62"></i>multiples de 2</span><span><i style="--c:#4aa8ff"></i>multiples de 3</span><span><i style="--c:#ffb347"></i>multiples de 5</span><span><i style="--c:#b388ff"></i>multiples de 7</span><span><i style="--c:#3ddc97"></i>nombres premiers</span>
+    </div>
+    <div class="cr-grid" id="crible-grid"></div>
+    <div class="cr-status" id="crible-prog"></div>
+    <div id="crible-msg" class="msg" role="status" aria-live="polite"></div>
+    <div class="row"><button type="button" class="cr-btn" id="crible-hint">💡 Indice</button><button type="button" class="cr-btn go" id="crible-show">▶ Montre-moi l'étape suivante</button><button type="button" class="cr-btn" id="crible-reset">↺ Recommencer</button></div>
+  </div>
+<script>
+(function(){
+  const $ = id => document.getElementById('crible-'+id);
+  const N = 100, PR = [2,3,5,7], COL = {2:'#ff5d62',3:'#4aa8ff',5:'#ffb347',7:'#b388ff'};
+  const grid = $('grid'), msg = $('msg'), reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let crossed, k, busy, done, cells, timers = [];
+  function say(html, cls){ msg.className = 'msg' + (cls ? ' '+cls : ''); msg.innerHTML = html; }
+  function status(){
+    const found = done ? N - 1 - crossed.size : 0;
+    $('prog').textContent = (done ? 'Terminé' : 'Étape ' + (k+1) + ' sur ' + PR.length) + ' — nombres barrés : ' + crossed.size + (done ? ' — nombres premiers trouvés : ' + found : '');
+  }
+  function build(){
+    grid.innerHTML = ''; cells = [null];
+    for(let n=1;n<=N;n++){ const b = document.createElement('button'); b.type='button'; b.className='cr-cell'; b.textContent=n; b.onclick = () => pick(n); grid.appendChild(b); cells[n]=b; }
+    cells[1].classList.add('one');
+  }
+  function reset(){
+    timers.forEach(clearTimeout); timers = []; crossed = new Map(); k = 0; busy = false; done = false; build(); status();
+    say('<b>1</b> n’est pas premier (il n’a qu’un seul diviseur). Le plus petit nombre premier est <b>2</b> : clique dessus pour barrer tous ses multiples.');
+  }
+  function pick(n){
+    if(busy || done) return;
+    const want = PR[k];
+    if(n === 1) return say('1 n’est ni premier, ni composé : on le laisse de côté. Clique sur <b>'+want+'</b>.', 'warn');
+    if(crossed.has(n)) return say('<b>'+n+'</b> est déjà barré : c’est un multiple de '+crossed.get(n)+', il a donc un diviseur autre que 1 et lui-même. Il n’est pas premier. Clique sur <b>'+want+'</b>.', 'warn');
+    if(n !== want) return say('On avance toujours dans l’ordre : le plus petit nombre non barré est <b>'+want+'</b>. Clique sur lui.', 'warn');
+    const p = n, list = [];
+    for(let m=2*p; m<=N; m+=p) if(!crossed.has(m)) list.push(m);
+    busy = true; cells[p].classList.add('chosen'); cells[p].style.setProperty('--c', COL[p]);
+    const delay = reduce ? 0 : Math.max(10, Math.min(70, 1500/Math.max(1,list.length)));
+    list.forEach((m,i) => timers.push(setTimeout(() => { crossed.set(m,p); cells[m].classList.add('x'); cells[m].style.setProperty('--c', COL[p]); status(); }, i*delay)));
+    timers.push(setTimeout(() => { busy = false; k++; k === PR.length ? finish() : next(p, list); }, list.length*delay + 80));
+    say('Multiples de <b>'+p+'</b> en cours de barrage…');
+  }
+  function next(p, list){
+    status();
+    const shown = list.slice(0,10).join(', ') + (list.length>10 ? '…' : '');
+    say('<b>'+list.length+'</b> nouveaux nombres barrés (multiples de '+p+') : '+shown+'.<br>Le plus petit nombre non barré est maintenant <b>'+PR[k]+'</b> : clique dessus.');
+  }
+  function finish(){
+    done = true; const primes = [];
+    for(let n=2;n<=N;n++) if(!crossed.has(n)){ cells[n].classList.add('prime'); primes.push(n); }
+    status();
+    say('✔ <b>Il reste '+primes.length+' nombres non barrés : ce sont les nombres premiers inférieurs à 100.</b><br>'+primes.join(', ')+'.<br>Pourquoi s’arrêter à 7 ? Le nombre premier suivant est 11 et 11² = 121 &gt; 100 : un nombre composé inférieur à 100 a toujours un diviseur premier inférieur ou égal à 10.', 'win');
+  }
+  $('hint').onclick = () => { if(busy || done) return; const c = cells[PR[k]]; c.classList.add('hint'); timers.push(setTimeout(() => c.classList.remove('hint'), 2600)); say('Indice : cherche le plus petit nombre qui n’est pas barré (en dehors de 1) : c’est <b>'+PR[k]+'</b>.'); };
+  $('show').onclick = () => { if(!busy && !done) pick(PR[k]); };
+  $('reset').onclick = reset;
+  reset();
+})();
+</script>
+<div class="utilite-box">
             <strong>💡 Ça sert à quoi ?</strong> Les nombres premiers sont essentiels en cryptographie (sécuriser les données bancaires, les mots de passe), en théorie des nombres et pour simplifier des fractions.
         </div>
 
@@ -1720,6 +1817,9 @@
     <!-- SECTION EXERCICES INTERACTIFS -->
     <div id="exercices" role="tabpanel" class="content-section">
         <h2>📚 Exercices d'entraînement</h2>
+        <div class="copy-notice" role="note"><strong class="t">✍️ Travaille comme le jour de l'examen !</strong>
+            Avant de saisir tes réponses, <strong>rédige sur ton cahier ou sur une feuille toutes les étapes et tous les calculs</strong> (décompositions en facteurs premiers, recherche du PGCD ou du PPCM, divisions, vérifications), puis termine chaque question par une <strong>phrase réponse</strong>.
+            C'est le seul moyen d'évaluer ton vrai niveau et de repérer ce que tu dois améliorer. À la fin de chaque exercice, compare ta copie avec la <strong>solution complète</strong> rédigée étape par étape.</div>
         <!-- Download box for Exercices PDF -->
         
         <h3>I. Applications directes</h3>
@@ -1949,6 +2049,9 @@
         </div>
         <h2>📝 Exercices Type Brevet</h2>
         <p style="margin-bottom: 20px;">Ces exercices sont inspirés d'annales du Diplôme National du Brevet. Ils mobilisent les notions de PGCD, PPCM, division euclidienne et nombres premiers.</p>
+        <div class="copy-notice" role="note"><strong class="t">✍️ Travaille comme le jour de l'examen !</strong>
+            Avant de saisir tes réponses, <strong>rédige sur ton cahier ou sur une feuille toutes les étapes et tous les calculs</strong> (décompositions en facteurs premiers, recherche du PGCD ou du PPCM, divisions, vérifications), puis termine chaque question par une <strong>phrase réponse</strong>.
+            C'est le seul moyen d'évaluer ton vrai niveau et de repérer ce que tu dois améliorer. À la fin de chaque exercice, compare ta copie avec la <strong>solution complète</strong> rédigée étape par étape.</div>
         <!-- Download box for Brevet PDF -->
         
         <div class="exercice-card-import">
@@ -2018,22 +2121,13 @@
 
         <div class="exercice-card-import">
             <div class="card-header">
-                <h4>🚌 Exercice Brevet 5 – Les deux bus (Amérique du Nord)</h4>
+                <h4>🚌 Exercice Brevet 5 – Les lignes de bus</h4>
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">À <strong>6 h 30</strong>, deux bus (ligne 1 et ligne 2) partent <strong>en même temps</strong> de l'arrêt « Mairie » et parcourent le même circuit dans le sens des aiguilles d'une montre. Ce circuit comporte <strong>8 arrêts</strong> : pour faire un tour complet et revenir à « Mairie », chaque bus effectue donc 8 trajets d'un arrêt au suivant.<br>• Le bus de la ligne 1 met <strong>3 minutes</strong> entre deux arrêts consécutifs (temps de stationnement compris).<br>• Le bus de la ligne 2 met <strong>4 minutes</strong> entre deux arrêts consécutifs.<br>Les deux bus font le circuit un grand nombre de fois et s'arrêtent juste après <strong>20 h</strong>.<br><strong>Question :</strong> les deux bus se retrouveront-ils au même moment à l'arrêt « Mairie » ? Si oui, donne tous les horaires de ces rencontres (en comptant le départ de 6 h 30). <em>Écris les horaires séparés par des virgules, par exemple : 7h05, 9h40.</em></div>
+                <div class="question">C'est à <strong>6 h 30</strong> que les deux bus des lignes 1 et 2 partent de l'arrêt « Mairie ».<br>— Le bus de la <strong>ligne 1</strong> met <strong>3 minutes</strong> entre chaque arrêt.<br>— Le bus de la <strong>ligne 2</strong> met <strong>4 minutes</strong> entre chaque arrêt.<br>Les deux effectuent le circuit complet un grand nombre de fois et s'arrêteront juste après <strong>20 h</strong>.<br><em>Est-ce que les deux bus vont se retrouver à un moment de la journée à l'arrêt « Mairie » en même temps ? Si oui, donner tous les horaires précis de ces rencontres.</em> <span style="color:#5d6878">(Écris les horaires séparés par des virgules, par exemple : 7h05, 9h40.)</span></div>
                 <figure class="exercise-figure">
-                <img src="image1.png" alt="Schéma du circuit : les deux bus, 8 arrêts, départ de la Mairie" class="exercise-image" onerror="this.onerror=null;this.style.display='none';document.getElementById('bus-fallback').style.display='block';">
-                <div id="bus-fallback" style="display:none;"><svg viewBox="0 0 340 285" width="340" role="img" aria-label="Circuit de bus à 8 arrêts : l'arrêt 1 est Mairie, les arrêts sont parcourus dans le sens des aiguilles d'une montre.">
-                    <polygon points="170.0,40.0 237.2,67.8 265.0,135.0 237.2,202.2 170.0,230.0 102.8,202.2 75.0,135.0 102.8,67.8" fill="none" stroke="#9aa5b8" stroke-width="3" stroke-dasharray="6 4"/>
-                    <circle cx="170.0" cy="40.0" r="13" fill="#e67e22" stroke="#fff" stroke-width="2"/><text x="170.0" y="44.0" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">M</text><circle cx="237.2" cy="67.8" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="237.2" y="71.8" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">2</text><circle cx="265.0" cy="135.0" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="265.0" y="139.0" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">3</text><circle cx="237.2" cy="202.2" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="237.2" y="206.2" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">4</text><circle cx="170.0" cy="230.0" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="170.0" y="234.0" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">5</text><circle cx="102.8" cy="202.2" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="102.8" y="206.2" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">6</text><circle cx="75.0" cy="135.0" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="75.0" y="139.0" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">7</text><circle cx="102.8" cy="67.8" r="11" fill="#4361ee" stroke="#fff" stroke-width="2"/><text x="102.8" y="71.8" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">8</text>
-                    <text x="170" y="131" text-anchor="middle" font-size="12" fill="#2b2d42" font-weight="700">Circuit</text>
-                    <text x="170" y="147" text-anchor="middle" font-size="11" fill="#2b2d42">↻ sens horaire</text>
-                    <text x="192" y="22" font-size="11" fill="#e67e22" font-weight="700">M = Mairie (arrêt 1)</text>
-                    <text x="170" y="262" text-anchor="middle" font-size="12" fill="#2b2d42">Ligne 1 : 3 min entre deux arrêts · Ligne 2 : 4 min</text>
-                    <text x="170" y="278" text-anchor="middle" font-size="12" fill="#2b2d42">8 trajets = 1 tour complet</text>
-                </svg></div>
+                <img src="image1.png" alt="Plan des deux lignes de bus : la ligne 1 en pointillés et la ligne 2 en trait plein, qui se croisent aux arrêts Cathédrale et Mairie" class="exercise-image" onerror="this.onerror=null;this.replaceWith(document.createTextNode('(Plan introuvable : place image1.png dans le même dossier que cette page.)'));">
             </figure>
                 <div class="input-group">
                     <label>Horaires des rencontres :</label>
@@ -2046,16 +2140,17 @@
 
         <div class="exercice-card-import">
             <div class="card-header">
-                <h4>🏠 Exercice Brevet 6 – Mosaïque sur le mur (Amérique Sud)</h4>
+                <h4>🏠 Exercice Brevet 6 – La mosaïque de Carole</h4>
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Carole veut réaliser une mosaïque sur un mur de sa maison. La surface à recouvrir est un rectangle de <strong>108 cm sur 225 cm</strong>. Elle doit être entièrement recouverte de carreaux de faïence <strong>carrés, tous de même dimension</strong>, posés <strong>sans découpe</strong>.</div>
-                <div class="subquestion">1) Carole peut-elle utiliser des carreaux de 3 cm de côté ? Et des carreaux de 6 cm de côté ? <em>(Réponds par Oui ou Non pour chaque cas.)</em></div>
+                <div class="question">Carole souhaite réaliser une mosaïque sur un mur rectangulaire de <strong>108 cm</strong> sur <strong>225 cm</strong>. Elle utilise des carreaux carrés identiques, sans découpe.</div>
+                <div class="subquestion">1) Carole peut-elle utiliser des carreaux de 3 cm de côté ? De 6 cm de côté ? Justifier. <em>(Réponds par Oui ou Non pour chaque cas ; rédige la justification sur ta copie.)</em></div>
                 <div class="input-group"><label>Carreaux 3 cm (Oui/Non) :</label><input type="text" id="pdfEx2a" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2a">Vérifier</button></div>
                 <div class="input-group"><label>Carreaux 6 cm (Oui/Non) :</label><input type="text" id="pdfEx2b" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2b">Vérifier</button></div>
-                <div class="subquestion">2) Quelle est la dimension maximale (en cm) du côté des carreaux que Carole peut poser ? Combien de carreaux utilisera-t-elle alors ?</div>
+                <div class="subquestion">2) Quelle est la <strong>dimension maximale</strong> des carreaux que Carole peut poser ? <em>(en cm)</em></div>
                 <div class="input-group"><label>Dimension max (cm) :</label><input type="text" id="pdfEx2c" placeholder="" style="width: 80px;"><button class="verify" id="btnPdfEx2c">Vérifier</button></div>
+                <div class="subquestion">3) Combien de carreaux utilisera-t-elle dans ce cas ?</div>
                 <div class="input-group"><label>Nombre de carreaux :</label><input type="text" id="pdfEx2d" placeholder="" style="width: 100px;"><button class="verify" id="btnPdfEx2d">Vérifier</button></div>
                 <div id="solPdfEx2" class="solution"></div>
             </div>
@@ -2063,14 +2158,15 @@
 
         <div class="exercice-card-import">
             <div class="card-header">
-                <h4>🧪 Exercice Brevet 7 – Vaccin contre la grippe (Laboratoires A et B)</h4>
+                <h4>🧪 Exercice Brevet 7 – Étude en laboratoire</h4>
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Pour tester l'efficacité d'un vaccin contre la grippe, deux laboratoires étudient des souris.<br><strong>Laboratoire A :</strong> l'expérience porte sur <strong>5 groupes de 29 souris</strong>. Trois groupes ont été vaccinés : aucune souris n'est tombée malade. Les deux autres groupes n'ont pas été vaccinés : dans chacun d'eux, <strong>23 souris</strong> sont tombées malades.<br><strong>Laboratoire B :</strong> la proportion de souris malades est égale à \( \frac{140}{870} \).</div>
-                <div class="subquestion">1) a) Montre que la proportion de souris malades dans le laboratoire A est égale à \( \frac{46}{145} \) <em>(proportion = nombre de souris malades ÷ nombre total de souris ; écris ton résultat dans les cases pour vérifier)</em>. b) Justifie que cette fraction ne peut pas être simplifiée.</div>
+                <div class="question">Dans un laboratoire A, pour tester le vaccin contre la grippe, on a injecté la même souche de virus à <strong>5 groupes comportant 29 souris chacun</strong>. <strong>3</strong> de ces groupes avaient été préalablement vaccinés. Quelques jours plus tard, on remarque que :<br>— Dans les 3 groupes de souris vaccinées, aucune souris n'est malade ;<br>— Dans chacun des groupes de souris non vaccinées, <strong>23 souris</strong> ont développé la maladie.</div>
+                <div class="subquestion">1) <strong>Étude du laboratoire A.</strong> (a) En détaillant les calculs, montrer que la proportion de souris malades lors de ce test est \( \frac{46}{145} \) <em>(détaille le calcul sur ta copie, puis tape la fraction obtenue)</em>. (b) Justifier, sans utiliser la calculatrice, pourquoi on ne peut pas simplifier cette fraction.<br><em>Donnée utile : le début de la liste ordonnée des nombres premiers est : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29.</em></div>
                 <div class="input-group"><label>Vérification (taper la fraction) :</label><span class="fraction-input"><input type="number" id="pdfEx3a_num" placeholder="num"><span class="fraction-bar"></span><input type="number" id="pdfEx3a_den" placeholder="dén"></span><button class="verify" id="btnPdfEx3a">Vérifier</button></div>
-                <div class="subquestion">2) Décompose 140 et 870 en produits de facteurs premiers, puis donne la forme irréductible de \( \frac{140}{870} \).</div>
+                <div class="question">Dans un laboratoire B, on informe que \( \frac{140}{870} \) des souris ont été malades.</div>
+                <div class="subquestion">2) <strong>Étude du laboratoire B.</strong> (a) Décomposer 140 et 870 en produit de nombres premiers. (b) En déduire la forme irréductible de la proportion de souris malades dans le laboratoire B.</div>
                 <div class="input-group"><label>140 =</label><input type="text" id="pdfEx3b" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3b','⁴')">x⁴</button></span><button class="verify" id="btnPdfEx3b">Vérifier</button></div>
                 <div class="input-group"><label>870 =</label><input type="text" id="pdfEx3c" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx3c','⁴')">x⁴</button></span><button class="verify" id="btnPdfEx3c">Vérifier</button></div>
                 <div class="input-group"><label>Fraction irréductible :</label><span class="fraction-input"><input type="number" id="pdfEx3d_num" placeholder="num"><span class="fraction-bar"></span><input type="number" id="pdfEx3d_den" placeholder="dén"></span><button class="verify" id="btnPdfEx3d">Vérifier</button></div>
@@ -2084,12 +2180,12 @@
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Un capitaine pirate possède un trésor composé de <strong>69 diamants</strong>, <strong>1 150 perles</strong> et <strong>4 140 pièces d'or</strong>. Il le partage <strong>équitablement</strong> entre ses marins : chaque marin reçoit le même nombre de diamants, le même nombre de perles et le même nombre de pièces d'or, et <strong>tout le trésor est distribué</strong> (il ne reste rien). Il y a <strong>plus d'un marin</strong>.</div>
-                <div class="subquestion">1) Décompose 69, 1 150 et 4 140 en produits de facteurs premiers.</div>
+                <div class="question">Un trésor est constitué de <strong>69 diamants</strong>, <strong>1 150 perles</strong> et <strong>4 140 pièces d'or</strong>.</div>
+                <div class="subquestion">1) Décomposer ces trois nombres en produits de facteurs premiers.</div>
                 <div class="input-group"><label>69 =</label><input type="text" id="pdfEx4a" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4a','⁴')">x⁴</button></span><button class="verify" id="pdfEx4aBtn">Vérifier</button></div>
                 <div class="input-group"><label>1150 =</label><input type="text" id="pdfEx4b" placeholder="" style="width: 180px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4b','⁴')">x⁴</button></span><button class="verify" id="pdfEx4bBtn">Vérifier</button></div>
                 <div class="input-group"><label>4140 =</label><input type="text" id="pdfEx4c" placeholder="" style="width: 200px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx4c','⁴')">x⁴</button></span><button class="verify" id="pdfEx4cBtn">Vérifier</button></div>
-                <div class="subquestion">2) Combien y a-t-il de marins ? <em>(Le nombre de marins doit diviser 69, 1 150 et 4 140.)</em></div>
+                <div class="subquestion">2) Le capitaine partage équitablement tout le trésor entre ses marins. Combien y a-t-il de marins sachant que toutes les pièces, perles et diamants ont été distribués ?</div>
                 <div class="input-group"><label>Nombre de marins :</label><input type="text" id="pdfEx4d" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx4dBtn">Vérifier</button></div>
                 <div id="solPdfEx4" class="solution"></div>
             </div>
@@ -2097,18 +2193,17 @@
 
         <div class="exercice-card-import">
             <div class="card-header">
-                <h4>🍱 Exercice Brevet 9 – Nems et samossas (snack)</h4>
+                <h4>🍱 Exercice Brevet 9 – Le traiteur asiatique</h4>
                 <div class="badge-brevet">Brevet (inspiré)</div>
             </div>
             <div class="card-body">
-                <div class="question">Un snack vend des barquettes composées de nems et de samossas. Le cuisinier a préparé <strong>162 nems</strong> et <strong>108 samossas</strong>. Il veut remplir des barquettes <strong>identiques</strong> : chaque barquette contient le même nombre de nems et le même nombre de samossas, et <strong>tous les nems et tous les samossas doivent être utilisés</strong>.</div>
-                <div class="subquestion">1) Décompose 162 et 108 en produits de facteurs premiers.</div>
+                <div class="question">Un cuisinier a préparé <strong>162 nems</strong> et <strong>108 samossas</strong> pour faire des barquettes identiques.</div>
+                <div class="subquestion">1) Décomposer 162 et 108 en produits de facteurs premiers.</div>
                 <div class="input-group"><label>162 =</label><input type="text" id="pdfEx5a" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5a','⁴')">x⁴</button></span><button class="verify" id="pdfEx5aBtn">Vérifier</button></div>
                 <div class="input-group"><label>108 =</label><input type="text" id="pdfEx5b" placeholder="" style="width: 150px;"><span class="exp-toolbar"><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','×')">×</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','²')">x²</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','³')">x³</button><button type="button" class="exp-btn" onclick="insertAtCursor('pdfEx5b','⁴')">x⁴</button></span><button class="verify" id="pdfEx5bBtn">Vérifier</button></div>
-                <div class="subquestion">2) Détermine <strong>deux</strong> diviseurs communs à 162 et 108 qui sont <strong>supérieurs à 10</strong> (ce sont des nombres de barquettes possibles). <em>Sépare-les par des virgules.</em></div>
+                <div class="subquestion">2) Déterminer <strong>deux</strong> diviseurs communs à 162 et 108 supérieurs à 10. <em>(Sépare-les par des virgules.)</em></div>
                 <div class="input-group"><label>Diviseurs >10 :</label><input type="text" id="pdfEx5c" placeholder="Séparez par des virgules" style="width: 150px;"><button class="verify" id="pdfEx5cBtn">Vérifier</button></div>
-                <div class="subquestion">3) a) Le cuisinier peut-il réaliser <strong>36 barquettes</strong> identiques (Oui/Non) ? b) Quel est le <strong>nombre maximal</strong> de barquettes qu'il peut réaliser ? c) Dans ce cas, combien y a-t-il de nems et de samossas dans chaque barquette ? <em>(Écris par exemple : « 5 nems et 7 samossas ».)</em></div>
-                <div class="input-group"><label>36 barquettes ? (Oui/Non) :</label><input type="text" id="pdfEx5d" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx5dBtn">Vérifier</button></div>
+                <div class="subquestion">3) Quel <strong>nombre maximal</strong> de barquettes pourra-t-il réaliser ? Quelle sera alors la <strong>composition</strong> d'une barquette ? <em>(Écris par exemple : « 5 nems et 7 samossas ».)</em></div>
                 <div class="input-group"><label>Nombre max de barquettes :</label><input type="text" id="pdfEx5e" placeholder="" style="width: 80px;"><button class="verify" id="pdfEx5eBtn">Vérifier</button></div>
                 <div class="input-group"><label>Composition (nems, samossas) :</label><input type="text" id="pdfEx5f" placeholder="" style="width: 200px;"><button class="verify" id="pdfEx5fBtn">Vérifier</button></div>
                 <div id="solPdfEx5" class="solution"></div>
@@ -2117,9 +2212,9 @@
 
         <div class="scoreboard">
             <h3>📊 Mon score sur cette série Brevet</h3>
-            <div class="score-display" id="score-brevet">Score : 0 / 27 (0%) — 0/27 questions faites</div>
+            <div class="score-display" id="score-brevet">Score : 0 / 26 (0%) — 0/26 questions faites</div>
             <button type="button" class="reset-scores-btn" onclick="resetScores('brevet')">🔄 Recommencer cette série</button>
-            <button class="download-cert-btn" id="download-brevet" disabled onclick="downloadCertificate('brevet')">Termine les 27 questions restantes</button>
+            <button class="download-cert-btn" id="download-brevet" disabled onclick="downloadCertificate('brevet')">Termine les 26 questions restantes</button>
         </div>
 
         <div class="scoreboard" id="pdf-box-brevet" style="display:none;">
@@ -2526,7 +2621,8 @@
         const times = parseTimeList(document.getElementById('pdfEx1').value);
         const expected = [0,1,2,3,4,5,6,7,8].map(k => 390 + 96 * k); /* 6h30 + k × 1h36 */
         let ok = !!times && times.length === expected.length && times.every((v, i) => v === expected[i]);
-        let detail = "Le bus de la ligne 1 met 8 × 3 = 24 minutes pour repasser à l'arrêt « Mairie ».<br>" +
+        let detail = "Sur le plan, chaque ligne comporte 8 arrêts (ligne 1 : Mairie, École, Pompier, Lycée, Piscine, Bibliothèque, Cathédrale, Place ; ligne 2 : Mairie, Gendarmerie, Collège, Marché, Horloge, Stade, Conservatoire, Cathédrale) : un tour complet correspond donc à 8 trajets d'un arrêt au suivant.<br><br>" +
+                    "Le bus de la ligne 1 met 8 × 3 = 24 minutes pour repasser à l'arrêt « Mairie ».<br>" +
                     "Le bus de la ligne 2 met 8 × 4 = 32 minutes pour repasser à l'arrêt « Mairie ».<br><br>" +
                     "De 6 h 30 à 20 h, il s'écoule 13 h 30, soit 810 minutes.<br><br>" +
                     "Les deux bus vont se retrouver à un moment de la journée à l'arrêt « Mairie » en même temps s'il existe un multiple commun à 24 et 32 inférieur ou égal à 810.<br><br>" +
@@ -2549,7 +2645,7 @@
         displayBrevetSolution('solPdfEx2', "Avec des carreaux de 9 cm : 225 ÷ 9 = 25 carreaux dans la longueur et 108 ÷ 9 = 12 carreaux dans la largeur.<br>25 × 12 = 300.<br>✅ <strong>300 carreaux</strong><br><em>Vérification par les aires : 108 × 225 = 24 300 cm² et 9 × 9 = 81 cm² par carreau ; 24 300 ÷ 81 = 300.</em>", ok, 'pdfEx2d');
     };
     
-    document.getElementById('btnPdfEx3a').onclick = () => { let u = getFraction('pdfEx3a_num','pdfEx3a_den'); let ok = (u==="46/145"); displayBrevetSolution('solPdfEx3', "<strong>a)</strong> Nombre total de souris : 5 × 29 = 145. Seuls les 2 groupes non vaccinés ont des souris malades : 2 × 23 = 46 souris malades.<br>Proportion de souris malades = 46/145.<br><strong>b)</strong> 46 = 2 × 23 et 145 = 5 × 29 : les deux nombres n'ont aucun facteur premier en commun, donc la fraction ne peut pas être simplifiée (elle est irréductible).<br>✅ <strong>46/145</strong>", ok, 'pdfEx3a'); };
+    document.getElementById('btnPdfEx3a').onclick = () => { let u = getFraction('pdfEx3a_num','pdfEx3a_den'); let ok = (u==="46/145"); displayBrevetSolution('solPdfEx3', "<strong>a)</strong> Nombre total de souris : 5 × 29 = 145. Seuls les 2 groupes non vaccinés ont des souris malades : 2 × 23 = 46 souris malades.<br>Proportion de souris malades = 46/145.<br><strong>b)</strong> 46 = 2 × 23 et 145 = 5 × 29. Avec la liste de nombres premiers donnée : les facteurs premiers de 46 sont 2 et 23, ceux de 145 sont 5 et 29. Ils n'ont aucun facteur premier en commun, donc la fraction ne peut pas être simplifiée : elle est irréductible.<br>✅ <strong>46/145</strong>", ok, 'pdfEx3a'); };
     document.getElementById('btnPdfEx3b').onclick = () => { let u=document.getElementById('pdfEx3b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx3b').value, {2:2,5:1,7:1}); displayBrevetSolution('solPdfEx3', "140 ÷ 2 = 70 ; 70 ÷ 2 = 35 ; 35 ÷ 5 = 7 ; 7 ÷ 7 = 1.<br>✅ <strong>140 = 2² × 5 × 7</strong>", ok, 'pdfEx3b'); };
     document.getElementById('btnPdfEx3c').onclick = () => { let u=document.getElementById('pdfEx3c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx3c').value, {2:1,3:1,5:1,29:1}); displayBrevetSolution('solPdfEx3', "870 ÷ 2 = 435 ; 435 ÷ 3 = 145 ; 145 ÷ 5 = 29 ; 29 est premier.<br>✅ <strong>870 = 2 × 3 × 5 × 29</strong>", ok, 'pdfEx3c'); };
     document.getElementById('btnPdfEx3d').onclick = () => { let u = getFraction('pdfEx3d_num','pdfEx3d_den'); let ok = (u==="14/87"); displayBrevetSolution('solPdfEx3', "140/870 = (2²×5×7)/(2×3×5×29) = (2×7)/(3×29) = 14/87.<br>✅ 14/87", ok, 'pdfEx3d'); };
@@ -2557,7 +2653,7 @@
     document.getElementById('pdfEx4aBtn').onclick = () => { let u=document.getElementById('pdfEx4a').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx4a').value, {3:1,23:1}); displayBrevetSolution('solPdfEx4', "69 n'est pas pair ; 6 + 9 = 15 est un multiple de 3 : 69 ÷ 3 = 23, et 23 est premier.<br>✅ <strong>69 = 3 × 23</strong>", ok, 'pdfEx4a'); };
     document.getElementById('pdfEx4bBtn').onclick = () => { let u=document.getElementById('pdfEx4b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx4b').value, {2:1,5:2,23:1}); displayBrevetSolution('solPdfEx4', "1 150 ÷ 2 = 575 ; 575 ÷ 5 = 115 ; 115 ÷ 5 = 23 ; 23 est premier.<br>✅ <strong>1 150 = 2 × 5² × 23</strong>", ok, 'pdfEx4b'); };
     document.getElementById('pdfEx4cBtn').onclick = () => { let u=document.getElementById('pdfEx4c').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx4c').value, {2:2,3:2,5:1,23:1}); displayBrevetSolution('solPdfEx4', "4 140 ÷ 2 = 2 070 ; 2 070 ÷ 2 = 1 035 ; 1 035 ÷ 3 = 345 ; 345 ÷ 3 = 115 ; 115 ÷ 5 = 23 ; 23 est premier.<br>✅ <strong>4 140 = 2² × 3² × 5 × 23</strong>", ok, 'pdfEx4c'); };
-    document.getElementById('pdfEx4dBtn').onclick = () => { let u=parseInt(document.getElementById('pdfEx4d').value); let ok = (u===23); displayBrevetSolution('solPdfEx4', "Le nombre de marins doit diviser 69, 1 150 et 4 140. Le seul facteur premier commun aux trois décompositions est 23 (69 = 3 × 23 ; 1 150 = 2 × 5² × 23 ; 4 140 = 2² × 3² × 5 × 23).<br>Les diviseurs communs sont donc 1 et 23 ; comme il y a plus d'un marin :<br>✅ <strong>23 marins</strong><br><em>Chacun reçoit 69 ÷ 23 = 3 diamants, 1 150 ÷ 23 = 50 perles et 4 140 ÷ 23 = 180 pièces d'or.</em>", ok, 'pdfEx4d'); };
+    document.getElementById('pdfEx4dBtn').onclick = () => { let u=parseInt(document.getElementById('pdfEx4d').value); let ok = (u===23); displayBrevetSolution('solPdfEx4', "Le nombre de marins doit diviser 69, 1 150 et 4 140. Le seul facteur premier commun aux trois décompositions est 23 (69 = 3 × 23 ; 1 150 = 2 × 5² × 23 ; 4 140 = 2² × 3² × 5 × 23).<br>Les diviseurs communs sont donc 1 et 23. Le capitaine partage le trésor entre « ses marins » (il y en a plusieurs), donc 1 est exclu :<br>✅ <strong>23 marins</strong><br><em>Chacun reçoit 69 ÷ 23 = 3 diamants, 1 150 ÷ 23 = 50 perles et 4 140 ÷ 23 = 180 pièces d'or.</em>", ok, 'pdfEx4d'); };
     
     document.getElementById('pdfEx5aBtn').onclick = () => { let u=document.getElementById('pdfEx5a').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx5a').value, {2:1,3:4}); displayBrevetSolution('solPdfEx5', "162 ÷ 2 = 81 ; 81 ÷ 3 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1.<br>✅ <strong>162 = 2 × 3⁴</strong>", ok, 'pdfEx5a'); };
     document.getElementById('pdfEx5bBtn').onclick = () => { let u=document.getElementById('pdfEx5b').value.trim().replace(/\s/g,'').toLowerCase(); let ok = sameFactorization(document.getElementById('pdfEx5b').value, {2:2,3:3}); displayBrevetSolution('solPdfEx5', "108 ÷ 2 = 54 ; 54 ÷ 2 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1.<br>✅ <strong>108 = 2² × 3³</strong>", ok, 'pdfEx5b'); };
@@ -2570,12 +2666,6 @@
             "Les diviseurs communs sont donc les diviseurs de 54 : 1, 2, 3, 6, 9, 18, 27, 54.<br>" +
             "✅ <strong>Ceux qui sont supérieurs à 10 : 18, 27 et 54</strong> (deux d'entre eux suffisent).";
         displayBrevetSolution('solPdfEx5', detail, ok, 'pdfEx5c');
-    };
-    
-    document.getElementById('pdfEx5dBtn').onclick = () => {
-        let u = document.getElementById('pdfEx5d').value.trim().toLowerCase();
-        let ok = (u === "non");
-        displayBrevetSolution('solPdfEx5', "Pour faire 36 barquettes, il faudrait que 36 divise 162 et 108. Or 162 ÷ 36 = 4,5 (pas un entier) : il resterait des nems.<br>(On le voit aussi avec les facteurs : 36 = 2² × 3², mais 162 ne contient qu'un seul facteur 2.)<br>✅ <strong>Non</strong>", ok, 'pdfEx5d');
     };
     
     document.getElementById('pdfEx5eBtn').onclick = () => {
@@ -2974,7 +3064,7 @@
 
     /* ================= SCORE TRACKING & CERTIFICATS ================= */
     const interactifsKeys = ['a1a','a1b','a2','p1','p2a','p2b','ex1a','ex1b','ex2','ex3','ex4a','ex4b','ex4c','ex4d','ex4e','ex4f','ex5a','ex5b','ex6a1','ex6a2','ex6a3','ex6b','ex6c','ex7a','ex7b','ex7c','ex7d'];
-    const brevetKeys = ['brevet1a','br1b','brevet2a','brevet2b','brevet3','brevet4a','brevet4b','brevet4c','pdfEx1','pdfEx2a','pdfEx2b','pdfEx2c','pdfEx2d','pdfEx3a','pdfEx3b','pdfEx3c','pdfEx3d','pdfEx4a','pdfEx4b','pdfEx4c','pdfEx4d','pdfEx5a','pdfEx5b','pdfEx5c','pdfEx5d','pdfEx5e','pdfEx5f'];
+    const brevetKeys = ['brevet1a','br1b','brevet2a','brevet2b','brevet3','brevet4a','brevet4b','brevet4c','pdfEx1','pdfEx2a','pdfEx2b','pdfEx2c','pdfEx2d','pdfEx3a','pdfEx3b','pdfEx3c','pdfEx3d','pdfEx4a','pdfEx4b','pdfEx4c','pdfEx4d','pdfEx5a','pdfEx5b','pdfEx5c','pdfEx5e','pdfEx5f'];
     const scoreTracker = { interactifs: {}, brevet: {} };
 
     function recordScore(tab, key, isCorrect) {
@@ -3530,6 +3620,7 @@
     });
 
     /* ================= SOLUTION COMPLÈTE APRÈS CHAQUE EXERCICE ================= */
+    const FULL_SOLUTIONS = {"solA1": {"s": [["Décomposer 120", "120 ÷ 2 = 60 ; 60 ÷ 2 = 30 ; 30 ÷ 2 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1.<br>Donc 120 = 2 × 2 × 2 × 3 × 5 = 2³ × 3 × 5."], ["Décomposer 450", "450 ÷ 2 = 225 ; 225 ÷ 3 = 75 ; 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1.<br>Donc 450 = 2 × 3 × 3 × 5 × 5 = 2 × 3² × 5²."], ["Vérifier", "2³ × 3 × 5 = 8 × 15 = 120 ✔ et 2 × 3² × 5² = 2 × 9 × 25 = 450 ✔."]], "r": "120 = 2³ × 3 × 5 et 450 = 2 × 3² × 5²."}, "solA2": {"s": [["Décomposer 126", "126 ÷ 2 = 63 ; 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1, donc 126 = 2 × 3² × 7."], ["Décomposer 210", "210 ÷ 2 = 105 ; 105 ÷ 3 = 35 ; 35 ÷ 5 = 7 ; 7 ÷ 7 = 1, donc 210 = 2 × 3 × 5 × 7."], ["Chercher le PGCD", "On garde les facteurs communs avec le plus petit exposant : 2 (exposant 1), 3 (exposant 1, car min(2 ; 1)) et 7 (exposant 1). Le facteur 5 n’est que dans 210.<br>PGCD = 2 × 3 × 7 = 42."], ["Vérifier (algorithme d’Euclide)", "210 = 126 × 1 + 84 ; 126 = 84 × 1 + 42 ; 84 = 42 × 2 + 0. Le dernier reste non nul est 42 ✔."]], "r": "Le PGCD de 126 et 210 est 42."}, "solP1": {"s": [["Division euclidienne de 275 par 16", "16 × 17 = 272 et 16 × 18 = 288 > 275.<br>Donc 275 = 16 × 17 + 3, avec 0 ≤ 3 < 16."], ["Interpréter", "17 salles pleines contiennent 17 × 16 = 272 photos. Il reste 3 photos : il faut une salle de plus."], ["Conclure", "17 + 1 = 18 salles. Vérification : 17 salles ne suffisent pas (272 < 275), 18 salles suffisent (288 ≥ 275)."]], "r": "Le photographe doit utiliser 18 salles."}, "solP2": {"s": [["Traduire", "Les phares brillent ensemble à un instant multiple de 15 et de 20 : on cherche le PPCM(15 ; 20)."], ["Décomposer", "15 = 3 × 5 et 20 = 2² × 5."], ["Chercher le PPCM", "On prend tous les facteurs avec le plus grand exposant : 2² × 3 × 5 = 4 × 15 = 60.<br>Contrôle : multiples de 15 : 15, 30, 45, 60 ; multiples de 20 : 20, 40, 60 ✔."], ["Calculer l’heure", "60 s = 1 min. Minuit + 1 min = 00 h 01 min 00 s."]], "r": "Les deux phares brillent de nouveau ensemble au bout de 60 secondes, soit à 00 h 01 min 00 s."}, "sol1": {"s": [["Écrire la relation", "a = 9 × 24 + r avec 0 ≤ r < 9, car le reste est strictement inférieur au diviseur."], ["Restes possibles", "r peut valoir 0, 1, 2, 3, 4, 5, 6, 7 ou 8 (9 valeurs). Le reste 9 est impossible."], ["Dividendes possibles", "9 × 24 = 216, donc a = 216 + r : 216, 217, 218, 219, 220, 221, 222, 223, 224.<br>Vérification : 224 = 9 × 24 + 8 mais 225 = 9 × 25 (quotient 25)."]], "r": "Les restes possibles sont 0, 1, …, 8 et les dividendes possibles sont 216, 217, …, 224."}, "sol2": {"s": [["Divisible par 2", "Le nombre est pair : * ∈ {0 ; 2 ; 4 ; 6 ; 8}."], ["Divisible par 3", "La somme des chiffres 6 + 0 + 7 + * = 13 + * doit être un multiple de 3 :<br>* = 0 → 13 (non) ; * = 2 → 15 = 3 × 5 (oui) ; * = 4 → 17 (non) ; * = 6 → 19 (non) ; * = 8 → 21 = 3 × 7 (oui)."], ["Vérifier", "6 072 ÷ 6 = 1 012 et 6 078 ÷ 6 = 1 013 : divisibles par 2 et par 3 ✔."]], "r": "Les nombres possibles sont 6 072 et 6 078."}, "sol3": {"s": [["Division euclidienne de 100 par 7", "7 × 14 = 98 et 100 = 7 × 14 + 2, avec 0 ≤ 2 < 7."], ["Interpréter", "14 semaines complètes (98 jours) ramènent au même jour : un mercredi. Il reste 2 jours : mercredi + 1 = jeudi, + 2 = vendredi."]], "r": "Dans 100 jours, nous serons un vendredi."}, "sol4": {"s": [["Méthode", "On teste 1, 2, 3, … et on garde les paires (a ; b) telles que a × b = n. On s’arrête quand a² > n."], ["22 et 45", "22 : 1 × 22 et 2 × 11 → 1, 2, 11, 22.<br>45 : 1 × 45, 3 × 15, 5 × 9 → 1, 3, 5, 9, 15, 45."], ["50 et 42", "50 : 1 × 50, 2 × 25, 5 × 10 → 1, 2, 5, 10, 25, 50.<br>42 : 1 × 42, 2 × 21, 3 × 14, 6 × 7 → 1, 2, 3, 6, 7, 14, 21, 42."], ["37 et 60", "37 : ni pair, ni multiple de 3 ou 5 ; 7² = 49 > 37 : seule paire 1 × 37 → 1, 37 (37 est premier).<br>60 : 1 × 60, 2 × 30, 3 × 20, 4 × 15, 5 × 12, 6 × 10 → 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60."]], "r": "22 a 4 diviseurs, 45 en a 6, 50 en a 6, 42 en a 8, 37 en a 2 (il est premier) et 60 en a 12."}, "sol5": {"s": [["Diviseurs de 120", "1 × 120, 2 × 60, 3 × 40, 4 × 30, 5 × 24, 6 × 20, 8 × 15, 10 × 12 → 1, 2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 24, 30, 40, 60, 120."], ["Choisir l’effectif", "Il doit diviser 120 et être strictement compris entre 15 et 30 : 20 et 24 (15 et 30 sont exclus)."], ["Nombre de groupes", "120 ÷ 20 = 6 et 120 ÷ 24 = 5."]], "r": "On peut former 6 groupes de 20 adolescents ou 5 groupes de 24 adolescents."}, "sol6": {"s": [["a) Diviseurs de 35 et de 55", "35 = 1 × 35 = 5 × 7 → 1, 5, 7, 35. 55 = 1 × 55 = 5 × 11 → 1, 5, 11, 55."], ["a) Diviseurs communs", "Les nombres présents dans les deux listes : 1 et 5. Le plus grand est 5 : PGCD(35 ; 55) = 5."], ["b) 18 et 36", "18 : 1, 2, 3, 6, 9, 18. 36 : 1, 2, 3, 4, 6, 9, 12, 18, 36. Communs : 1, 2, 3, 6, 9, 18 ; PGCD(18 ; 36) = 18 car 36 = 18 × 2."], ["c) 21 et 10", "21 : 1, 3, 7, 21. 10 : 1, 2, 5, 10. Seul 1 est commun : PGCD(21 ; 10) = 1."]], "r": "Communs à 35 et 55 : 1 et 5. Communs à 18 et 36 : 1, 2, 3, 6, 9, 18. Commun à 21 et 10 : 1 seulement, donc 21 et 10 sont premiers entre eux."}, "sol7": {"s": [["a) 40 bouquets ?", "Il faut que 40 divise 64 et 160. 64 = 40 × 1 + 24 : le reste n’est pas nul, donc il resterait 24 pivoines."], ["b) 16 bouquets ?", "64 = 16 × 4 + 0 et 160 = 16 × 10 + 0 : les deux restes sont nuls, donc 16 convient (4 pivoines et 10 roses par bouquet)."], ["c) Nombre maximal de bouquets", "64 = 2⁶ et 160 = 2⁵ × 5. Facteur commun : 2, au plus petit exposant (5) : PGCD(64 ; 160) = 2⁵ = 32.<br>Donc 32 divise 64 et 160 : 64 = 32 × 2 et 160 = 32 × 5, sans reste."], ["d) Composition", "64 ÷ 32 = 2 pivoines et 160 ÷ 32 = 5 roses par bouquet. Vérification : 32 × 2 = 64 et 32 × 5 = 160."]], "r": "La fleuriste peut composer au maximum 32 bouquets identiques, chacun avec 2 pivoines et 5 roses (40 bouquets sont impossibles, 16 sont possibles)."}, "solBrevet1": {"s": [["Traduire", "Le nombre de sachets divise 180 et 150 et on le veut maximal : c’est le PGCD(180 ; 150)."], ["Décomposer", "180 ÷ 2 = 90 ; 90 ÷ 2 = 45 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1, donc 180 = 2² × 3² × 5.<br>150 ÷ 2 = 75 ; 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1, donc 150 = 2 × 3 × 5²."], ["Chercher le PGCD", "Facteurs communs au plus petit exposant : 2, 3 et 5. PGCD = 2 × 3 × 5 = 30."], ["Composer un sachet", "180 ÷ 30 = 6 confettis rouges et 150 ÷ 30 = 5 confettis bleus. Vérification : 30 × 6 = 180 et 30 × 5 = 150."]], "r": "On peut remplir au maximum 30 sachets, chacun contenant 6 confettis rouges et 5 confettis bleus."}, "solBrevet2": {"s": [["Traduire", "Le côté du carreau divise 270 et 210 et doit être le plus grand possible : c’est le PGCD(270 ; 210)."], ["Décomposer", "270 ÷ 2 = 135 ; 135 ÷ 3 = 45 ; 45 ÷ 3 = 15 ; 15 ÷ 3 = 5 ; 5 ÷ 5 = 1, donc 270 = 2 × 3³ × 5.<br>210 ÷ 2 = 105 ; 105 ÷ 3 = 35 ; 35 ÷ 5 = 7 ; 7 ÷ 7 = 1, donc 210 = 2 × 3 × 5 × 7."], ["Chercher le PGCD", "Facteurs communs au plus petit exposant : 2, 3 et 5. PGCD = 2 × 3 × 5 = 30."], ["Compter les carreaux", "Longueur : 270 ÷ 30 = 9 carreaux ; largeur : 210 ÷ 30 = 7 carreaux ; 9 × 7 = 63.<br>Vérification par les aires : 270 × 210 = 56 700 cm² et 56 700 ÷ 900 = 63."]], "r": "Les plus grands carreaux mesurent 30 cm de côté et il faut 63 carreaux pour recouvrir la salle."}, "solBrevet3": {"s": [["Traduire", "Les feux clignotent ensemble à un instant multiple de 24 s et de 36 s : on cherche le PPCM(24 ; 36)."], ["Décomposer", "24 ÷ 2 = 12 ; 12 ÷ 2 = 6 ; 6 ÷ 2 = 3 ; 3 ÷ 3 = 1, donc 24 = 2³ × 3.<br>36 ÷ 2 = 18 ; 18 ÷ 2 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1, donc 36 = 2² × 3²."], ["Chercher le PPCM", "Tous les facteurs avec le plus grand exposant : 2³ × 3² = 8 × 9 = 72 s. Contrôle : 72 = 24 × 3 = 36 × 2 ✔."], ["Calculer l’heure", "72 s = 1 min 12 s. 8 h 00 min 00 s + 1 min 12 s = 8 h 01 min 12 s."]], "r": "Les deux feux clignoteront de nouveau en même temps à 8 h 01 min 12 s."}, "solBrevet4": {"s": [["Décomposer 252", "252 ÷ 2 = 126 ; 126 ÷ 2 = 63 ; 63 ÷ 3 = 21 ; 21 ÷ 3 = 7 ; 7 ÷ 7 = 1, donc 252 = 2² × 3² × 7."], ["Décomposer 294", "294 ÷ 2 = 147 ; 147 ÷ 3 = 49 ; 49 ÷ 7 = 7 ; 7 ÷ 7 = 1, donc 294 = 2 × 3 × 7²."], ["Simplifier", "252/294 = (2² × 3² × 7) / (2 × 3 × 7²). On simplifie par les facteurs communs 2, 3 et 7 (PGCD = 42) : = (2 × 3) / 7 = 6/7."], ["Vérifier", "6 × 42 = 252 et 7 × 42 = 294 ; 6 = 2 × 3 et 7 n’ont aucun facteur commun : la fraction est irréductible."]], "r": "La fraction 252/294 est égale à la fraction irréductible 6/7."}, "solPdfEx1": {"s": [["Lire le plan", "Ligne 1 (pointillés) : Mairie → École → Pompier → Lycée → Piscine → Bibliothèque → Cathédrale → Place → Mairie : 8 arrêts, donc 8 trajets par tour.<br>Ligne 2 (trait plein) : Mairie → Gendarmerie → Collège → Marché → Horloge → Stade → Conservatoire → Cathédrale → Mairie : 8 arrêts, donc 8 trajets par tour."], ["Durée d’un tour", "Ligne 1 : 8 × 3 = 24 min. Ligne 2 : 8 × 4 = 32 min."], ["Traduire", "Les bus sont ensemble à la Mairie après un nombre de minutes multiple de 24 et de 32 : on cherche le PPCM(24 ; 32)."], ["Chercher le PPCM", "24 = 2³ × 3 et 32 = 2⁵. PPCM = 2⁵ × 3 = 96 min = 1 h 36 min. Contrôle : 96 = 24 × 4 = 32 × 3 ✔."], ["Durée de service", "De 6 h 30 à 20 h : 13 h 30 = 810 min. 96 × 8 = 768 ≤ 810 et 96 × 9 = 864 > 810 : il y a 9 rencontres (en comptant le départ)."], ["Calculer les horaires", "On ajoute 1 h 36 min à chaque fois : 6 h 30 → 8 h 06 → 9 h 42 → 11 h 18 → 12 h 54 → 14 h 30 → 16 h 06 → 17 h 42 → 19 h 18.<br>La rencontre suivante aurait lieu à 19 h 18 + 1 h 36 = 20 h 54, donc après 20 h : elle n’a pas lieu."]], "r": "Oui, les deux bus se retrouvent à l’arrêt « Mairie » toutes les 1 h 36 min : à 6h30, 8h06, 9h42, 11h18, 12h54, 14h30, 16h06, 17h42 et 19h18.", "fig": "<img src=\"image1.png\" alt=\"Schéma du circuit des deux bus\" class=\"exercise-image\" onerror=\"this.parentNode.style.display='none'\">"}, "solPdfEx2": {"s": [["a) Carreaux de 3 cm", "1 + 0 + 8 = 9 et 2 + 2 + 5 = 9 sont des multiples de 3 : 108 et 225 sont divisibles par 3 (108 ÷ 3 = 36 ; 225 ÷ 3 = 75). Oui."], ["b) Carreaux de 6 cm", "225 est impair, donc pas divisible par 2, donc pas par 6 (225 ÷ 6 = 37,5). Non."], ["c) Dimension maximale", "On cherche le PGCD(108 ; 225). 108 ÷ 2 = 54 ; 54 ÷ 2 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1, donc 108 = 2² × 3³. 225 ÷ 3 = 75 ; 75 ÷ 3 = 25 ; 25 ÷ 5 = 5 ; 5 ÷ 5 = 1, donc 225 = 3² × 5².<br>Facteur commun : 3, au plus petit exposant (2) : PGCD = 3² = 9."], ["d) Nombre de carreaux", "225 ÷ 9 = 25 et 108 ÷ 9 = 12 ; 25 × 12 = 300. Vérification : 108 × 225 = 24 300 cm² et 24 300 ÷ 81 = 300."]], "r": "On peut poser des carreaux de 3 cm (oui) mais pas de 6 cm (non). Les plus grands carreaux mesurent 9 cm de côté et il en faut 300."}, "solPdfEx3": {"s": [["1.a) Calculer la proportion", "Nombre total de souris : 5 × 29 = 145.<br>Groupes non vaccinés : 5 − 3 = 2, avec 23 souris malades chacun : 2 × 23 = 46 souris malades (0 dans les groupes vaccinés).<br>Proportion = 46/145."], ["1.b) Justifier que 46/145 est irréductible", "46 = 2 × 23 (46 est pair, 46 ÷ 2 = 23, premier). 145 = 5 × 29 (145 se termine par 5, 145 ÷ 5 = 29, premier).<br>Avec la liste donnée, les facteurs premiers de 46 sont 2 et 23, ceux de 145 sont 5 et 29 : aucun en commun. La fraction ne peut donc pas être simplifiée."], ["2.a) Décomposer 140", "140 ÷ 2 = 70 ; 70 ÷ 2 = 35 ; 35 ÷ 5 = 7 ; 7 ÷ 7 = 1, donc 140 = 2² × 5 × 7."], ["2.a) Décomposer 870", "870 ÷ 2 = 435 ; 435 ÷ 3 = 145 ; 145 ÷ 5 = 29 ; 29 ÷ 29 = 1, donc 870 = 2 × 3 × 5 × 29."], ["2.b) Forme irréductible", "140/870 = (2² × 5 × 7) / (2 × 3 × 5 × 29). On simplifie par les facteurs communs 2 et 5 (soit 10) : = (2 × 7) / (3 × 29) = 14/87.<br>Vérification : 14 × 10 = 140 et 87 × 10 = 870 ; 14 = 2 × 7 et 87 = 3 × 29 n’ont aucun facteur commun."]], "r": "Laboratoire A : la proportion de souris malades est 46/145, fraction irréductible car 46 = 2 × 23 et 145 = 5 × 29 n’ont aucun facteur premier commun. Laboratoire B : 140/870 = 14/87, forme irréductible."}, "solPdfEx4": {"s": [["Décomposer 69", "69 ÷ 3 = 23 ; 23 ÷ 23 = 1, donc 69 = 3 × 23."], ["Décomposer 1 150", "1 150 ÷ 2 = 575 ; 575 ÷ 5 = 115 ; 115 ÷ 5 = 23 ; 23 ÷ 23 = 1, donc 1 150 = 2 × 5² × 23."], ["Décomposer 4 140", "4 140 ÷ 2 = 2 070 ; 2 070 ÷ 2 = 1 035 ; 1 035 ÷ 3 = 345 ; 345 ÷ 3 = 115 ; 115 ÷ 5 = 23 ; 23 ÷ 23 = 1, donc 4 140 = 2² × 3² × 5 × 23."], ["Chercher le nombre de marins", "Le nombre de marins divise 69, 1 150 et 4 140. Le seul facteur premier commun aux trois décompositions est 23 : PGCD = 23, les diviseurs communs sont 1 et 23. Il y a plus d’un marin : 23."], ["Calculer les parts", "69 ÷ 23 = 3 ; 1 150 ÷ 23 = 50 ; 4 140 ÷ 23 = 180."]], "r": "Il y a 23 marins ; chacun reçoit 3 diamants, 50 perles et 180 pièces d’or."}, "solPdfEx5": {"s": [["1) Décomposer 162", "162 ÷ 2 = 81 ; 81 ÷ 3 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1, donc 162 = 2 × 3⁴."], ["1) Décomposer 108", "108 ÷ 2 = 54 ; 54 ÷ 2 = 27 ; 27 ÷ 3 = 9 ; 9 ÷ 3 = 3 ; 3 ÷ 3 = 1, donc 108 = 2² × 3³."], ["2) Diviseurs communs supérieurs à 10", "Un diviseur commun à 162 et 108 divise leur PGCD. Facteurs communs au plus petit exposant : 2 et 3³, donc PGCD(162 ; 108) = 2 × 27 = 54.<br>Les diviseurs communs sont les diviseurs de 54 : 1, 2, 3, 6, 9, 18, 27, 54. Deux diviseurs supérieurs à 10 : 18 et 27 (54 convient aussi).<br>Vérification : 162 ÷ 18 = 9 et 108 ÷ 18 = 6 ; 162 ÷ 27 = 6 et 108 ÷ 27 = 4."], ["3) Nombre maximal de barquettes", "Le nombre de barquettes doit diviser 162 et 108 ; le plus grand diviseur commun est le PGCD = 54. Le cuisinier peut donc faire au maximum 54 barquettes."], ["3) Composition d’une barquette", "162 ÷ 54 = 3 nems et 108 ÷ 54 = 2 samossas. Vérification : 54 × 3 = 162 et 54 × 2 = 108."]], "r": "Le cuisinier peut préparer au maximum 54 barquettes, chacune contenant 3 nems et 2 samossas."}};
     function refreshFullSolutions() {
         Object.keys(fullSolStore).forEach(divId => {
             const e = fullSolStore[divId], solDiv = document.getElementById(divId);
@@ -3541,17 +3632,24 @@
             if (!done) return;
             const box = document.createElement('div');
             box.className = 'full-solution-box';
-            const parts = e.order.map((k, i) => {
+            const results = e.order.map((k, i) => {
                 const good = scoreTracker[e.tab][k] === true;   // résultat d'origine : il ne change jamais
                 return '<div class="fs-q ' + (good ? 'ok' : 'ko') + '" data-key="' + k + '"><div class="fs-q-title">Question ' + (i + 1) + ' — ' +
-                    (good ? '✔️ réussie' : '❌ à revoir') + '</div>' + e.html[k] + '</div>';
+                    (good ? '✔️ réussie' : '❌ à revoir') + '</div></div>';
             }).join('');
+            const m = FULL_SOLUTIONS[divId];
+            const body = m
+                ? (m.fig ? '<figure class="exercise-figure">' + m.fig + '</figure>' : '') +
+                  m.s.map((st, i) => '<div class="fs-step"><div class="fs-step-title">Étape ' + (i + 1) + ' — ' + st[0] + '</div><div>' + st[1] + '</div></div>').join('') +
+                  '<div class="fs-answer"><b>✍️ Phrase réponse :</b> ' + m.r + '</div>'
+                : e.order.map(k => '<div class="fs-step">' + e.html[k] + '</div>').join('');
             box.innerHTML =
                 '<div class="fs-banner">🎯 Tu as répondu à toutes les questions de cet exercice.' +
-                '<small>Avant de passer au suivant, prends le temps de lire la solution complète. Ton score est déjà enregistré : il ne changera pas.</small></div>' +
+                '<small>Avant de passer au suivant, compare ta copie avec la solution complète. Ton score est déjà enregistré : il ne changera pas.</small></div>' +
                 '<div class="fs-actions"><button type="button" class="fs-btn" aria-expanded="false">📖 Voir la solution complète</button>' +
                 '<button type="button" class="fs-next">Exercice suivant ↓</button></div>' +
-                '<div class="fs-panel" hidden>' + parts + '</div>';
+                '<div class="fs-panel" hidden><div class="fs-results">' + results + '</div>' +
+                '<div class="fs-howto">📝 <b>Modèle de rédaction :</b> voici comment présenter ta copie le jour de l’examen — étapes, calculs détaillés et phrase réponse. Compare avec ce que tu as écrit sur ton cahier.</div>' + body + '</div>';
             const btn = box.querySelector('.fs-btn'), panel = box.querySelector('.fs-panel'), next = box.querySelector('.fs-next');
             btn.onclick = () => {
                 const open = panel.hidden;
