@@ -649,6 +649,22 @@
   #pgcd .chk input{width:22px;height:22px}
 }
 @media print{#pgcd{display:none}}
+
+/* ===== Solution complète après chaque exercice ===== */
+.full-solution-box { margin-top: 18px; border: 2px solid var(--primary); border-radius: 14px; background: #f0f2ff; padding: 14px 16px; }
+.fs-banner { font-weight: 600; }
+.fs-banner small { display: block; font-weight: 400; color: #5d6878; margin-top: 2px; }
+.fs-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.fs-btn, .fs-next, .fs-later { font-family: 'Sora', sans-serif; font-weight: 600; border-radius: 8px; padding: 10px 18px; cursor: pointer; min-height: 44px; border: 2px solid var(--primary); }
+.fs-btn { background: var(--primary); color: #fff; }
+.fs-next, .fs-later { background: #fff; color: var(--primary); }
+.fs-btn:hover, .fs-next:hover, .fs-later:hover { opacity: .9; }
+.fs-panel { margin-top: 12px; border-top: 1px dashed #b7bff0; padding-top: 4px; }
+.fs-q { background: #fff; border-radius: 10px; padding: 10px 14px; margin-top: 10px; border-left: 5px solid #8d99ae; }
+.fs-q.ok { border-left-color: #2e9e5b; } .fs-q.ko { border-left-color: #d64550; }
+.fs-q-title { font-weight: 700; margin-bottom: 4px; }
+.fs-nudge { margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; background: #fff7e0; border: 1px solid #f0d58a; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+@media print { .full-solution-box, .fs-nudge { display: none !important; } }
 </style>
 </head>
 <body>
@@ -2145,12 +2161,32 @@
     const attemptCount = {};
     const BADGE_OK = '<div class="feedback-correct">✔️ Bonne réponse !</div>';
     const BADGE_KO = '<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div>';
+    /* Corrections mémorisées pour proposer la solution complète d'un exercice (sans jamais toucher au score) */
+    const fullSolStore = {};   // divId -> { tab, order: [clés], html: { clé: correction } }
+    let solCapture = false;
+    function storeSolution(tab, divId, key, content) {
+        if (!key) return;
+        const e = fullSolStore[divId] || (fullSolStore[divId] = { tab: tab, order: [], html: {} });
+        if (!(key in e.html)) e.order.push(key);
+        if (solCapture || !(key in e.html) || e.html[key] === undefined) e.html[key] = content;
+    }
     function showAttempt(tab, divId, content, isCorrect, key) {
+        storeSolution(tab, divId, key, content);
+        if (solCapture) return;
         const solDiv = document.getElementById(divId);
         solDiv.style.display = 'block';
         if (!key) { solDiv.innerHTML = (isCorrect ? BADGE_OK : BADGE_KO) + content; return; }
         if (Object.prototype.hasOwnProperty.call(scoreTracker[tab], key)) {
-            solDiv.innerHTML = '<div class="feedback-info">🔒 Cette question a déjà été notée : ton score ne change pas. Voici la correction :</div>' + content;
+            const wasRight = scoreTracker[tab][key] === true;
+            const msg = (isCorrect && !wasRight)
+                ? '✔️ Ta réponse est juste, mais cette question avait déjà été notée comme ratée : ton score ne change pas.'
+                : '🔒 Cette question a déjà été notée : ton score ne change pas.';
+            solDiv.innerHTML = '<div class="feedback-info">' + msg + ' Voici la correction :</div>' + content;
+            if (isCorrect && !wasRight) {   // précise-le aussi dans la solution complète (sans changer le score)
+                document.querySelectorAll('.fs-q[data-key="' + key + '"] .fs-q-title').forEach(t => {
+                    t.textContent = t.textContent.replace(/❌ à revoir.*$/, '❌ ratée au départ (score enregistré) — ta nouvelle réponse est juste ✔️');
+                });
+            }
             return;
         }
         attemptCount[key] = (attemptCount[key] || 0) + 1;
@@ -2946,6 +2982,7 @@
         scoreTracker[tab][key] = isCorrect;
         try { localStorage.setItem('chapitre1_scores_' + tab, JSON.stringify(scoreTracker[tab])); } catch (e) { /* ignore */ }
         updateScoreDisplay(tab);
+        if (typeof refreshFullSolutions === 'function') refreshFullSolutions();
     }
 
     function loadScores(tab) {
@@ -3476,6 +3513,7 @@
         const group = btn.closest('.input-group');
         const original = btn.onclick;
         if (!group || !original) return;
+        btn._orig = original;
         btn.onclick = function (e) {
             const fields = Array.from(group.querySelectorAll('input[type="text"], input[type="number"], textarea'));
             if (fields.length && fields.every(f => f.value.trim() === '')) {
@@ -3490,6 +3528,73 @@
             return original.call(this, e);
         };
     });
+
+    /* ================= SOLUTION COMPLÈTE APRÈS CHAQUE EXERCICE ================= */
+    function refreshFullSolutions() {
+        Object.keys(fullSolStore).forEach(divId => {
+            const e = fullSolStore[divId], solDiv = document.getElementById(divId);
+            if (!solDiv) return;
+            const card = solDiv.closest('.exercice-card-import');
+            if (!card || card.querySelector('.full-solution-box')) return;
+            const expected = card.querySelectorAll('button.verify').length;
+            const done = e.order.length >= expected && e.order.every(k => Object.prototype.hasOwnProperty.call(scoreTracker[e.tab], k));
+            if (!done) return;
+            const box = document.createElement('div');
+            box.className = 'full-solution-box';
+            const parts = e.order.map((k, i) => {
+                const good = scoreTracker[e.tab][k] === true;   // résultat d'origine : il ne change jamais
+                return '<div class="fs-q ' + (good ? 'ok' : 'ko') + '" data-key="' + k + '"><div class="fs-q-title">Question ' + (i + 1) + ' — ' +
+                    (good ? '✔️ réussie' : '❌ à revoir') + '</div>' + e.html[k] + '</div>';
+            }).join('');
+            box.innerHTML =
+                '<div class="fs-banner">🎯 Tu as répondu à toutes les questions de cet exercice.' +
+                '<small>Avant de passer au suivant, prends le temps de lire la solution complète. Ton score est déjà enregistré : il ne changera pas.</small></div>' +
+                '<div class="fs-actions"><button type="button" class="fs-btn" aria-expanded="false">📖 Voir la solution complète</button>' +
+                '<button type="button" class="fs-next">Exercice suivant ↓</button></div>' +
+                '<div class="fs-panel" hidden>' + parts + '</div>';
+            const btn = box.querySelector('.fs-btn'), panel = box.querySelector('.fs-panel'), next = box.querySelector('.fs-next');
+            btn.onclick = () => {
+                const open = panel.hidden;
+                panel.hidden = !open;
+                btn.setAttribute('aria-expanded', String(open));
+                btn.textContent = open ? '🙈 Masquer la solution complète' : '📖 Voir la solution complète';
+                if (open) box.dataset.seen = '1';
+            };
+            let nextCard = card.nextElementSibling;
+            while (nextCard && !nextCard.classList.contains('exercice-card-import')) nextCard = nextCard.nextElementSibling;
+            if (nextCard) next.onclick = () => nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            else next.style.display = 'none';
+            solDiv.insertAdjacentElement('afterend', box);
+        });
+    }
+
+    // Rappel discret : on commence l'exercice suivant sans avoir ouvert la solution du précédent
+    document.addEventListener('focusin', ev => {
+        const card = ev.target.closest && ev.target.closest('.exercice-card-import');
+        if (!card || card.dataset.nudged) return;
+        let prev = card.previousElementSibling;
+        while (prev && !prev.classList.contains('exercice-card-import')) prev = prev.previousElementSibling;
+        const box = prev && prev.querySelector('.full-solution-box');
+        if (!box || box.dataset.seen) return;
+        card.dataset.nudged = '1';
+        const n = document.createElement('div');
+        n.className = 'fs-nudge';
+        n.innerHTML = '<span>📖 Tu n\'as pas encore lu la solution de l\'exercice précédent.</span>' +
+            '<button type="button" class="fs-btn">Lire la solution</button><button type="button" class="fs-later">Plus tard</button>';
+        n.querySelector('.fs-btn').onclick = () => { n.remove(); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); if (box.querySelector('.fs-panel').hidden) box.querySelector('.fs-btn').click(); };
+        n.querySelector('.fs-later').onclick = () => n.remove();
+        card.querySelector('.card-body').insertAdjacentElement('afterbegin', n);
+    });
+
+    // Lecture des corrections (sans rien afficher ni noter) pour pouvoir proposer la solution complète
+    (function captureFullSolutions() {
+        solCapture = true;
+        document.querySelectorAll('#exercices button.verify, #brevet button.verify').forEach(b => {
+            try { if (b._orig) b._orig.call(b); } catch (err) { console.warn('Correction non lue pour', b.id, err); }
+        });
+        solCapture = false;
+        refreshFullSolutions();   // exercices déjà terminés lors d'une visite précédente
+    })();
 </script>
 
 </body>
