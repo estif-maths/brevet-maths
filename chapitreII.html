@@ -272,7 +272,7 @@
 .wg-tab th,.wg-tab td{border:1px solid #2a3d59;padding:6px 8px;text-align:center;color:#eaf1fb}
 .wg-tab th{background:rgba(255,255,255,.07)} .wg-tab td.on{background:#3ddc97;color:#06251a;font-weight:700}
 .wg-step{background:rgba(255,255,255,.06);border:1px solid #2a3d59;border-radius:8px;padding:6px 12px;margin:6px 0;font-size:1.05rem}
-.wg-step.cur{border-color:#3ddc97} .wg-step mark{background:#ffb347;color:#2a1200;border-radius:4px;padding:0 4px}
+.wg-step.cur{border-color:#3ddc97} .wg-step mark{background:#ffb347;color:#2a1200;border-radius:4px;padding:0 4px} .wg-step .grp{outline:1px dashed #92a5c0;outline-offset:2px;border-radius:4px}
 @media(max-width:600px){.wg-ctl label{flex-basis:100%}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print{.wg{display:none}}
@@ -354,14 +354,6 @@
                         <li>Dans une expression littérale, une lettre écrite sans signe ne représente pas forcément un nombre positif.</li>
                     </ul>
                 </div>
-              <div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N2 - Nombres relatifs.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-                
                 <h3>B. La droite graduée</h3>
                 <div class="definition-box">
                     Les nombres positifs peuvent être placés sur une demi-droite d'origine O. Pour pouvoir aussi placer les nombres négatifs, on prolonge cette demi-droite de l'autre côté de O. On obtient alors une <strong>droite numérique</strong> complète : les nombres positifs se trouvent généralement à droite de O et les nombres négatifs à gauche.
@@ -407,7 +399,14 @@
                         <li>\(-16\) et \(-9\) : \(-9 > -16\) (négatifs).</li>
                     </ul>
                 </div>
-                            
+                <div class="definition-box">
+                    <div style="max-width: 800px; margin: auto;">
+                        <video controls style="width: 100%; height: auto;">
+                            <source src="N2 - Nombres relatifs.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                
 <div class="utilite-box"><strong>💡 Ça sert à quoi ?</strong> Températures, altitudes, soldes de comptes en banque, étages d’un parking : les nombres relatifs décrivent tout ce qui peut être au-dessus ou au-dessous d’une référence.</div>
 <div class="warning-box"><strong>⚠️ Pièges à éviter :</strong><ul><li>−5 est <strong>plus petit</strong> que −2 : plus un nombre négatif est loin de 0, plus il est petit.</li><li>L’<strong>opposé</strong> de 4 est −4 ; ne le confonds pas avec son inverse.</li><li>Une distance à zéro n’est jamais négative.</li></ul></div>
 <div class="quiz-block" id="quiz-1">
@@ -728,8 +727,8 @@
                         <li>Attention aux signes négatifs lors des soustractions.</li>
                     </ul>
                 </div>
-                <div class="wg" id="wg-pr-box"><h4>🧮 Les priorités pas à pas</h4><p class="wg-sub">Choisis une expression, puis avance étape par étape : la partie surlignée est celle qu’on calcule en premier.</p>
-<div class="wg-ctl"><label>Expression <select id="wg-pr-sel" aria-label="Expression"></select></label><button type="button" class="wg-btn" id="wg-pr-next">Étape suivante ▶</button><button type="button" class="wg-btn" id="wg-pr-reset">↺ Recommencer</button></div>
+                <div class="wg" id="wg-pr-box"><h4>🧮 Les priorités pas à pas</h4><p class="wg-sub">Une nouvelle expression est tirée au hasard à chaque fois. Avance étape par étape : la partie surlignée est celle qu’on calcule en premier. Clique sur « Recommencer » pour en obtenir une autre.</p>
+<div class="wg-ctl"><label>Type d’expression <select id="wg-pr-sel" aria-label="Type d’expression"><option value="mix">Mélange (avec et sans parenthèses)</option><option value="plain">Sans parenthèses</option><option value="par">Avec parenthèses</option><option value="nest">Parenthèses emboîtées</option></select></label><button type="button" class="wg-btn" id="wg-pr-next">Étape suivante ▶</button><button type="button" class="wg-btn" id="wg-pr-all">Tout afficher</button><button type="button" class="wg-btn" id="wg-pr-reset">↺ Recommencer</button></div>
 <div id="wg-pr-steps"></div><div class="wg-out" id="wg-pr-note"></div></div>
 <div class="utilite-box"><strong>💡 Ça sert à quoi ?</strong> Écrire et calculer des expressions comme celles des programmes de calcul du Brevet, sans se tromper d’ordre.</div>
 <div class="quiz-block" id="quiz-7">
@@ -741,9 +740,10 @@
 
         <div class="scoreboard" id="full-course-download-box" style="display:none;">
             <h3>🎉 Félicitations, tu as terminé tout le chapitre !</h3>
-            <div class="score-display">Tu as validé les 7 sections avec au moins 75% de réussite à chaque quiz. Télécharge ton certificat de réussite :</div>
-            <p style="text-align:center; margin-top:12px;">
+            <div class="score-display">Tu as validé les 7 sections avec au moins 75% de réussite à chaque quiz. Télécharge ton certificat de réussite et le cours complet en PDF pour le réviser :</div>
+            <p style="text-align:center; margin-top:12px; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:center;">
                 <button class="download-cert-btn" id="download-cours" onclick="downloadCoursCompletion()">🏆 Télécharger mon certificat du cours</button>
+                <a class="download-cert-btn" id="download-cours-pdf" href="N2%20Nombres%20relatifs%20cours%20complet.pdf" download="N2 Nombres relatifs cours complet.pdf" style="display:inline-block; text-decoration:none;">📄 Télécharger le cours complet (PDF)</a>
             </p>
         </div>
     </div>
@@ -2115,23 +2115,88 @@
     // ==========================================
     // CERTIFICATS PDF
     // ==========================================
+    const notionsDuChapitre = [
+        "Vocabulaire et droite graduée",
+        "Repérage dans le plan",
+        "Addition de nombres relatifs",
+        "Soustraction de nombres relatifs",
+        "Multiplication de nombres relatifs",
+        "Division de nombres relatifs",
+        "Priorités opératoires"
+    ];
+
+    /* ================= FILTRE DU PRÉNOM (CERTIFICAT) =================
+       Un prénom contenant un mot injurieux, raciste, violent ou à caractère sexuel est refusé.
+       - NAME_BLOCK_EXACT : mots courts ou ambigus, refusés seulement s'ils forment un mot entier
+         (pour ne pas bloquer « Dominique », « Violette », « Killian », « Shitaye », « Assefa »…).
+       - NAME_BLOCK_SUB   : mots refusés dès qu'ils apparaissent dans un mot du prénom.
+       Écrire les mots en minuscules, sans accents. Pour enrichir la liste, il suffit d'ajouter des mots. */
+    const NAME_BLOCK_EXACT = [
+        'con', 'conne', 'connes', 'cons', 'cul', 'culs', 'pute', 'putes', 'bite', 'bites', 'bitte', 'zob', 'zizi', 'chatte',
+        'nique', 'niquer', 'ntm', 'fdp', 'pd', 'pede', 'pedes', 'pedale', 'merde', 'merdes', 'chiant', 'chiante', 'chier',
+        'baise', 'baiser', 'baisee', 'sexe', 'sex', 'sexy', 'porn', 'porno', 'pornos', 'xxx', 'anal', 'viol', 'tuer', 'kill', 'rape',
+        'negre', 'negro', 'raton', 'feuj', 'nazi', 'kkk', 'zebi', 'zebbi',
+        'shit', 'ass', 'fag', 'dick', 'cock', 'cum', 'tits', 'boob', 'boobs', 'piss', 'crap'
+    ];
+    const NAME_BLOCK_SUB = [
+        'connard', 'connasse', 'putain', 'salope', 'salopard', 'salaud', 'encul', 'enfoire', 'merdeux', 'merdique', 'bordel', 'foutre',
+        'branl', 'couillon', 'couille', 'nichon', 'nibard', 'pouffiasse', 'poufiasse', 'tarlouze', 'tapette', 'gouine', 'petasse',
+        'sodomie', 'fellation', 'masturb', 'orgasme', 'erection', 'sperme', 'clitoris', 'vagin', 'vulve', 'penis', 'pornograph',
+        'pedophil', 'sexuel', 'niquetamere', 'nikmok', 'nikomok', 'mnayek', 'kahba', 'qahba', 'sharmout', 'sharmut',
+        'meurtre', 'assassin', 'violeur', 'violer', 'egorger', 'massacr', 'terroriste', 'daech', 'daesh', 'hitler', 'kukluxklan',
+        'negresse', 'bougnoul', 'bicot', 'youpin', 'chinetoque', 'bamboula', 'babtou', 'esclave', 'salearabe', 'salenoir', 'salenegre', 'salejuif',
+        'nigger', 'nigga', 'faggot', 'whore', 'slut', 'bitch', 'asshole', 'bastard', 'fuck', 'bullshit', 'cunt', 'pussy', 'dickhead',
+        'motherfuck', 'wanker', 'twat', 'retard', 'rapist'
+    ];
+    // Minuscules, sans accents, lettres uniquement ; « k » et « q » comptent comme « c » et les lettres répétées sont
+    // ramenées à une seule (« konnnard » -> « conard ») pour déjouer les contournements courants.
+    function normalizeToken(tok) {
+        return tok.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z]/g, '')
+            .replace(/[kq]/g, 'c').replace(/(.)\1+/g, '$1');
+    }
+    const BLOCK_EXACT_SET = new Set(NAME_BLOCK_EXACT.map(normalizeToken));
+    const BLOCK_SUB_LIST = NAME_BLOCK_SUB.map(normalizeToken);
+    function tokenizeName(raw) { return raw.split(/[\s'-]+/).filter(Boolean); }
+    function containsBlockedWord(raw) {
+        const tokens = tokenizeName(raw).map(normalizeToken).filter(Boolean);
+        if (tokens.some(t => BLOCK_EXACT_SET.has(t) || BLOCK_SUB_LIST.some(w => t.includes(w)))) return true;
+        const joined = tokens.join('');            // « sa lope », « f u c k »… : on teste aussi le nom collé
+        return BLOCK_SUB_LIST.some(w => w.length >= 6 && joined.includes(w)) || BLOCK_EXACT_SET.has(joined);
+    }
+    function isNameFormatValid(raw) { return /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{1,25}$/.test(raw.trim()); }
+    function capitalizeName(raw) {
+        return raw.trim().replace(/\s+/g, ' ').replace(/(^|[\s-])([a-zà-öø-ÿ])/g, (m, sep, c) => sep + c.toUpperCase());
+    }
+    // Ne renvoie jamais un prénom vide, injurieux, raciste, violent ou à caractère sexuel :
+    // après 3 essais invalides (ou en cas d'annulation), le certificat porte « Élève ».
     function askForCertificateName() {
-        let raw = prompt('Ton prénom pour le certificat :', '');
-        if (raw === null) return 'Élève';
-        raw = raw.trim();
-        if (raw === '') return 'Élève';
-        return raw.replace(/(^|[\s-])([a-zà-öø-ÿ])/g, (m, sep, c) => sep + c.toUpperCase());
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            let raw;
+            try { raw = prompt('Ton prénom pour le certificat :', ''); } catch (e) { return 'Élève'; }
+            if (raw === null) return 'Élève';
+            raw = raw.trim();
+            if (raw === '') return 'Élève';
+            if (!isNameFormatValid(raw)) { alert("Merci d'utiliser uniquement des lettres (pas de chiffres ni de symboles), 25 caractères maximum."); continue; }
+            if (containsBlockedWord(raw)) { alert("Ce prénom n'est pas accepté. Merci de saisir ton vrai prénom, sans mot injurieux, violent, raciste ou à caractère sexuel."); continue; }
+            return capitalizeName(raw);
+        }
+        return 'Élève';
     }
 
-    function generateCertificatePDF({ title, name, scoreLine }) {
-        if (!window.jspdf) { alert("Erreur de chargement du PDF."); return; }
+    function generateCertificatePDF({ title, name, scoreLine, notionsList }) {
+        if (!window.jspdf) { alert("Le générateur de PDF n'a pas pu se charger (connexion internet requise). Réessaie un peu plus tard."); return; }
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-        const W = 297, H = 210;
-        const brown = [76, 46, 28], gold = [186, 140, 60], cream = [250, 246, 237];
+        const W = 297, H = 210, brown = [76, 46, 28], gold = [186, 140, 60], cream = [250, 246, 237];
         doc.setFillColor(...cream); doc.rect(0, 0, W, H, 'F');
         doc.setDrawColor(...brown); doc.setLineWidth(2.2); doc.rect(8, 8, W - 16, H - 16);
         doc.setDrawColor(...gold); doc.setLineWidth(0.8); doc.rect(12, 12, W - 24, H - 24);
+        try {
+            if (typeof ESTIF_LOGO_B64 === 'string' && ESTIF_LOGO_B64.length > 100) {
+                const logoW = 46, logoH = 46 * (350 / 640);
+                doc.addImage(ESTIF_LOGO_B64, 'JPEG', (W - logoW) / 2, 17, logoW, logoH);
+            }
+        } catch (e) { /* le logo est facultatif */ }
         doc.setFont('times', 'bold'); doc.setTextColor(...brown); doc.setFontSize(30);
         doc.text('CERTIFICAT DE RÉUSSITE', W / 2, 60, { align: 'center' });
         doc.setFont('helvetica', 'italic'); doc.setFontSize(13); doc.setTextColor(...gold);
@@ -2141,10 +2206,28 @@
         doc.text('Ce certificat est fièrement décerné à', W / 2, 86, { align: 'center' });
         doc.setFont('times', 'bolditalic'); doc.setFontSize(26); doc.setTextColor(...brown);
         doc.text(name, W / 2, 100, { align: 'center' });
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(13); doc.setTextColor(70, 50, 40);
-        doc.text('avec un score de', W / 2, 116, { align: 'center' });
-        doc.setFont('helvetica', 'bold'); doc.setFontSize(20); doc.setTextColor(34, 139, 79);
-        doc.text(scoreLine, W / 2, 126, { align: 'center' });
+        const nameWidth = doc.getTextWidth(name);
+        doc.setDrawColor(...brown); doc.setLineWidth(0.4); doc.line(W / 2 - nameWidth / 2 - 4, 103, W / 2 + nameWidth / 2 + 4, 103);
+        let y = 114;
+        if (notionsList && notionsList.length) {
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(12.5); doc.setTextColor(70, 50, 40);
+            doc.text('pour avoir validé avec succès les notions du chapitre :', W / 2, y, { align: 'center' });
+            y += 9; doc.setFont('helvetica', 'bold'); doc.setFontSize(11.5);
+            const colWidth = 130, leftX = W / 2 - colWidth - 5, rightX = W / 2 + 5;
+            notionsList.forEach((n, i) => {
+                const col = i % 2 === 0 ? leftX : rightX, row = Math.floor(i / 2);
+                const ty = y + row * 8; doc.setDrawColor(...gold); doc.setLineWidth(0.8); doc.line(col, ty - 1.6, col + 1.3, ty - 0.2); doc.line(col + 1.3, ty - 0.2, col + 3.8, ty - 3.4);   // coche dessinée (la police du PDF n'a pas ✔)
+                doc.setTextColor(60, 45, 35);
+                doc.text(n, col + 6, ty);
+            });
+            y += Math.ceil(notionsList.length / 2) * 8 + 4;
+        }
+        if (scoreLine) {
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(12.5); doc.setTextColor(70, 50, 40);
+            doc.text(notionsList && notionsList.length ? 'Résultat :' : 'avec un score de', W / 2 - (notionsList && notionsList.length ? 22 : 0), y + 6, { align: notionsList && notionsList.length ? 'right' : 'center' });
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(notionsList && notionsList.length ? 15 : 20); doc.setTextColor(34, 139, 79);
+            if (notionsList && notionsList.length) doc.text(scoreLine, W / 2 - 18, y + 6, { align: 'left' }); else doc.text(scoreLine, W / 2, y + 16, { align: 'center' });
+        }
         const today = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
         doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110, 90, 75);
         doc.text(`Délivré le ${today}`, W / 2, H - 30, { align: 'center' });
@@ -2160,13 +2243,13 @@
         if (pct < 75) return;
         const name = askForCertificateName();
         const title = tab === 'interactifs' ? 'Exercices Interactifs — Chapitre 2 : Nombres Relatifs' : 'Exercices Type Brevet — Chapitre 2 : Nombres Relatifs';
-        const doc = generateCertificatePDF({ title, name, scoreLine: `${correct} / ${totalKeys.length} (${pct}%)` });
+        const doc = generateCertificatePDF({ title, name, scoreLine: `${correct} / ${totalKeys.length} (${pct}%)`, notionsList: notionsDuChapitre });
         if (doc) doc.save(`Certificat_${tab}_${name}.pdf`);
     }
 
     function downloadCoursCompletion() {
         const name = askForCertificateName();
-        const doc = generateCertificatePDF({ title: 'Cours complet — Chapitre 2 : Nombres Relatifs', name, scoreLine: "100% de réussite aux quiz" });
+        const doc = generateCertificatePDF({ title: 'Cours complet — Chapitre 2 : Nombres Relatifs', name, scoreLine: '7 quiz réussis (75 % ou plus)', notionsList: notionsDuChapitre });
         if (doc) doc.save(`Certificat_cours_${name}.pdf`);
     }
 
@@ -2213,24 +2296,27 @@
         /* 1) Addition / soustraction sur la droite graduée */
         function mkLine(id, op) {
             const cv = $(id + '-cv'); if (!cv) return;
-            const ctx = cv.getContext('2d'), W = cv.width, H = cv.height, lo = -20, hi = 20;
-            const X = v => 30 + (v - lo) / (hi - lo) * (W - 60), mid = H * 0.62;
+            const ctx = cv.getContext('2d'), lo = -20, hi = 20;
+            let W = cv.width, H = cv.height, fs = 1, mid = H * 0.62;
+            const X = v => 30 + (v - lo) / (hi - lo) * (W - 60);
+            function fit() { const narrow = (cv.parentNode.clientWidth || 720) < 600, w = narrow ? 420 : 720, h = narrow ? 230 : 200; if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; } W = w; H = h; fs = narrow ? 1.55 : 1; mid = H * 0.62; }
             let t = 1, raf = null;
             function vals() { return [+$(id + '-a').value, +$(id + '-b').value]; }
             function draw() {
-                const [a, b] = vals(), step = op === '+' ? b : -b, end = a + step;
+                fit(); const [a, b] = vals(), step = op === '+' ? b : -b, end = a + step;
                 ctx.clearRect(0, 0, W, H); ctx.fillStyle = '#0b1522'; ctx.fillRect(0, 0, W, H);
                 ctx.strokeStyle = '#eaf1fb'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(lo), mid); ctx.lineTo(X(hi), mid); ctx.stroke();
-                ctx.fillStyle = '#92a5c0'; ctx.font = '13px sans-serif'; ctx.textAlign = 'center';
-                for (let v = lo; v <= hi; v++) { ctx.beginPath(); ctx.moveTo(X(v), mid - (v % 5 === 0 ? 8 : 4)); ctx.lineTo(X(v), mid + (v % 5 === 0 ? 8 : 4)); ctx.stroke(); if (v % 5 === 0) ctx.fillText(m(v), X(v), mid + 24); }
+                ctx.fillStyle = '#92a5c0'; ctx.font = (13 * fs) + 'px sans-serif'; ctx.textAlign = 'center';
+                const lab = fs > 1 ? 10 : 5;
+                for (let v = lo; v <= hi; v++) { ctx.beginPath(); ctx.moveTo(X(v), mid - (v % 5 === 0 ? 8 : 4)); ctx.lineTo(X(v), mid + (v % 5 === 0 ? 8 : 4)); ctx.stroke(); if (v % lab === 0) ctx.fillText(m(v), X(v), mid + 18 + 8 * fs); }
                 ctx.fillStyle = '#3ddc97'; ctx.beginPath(); ctx.arc(X(0), mid, 5, 0, 7); ctx.fill();
                 const col = step >= 0 ? '#3ddc97' : '#ff5d62', cur = a + step * t;
                 if (step !== 0) {
                     ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(X(a), mid - 30); ctx.lineTo(X(cur), mid - 30); ctx.stroke();
                     const dir = step > 0 ? 1 : -1; ctx.beginPath(); ctx.moveTo(X(cur), mid - 30); ctx.lineTo(X(cur) - 11 * dir, mid - 38); ctx.lineTo(X(cur) - 11 * dir, mid - 22); ctx.closePath(); ctx.fill();
                 }
-                ctx.fillStyle = '#4aa8ff'; ctx.beginPath(); ctx.arc(X(a), mid, 8, 0, 7); ctx.fill(); ctx.font = 'bold 15px sans-serif'; ctx.fillText('départ ' + m(a), X(a), mid - 46);
-                if (t >= 1) { ctx.fillStyle = '#ffb347'; ctx.beginPath(); ctx.arc(X(end), mid, 8, 0, 7); ctx.fill(); ctx.fillText('arrivée ' + m(end), X(end), mid + 46); }
+                ctx.fillStyle = '#4aa8ff'; ctx.beginPath(); ctx.arc(X(a), mid, 8, 0, 7); ctx.fill(); ctx.font = 'bold ' + (15 * fs) + 'px sans-serif'; ctx.fillText('départ ' + m(a), Math.min(W - 40, Math.max(40, X(a))), mid - 48 * (fs > 1 ? 1.15 : 1));
+                if (t >= 1) { ctx.fillStyle = '#ffb347'; ctx.beginPath(); ctx.arc(X(end), mid, 8, 0, 7); ctx.fill(); ctx.fillText('arrivée ' + m(end), Math.min(W - 40, Math.max(40, X(end))), mid + 40 + 14 * fs); }
             }
             function text() {
                 const [a, b] = vals(); $(id + '-av').textContent = m(a); $(id + '-bv').textContent = m(b);
@@ -2267,21 +2353,101 @@
             ['wg-sg-x', 'wg-sg-y'].forEach(i => $(i).addEventListener('input', run)); document.querySelectorAll('input[name="wg-sg-op"]').forEach(r => r.addEventListener('change', run)); run();
         })();
 
-        /* 3) Priorité opératoire pas à pas */
+        /* 3) Priorités opératoires pas à pas : expressions tirées au hasard */
         (function () {
             if (!$('wg-pr-sel')) return;
-            const PR = [
-                ['A = 3 + 2 × 4', ['A = 3 + <mark>2 × 4</mark>', 'A = 3 + 8', 'A = 11'], 'La multiplication est prioritaire sur l’addition.'],
-                ['B = (3 + 2) × 4', ['B = <mark>(3 + 2)</mark> × 4', 'B = 5 × 4', 'B = 20'], 'Les parenthèses sont prioritaires.'],
-                ['C = −3 + 5 × (−2)', ['C = −3 + <mark>5 × (−2)</mark>', 'C = −3 + (−10)', 'C = −13'], 'Signes contraires : 5 × (−2) = −10, puis −3 + (−10) = −13.'],
-                ['D = [(−3 + 5) × 2] − 4', ['D = [<mark>(−3 + 5)</mark> × 2] − 4', 'D = [<mark>2 × 2</mark>] − 4', 'D = 4 − 4', 'D = 0'], 'On commence par l’intérieur des parenthèses, puis les crochets.'],
-                ['E = 10 − 2 × 3 + 1', ['E = 10 − <mark>2 × 3</mark> + 1', 'E = <mark>10 − 6</mark> + 1', 'E = 4 + 1', 'E = 5'], 'Multiplication d’abord ; puis additions et soustractions de gauche à droite.'],
-                ['F = −4 × (−3 + 1) ÷ 2', ['F = −4 × <mark>(−3 + 1)</mark> ÷ 2', 'F = <mark>−4 × (−2)</mark> ÷ 2', 'F = <mark>8 ÷ 2</mark>', 'F = 4'], 'Parenthèses, puis multiplications et divisions de gauche à droite.']
-            ];
-            const sel = $('wg-pr-sel'); PR.forEach((e, i) => { const o = document.createElement('option'); o.value = i; o.textContent = e[0]; sel.appendChild(o); });
-            let k = 0;
-            function show() { const e = PR[+sel.value]; $('wg-pr-steps').innerHTML = e[1].slice(0, k + 1).map((s, i) => `<div class="wg-step${i === k ? ' cur' : ''}">${s}</div>`).join(''); const last = k >= e[1].length - 1; $('wg-pr-note').innerHTML = last ? '✔ ' + e[2] : 'Étape ' + (k + 1) + ' sur ' + e[1].length + ' : regarde la partie surlignée.'; $('wg-pr-next').disabled = last; }
-            sel.addEventListener('change', () => { k = 0; show(); }); $('wg-pr-next').addEventListener('click', () => { k++; show(); }); $('wg-pr-reset').addEventListener('click', () => { k = 0; show(); }); show();
+            const T = {
+                plain: ['A + B * C', 'A - B * C', 'A * B - C * D', 'A - B * C + D', 'A + B * C - D / E', 'A / B + C * D', 'A * B + C / D', 'A - B + C * D'],
+                one: ['(A + B) * C', 'A * (B - C)', '(A - B) / C', 'A - (B + C) * D', '(A + B * C) - D', 'A * (B + C) - D', '(A - B) * C + D', 'A + (B - C) / D'],
+                two: ['(A + B) * (C - D)', '(A - B) / (C + D)', '(A * B - C) + (D - E)', '(A + B) / (C - D) + E', '(A - B) * C - (D + E)'],
+                nest: ['A - [B * (C + D)]', '[(A + B) * C - D] / E', 'A * [B + (C - D) * E]', '[A - (B + C)] * D', '[A + B * (C - D)] - E', 'A - [(B + C) * D - E]', '[A * (B - C) + D] / E', '(A + [B - (C + D)]) * E']
+            };
+            const POOL = { plain: T.plain, par: T.one.concat(T.two), nest: T.nest, mix: T.plain.concat(T.one, T.two, T.nest) };
+            const rnd = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+            const OPS = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+            let lastTpl = '';
+
+            function build(tpl) {                      // gabarit -> liste de jetons
+                const vals = {}, tk = [];
+                for (const c of tpl) {
+                    if (c === ' ') continue;
+                    if (/[A-E]/.test(c)) { if (!(c in vals)) vals[c] = rnd(1, 9) * (Math.random() < 0.3 ? -1 : 1); tk.push({ k: 'n', v: vals[c] }); }
+                    else if (c === '(' || c === '[') tk.push({ k: '(' });
+                    else if (c === ')' || c === ']') tk.push({ k: ')' });
+                    else tk.push({ k: 'o', v: c });
+                }
+                const kk = bracketKinds(tk); tk.forEach((x, i) => { if (x.k === '(' || x.k === ')') x.sym = kk[i]; });   // les symboles sont fixés une fois pour toutes
+                return tk;
+            }
+            function bracketKinds(tk) {                // ( ) pour le groupe le plus intérieur, puis [ ], puis { }
+                const kind = [], match = {}, st = [];
+                tk.forEach((x, i) => { if (x.k === '(') st.push(i); else if (x.k === ')') { const o = st.pop(); match[o] = i; match[i] = o; } });
+                const height = i => { let best = -1; for (let q = i + 1; q < match[i]; q++) if (tk[q].k === '(') { best = Math.max(best, height(q)); q = match[q]; } return best + 1; };
+                tk.forEach((x, i) => { if (x.k === '(') { const hh = Math.min(2, height(i)); kind[i] = '([{'[hh]; kind[match[i]] = ')]}'[hh]; } });
+                return kind;
+            }
+            function render(tk, hl) {                  // hl = { i, grp:[open,close] }
+                let out = '';
+                tk.forEach((t, i) => {
+                    let s;
+                    if (t.k === 'n') s = (t.v < 0 && i > 0 && tk[i - 1].k === 'o') ? `(${m(t.v)})` : m(t.v);
+                    else if (t.k === 'o') s = OPS[t.v];
+                    else s = t.sym;
+                    if (hl && hl.grp && i === hl.grp[0]) s = '<span class="grp">' + s;
+                    if (hl && hl.i !== undefined && i === hl.i - 1) s = '<mark>' + s;
+                    if (hl && hl.i !== undefined && i === hl.i + 1) s = s + '</mark>';
+                    if (hl && hl.grp && i === hl.grp[1]) s = s + '</span>';
+                    const prev = tk[i - 1], space = i > 0 && prev.k !== '(' && t.k !== ')';
+                    out += (space ? ' ' : '') + s;
+                });
+                return out;
+            }
+            function nextStep(tk) {
+                let s = 0, e = tk.length - 1, grp = null;
+                const close = tk.findIndex(t => t.k === ')');
+                if (close >= 0) { let open = close; while (tk[open].k !== '(') open--; s = open + 1; e = close - 1; grp = [open, close]; }
+                let i = -1, kind = 'md';
+                for (let q = s; q <= e; q++) if (tk[q].k === 'o' && (tk[q].v === '*' || tk[q].v === '/')) { i = q; break; }
+                if (i < 0) { kind = 'as'; for (let q = s; q <= e; q++) if (tk[q].k === 'o') { i = q; break; } }
+                return { i, kind, grp };
+            }
+            function gen(kind) {
+                const pool = POOL[kind] || POOL.mix;
+                for (let tries = 0; tries < 400; tries++) {
+                    let tpl = pool[rnd(0, pool.length - 1)]; if (pool.length > 1 && tpl === lastTpl) continue;
+                    let tk = build(tpl), lines = [], notes = [], ok = true;
+                    const text = render(tk);
+                    while (tk.length > 1) {
+                        const st = nextStep(tk); if (st.i < 0) { ok = false; break; }
+                        lines.push(render(tk, st));
+                        notes.push((st.grp ? 'On calcule d’abord à l’intérieur ' + ({ '(': 'des parenthèses', '[': 'des crochets', '{': 'des accolades' }[tk[st.grp[0]].sym]) + ', en commençant par les plus intérieures. ' : '') + (st.kind === 'md' ? 'La multiplication et la division sont prioritaires sur l’addition et la soustraction (de gauche à droite).' : 'Il ne reste que des additions et des soustractions : on calcule de gauche à droite.'));
+                        const a = tk[st.i - 1].v, b = tk[st.i + 1].v, op = tk[st.i].v; let r;
+                        if (op === '+') r = a + b; else if (op === '-') r = a - b; else if (op === '*') r = a * b; else { if (b === 0 || a % b !== 0) { ok = false; break; } r = a / b; }
+                        if (Math.abs(r) > 300) { ok = false; break; }
+                        tk.splice(st.i - 1, 3, { k: 'n', v: r });
+                        for (let q = 1; q < tk.length - 1; q++) if (tk[q - 1].k === '(' && tk[q].k === 'n' && tk[q + 1].k === ')') { tk.splice(q - 1, 3, tk[q]); break; }   // plus qu'un nombre : on enlève le groupe
+                    }
+                    if (!ok || lines.length < 3) continue;
+                    lastTpl = tpl;
+                    const L = 'ABCDEFGH'[rnd(0, 7)];
+                    return { label: L, text, lines: lines.concat([render(tk)]), notes, result: tk[0].v };
+                }
+                return null;
+            }
+            window.__prioGen = gen;                    // utilisé pour les tests
+            let cur = null, k = 0;
+            function show() {
+                const last = cur.lines.length - 1;
+                $('wg-pr-steps').innerHTML = cur.lines.slice(0, k + 1).map((s, i) => `<div class="wg-step${i === k ? ' cur' : ''}">${cur.label} = ${s}</div>`).join('');
+                $('wg-pr-note').innerHTML = k >= last ? `✔ Terminé : <b>${cur.label} = ${m(cur.result)}</b>.` : `Étape ${k + 1} : ${cur.notes[k]}`;
+                $('wg-pr-next').disabled = k >= last;
+            }
+            function fresh() { cur = gen($('wg-pr-sel').value); k = 0; show(); }
+            $('wg-pr-sel').addEventListener('change', fresh);
+            $('wg-pr-next').addEventListener('click', () => { if (k < cur.lines.length - 1) { k++; show(); } });
+            $('wg-pr-all').addEventListener('click', () => { k = cur.lines.length - 1; show(); });
+            $('wg-pr-reset').addEventListener('click', fresh);
+            fresh();
         })();
     })();
 </script>
