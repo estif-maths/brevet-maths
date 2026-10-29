@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 8 : Introduction aux fonctions - Maths 3ème</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee; --secondary: #3f37c9; --accent: #4cc9f0;
+            --bg: #f8f9fe; --text: #2b2d42; --success: #2ecc71; --warning: #fab005; --brevet: #e67e22;
+            --ink: #0f0e17; --paper: #fffcf5; --cream: #f5f0e8; --gold: #c8964c; --gold-lt:#e8c87a;
+            --blue: #2563c8; --violet: #6b3fa0; --teal: #0d8a72; --rose: #c23b5a;
+            --border: rgba(0,0,0,.08); --shadow: 0 4px 24px rgba(0,0,0,.07);
+        }
+        body { font-family: 'Sora', sans-serif; background-color: var(--bg); margin: 0; color: var(--text); line-height: 1.6; }
+        header { position: relative; overflow: hidden; background: var(--ink); color: white; padding: 0 20px 48px; text-align: center; }
+        header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% -10%, #1a2f5a 0%, transparent 70%), radial-gradient(ellipse 50% 50% at 80% 80%, #0d3a4a 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 10% 60%, #1f2a4a 0%, transparent 60%); pointer-events: none; }
+        header::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.15), transparent), radial-gradient(1.5px 1.5px at 60% 70%, rgba(255,255,255,.1), transparent), radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.12), transparent), radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.08), transparent), radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,.1), transparent); pointer-events: none; animation: twinkle 6s ease-in-out infinite alternate; }
+        @keyframes twinkle { 0% { opacity: .5; } 100% { opacity: 1; } }
+        .hero-deco { position: absolute; font-family: 'DM Serif Display', serif; color: rgba(255,255,255,.035); pointer-events: none; user-select: none; }
+        .hero-deco.d1 { font-size: 12rem; top: -30px; left: -20px; }
+        .hero-deco.d2 { font-size: 9rem; bottom: -25px; right: -10px; }
+        .hero-deco.d3 { font-size: 6rem; top: 25px; right: 15%; }
+        .hero-deco.d4 { font-size: 5rem; bottom: 30px; left: 12%; color: rgba(255,255,255,.025); }
+        
+        .header-inner { position: relative; max-width: 820px; margin: 0 auto; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+        .header-logo { width: 100px; height: auto; margin: 20px auto 8px; display: block; filter: drop-shadow(0 6px 24px rgba(200,150,76,.35)); animation: floatLogo 5s ease-in-out infinite; }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        
+        .header-tagline { font-family: 'DM Serif Display', serif; font-size: clamp(1rem, 2.3vw, 1.25rem); color: var(--gold-lt); font-style: italic; letter-spacing: 0.02em; margin-bottom: 10px; line-height: 1.3; text-shadow: 0 2px 12px rgba(200,150,76,.25); }
+        .header-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); color: white; font-weight: 400; letter-spacing: 0.01em; margin: 0 0 10px; line-height: 1.2; }
+        .header-subtitle { font-size: 0.85rem; color: rgba(255,255,255,.6); letter-spacing: .03em; margin-bottom: 16px; }
+        .header-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(200,150,76,.2), rgba(200,150,76,.08)); border: 1.5px solid var(--gold); border-radius: 100px; padding: 6px 20px; color: var(--gold-lt); font-size: .76rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; box-shadow: 0 0 20px rgba(200,150,76,.12); }
+        .header-badge svg { flex-shrink: 0; width: 14px; height: 14px; }
+        
+        .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; background: var(--paper); }
+        .wave-divider svg { display: block; }
+        
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: var(--primary); font-weight: 600; }
+        
+        .tabs { display: flex; justify-content: center; background: white; padding: 10px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; gap: 10px; flex-wrap: wrap; }
+        .tab-btn { padding: 12px 25px; border: none; background: none; font-family: 'Sora', sans-serif; font-weight: 600; cursor: pointer; color: #8d99ae; border-radius: 10px; transition: all 0.3s; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        
+        .content-section { display: none; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+        
+        h2 { color: var(--primary); border-bottom: 2px solid #f0f2ff; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: var(--secondary); margin-top: 25px; border-left: 4px solid var(--accent); padding-left: 15px; }
+        
+        .definition-box { background: #f0f2ff; padding: 20px; border-left: 6px solid var(--primary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .method-box { background: #fff9db; padding: 20px; border: 1px solid var(--warning); margin: 20px 0; border-radius: 15px; }
+        .example-box { background: #fdfdfd; padding: 20px; border: 1px dashed #ccc; margin: 15px 0; border-radius: 15px; }
+        .utilite-box { background: #e7f5ff; padding: 20px; border: 1px solid var(--primary); margin: 20px 0; border-radius: 15px; }
+        .warning-box { background: #fff5f5; padding: 20px; border-left: 6px solid #e53e3e; margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .warning-box ul { margin: 8px 0 0 20px; padding-left: 0; }
+        .warning-box li { margin-bottom: 6px; }
+        .remark-box { background: #f3e8ff; padding: 20px; border-left: 6px solid var(--secondary); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        .property-box { background: #e6f7e6; padding: 20px; border-left: 6px solid var(--success); margin: 20px 0; border-radius: 0 15px 15px 0; }
+        
+        .step-list { margin: 10px 0 0 20px; padding-left: 0; }
+        .step-list li { margin-bottom: 8px; }
+        
+        .progress-tracker { display: flex; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
+        .progress-step { padding: 8px 14px; border-radius: 20px; background: #e9ecef; font-size: 0.85rem; font-weight: 600; color: #868e96; display: flex; align-items: center; gap: 6px; }
+        .progress-step.done { background: var(--success); color: white; }
+        .progress-step.current { background: var(--primary); color: white; }
+        
+        .course-section { position: relative; margin-bottom: 10px; }
+        .course-section.locked .section-inner { display: none; }
+        .lock-overlay { display: none; background: #f1f3f9; border: 2px dashed #adb5bd; border-radius: 15px; padding: 45px 20px; text-align: center; color: #6c757d; font-weight: 600; }
+        .lock-overlay i { font-size: 2.2rem; display: block; margin-bottom: 12px; color: #adb5bd; }
+        .course-section.locked .lock-overlay { display: block; }
+        
+        .quiz-block { background: #fff9db; border: 2px solid var(--warning); border-radius: 15px; padding: 25px; margin: 30px 0 40px 0; }
+        .quiz-block h3 { margin-top: 0; border: none; padding-left: 0; color: #8a6d00; }
+        .quiz-question { margin-bottom: 16px; background: white; padding: 14px 18px; border-radius: 10px; }
+        .quiz-question p { font-weight: 600; margin: 0 0 10px 0; }
+        .quiz-options label { display: block; padding: 8px 12px; margin-bottom: 6px; background: #f8f9fe; border-radius: 8px; cursor: pointer; border: 1px solid #eee; transition: 0.2s; }
+        .quiz-options label:hover { background: #e7ecff; }
+        .quiz-options input { margin-right: 8px; }
+        .quiz-submit-btn { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-top: 5px; font-family: 'Sora'; }
+        .quiz-submit-btn:hover { background: var(--secondary); }
+        .quiz-result { margin-top: 15px; padding: 15px; border-radius: 10px; font-weight: 600; display: none; }
+        .quiz-result.success { background: #d4edda; color: #155724; display: block; }
+        .quiz-result.fail { background: #f8d7da; color: #721c24; display: block; }
+        
+        .auto-card { background: #fff; border: 1px solid #edf2f4; padding: 25px; margin-bottom: 25px; border-radius: 15px; }
+        .auto-card h3 { margin-top: 0; }
+        .auto-question-zone { background: #f8f9fe; padding: 20px; border-radius: 12px; margin: 15px 0; font-size: 1.15rem; font-weight: 600; text-align: center; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;}
+        .auto-answer-zone { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: center; margin-top: 10px; }
+        .auto-answer-zone input { padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 120px; font-family: 'Sora'; font-size: 1rem;}
+        .auto-btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-family: 'Sora'; }
+        .auto-btn.secondary { background: #8d99ae; }
+        .auto-btn:hover { opacity: 0.9; }
+        .auto-feedback { margin-top: 12px; padding: 12px; border-radius: 10px; font-weight: 600; text-align: center; display: none; }
+        .auto-feedback.success { background: #d4edda; color: #155724; display: block; }
+        .auto-feedback.fail { background: #f8d7da; color: #721c24; display: block; }
+        .auto-score { text-align: center; color: #8d99ae; font-size: 0.9rem; margin-top: 8px; }
+        .timer-display { font-size: 1.3rem; font-weight: 700; color: var(--brevet); text-align: center; margin-bottom: 10px; }
+        .timer-display.time-up { color: #e74c3c; }
+        .auto-session-score { text-align: center; font-weight: 600; color: var(--secondary); margin-top: 8px; }
+        
+        .scoreboard { background: #f0f2ff; border: 2px solid var(--primary); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; }
+        .scoreboard h3 { margin-top: 0; border: none; padding-left: 0; }
+        .score-display { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: var(--secondary); }
+        .download-cert-btn { background: var(--success); color: white; border: none; padding: 14px 28px; border-radius: 10px; cursor: pointer; font-weight: 700; font-family: 'Sora'; font-size: 1rem; }
+        .download-cert-btn:disabled { background: #ced4da; cursor: not-allowed; }
+        .download-cert-btn:not(:disabled):hover { background: #27ae60; }
+        .reset-scores-btn { margin-top:10px; background:none; border:1px solid var(--primary); color:var(--primary); border-radius:8px; padding:6px 12px; cursor:pointer; font-family:inherit; }
+        
+        .exercice-card-import { background: white; border-radius: 1.5rem; margin-bottom: 2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; overflow: hidden; }
+        .card-header { background: #f8fafc; padding: 1rem 1.8rem; border-bottom: 2px solid #e2e8f0; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+        .card-header h4 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin: 0; }
+        .badge-import { background: #3b82f6; color: white; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: 600; }
+        .badge-brevet { background: var(--brevet); color: white; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: 600; }
+        .card-body { padding: 1.6rem 1.8rem; }
+        .question { background: #f1f5f9; padding: 0.9rem 1.2rem; border-radius: 1rem; border-left: 5px solid #3b82f6; margin-bottom: 1.3rem; font-weight: 500; }
+        .subquestion { margin: 1rem 0 0.5rem 0; font-weight: 600; color: #1e40af; }
+        .input-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin: 0.8rem 0 0.3rem; }
+        .input-group label { font-weight: 500; min-width: 100px; }
+        input[type="text"], input[type="number"] { padding: 0.5rem 1rem; border-radius: 2rem; border: 1px solid #cbd5e1; font-family: 'Inter', monospace; min-width: 100px; font-size: 0.9rem; }
+        button.verify { background: #0f172a; border: none; color: white; padding: 0.5rem 1.2rem; border-radius: 2rem; font-weight: 500; cursor: pointer; transition: 0.2s; font-size: 0.85rem; }
+        button.verify:hover { background: #1e293b; transform: translateY(-1px); }
+        .solution { background: #fefce8; border-left: 5px solid #eab308; padding: 1rem 1.3rem; border-radius: 1rem; margin-top: 1rem; font-size: 0.92rem; display: none; line-height: 1.6; }
+        .feedback-correct { color: #15803d; background: #dcfce7; display: inline-block; padding: 0.2rem 0.8rem; border-radius: 30px; margin-bottom: 0.5rem; font-weight: 600; }
+        .feedback-wrong { color: #b91c1c; background: #fee2e2; display: inline-block; padding: 0.2rem 0.8rem; border-radius: 30px; margin-bottom: 0.5rem; font-weight: 600; }
+        .feedback-info { background:#eef2ff; border-left:4px solid var(--primary); padding:8px 12px; border-radius:8px; margin-bottom:8px; }
+        
+        .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 4px; font-weight: 600; line-height: 1.2; }
+        .frac .num { padding: 0 4px; border-bottom: 2px solid currentColor; }
+        .frac .den { padding: 0 4px; }
+        
+        .copy-notice { margin: 14px 0 20px; padding: 14px 18px; border-radius: 12px; background: #fff7e0; border: 2px solid #f0b429; line-height: 1.6; }
+        .copy-notice strong.t { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+        .brevet-header { background: linear-gradient(135deg, #e67e22, #d35400); color: white; padding: 0.5rem 1rem; border-radius: 30px; display: inline-block; margin-bottom: 20px; font-size: 0.9rem; font-weight: 600; }
+        
+        @keyframes shakeField { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        .shake-field { animation: shakeField 0.3s; border-color: #e53e3e !important; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+        img, video { max-width: 100%; height: auto; }
+        
+        @media (max-width: 768px) {
+            .container { margin: 1rem auto; padding: 0 10px; }
+            .content-section { padding: 20px 14px; border-radius: 16px; }
+            .tabs { padding: 6px; gap: 6px; }
+            .tab-btn { flex: 1 1 45%; padding: 10px 6px; font-size: 0.85rem; }
+            .definition-box, .method-box, .example-box, .utilite-box, .warning-box { padding: 14px; margin: 14px 0; }
+            .step-list { margin-left: 4px; padding-left: 14px; }
+            .card-header { padding: 0.8rem 1rem; }
+            .card-body { padding: 1.1rem 1rem; }
+            .input-group label { min-width: 0; width: 100%; }
+            .quiz-block, .scoreboard, .auto-card { padding: 16px; }
+            .download-cert-btn { width: 100%; padding: 12px 10px; }
+            .progress-step { font-size: 0.78rem; padding: 6px 10px; }
+        }
+        @media (max-width: 480px) {
+            header { padding: 0 12px 36px; }
+            .header-logo { width: 80px; }
+            .tab-btn { flex: 1 1 100%; }
+        }
+        @media print {
+            header, .wave-divider, .tabs, .back-link, .lock-overlay, .quiz-block, .progress-tracker, .scoreboard,
+            button, video, footer, [class*="completion"] { display: none !important; }
+            body { background: #fff; color: #000; font-size: 12pt; }
+            .container { max-width: 100%; margin: 0; padding: 0; }
+            .content-section { box-shadow: none; padding: 0; animation: none; }
+            .course-section.locked .section-inner { display: block !important; }
+            .definition-box, .method-box, .example-box, .utilite-box, .warning-box, .exercice-card-import {
+                break-inside: avoid; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+            .full-solution-box, .fs-nudge { display: none !important; }
+        }
+        :focus-visible { outline: 3px solid #4361ee; outline-offset: 2px; border-radius: 4px; }
+        .skip-link { position: absolute; left: -9999px; top: 8px; background: #0f0e17; color: #fff; padding: 10px 16px; border-radius: 8px; z-index: 1000; text-decoration: none; font-weight: 600; }
+        .skip-link:focus { left: 12px; }
+        .math-warning { background: #fff7e6; border-left: 5px solid #fab005; padding: 10px 14px; border-radius: 8px; margin: 12px 0; font-size: .9rem; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+        .wg{background:linear-gradient(160deg,#16263d,#0e1a2b);color:#eaf1fb;border-radius:16px;padding:14px 16px;margin:22px 0;box-shadow:0 10px 30px rgba(8,16,30,.3)}
+        .wg h4{margin:0 0 2px;font-size:1.1rem;color:#eaf1fb;border:none;padding:0}
+        .wg .wg-sub{margin:0 0 10px;color:#92a5c0;font-size:.9rem}
+        .wg-ctl{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;margin-bottom:10px}
+        .wg-ctl label{display:flex;flex-direction:column;gap:2px;font-size:.88rem;color:#c9d6e8;min-width:0;flex:1 1 220px}
+        .wg-ctl label.row{flex-direction:row;align-items:center;gap:8px;flex:0 1 auto;max-width:100%}
+        .wg-ctl output{font-weight:700;color:#ffb347;display:inline;margin-left:4px}
+        .wg input[type=range],.wg input[type=radio]{min-width:0;padding:0;border:0;border-radius:0;box-sizing:border-box;accent-color:#ffb347}
+        .wg input[type=range]{display:block;width:100%;height:30px;margin:2px 0}
+        .wg input[type=radio]{width:auto}
+        .wg select{font:inherit;padding:6px 10px;border-radius:8px;background:#0b1522;color:#eaf1fb;border:1px solid #2a3d59;min-width:0;max-width:100%}
+        .wg canvas{width:100%;height:auto;display:block;border-radius:10px;background:#0b1522}
+        .wg .wg-out{margin-top:10px;padding:10px 14px;border-radius:10px;border:1px dashed #2a3d59;line-height:1.7;font-size:.95rem}
+        .wg-btn{font:inherit;font-weight:700;color:#2a1200;background:linear-gradient(135deg,#ffb347,#ff7a45);border:0;border-radius:10px;padding:9px 16px;cursor:pointer;min-height:44px;touch-action:manipulation}
+        .wg-btn:disabled{opacity:.5;cursor:default}
+        @media(max-width:600px){.wg-ctl label{flex-basis:100%}}
+        @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+        @media print{.wg{display:none}}
+        .full-solution-box { margin-top: 18px; border: 2px solid var(--primary); border-radius: 14px; background: #f0f2ff; padding: 14px 16px; }
+        .fs-banner { font-weight: 600; }
+        .fs-banner small { display: block; font-weight: 400; color: #5d6878; margin-top: 2px; }
+        .fs-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .fs-btn, .fs-next, .fs-later { font-family: 'Sora', sans-serif; font-weight: 600; border-radius: 8px; padding: 10px 18px; cursor: pointer; min-height: 44px; border: 2px solid var(--primary); }
+        .fs-btn { background: var(--primary); color: #fff; }
+        .fs-next, .fs-later { background: #fff; color: var(--primary); }
+        .fs-panel { margin-top: 12px; border-top: 1px dashed #b7bff0; padding-top: 4px; }
+        .fs-q { background: #fff; border-radius: 10px; padding: 10px 14px; margin-top: 10px; border-left: 5px solid #8d99ae; }
+        .fs-q.ok { border-left-color: #2e9e5b; } .fs-q.ko { border-left-color: #d64550; }
+        .fs-q-title { font-weight: 700; margin-bottom: 4px; }
+        .fs-howto { margin: 12px 0 4px; padding: 10px 14px; background: #fff7e0; border: 1px solid #f0d58a; border-radius: 10px; font-size: .95rem; }
+        .fs-step { background: #fff; border-radius: 10px; padding: 10px 14px; margin-top: 10px; border-left: 5px solid var(--primary); line-height: 1.7; }
+        .fs-step-title { font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+        .fs-answer { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: #e8f7ee; border: 2px solid #2e9e5b; }
+        .fs-results { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .fs-results .fs-q { margin-top: 0; padding: 6px 12px; }
+        .fs-nudge { margin: 0 0 14px; padding: 10px 14px; border-radius: 10px; background: #fff7e0; border: 1px solid #f0d58a; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .fs-step > div:not(.fs-step-title) { line-height: 1.9; }
+        .hint-box { margin-top: 10px; padding: 10px 14px; border-radius: 10px; background: #fff7e0; border: 1px solid #f0d58a; }
+        .solution-steps { line-height: 1.95; margin-top: 8px; }
+        
+        .two-columns { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+        .col-text { flex: 1; min-width: 200px; }
+        .col-img { flex: 0 0 300px; text-align: center; }
+        .col-img img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .remark-box .vertical-img { text-align: center; margin-top: 15px; }
+        .remark-box .vertical-img img { max-width: 550px; width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .interactive-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .interactive-table th, .interactive-table td { border: 1px solid #cbd5e1; padding: 10px 8px; text-align: center; vertical-align: middle; }
+        .interactive-table th { background-color: #e2e8f0; font-weight: 600; }
+        .interactive-table input { width: 100%; min-width: 60px; padding: 6px; border-radius: 12px; border: 1px solid #94a3b8; text-align: center; background: #fff; font-family: inherit; }
+        .table-feedback { margin-top: 10px; font-weight: 500; }
+        .graph-holder { background: #ffffff; border-radius: 1rem; padding: 10px; margin: 0.75rem 0; border: 2px solid #94a3b8; text-align: center; display: flex; justify-content: center; align-items: center; overflow-x: auto; }
+        .graph-holder svg { background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); width: 100%; height: auto; max-width: 450px; border: 1px solid #cbd5e1; }
+    </style>
+    <script>var ESTIF_LOGO_B64="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAFeAoADASIAAhEBAxEB/8QAHQAAAgIDAQEBAAAAAAAAAAAAAAECBwUGCAQDCf/EAFUQAAEDAwIDBAUJBQUCCwYHAAEAAgMEBREGIQcSMQhBUWEIFCJxgRUWIzJCU5GS0TNSYqGxJENygsEXlCVVY4OTorK0wtLhNDVEc3TwGCZUVqPT8f/EABoBAQADAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAoEQEBAAICAgICAwABBQAAAAAAAQIRAxIhMQRBIjITUWEUBSNCUnH/2gAMAwEAAhEDEQA/AOyu9IndCOqB83kjm8kspIJZSBwkhBLm8kc3kooQS5vJLm8kZ2SQPKAUkIA7lMHCSO7PegefJGcJZQglzeSObyUUIHzeSMpIQNPm8lFCCXN5I5vJRQgefJMFRQgln3IJ2UUIBCEHHcgO5CEIHlGUkIHlGUkIJc3kjm8lFCB5RnySQgeUZSQgeUZSQgeUZ8kkIHlGUkIJc3kjm8lFCBk5SyjOUIHlGUkIHlCSM4QSCObyUUIJc3kjm8lFAx3oHlGUkIHlPm8lFCA70IQgEZ2QhAIQhAIQhAIQhADYoQChAIQUIHhQf9QqSTvqlBNIoCCgSEDqn3oDqjbvQE0CwjCe+N0s7eaAwjCYKM+BQLG6eAhIndAY3wjA+CM7oygMeKMJjog9EC9nCWE8ZT7kCxtsjCZ3CRQI58MownlB6oFg9/RMblPv8kIFhAx3o70BAsIxlPOyWdkBhGCmEYPcgEsKSSAHVLvUksboF1QntndAx3oFjKCCE9sbIzt4oDCMFA6bJ/ZygWD4IxgbpkpE75QJGE+9L+iA2KEbZ3TCBIwjbvGU/slAu5PHglnbCedtkCwjGU8+CNu5AHrhLvwnkc2UA75QG3egY70Dql0QCMAjPgpYHgEEbYQR7slPwR9lBPRAY8Ekz5JIDGe7ZM9UZ3RsXIEnhCecIIjfKE8pbYQPuST7sI7ggSEyjqgDjuSGM7qQARjyQRTwnhGEEUKWEu5AlCT9mVNRf9Q+5BJCaSAQhHcgfRGd0dwRg+CBITwnjZBFCfl4JjogjlPuQRlCBdyO5S78owgjkp5QdkID4pKSMIF34S38VLCMIEE8YBTR0QRyjO2E0HxQLHmjCkEII9U/tJqKA70snxT708DwQRR3KWEY2QRT7k8IwgihM9E8IIhS7ijCRG6AHRCZ6IwgjnB6Jp4TCCJ3KPJSQgh3qSMdyECCD1TTQQQpYRjCCJKZGE0II92EdylhGECHQICeEYQPKWfZyhGNkB35S6lPGyaCHwQmdh70d6BJ52wjvynjfdBFCkW5RhBFHcVLCMII5whPvygA5KBDZSARhNAj0wgdEFCBkZQlhPCBBB6JpH6qCKi/6h9ykovOGH3IJIT6Jd6AR3bITwMbIJBBwo5wmUDQllGUAdslGB4pkZS27kCx4HKMDGE8AIIHegB5I67I/olnfPcgMZ7lJIEeKaBcoQMJpd2EDQllGUDQhLIQPO+EZS2BRsgDg9UgjbvQB4oJZQkAOqaAKMhI4KW3ggkhR69QmNuiBowjKEBkISwjKBpbZzlCMAdyB52QgbBCAQgpZQNHRLKPggeUJYTQCO9GUsoGhL3IwgexQgDCEB3oPRBUe7GEDHgmFEDdSAx3IBCEFAZQlt3IO6BOCMc3UpoHhhAwMdEHpuhCAQkgIGNksb5TQgEsb5TQgEYwkmgEIQgEIyllA0j0RlB+qgiov+o73KSi/wCo73IJITPRJAdyewGUggnZA9sJ9UgM96kBhAuiM7ZTQgFEg9ykhBH4JpoQJGM+5NCBEBPKWEEb5QPokmNwhAIQhAHokh3RLKBkbZKEZ3wmUEdihNCAGyMoHRNAj1KE0IFhPCEIBCEIBLCe6EBhCEIBCEboFuhNCBYTQhAIQhAIwEIQCEIQCEIwgW6MJoQACFAvAOMphyCSXVA3TQLCeEIQCEIQCWE0IFhPvQhAIQhAIQhAIQhAIQhAuqaEIBI9E0j0QRUX/UPuUlGTaN3uQT7kk0kAhCeTkZQMHKaSWT4IJIKSaAQhCASJwU1EnBQSSJ7l8nVMTH8rpGA+GVhdRav05pa3iuv93p6CJ31e0d7T/wDC0bu+AUW69jPgoJwqZdxouV4Y+TRehLhcaMbNuNymZQ0p8w9/Ue5Y9+v+IUnt1WoeHVjbnHJPWSz48i8ENVO8W61euVLKqS33ri1WU/rFrrtBaijbuRSVMzP+sC4D4r3x6/1RaeX54cOrjQwj61bapW3CFo8SG4eB/lKnsjSynPDRkkAeaXPsDkYK06assHEbS0rLHqFskHMOaejlxJCQc4cOrDt0IUqh90orVDQ00jjPCQY5evbsb1G/28fZ7z5Kexp7dQuus3qvyLWQxSMqGNl5jn2SRkELO08gcwAvDnt2dg960qhL5GzTyuZA+aqhMTYu+J7wWvJ73Z5h5YwnSC4QzAwSMipnzdo+fnLnlgHKwuB6l5B2G/RRL52N4dI0ENLhk9BlSBBAwqd1xrLS1r1FRV1y1KYp6J3/ALvondrI/IIIeG7A+ROy1K6ekVcHZbYNMMhgA9mevlJJ9zG4/qs7z4Y+2uPDnl6jo5POy5SpOKHFfVdYaWyTSSPPWO30bfY97iDj4lbVSaL443INlrNWSW/m35Jq13MPhGCP5qk+R2/WVa8HX9rI6CzhPO+VSDNC8aKICSk4hQzuH2JpHuB/Mwpv1rxU0TH2usdNw3i3s+tWURALR4nl2/Fo96v/ADa/aaV/j3+tlXf5+Ka1fSetrFrKgNVaKgl7AO1gk2kjJ8R4eY2Wzjda45TKbjKyy6oyhGE1ZBJowhAJZR3owgMoRhPCACEIQCMpbowgMoRhNABCEIBGyW6MIDdG6fchAIQhALS+Jmuqbh3oSt1LUU5qXRFsUEAdy9rK84a0nuHeT4Arcz0Vacb9P2fUfCW60t5ucVripg2sjqpRlrJIzloI7+bJbgb+1sq5ekz21WhsfEnVAZNeOIVzt9y7Jk89NZmRQ0tEHt5mRjmBdK/oTkgYPXdenhvxIvb9av4eaxrKe43E0xqrfc6ZvK2rhHUPHc8YPcOhB6ZOT4bamlm0ZNc7lRPp7u+3Q3KqpXO9pp7Ps25HdzNha4D+IqudD2ygPpWXAXWR1NU222EWWnaw8tRC7d8xf0J9txx/EfBU9aq/vbp5pyOikoN6BTWrMZSyjvTwgW5T3QhAIyhJAZRlGE8IAIQhAIQhAIQhAIQhAISRhA0j0TSPRBFRk/ZO9ykoyDMbh5IJIQhAJ9UkIHun37pZS3QTQogkpk7ZQNCQ6ZRnHVAnOABycd68ETpK7EhcW0/djYv8z5J3FpmMNIOkzvb3+wN3fjsPitB1nxArtLavgtlPbYPkqktsl3udZM4js4GktEcYH23OAAztuqW6TJt5OKnE6DQlPBZbHSfKeqrkA2ht8QzjJwJH4+znoOpPkCVrOiuDtZcbl87uI9cb5qCcc30+JIaXvDWMI5Ty+JGPAd6xvAWxVOsbpd+L2qo+3uN0nkjomvOWwRg4PKPAbMHk0+K6NaGjoqSdvNXt6/jGMp9PWqAsk9TjmmaBiWf6Vw9xdnHuGAvXVUFJW0klHWUsVRTSNLXwysDmOHgWnYr0qS11GbnnWXAo2+/0ep+Hdc3T0sc3PWATmGOKLqXs5R3e1lp6hb3wk1nPrHSM8lZUirq6CodTS1MbeVsw6tcMeIwrJexsjCx7Q5rhggjII8FjKK12fT9sfT22gpbdRtc6QxwRtjZzHqcDbJWfXzta5bmmgXiz6T1Xc7u2hgq7NqGheIH3CjpnNe/IDgHjHLMw5xh4K8dkr7g24mzame6nvUrcQyPhe2luMbMnmiGAWSDmy4dR1BI6WJUQQ1dvLqB8UbqkBznt2L2Z9rBG+cd6oXi/ra1acsg0+KmtuF+e5ktCKeUiOjc04bICcucc58c5Iyl8TacZcrqPhxB4oVejtQMtQttRJUnEzuc8rfrZy132skeAwckgEnNdV2suIetpaVrqo2m0v5nthp5Awlg+s87hz9hgd22F5KDT16ujqfUWpqmmqTVAzvNbM5xjiB3d2bPaxscZwNl9ai8XnX94lsGl6cW+0w4E059nsocgDnI7iejRkknG647FlldR348eOE3St0dFV3Ntn0pbZLxdZvZaGDmDDn2nZ7x5nbzV06V4IW6FzLjr64Mraw7+owyYij8nEbu9wwPevvp+m0lw2pKXTNuqpYrzVte+X1Wn9arqvkGXDlaCAMdWAnAG5yrZttRJFSU9SJO1pJw0gug7GRnN05m7eIyCAQtOPgxnnJhyfIyy8Y+I9FrpbNbKAUtogp6emjG0VM0NaPgO9Yug1UKy9zW8wSARuDc9kQNweh7/AD8FsM8DJG9sxgEzejwN/d7l86eipGP9YZTsZI4AnAxg4/r5rq1rxHLv+3tzsovibK0teMgjBHipBS271azaHO/E2wVPDbUlv17o5gpad8vZVNMz9mHHfGP3X4II7j0V66evNNqHTlDeqTPY1kTZWg9W5G7T5g5HwWp8ZIYpeD+oDI0ExwtkYT3OD24KxXAKomn4SwCY5EVVNHH5NyD/AFJXPhOvJ1nqujK9uOZX3FqoRlLK6XOaEgmSB1KAwheWruFHQUr6qtqoaanYMulmeGNHvJ2VdTcZLFX1zrZom3V+sa5p5T8mxf2eM/xzuwwfDKjcTpZ2UZVWQai4lz103Ys0nPVwN55bBFWvdUsZnqZegd5FuPNZazcTrJWXEWe/QT6YvWcepXTEfaHxjk+pIPcc+Sbhpv2Uice5anqHiLorS0Wb1qSip5Ds2BknazPPg2NmXE/BYCPXmor9SOq9O6ZNqtn/ABpqRxpGe9sX13D38qbNLLDsoB3VaP1drbTkEdVftOw6itTt/lLTxLy1v7zoXbn/ACkhbRp3Wul9VQ9pY71T1b2/Xg5uWWM+DmHDgfgo7Q02RC+bXhTyCNlZBoQhAIQjKAQllAQNCEIA9FU/Hot/2fW9jxlj73QBw8R2uf8ARWwqk49v5dB2prRmSS90TIwenNzEjPlsqZ+lsfayYY2PuVc0saPaYA4NAJHLnGfxVaVZD+OHDyWVg7Z9muDXO5QCcdnt/X8VkqrX4td2dQ1xZSzvAc509OOTYY+uyZ39FqEeqKO/cfNBz0YqTCKOvgZI+l7KJ+WAkscXlzsFo7gEtmiS7Xt4DuX0HRfMdQV9ArqhCMo2QCEsoQAKaWT3IyEDQjIQSgEIQgEIQgEIQgSaEIBCEIBJ3RNI9EEVF/1D7lJRk/ZlBJHehCB+aAkn1QIp7HuR3KSBdxURueqn1CjjzQHdhHcNsoPRHUIPHLn5SjxuRC/H4j/0XOvHO9XWp4G1N1uNHFQ1N0nhpGwxOJc2ASvfyuJ7yYwSOgyuiKtwiq6SY/VJMTj4c2MH8QB8VRfpRU00vCaZ8URcylroJ3EdzXc7CT7nOb+ZZ5xfD9otrQlng0/w40/aoWhjKWghadsZJYC4/EklaPauLF41LxBdadLaRkuGnaWp9VrLsaho5Dv7Qbn6ux69cLNx6h+VfR6OobZ7ck1gdMwNO4eICCPeCD+CwXB3RNbo/hHB6rb6On1DcYWVNQ6eV72SPO7eYjcYYcYb3+KrfqRPjza26r1xBJZZam108jqxr3sbBVxuh3jeGvB2yNjkdx2WbpNR0VXcIKGGKoMkzJJGuEZMYax3KSXdBknbxwVXl8jusdM/5OgYK4PHIKx0nIMn7ZPt4xnGfHwWUttVco52+o0+al+BG2odI2InOPa5ARjlBx3bDxJU7v2jUWR3brCalscWobDWWuWqnp21ERjL4ZC0jKyclRHBSPqKl7Yo2DLnOOAF86Cvpbjb4q2lmZLDK0Oa9pyCtPCijtWWyk4R6Oob9U6nr6yO3Qep0tulkPLWSuxgP36DBJ8gucrVWzXm/wAmq9Sx/KtVVPdLmXmw0DZuGjxOzR0AC3b0ktTtv/FOPTUlY6C12KD6VzWl/wBM8AuPKOpALG/ivNe7xFYdJwV1FYZaWsZG8EzgtDcP5ebYeycuOG7HHU74XFy271Ho8GMk3WJvTdRay17FoixGeCWqEPb0vaHsqY8jSWYHRrB1z1x4q/8ARuiaOz0ptlijb6vQOeyareCHVc7R7ReRuPa5gP3G9N3HHg9HPQNTZ9FVGtLpHzXy+NL4ny7ubD1aTnpzn2j5cquXSlnFi0lQ2t7xLNFH9PJ95Kd3u+LiVtx8evNc3NydrqNUhqKHVOn7wdNOpaS907JYaeYxtJo5Q0sABA2xuNvHzVd01y1Dwc4Zy0morzNqnUdzr8UNM8SnlO2xL9yMjJx3kAdcq9bJabbazVNoKWOB75nukDGgZJPNn45VNcRa9sPpQcPoKundUwto5ZKWLmADqgl4aSTsMEN39yvlPG2eH9NY1DozjJVacq9V6n1rFQuijM5oBUviEY/cHLhrT3AZO/evHwj4tX6m1bbdPXq4zXG3XCRtO01D+d8D3bMIJ3xnAI81b3GTR1+1rw7hoLK6I3CnqGVJpy/kZUYaQWgnofayM+Hcqn4V8EdWU+t6G/6soW2uitsgnZTulbJJPIN2/VJAaDvk9cYXPljlM5Y6sc8MuO9vbqkbbJnoVAZbhYzUOorRpixVN6vdYykoqdvM97juT3NaO9x7guveo4VVekVqqCz8OW2Vsn9qu0zWBg69mwhzj+PKPitz4TWObT/Cuy0NVGY6qSL1mZh6tfIeflPuBA+CofR9uunHPjJPrS80j4tL2p7RBDJuw8u7IR3E59t/vx4LrBgAbjCywluXZvnZjjMIeE8IQThbsAqF4/8AE3VmgKzTFFpyqpaSK8ySRTVMtP27oOXl9prScHYnbyV8lwA3XIXpc3SmGotDUzZmufC6okfEHDLc8oGR1GVTO6jTjkyy1W26e01onXNDNcp9Xu4iapjjL4aO/VD6anbJ3D1do2b54csHSXq8HVJ0pxluVfoC1Od2dBQ2eNtHbKoeBq48n4Et88Ko9P6a1jUQwalpoRpy2wHmbe7lOKSGPuy1zsOcfJoOVd1r4o3DUGk/mdpnTlbxerQ0x1NzraVtJbs9Pac8e1jxwCVjx5XKeY25cJhdS7XXBo7RNtsIjt9ipIKWNnaCWkjPanbPMJG+253mCSVXUV1t+urBVw6Zudv1/QwOc2Wx3sCCujI7mSEAg+HO3/MFgNPw644L2Ov1drWuElkmkbFTaS07TuqIqWR59nle85Y3bGG5GSq+1TYtd8UtQRasouHdv4YwskEztQ3OsdS1D9urgCMn/Lk+K1rCe26aculPaLr6pbNG2XhbA2UMfXaie2e5z930ERJLt9g4kt96vi06WtUT2XCsnqb5VvHMKu5P7VwH8DMBsY8mtC5Lbw84haE1/RcRbzYmcV6GBomNdRVj5Hg/vNaSSS3qNi33Lo+ebWestM23VWirjV6bndGSbHf6BoinHhJgdozPc4HGN8Jjv7MmJ19qKz6arJaTR8N+qNUv3bQaepzMwuPQzMcDC0eZw5eKj07FqHSx1Lxm07Z9LXSDDmXKjrTTzsbjOZHtOGu8uZwXwunGCvstBLY9e2qv4c3N45ILxFTtr7c537zXAYwe9rgD5hVq6xXcXb528Xae6cT9Nh3bUVbY5Gz0kI8ZKUFrsdOgOO/KUkbjYuKF0pNc2Gx6Xu9drXS91rRQi519I6PsXdXBk+B2oDQTnHxXR7e5ckx8YrHrDiZw4sumbIbRZKG7BsTXcrHbtLA0xt2YN+mSfFdatIOFOJnNJoQhXUBSwmThLKB4QhCAQhCBeKpr0hHuGk9MwxtLpJNQ0gaB4gPKuY9FSfpBShts0ZDh2X6ghILX8pbhjjnODj34Kz5PS+H7JXTQd5qI2CCG3zT08MUc75HN5zIGsOeYjpsStbbFVUnFjhfUua31OWarjp5I8crg6Lfp/FlZC/X+4Nvc4pq+gmiY1hmbW0cNU/kJABEmGZ2cOoOMrBV99Fx4pcN3UsZgttNXdlDAJGcrS4EEhjGNDeviVS60vO326YG4CkotUgtoxCMJoUgwjZIndYq/agtWmrNUXi81jKSjpxl8jv5ADvJ7gFFsk3STfiMm5wb1K8k9zt9PIIqmup4ZD0bJK1pPwJXLmouLGuOJl++bWgYKm300pIa2A8s8re9z5P7tvkMe8pU3ooXa4076q+6zghrpBktipXVGD/E9zgT8AsZy3K/jHReGY/vdOrGSNdgtOQRkHxX1BC4piunE30Z9a26h1BcHXvRFbIcmLJj5ce3yB2TFI0e1y5w4D8OzaOqgrKOCrppRNBPG2WORu4e1wyCPIghay79sbjp6kICFZUIQhAIQhAIQhAkDqmhAsIPRNI9EEVCT9m73KeFCX9m73IJoQjvQCYST2Byge/co4Tz4JoENgcpI3KYG26Bbd6ZIAG6i5waPaOFidQVdypLNNPaaeOoqmtPIyQkNJx34BUW6GRq4W1NNJC44DhjI7vNarqOw0us9F3jS11c2Oaqpn00hx9QkZZIPLIDh7iFldM1l0rNP0tReaeOnrHxtMscZy0OI3wV6qunFTJHUUsojqYtmPG+3e1w72nw+I3VfafVc5ej9qY2c3fglrVvq90o5ZWU0cmwlY4fSRtPf1L2+LXeS6B05Uctt+S6gtFVbeWmkH7wA9h48nNwffkdyqDi9wrGvp6e9WOf5A15bwDSy8/LHWBpyG847wfqu6t6EYWq6P47yW28s05xapJtM6rom+rm4zQkQVLe4TtHTJ3D25bk5GMkGs8eGmX5eYv8AuGmRLQVLaCX+1SyPma6qc6RnO9wLiR12AwAOnReC8SWHS1V8sTPrOagp5ZJuSYNiihc7mLpOYhuAR7OTkb4X1Gq33eysq9NT0NRUNex/I6USRVEefaEcjTy5I6E9/UBeC/R2W9Wm62+9QesW65mLt4X5aXhvLzQvxgsOG5Hce4q3hn/9ZShuOl+JeihXW+o9dtNcx8XOz2T3tc3yIX30dpK1aP03S2e1QmOCIYAc8vIyemTvhRstisVu0Yyy6Pjhoba1jhCKXcMLtyd8nOTk53yvdp+hq7XZIKKur5a6aLrLNjmcM53wn2OI7LqKeo4t6zvsdmF2uk1RPFSRSN5mRyPn5Od2dgGszgnYHCNXMrtQa+sGkjI6GO7XDtpaZrjhvauZH7Q/exG5x83LB/K1doPipra3wyPpqs1NVFDICByP7RzmOOe7BB/Be7T+s7UeMul9WXsSE05jlrBDGXntRz5LWDc5JBwO8rk1+T0/HTw7gvbaq22AU9qgiEMUfZ4JILI2twOUAHPQdVr2mbxVROra29VNLTUUEkhdLJIWMjYHbFznADOOu/uWHOtuImsW9lojQ5s9DIP/AHrqX6IY8WQNy53xOF7LXwjpp6uK567vNRq+tjf2kcNU0R0cDuuWU7fZznvdkrp878PO8a8vs7WlXqCvc7RFG6S3SNEc1+q4nCkjdnAdE3Z057sjDOmXLAcT+ENTqTStPcNPXCV+srdM2rgr6mTD6hw6sJGzBsC0ABrSOm5VodtcG3xtB8nxfJXq/wC05xkOzjl5cdML1iKpptoPpYR0jccFvuPh5H8VbUqN6u4pXRnpA2uNnzf4oU82ldR0uI5jVQubFUEbc4IHs56nu8CrDdxY4aMg7Y65svJ12q2k/h1WUvlh03qem9T1NYIK+IdG1lOH8v8Ahdvj4FajHwJ4Pmbtm6Joy7rjml5fw5sKPMW3jWv6j9JLRFETRaWhrNUXR/sxQ0cTmsc7u9ojJH+FpWlUnDjihxh1DBe+J07rDp+F3PBaovYkx4Nbk8ue97su8l0TZNJ6a03HyWGw0FsyME00DWOPvcBk/is3yjr3p0t9neT9WNsVktunrNTWi0UjKSip28scUYwB5+ZPeTuVk2nqEb4QOuVeTXhnvZk4SzlPCRGFI519KPWGo9LWPTMNivFXbYbhWvhq/U5OzlkYA04D+rep/FQ4P1nBC51AFpoRSaqf9Z99eKise7HWOV+Wu/y4PksD6YTaw0OinCNpoxXyBz8btkIbgZ8CM/gub5steHNOHA5BHUHPVcnJyXDJ3cXDOTDf26N1rwz1jpXWcut75bX8X7BHlzqOtkd61SNznLYh7DsD90dOre9WVpvj9wfn0q6pivVNp6KibyyW6ph7B8J/daxow7fb2c/BUDoP0hNYaTMNBfHfOO0Mw0MnfioiH8Mp6+52feFaldrb0bdQxQ65vdBbjdYDk09RSn1kv8HRt9mTyccjzV8c8cvTHPiyx/Z7XcXdfcQJvVeDuiJPUnO5TqG+tMFOz+JjOrv5nyXiuPCnSlJCLzx94iy6iran2WRVdUaWkhJ+6jaQTjx2HkvrFxD4rcRmGi4VaQi03ZgA1t6vI5cNzjMUYGOngHfBaRxV4Ox6W4Z3HWWoNT3DU2qDPAx1VM8iOMPfh3K3c/j08Ar78bUmM3r03ei4ba20TbW3PgbraK42R+ZmWS6vE0Ev/wAqUdM+O3vWU0x6Qtt+Xm6U4lWKr0TqPPLy1gzTynxbJ3A9xO3muXNDcUNY6AePm/cc0Tnc0lBUfSQSeJ5erT5tIK6Ks/F7hbxVtLbBxHstHbat/shtbh8Die+ObYxn3495VMeSVplxZY/W2za/478OrKX6chhOsbtOOX5Jt8QqWvPcHnBb8Bk+S0zh5w+4nVesRrItpeFlme4SOsduHaGpbnOZY3EsZkdTgEeAXrm1zwW4OgWTh7YYr3f5fZZT2gdvNI7uD5zzH4DPuXzm0Rxq4tVNK7X93i0ZpSYc7rPapT6w5pGzZDj63TPMSB4Z2V57Y+mN4w674Nm8No7ZppmptYQyAw1FmPYvgmB9kmePdxB7gHKy/R+1NqLVPCttw1PWPq66Kunpu0lbiTlYRgP8XAkjPVevT2jeGHCZkFJZ7bEy6VAxHt6xXVR8u/Ge8ANHfhZThdZG2PTdyjIkZJWXesrJI5HBxifJJksyNjhJLLstlmm+A57lJRB2UlqoEkd6XegM+aaMJAoJIJwvnLNHDG6SR7WMaMlzjgAeJK0S7cXuH9nldFUagiqJWnBZSMdNj4tGP5qmWcx9rY45Zeo37qqK9IPMlVw/pAd6i+taPygf6rPN4/8ADkychra5o8TRPwtB4oaw01rXWPC+Kw3VlZHBfmy1HKC0wj2cFwcBgdVnlyY5TW2uPHnjd2MhQ6Mkr6rU1vr7xSUz6F7LcJHuxznsIXcwz13/ANFqFJZ6uhquGOo6h7exuV5Y6Ng6tGGjf4grza41l8j8TdXWFlsnrYausZNHJHXuja1xiZn2ADncdcrPVTpmcJ+ClVVSOe8XaEue45OXOcQP9PgovWzwtO09/bp3oVIdFDO596mFvPTmNGUikThuVI81fW01uoJ66smbBTU7DJJI84DWgZJK404g66u3FLWFPbrZFKaDtxBbqIbGRzjjnd/Ef5D4rf8A0hNfukn+Y9rm9hmJLg5p6nqyL/xH4Be30edB9lBLrq6Q4lqWmKgY4Y5Y+jpB/i6A+APiuHPK8uXSenfxYziw/ly9/SyeGHDe3cPdOeqx8tRdKnD6yrxvI7uaD3Mb0A+PUrfxsEDYI6LsxxmM1HDcrld1WPHiwUt/4G6oinja6SkpHV0LiPqviHN/MAj3FLgHcZ7nwC0jU1Lud7aMwcxO5Eb3Mb/IBHHq+R2LgPq2qc9rXTURpIwftOlIYB+BJ+CfAK3TWzgFpGnqGOZI+j7ctcMECR7nj+Tgo+1v/FZ4TQEK6gQhCAQhAGEAhCEAhJHVAZQeiMIPRAioSfsz7lJQkOIyfJBNCEIBPbuQgHJQGPBG/egp5wgW/csHqa+TWG1Ctht81e/nazsocc2CcE7nuWbzgLxVU7XxyxQsZNK1pIYT1ONgoo1zUD2Xm2UQir6ijc5zahzoHY5QwguDj3DuI67qYvL66vho6Oo7RrWPEwczlyW7P7uoy3bzHivA+uqKuSSOsss1NA8YfK6IvjcRj67cbjOQDsfZPdhYS76jtmlIG3Wuqo6akY7Dnc/O05HKcO79jjuOzcjI3pv+0+/EZoX2ron0EVRUBlNLRdqAyMuIAYzLnEZxucea9emY3UM1W6W4z1oqC6pDpHgsj3wWNPdjwPTK02y6ptGo+xrbVcIqmlp4IoyWODeYsaMAk/VAOXHO+eXAOFsYqjBDC2ls8tRTRAO/s8RDI8HADQ767veTsO7YKJdlmnuZquCqo7k65WwwspXua2OVzfpAADzDfpg9VjbzojSnEK1dlcqKmu1MwYY2sZ2jogdx2crSHtHfs4hbFU0dNeLZGy5UrIn1Dd2PAJORjB+Hd8F8aCeCjhNv03SsqS08slQ53LBGRtguH1iP3W594U+/Zv8ApSE/osxUFVJV6J1nddMSncRNlM0Z8uYFjvxyvC/QXG21yOpP9qVguGfZaKthkkx4Y7MuC6OZZ5pnGS6XCWsLv7lv0UTfINacn/MSsJqbiBobQFNy3q6U1BIRzMpIW5lf7mN3+JUXGReZZXxFN2/htx2hkNTTar01SyPPMZIoX5J8SCxZ13DrjbX0/LeOMEkTDs5ltpGR4H+I8q0fWHpQ3acuj0ZYRR02SG1twPO93mGDYfElVBcNfcSNcVrbdU3663R85w2ipSQHeXZx4BCy7z6dE4s75vhu3EXRmhtBVFNdbhNNrm8Vkrm1ba28hj2ux9Z7IQXEEbbu8FqR4jfJtPQVelbJbdPupKsSzx26lDHSxNc3ljfI4uec4O/MM5OVnOHfBeo1jq2tsWorm+xTUMLKmWljjEk0rHHGQ4HlG/XOT5L38TPR51RpKaa7aIil1DZS36WlIBqoR35A/aN827jw71X8r5aTpL1t23x3pcUdTP2Fk4f3GsmecBrqgEk+GGNcV74fSA4k1J5oOC9yLPNtR/8A1LnvhhxZvXCq+VIpaQVtpqZAau3zfRvjcNiWO6td79j3hdo6N4z8Pta0zDbNQQ01WR7VFXPEEzT4YccO97SVrjbfthnjMfpWx9JirtUo+dvDG8WqPvlHMAP+kY0fzVq6G4q6M4gxPbp65F1XG3nko52dnMwePL3jzBIW21E9FJRvNRLC6nc32u1c0sI887YXHd/qrJH6WWmWcLHxHNTCK1tAfoMl57YNxty9n9bG2VO7P9Z6mX1p2gB4J4KiDkZUt9srVkXeFLCR2KedlIMJ4CWdks+CCSRTCi44I3UDlj0v7fM+zaQufrkoijuLoDTgDkJcObnz1yOXHuK5plIbJvh2/Qrq30moqXU1BYNO0dwjFZRXAVdS0bmJnIQM+ZJ6KlqXR9ljz6zBLWP8XykD8G4Xl/K5sMctbex8Tjyyw2rcxMmP0f0b/wBxx2PuP6q5/RusumKrWF8uGq4KJ0dDSNlhNeWhkZMmC/DtugCws+irNUwubBRmmlI9lzJnbH3HK2rgdpmwWPiFdZ9Y/J1RRNoxNRTVnLyskDgXAtO3MG79+3RU+Ny4556i3y+OzDbqGm1N8q4j0tbpK6EDArZWmGkaP4XEZk9zAR5hVV6RlDNS8HKi4Vdc6orRWU7GEAMjiy7DuRmepG2Tk4z3KyZtU109FUV9BQC1WinjMj7rd2GJvIO9kOzyMdObk8gVzVxJ1LFrWI0E7J328yCUVNY7mqpsHIIaAG07P4GjJH1j3L0OXPHDHy83g4suTL8VDQ9jPDiVpgkztKxuQfe39PwKKuhq4YRKWtnp3bCaI8zfce8HyIC3yCyWJjQxts5gO98rif6oqtLW2qpnRU4noubvhkJB94K8ufIxmXl7N4cuviutNKac4acLtN22qgp6OhrKqnZioe3taupJaCQwAF7tz0aFnRcNWakD226ik0xbBt63XRB1XKPGOHOIx5yHP8KpbhlqeCmpKHSejtJwz67jpsVNyuTiYY6dpx23aZLi3Jx2TMb57t1neIlntVptNPNxK1pftT3CscRS2S3zigp53gbgRxAERjve9xx7zhetMpce09PCywy7db7Zq/8AFDhFwk9Y7e7CvvU2DOymd63W1Dv+UfnAHkSAO4LP8IL9bL7omW7UXNA2tuNVOYp5w94c6Qk58BnOB4LkPUFo07cKppfZLXaYWfVo7TBjH+OZ+XPPnssay22CmwKW0iPGw+lfn+RXNflSXxNu7H4Ns83T9FeYBo32KkCCAvz7t2pNTaeqBPpnUdztMjdxGKp0sJPgY35BC6E4R8ep9TXiHSWt6aCgvcwPqlVACIK4gZIwfqPxn2eh7vBb8fPjm5+X42fH59x0FskdlFp2yN08ldDlPOQV4LrcqOz2erutwqGU1HRxOnmlf9VjGjJJ+AXuHQqj/Snu1Ra/R6vDKfINbPT0ryDjDXSBzvx5cfFRUxV0eqddekVqSrpNNRGg0vRyBru2cWRMB+qZcbveRvyjOB+K36k9GmjEDRXauqnyY3ENKxrfhkkrfOCGlrfpTgxpqho4WNkqKOOtqJB1lmlaHucT39QPcArIwFj/AA43zfLo/wCRnj4x8Oear0ZqUsJodYVMbvCekY8H8CFWOr+EOpdJ3qy0HrNLdH3ipNNSind2bnvDS4gh+w2HiQuz554advPNIyNuQMvIAyenVVHxVnjZxQ4Tdq4Ni+WJ3OJOAMQHBKplwYfS2PyeXfm7cjV0dfQXSopq9skFXSyugka7Z0bhsW+WOi3CTiVXVOmdJ6frLdE6l05Xw1kUsBxI9rDnlIJwSQTvkLWeJsw/2sam7J5MT697stOxGxz/ADVk1eh9Ly8DNBajhpRS3m6VUNHVVcbzl7JHvaXOZnBIIG658cMpbp05ZY3XaOn9La50vrGlE9iusVQ/lDn07vYmjz3OYd/9FswcD0K471BwM4h6TqXV+n3i8QwuL45qF5iqWf5SQc/4SV9tLekDrXTc7rdqulN1jgPI9lUwwVTPHLiNz/iHxXRjza8ZRzZfHl88d26/zhavr3VlNovRNwv0/K58LOWCN397M7Zjfx6+QKxOj+LOjNZNay33RtNVnb1SsxFJnyycO+BKo/0jdZC46npNJ0k/NTW5vbVHKcgzOGwP+Fv83K/JySYbjPj4rlnMarjSdouOv+INJb6qZ81RcJzNWTnchueaR34Zx8F3ZRUlNQUMFHRxNhp4I2xxsaNmtAwAPgqI9HLR4o7HVavrYsT1+aelz9mFp9o/5nfyaF0BsqfHw6zd+2nys+2XWeoEOSLwNlRnFfjh8h1zND8OoW6i1vXO7COGnHasoiftPxsXDry5wMZdgLprlk20njtcZOJ/F7S/BKxTmSCOcVd5kiORCAM8px3tj5j73tXUVJSwUVDBR00YiggjbFGwdGtaAAPgAFUvBThCOH1uqb5qCo+U9YXj6S4Vjnc/Jk83ZtPfvuXd58gFcQxyqIW/RhNIJqyAhCEAgHKEDYIBCEIBCEIBI9E0j0QRUJf2TvcpqMn7N3uQSQhCA70IRlA0Z8illCBOBcMZwtZbpq222+XDUMk9QXVEY7RrpX8rcDqBnY7dy2gnByVrmqJ7s+2T0tgZBLcW8jgyYkN5S7yB8CooxTrpBO98VPbZTJHvLLLVyCGJuMgl4O56ZA3GVWPEzR1TrK0i30craGUyNlMzWvw4AEgcrnEnIzjOPHCtS6x1NHbYq2qlpoxGPpXzN+ip9tjjO+/ef5Kvf9pOiILhBSP1Tb58OkD5jUdS0dXHoC52CN+jAFllqzVXxtl3GB4UaBuGh4aukqp462aZ3ahrQ4lvsjoGuBO2+xzt0Ktl94io4Mz0LnPewmKWGsldETnHtEn6MDvJ6LCMqo6+4QsoXiaF1DHUyuhJcXN5Gt5o3NOMjAPvBHevTTQVeopZXR1vrVHQv9uanAaLhK3BAe3o5rSNzgZO3QbxjNTUMsrld18bjpn57xUV8ljraWmoyJqWmNRIHVLiMFzxnZmCcNO7up22Xuor/BoXQxuGta2kt1LSDsw5rS1p3PK1jdySRjDRuvBeOJEugtFVt911Ssppu2fHR0sD+aSqOfZAz343d3N38s8j6j1PqTijX1mqdWVjoLPb3hkFNAPo4S47Rxg4BcQN3HfA+CrnnMWnHxXP36WPrD0itUatrpLLoCCSyW/BMlfJg1Dmd5HURj8T7lVslDQ01C+73uqlrKyrdzs9YJMsw737nOD59cL1veLDpntX0z6GWVvPTxlwLnEj2S/YZHKc46ZIVocGODVbfqiLW2tIHTxS8r6SlqckPHdI9p6t/db0PU7bHm/Llru/Dhx3pqeiuEl6126O8XqSayWD+7MdO6Wadv8AybADt/EdvDK6V0tZtKaGs7qTRWkblPUEe1L6sRLM7/lJZOXH8gO4LZ7pdLFYZaSku+rI7ZPVHs6aOaoih7QjAwxpGD1C9DnHsamoeWiuotnSsGBK3HNgjzH4HouvHCYxwcnLlnd1ofCfhtV6Wu991ReYKamul4kOKSmcXx0kXOXcgd9oknJI222VugBYe932ksVnNxqhIYmgHEcZe7B8gsnTzNnpY525DZGhwyCOvvWmM0zyu7utN1fwp0Frlrnaj07TT1J6VcQ7Gcf84zBPxyqhuvogaMqpi+16lvFA09I5BHOB8SAV0lNPDBE6WaVkUbd3Pe4NA95K1Wv4l6AtcpirdXWuJ46tFQHkflyosx+0zLL6UbS+iHa8tZcdf3ippwd4oomx5Hxc4fyVx6B4S6K4cwv+bltIq5G8stbUu7Wd48OY9B5AAL6QcW+G1RII49Y23mO3tyFn8yAFtVvu9su0PbWu4U1dF3vp5myAfgSk6/Rlc77e8DCaXMU856rRQuu6EFJAIRhPCAatQ4lahqdM6GqrlRDFS57II34z2Zecc3w/qtvBwVrutNKx6x00+zSVr6IOlZKJWMDyC05xgkLPkluNk9r8dkyly9OP6mocXSV9dUbyPL3yyv3c49SSepX2tdfb7i9zKSpZK9vUN6hZ3i9wL+a2gblrGfV9Tcn0MkHZ0ppGxMw+ZkeMhxIxz5+HmqYss5o9R2+dji0tnaD5gnBH814XL8bLHHeXt9BxfJxzv4+l0spTgYwsJWz1NnujLhQuDa2gnZWQcwyC9hBAI8CMt+K3HsBH08VpGoqpovcrBg8rWtOfcuD4+Vmfh154zKarfeKnENupDR0ttmeLb2bJhED9aQgHmd48pOAO4gnfbFKS323QzPjlqg5zDiQMy7kP8WOidTQan1HdGae0da5bndKlpkkbHgCGLODI9xIDRk4yVuvELhRfNJ8GW3XUFxoojSzwxQWq2whkERkPK6R78B0kmPtHOd98L2f4s+X883m3kw4P+3g163SwXCAT0crJWZwS09Css2nc2AuJ6Kt9ATmlvvqYPsVOWEZ2yBkH/T4q4RADSyAjq0/0Xmc86Zad3Hl2m2Lt1wuVgvdu1LYIWSXS3SlrWvBxLFIOV7Dju3B+C+Opbzc7pe6i4XisNZdJmhstQ0crY2jpHG37LAf1OSV5xUPp8uY4j2eUb/zT0jorU/EnUVRbrIDbrRRv5K27St5g0/uRj7T8d3d34XVwzk5J0l8M+T+Piv8AJl7arV11HSv/ALROyPP7xwiKWnqvagka9p72rrzTXo/cMdORh0mno73WOwJKu7f2l7j3kA+y34Bcoak0u3T1ptWs6Jhgo579W2irp2D2ByyHsSPD2eb8oXdl8e4xx4fMxzy1p4pYi0Zxt4rG1/bsg7ekldFV07mzwSNJBZI08zSPiFtNRS4jc0Y3G3gtenw05d07wubDLbus3NV3pw91O3WXDuxanGOa4UbJZAPsyYw8fmDltSpb0Y5zNwDtLCSRDU1UbfcJnY/qrpG3evZx8x8znNZWDCr/AIxaKfr/AIS37TVP2frk8QlpDIcNEzHBzMnuyRj4qwB5qLgHbEAhWVc28AeMFtptMU/DjXlU2wamsIFG2K4HshPE3ZntO2DgNiD1ABGcroGrv1moKM1lbd6KlpwM9rLUMa3HvJWua04X6E4gQtZqvTlNXyMHKyowY5mDwEjSHY8s4Wj0novcHaWdsr9O1VW1uMRVNwmez8OYZVU7jQdfXqf0gOIVh0ToJ0lRp2w1za68XhwcyBzmuADGH7RxzY8Sc9BlZf0mat1JddGvDyzs/XpQQejuyAb/ADK6CtFltFgtsVtstspbdRxDDYaaIRsb8AubvSghiuerNE2U3WjtrqhlSe3rHFscYyzdxaCfLoqZ70049d5tz1e62OauqZHe1JLGwOd355Ysn+RWWptS1TTare+oe+mhNK2njJ9lgbUmQ7f5isLeLDW0N2fQtu1muZAAbPRXGJ8cm3cSQR8QEqmzT2/Tw1BLfLEW00kYFJFcmS1LiXd0bMnzzlc83t6FuNj9KWgOySMrCX3SGmdSwmK+2OjuIIwHTRAuHud1HwKy9JI2SjhlactfG1wPjkAr7hdepZ5eZuy+HOWvOAGk7Vp643yx3Weyx0cL6h0MxM8XsjOASQ5p7hueq5oorfdbtdaSipWmqra2ZsMbQ4kue44GSf6rq30lNTOoNFUemqeTEt2m5pQDuIY8H+buUfAqsvR106+7cR5LxM0Gls0JkBI6yvBa0fAcxXDnjP5OsejxZZTiueTbbTX+kDomw0dmpNF0lfSUcYhiDGNkOB3kseM/gvc7X3pHV0YiouGVLSPdj6SdhwPzSBdDY22b0Tx4tBXVMNfbhvJu7sc3Hhzx/wBfvMGvtfQads7ziSis+O0e3wywAD4uPuKtvQXCzRfDihfBpu0MinlbyzVsx7Som/xPPd5DA8lvCFpJpS5bIAAYHRMHuVU8X+Mdv4ZUtLRxUouN8rmOfBTF/KyNg/vJCNw3OwA6kHoqhdxd47WewUXEHUdqtUelKmaNjacxNjkka87cg5i/cZwT78YUXKS6TMLZt1sE18aaUT08cwBAkaHAEYO4yvsrRQIQhSBCEggaEIQCSMJoEnjbCEHogiQvnL+yd7l9D1Xzm/ZO9yCZ6oQhAIQhAIT3S96D5VAldC4Qua15GxcMgfBVFZ7VxJj4y3GeuuUBsDqZnLyx7F2XcvscxIGQ7v6kbeFx4GF8uyYJTKGjmcA0u8h0/qVXKbTLpznqakreKvpGycOrvVSM0tpijjr6ymiPIK6Z3KQHeXtAeQB8VdNbpy327TctHYNO21rmRkRU/q7GszjYHbxx4qudbaT1bp7i1BxW0Hao73NPSeo3W0GcQyVMYxyvjc72eYADY+A8Ss43VvELUV0tdLZdDV2n6QTskuFbe+yaGxD60ccbXkueenNsAqRe+daaPXPq9IUFFc7dHQ6W1PUhxr7JSTA09ZCD7bmMOGtm39gtG7jg53xa1ifpDSmiJr7bnx0lkdCbi6XJxyOHNzHO+T4eOy5z44aN1Rrrj5BbtL2509RBaoqrnMgjawB7hz8x6bgAeJWj6t15fH8FrNw6mdMLiytqfXm49p7I5T2bPPLydv4As+2ms4u0mr5emruOoePHF8VrGwRUVPzNo6WtkAihiAJaCO9zjgu/QLJVz5NDWKxWGehtNLeHuqLi+GuYZxSyPcWteWD2Q0RsHK52cB2Q1abYbPqGmuNoZp6mkkrHROmpy37UxyzmPdysAcd9skL18R8XK62qz09Z8uX2o7Gmnqs87qmYDkAa7vHO4jPkPBc+7XZqTUnptXBrSddxc1zU6q1Y91XabY5gk5thUy/ZjwNsAbn4DvXaLZqWGSOkbLG2VzC5kQIBLW4BIHgMgeWQq707pC28O+F9v0rEZe1ewsklp+cOknc3me7nYCWbg4cdtgsRPfIY9R0TKuVxus8cnYlzHc3I0sL8Y6Ny1pI7z7104yYzTg5Mrnlt9eJPCu0621rZtQ3oVdRQ26DsjBSYLg8Sc7XEdXNOSCG79FtNVWQ01qqeXtzHK/mnqqiMx87jtysacEnAwAB+JXh+Wr0/T1ZT2VnrF4i+kxUc4YeckjLi0DGx2adtgvVqi/2zT/Dme8azfHTNZHh7G4eTIfqtYCN3E9PxV/pnq+mNuGt6C1xiqv8AcKCmpxA6UxPl5WFoLcuHNuSDlo23yFpLeMmrddyOtXCnTBnLfZlu1Y3lgiP8Id0/zb/wrRbZpC78VLzSaj1hBNTWSQmS1WCB3Zy1DBt2j3f3cfTMh69GjcLp7T9ip7LbIaWGngp44mBrIKZvJDEPBrf/ABHc/wAlWdqveuP+1UkfAu96omFdxO13cLvMTn1SjdyQx+QyMfg0LbLdwI4XW9jQNLR1Lmj61VNJIT8CcfyW+2q60t0FaKWTn9Tqn0shxsHsxzD4ZwskrzCK3PL+1d1XBXhfUsLXaOo4iRjmgL43D3FrlXGpOA1Tpt0moeGeoay2V0I520s03KHeTZNvwfkeJXRaTgHNLXAEHqCl45Uzkyn2pDg/xiqtVV8+kdWQNpdR0gPK8ANFSG/WyBsHjqQNiNwrtXIvGqxjhrxUsurtL2v5Oo5i2oDoj9G6qa5xe0N+zlmNuhy7zXVdlulPe7HQ3alOYKyBk7Pc5oP+qrx5Xdxv0vy4ySZ4+qnUXa1Uc3Y1dypaeTGeSWZrDjxwSvj84rD/AMd2/wD3qP8AVce+kvE93GHLKV8o+ToN2xl3e/yVLer1GR/YJiP/AKd36KmXNZdSNeP48yxl7P0r+cNh/wCO7f8A71H+qPnFYP8Aju3/AO9R/qvzSNNP/wAXzD/mHfooOpqgdLfN/u7v0Vf57/TT/iz/ANn6bUt2tddMYaK5UtTIBzFkMzXkDxwCveuMPRZjqGcU7k6Slkib8lvHM6ItGe0Z4hdnjot8Mu03XHyYdMusu1Sekfn/APD5qLHXtKT/AL3EuL7XD6xqGghGxfUM2/zBdoekeSPR81ER17Sk/wC9RLj7SEHaathmwSyAPkJ7hgYH9VxfMusXf8KbXXPWhnM7q3zVaXe4RzVtXWvd7BLnE+Qzj+i2K6XExUE7x1DcD4rR2w0VyuNvttyucNtoauqjjqqmZ4Y2OHOZCT/hBA8yF5PxeGW7ezyZdcbXUfo8aPFh4efOSugDbrqNwrJHOG8cG/Yx+Q5TzY8XLzek3WUJ4SG0yXGkgrqmshkhgmmDHzBhJPI3qf6ea2Juo9TavgbbeHFB8i2ONrWN1DcoCGuYBgClgOC/bo9/K3boVVfHPhnp3SvCie/n1m8ainroGT3m5ymaokB5sgE7Mb/C0AL6GyTHUfMzLtn2rnHSjzDq23h4wRODjv6K855GCikfjoxx/kqQ0a4zaot8UuHMbKXBzhvs3plW5dqlrLPUOYdy3l/Hb/VfP/Km+SPovj/q0y61VV6iY6MD1moeymhyM+3I4Mb/ADK7l0dpig0dpO3adoBmOjhEbn49qaT7bz4lzskrhKmqjBrDSzm0NTcQLvTymkp8dpMWPDgxuSBkkAbldJavu15qbS+7cVNWw8O9MSgltmt1RzV9SP3JJm75PeyIHzcvY+LjMcXmfPtucxbxqji3Y7LdTp6w0lTqvUucC12vEjoznrK/6sY95yueKwXC5ejRrCK8ilpaq26t7WSnjcXmN/at5m83Q7uOD4AqyuH2uKGzy2ym0/wAJqrTmhrpVx0lLd5HNZNPNIcMfJGfac1x+1k47xVWX+c0/DfiNa+0aPWdfNgDc745i8/wDZXRyXUcPFPyjAPcAwZ6Y6/BajcpgyCSXAAa0uO/kVslZL2VO8juatJu9QDQTx7e2ws38wvH44+izuo7t4GWd1j4GaUo3w9lLJRipkBGCXSkvz/wBYKyM4ySsTppjY9J2eNgwxtFAAPAdm1ahxd4mUfDTRE1zwye6VJMFvpndJJcfWd/A3qfgO9e5LJi+Zu8svD2a94raP4eUzfly4c9bI3nioKcc88g8cdGjzcQFRbvSW17qO5vpdEaBhqMDIY4SVUuPEhnKGrnm1Uep+I+vYaOOWS5Xy81GZJ5ST5ue7wa0d3QAYC/QbQGhrPoDSVNY7VDu326iocPbqZD1e4/0HQDAWUuWd8enRlhhxTz5qtdA8cLlcdRz6Y4i2JmmbqyldVRuw5jZGsBc4Fr9weUEjBIIB71qF39JrUD6uU2SwW+npQ49m6qc+R7m9xIBAGR3L0elM21sqNNVDHtbeB2zCAPaNOQNyfDm2HvKqPhZpx+ruKFktZYX0sUvrdXtkCKPcg+84b8Vz555d+krbi4uO43kyjuTTtbXXDTFsuFzgZBWVNLHNNEzPKx7mgkDO+2VzB6RN9FFxqsr+0LRaNP1NYADguc5xHLzDduQMZGD4ELrRoAHQBcVekxQW6v8ASGstLeLw21W6otTGTzucWhjOaTOcA7HbuXXlPDj4/OTA6gtthoYBc4rFSSVrqCetgkqIWTMk7NsX1w4ZefpCSSe4Lz6ludshsOqrNR0ENC2KgbUOjjDRn+0sYzIaAA4guJIG2wHU52Gtr9Nus1JQO1rYaqmp6N1FDMZhz9i5zXOacs+0WjJxnqOhVb67pdMPsd81Fb9d0dVfbhMBLbqZ5Ikjc/mcAOQAAENIGe5RptY/Q7Tk/rWlrTU/fUcMn4xtKyh6LEaXjEWkLNEDkMoYGg+OI2qOrb7HprRt2v0hbihpZJmhx2c4D2R8XYCv9OXW7pxpxv1P8vcXbr2b+eltpFDH7W2WfXI/zl34rongFpsWHhVS3CeMMqbw81ryRg8h2jB/yjP+ZceWa31WqtX2+05dLV3asayR3m92Xu/7RXSPG7Vt2aLVwV4eBzr1d42QVDonY9VpccvKSPq8w3J7mg+K4uLzlc69L5HjDHjjKay9IBsN3qNO8NrI/Vlypwe2qImufTxEdQOTd+MdQQPMrSbL6R+r6e6R/OK3W2ek5w2dkMToZIhncg8xyR4EK9OG/D+x8LdCU9poSx0kbO0ra4tDXVDwMucf4RjYdw+K4putXFfdSV9XTkf2+slljH+N5Lf+0Fpy5ZY2eWfx8MM5ZZ6fobTTxVVLDUwvD4pWB7HD7QIyD+BX1dnBC8NopXUNkoKJ/wBanp44j72sA/0XpqamGlpZamplZDDEwvkkecNa0DJJPcAF1T04HB3GOsdfPSPucVykEVJDWU9vy47MgbyB3uBy8/Eq4ajPHvirR0NDC6Lh1pCp53TcuG3GpbsGtH7oAwPBuT9oLnXiXqKi1rxEvd9tVNJBRXCUuhL+r2gcof4bluf5LujhRLaqjhPpuos9NFT076JnMyMYAkAxJnzLwST1WGF3lY6+WawxreGbDphSSCa6HIEIQgEh0TSCBoQhAIQkUDSPRPCRGyCKhL+yd7lM9VCb9k73FB9MpJ9EkAn5pIQPKBnvRhRIOc52QT7sKDyGtOeil718amJk8D4pG8zHjlcPEFRRrlw1C+GuZBFAQxj/AKTnaTzDB9ny3wc+R8VkDcmTWmepjZ2Za08pI7+mxI338Fp1x0pNNV0znQuAZOOww7PIWtdgnBGBgEb7bjvWcpLRHbbVU1NRERUvLRI8v5uZoeAPLp8fElZze9VPjTDV1609Y+K1Oay4QxXCttsdCyI/XcRPlvwPP1XFms6/m9IK+10E8cTIL3LIx8mSwBkhJ2HXodh1XcV+0Fp6t1tZ9Y1FJm5UEzWiQHq07b+QJauGNLPtty4u11dfYG1FFHPV1c0TnYD8OdsT8Vlybkdfx/dsWhNfmP4b0NHSWyJtRbbh8mxumDhFcBMHSR85bh3LuCWdDtnbIWH4CWubWHH0328vFQbVBJWENYAxjxiOMNaNmtbnYAbYCzGs+IVrllulz0ZE1kNZamudTVNO17Kd1NN2UVTFnYO5S4A79QVm/RBomCo1dcZBmQNpoA89dy9x/oFTCfk0ytmFunQlDfodSVF2tdLBNBLb39iXVELmNL8ZBHTmb0968NTYpvlWmoCx8olifJ24bhsfKYxjOMNJy4gDwHgtF1H6QOm9L67o7DHZJqmmq5Q2asjeAWhzuVrwzG7c9NwSN8YIzeowQuieXFdxq9mq6O3Tz2ieaJ1fBEJqiRkZY0t3w458APHZc1X/AFA3ibq+t1reYpqvQunakUVntbHcpvVc44a0eTjuT3MwO8q2/SC1BUWHhybVZIwb3qeoZaabl2d7f1z+Xb/MtM07paGLjZpbQVGxrrJoOgE9QBuJq+RnOXnzyWkeGFF96Wx8Ta8NIWGotNt9cuz2T3usa19ZK0Yaw42hjH2Y2D2WgeBPUlbR1UQMAKS1jJ5qOho6BszaOligE8rp5OzaG88jjlzj4knqV6S452UuqieuFIkNwhROySCkPSdbSN4UU88sUbqhtxiZC9wy5mWu5se8DdbbwUdK/ghpR02eY0YIz+7zO5f5YVNek7fZLtqHTug7YTLVB3rD4275kkIZEMeOOY/ELpPTlpisOmLZZIQOzoaWOnGO/laBn8QVjPOdrfLxxyMoAAeiMJhMBa6jAuUeCOXyUkKOsEA3yUgMJoVhUnpHb+j5qPH79J/3qJclaN+ifXVRGA7EYPnnJ/0XWvpHuDfR91ESce3Sde/+1RLk2yhlPZo9vakzK4+Z/wDTC8z5stkj1/8Ap89vVqGua6nZA1273ZPwW0cBbPbdScXuS7UEVbFa7fJVsjnYHsEpexrXYO2RkkearW81XPWcrSSGjHxVq+ipK2q4p6j7RuQbWG48u1aCqfFxksdPzMr/AB1bVXxTvuobhS2/TdN83bRcaOokpb5VU3rb55YiQY4oWkAOwHOBfkbYwqX11p7Ulr4S3utv1/u1ymqbjQ9rJXVXasqi6N0olbHjMBAcG8oOMK0a622ywekFoy1WujZTQsstYGxx7NawRSey0dw8vFYPjtUF3B+5kgt7S42sgHuzSAlejn+teJh+0c+aNliFwgDaRjJqcSyOqOYl0gcAA0jptvggDqtxu9xLqLkJI5nAfgtM0lhrqmYg4IDM/wA/0WQu1W4va1rugzheLnj25PL6Ph8YbYm43qrtV4t1yt8whq6F/rMUhYHhjx9U4OxVk6vrdLaF1HF8uxV2v+IM0cMstfeHc1LRdo0Ob2cfRxHMOowMdFSl2lL6mff6sZH8irN1/TurfSRqaVzS8vpaAgH/AOniXocd1j4eZz2Z8nlufC3UurtT112g1HeKq6OpNR2psLpyDyYlfzBoGA0YHQBa3rOui+cN7szB9LJrmsrH/wCBkXKP5vK3vgRaxLd9UuHRmqaUDyLO1JVc61pWx8c9ZOGOSO5TvaPAudur8uVnHuseDGXl08V0m5aJ++x2Wk3USSR+xkDBdv34G62C9VOIWsH2nf0WIqml9qdI4YLKKolafE8zWri45rT1+T1Y/STTTv8A8oWZx76KDf8A5tq4D44a/k11xVudRFNz2m2PNDQgHYtYcPf/AJnZPuDV1/rjU7tJ+jZVX2KTs6hlmhhp3A4IlljZG0j3F2fgvzyt1FUXW6UVnpQX1NbNHSx573vcGj+ZXo53xI8Xgnm5V2h6K+goLfpCXXlZDzVt3LoqVzh+zpmnGR/jcCfc0Lo2pqIqSklqaiVsUMTS973HAa0DJJ8gMleDT9optPaattjpABT2+mjpmYGMhjQ3Pxxn4rn30nuKYtFidw8sswdc7pEH1zmHeCmP2fIvx+UHxWmuuLDd5M1B8SNeO1/r+4X9khNG9whomk/Vgbs38d3HzK6M9GDSMlv0jX6urYsT3eTsqYkbiCM4yPJz8/lC47sNvq7xebdZaBmaqunZTxNHc5zgM/DOfgv04sNmpNP6dt9koWAU1BTsp4/MNGM/Hr8VhxY7yuVdfyMumEwj3ucGgZK4Z4hcVtFXzjDd75Wafp7rBb6WShttXK0TxzuYDgmNxDQObnwSDnIzsry9I3iPWab0rS6L0yXy6p1Q71Snji+vHE48jnDwLieQHxJPcudL/wAC5LFr6i0m24iEUthiuFwquxkmb27nua4NawEgZwB5Nz1W+Tm4pN+Tvl24LUlvorhRaPZU3Wug5qqj5Htgp5RjIAEg5Aebq0uxgkY6Lx6ovXCKltldZNNaRj7OegkxNPDzyNnzhhExcZBuCdsDGAQsXUaGtMU7ozqtryNji2VBP/ZWVZweguWjbzebRqCorK2go5aoUxtU0TJWsbzOHaOAAOAfesplXTccdea700sebR9mcAADQwHA7vo2ql/Si1Q22aBt+non8tRdqoPcAcYii3OR4FxaFcGiphUcPtOVIxiW2Ur9um8LSuLvSR1Ub3xnrbcx+aeyRMomYO3ORzyH8XAf5VbkusXPwY9uR5uE1xodM3O9cRLs0PpdNUDpIYycdtUzHs4mDzPt/DfuV++j7pC41NLXcWNXDt9R6leZYy9uOwp87co7ubA/ytb4lc1cJtEXLiXrOk0920jdP0k7LjcgPqkMy1o83HJaPDLiv0LhijpqSOGCNsccbQxjGjAAAwAPgqcOOptr8nP8rFVekDrM6R4U1kNPIGV93d6hAO8NcMyO+Dcj4hcucJLG/UXFfTVvhYXwwTtq6jvDYovaOfeQB8V6fSH1587eKU9BS1HPbLHmihA6Olz9K/8AMOX3NCtv0U9Ivgsly1vWR7159To8jfs2HL3DyL8D/Kq5S55z/GmFnFw233XTYO265+49anuN/uVq4LaRlzedROabg9n/AMLR9Tk93MASf4R5qzeJev7Xw30HW6nuR7Qwjs6enB9qomP1GD47k9wBKrrgFoW8QU1w4n61L5tU6nPakzD2qenO7WgfZyMbdzQ0Lqv9ODHx5qovSJ0ZRaNuGkYbTT9lbW2v1BnmYXZyfMh+fxW+eirqyOa2XrR80p7SneK6nYf3HYbIB7ncp/zLZvSbscdy4RG6Bv0toq45g7H2H/RuH/WafguaeB97fZeN2m5WyckdXOaKTfAc2Vpbg/5uU/Bc9vXk8O2fnw6v0/QtqkoMO2/XCmupwBCEIBRHVSPRRCCSWE0IBCEIBCEHogiRuvnKMxuB6YU1CX9k73IJlCEIBHcg9U0CPRSGyipIFnKOpRjCYOBgoIhoPULyXKB1Ra6qBgy58bg3342/nlew+KO7ZB5oXR1tJFKd2yNa/wDHBX5u1VHDYeM94s9a09ky41VK8E4y1znjH4EL9GLe8U8lRbycGJ3PGD3xuJI/A5HwXEHpO6Xn01xmi1LBEW0d8jZVNcBsJ48NkafMgNd8SsOWbjq+NlrLQ1JUaTbZqim0459bPVWr1NzD7LaCCKLtI4wBu57n+05xPUYxutk9HK8TUfD7iQymH9obDDLGe/2mvZn4Zyqe09TdhezeqWdj4W8rn07ussbhyvA9wP8A94Vj8Bpo7ZxR1LoSSUf8M0NRSQOJwC9vtxH4tJKx4/FdPNj+F06gj0Bo2ktdkr7zYKe53ShwaeWSLnm7Vx5uVo78EbA7Dlz3LK3XUmqLPQy3WfSLKi3QNMkzaavElSyMblwjLA1xAyeUPzttle+2Vgu1Vb6pzOVwojIGHqx7nBrx7xykfFVbr/TXF7VepKG86J1JTW+1tbUUrqaWVzGtaXFnO5uCJMgE+I2wur086XftjOI1dS6i4+cEzBMJ7XUOqLhCR9WQ8rXMO/kAtdm4hO4fcU+L7qikhmvbpYK23RzydmyaPs2twTkEgNIdyjc4ON1nOJ+j7noXSnDbVFigku0ugZWMqWNaS+Wnc0Ne7Ayeo+AdnuWe4scDqPio+k1Bbq/5FvLYGsL5oeZs0fVrZGgghzc7EdNxus7v6a43Hxv0xXBTjzdeIGqqnTOobZSU9V6u6pp56QODXBp9prmknuOQcroUHdUbwf4F0nCmsq9RXa9suV0kgMRkZH2cNPH1djJyScDJPd3K2najtvPB2UwmimBd2zDljWhocCT4EEYIzlXwtk/JTk63L8fTNZHikeq+EFVT1TXuppmShjzG4scDyuHVp8x3hfcHxWjMliNSagt2l9NV9+u0wio6KIyyHvOOjR4knAA8SsnLNHDG6SV4YxgLnOccAAdST3BcicQtW3fjzxDpOH2g5HGw0svNPV4PZyEHDp3fwNGeQH6xIPeFTLLXhfDHtf8AHr4JWW6cTOL124saigIpaWYup2HdpnIwxo8RGzHxwus8LDaW01bNI6XoNPWiLkpKOIMbn6zz9p7vMnJPvWawUwx1DPLtTHepZSGUFXUNLKEYQLvVZ8ZdHau1ho+mh0TqWax3ihq21cZbUPhZUANIMby09Nwd8jbdWZ1KCNlFPTijiJrOuqNBzaP1RQV9h1PJVROqbVWsdUUk+D/7TSSuJMe/VocW77DvWgCfsIOTm2aMfgrk9K6+MGodKWJzMx07JK6V3JnBc4Mbv7muOFz5V3eknhkibKOZzSANwvO+RLbp7Xw7Jhb/AG8NdVlzZp+bJOSru9EaQHibe2lvtOtef/5mKl9P2WXU9+pbNSvk+neBJNFA+fsI/tSFjASWtG5wrk0Dwz4o6J1RcKyx19npLdX298cepn1HNSMhL2+23vEm2zTjv8Ffgwsu2XyuSWa232p11om98e6Wut9wqLlc7ZaZbfR0NBTPnfPPIJOc7DAY1uxJIwSqzobbxk4q2S46SulOylfSTQy1s11gNHySRsLIGA/ake0gbDAABO5VqaM01ovgVba6/P1OHS3GIMlul1Y2GF2HFx9XhH0smSegPKdslY2s4j671VQV9bpjhdcNV6WfE9s1wvQ5HzAjGaeBvKA0dfZDnHxyuy3bzpuXw57s9LV2unqaKtj7KpjqHskZ+65p5SNvMFee41HNVY22AUKa4UUMfq5mf6xzkOjeHF4cT0Od8/zXmrqaujqJO0oKphA5y18D2uDfEgjYea8y47yte9jnrCeWErHNkdO797m/ouxYuEtLd+M1Rrq5XqnhgEVFFFSteOd3LTxA8w69QMLjB7/pBDlodIeVvM4NBz5nb4r9FqfVektI2eluFdVxz3K8U8U8dPRN7eadrYWMHIB1aA3dxwN9yuvhk1dvK+RlrLwq7Qtj1zpS76ksFNpSWlutfeReYa+qcx9FFSl728z3tdnmAP1BufEdVRd+qoajXWpK6nur7vHLXyf288o9aIOC8BuwBOcY2xjr1Vz3nW934kXWqZUVvZ6ZocvqLbST9nQwtH2rhWjZ/TeCLr9UuKoekp66vtlXfKa1Ti19q+WSop6N7aaPLs+yQOVrd9h3DZRzas1F/i+M7lkxN2e+aoiha7cgn/7/AAXxnmibYxG6UNdLQSRtz+854IH8ivnLPTy3btvWQImMIBx348PivRJqZzKNtvomQ0sEbeTt3wCSR3uyMBc0xr0cuTG78uqOMz4dR+h3T3CzVTKqnpYaCeR8TsgtYWteD7idx5Ll7gTBBX+kBoyKqIDGV3ajmOxcxjnNHv5gFvfAnXdstmpK7QuqqkzaT1LA6llZUtwyOZww07dA4eyT3HlPcs1e/RD1xbtSPqNF6jt8lCyTnppamaSCohGcgEtaQSP3gfwXdPy1Xk7mG8a6P4vcW7Hwp0k+rq5GVF5qWltvt+falfj6zh3RjqT8BuuW3aIu9LwM1jxg132j9SX8xRUbake1HHLKzmkwehe3IaPssHmrh4e+i9R2u+Q6p4kXx+q7zE4PjheXOp2OHQuLzzSEHoDgDwK37j1pGt1dwO1DabXC+avjYyrp4oxl0j4nh/IB3kgEDzwtLNsMcpjfDlf0ZLMy88cqKpccttVJNWcv8WAxv83rsviPxAsvDfRVVqS8S5bEOSCnaQH1UpHsxt/qT3AEnovzs4Z8Sb3wu1qbxbbfHWVToX0ctHUBzS8Eg4wPaBBaF0zpTh1rnjXqyh1/xkhNvslHh1t0+GlgfnBy9pOQw9Tn2ndNgq4TU015b2y2y/A3Qt81Rqmr438QWOkutxybTSy5IpIDnDgD9XY4YPDLvtKs/SZq65vHBkFvqqiCU26naDDK5hJJfgbEeK7dZGyNjWNAa1oAAAwAPBcLekLI4ek9C07sMdA0/iFHJPxOC/ntOazcPtMaSt8Gp7uy53m5DmdWvqqj2DnB5OzPsMadudwJcQSBhaNra03bRkrIqDUldNbrjA90OKt4c0A8j4ngHBIz16OBB714OLNJ6jebRIZCO1o3nl/dxLIP6FZfi5mJunYgMMbRkn34j/8ARZW+PTrxmvddxcOq6Kn4JaVr6h+I4bHTSPd3ANgBP8gvzcvN8lvmobre6h5dJXVUtS4k/vOLv6FfoRom1y6h9GKy2WKf1eW46bZStlP92Xw8od8Mrn7Qnok6pota0VZrKvtRs1FM2V8VJI+V9VynIZgtAa0kDJPdstLjcnJx5zC2r19H3h/8xuFtHJW0wjvF2Arawn6zeYfRxn/C0jbxJVlajuBtGlLvdx1oaOap3/gjc7/RZRjcNwsdqC1MvmmbpZJXcsdwpZaVzvAPYW5/mtpNTTC5bu6/LG3RV2oLzR0MMhkrrpUsjDieskjsZPxdlfp3aLfZeH+hKS39vHSWqzUYY6aQ8rWsY32nuPnuT5lfmew3bhtxDpo7tbuS6WGuZI+nly0PdG8Eb97XYyCOoK6DffeJHpT3WKy0dC7S2haZ7ZK2VrnPEhBzgvwO1f4MA5R1KxwmturnvbWvTabIyo9I3i0zV9ex8fDrS0/LQUk4LRXTjcvcPgCfABre9y3S78Zbxq3VE2juC9sivNZA/s66/VIPqFAM4LgR+0PXAGxxtzLV/SDlm0Bwp0pw10OBa6e+VQthc04xEAOYFw3y9zwXHqd1dfD3QNj4a6KpdNWOL6OH2ppnD26mU/Wkd5nuHcMALVy1SHE7hTNbOGeoNY8QOJOoNSXGlpS6CESinpGSuIa0NhbsRzEeHRcy8PpJJ+KmkIYAS994pMDrt2jSf5BXp6WPFGjqvVeHNlq45jDKKi6PjdkMc39nCfMZLiO72QtW9FPQFVqLiGdaVUJba7BkxvcNpapzSGtH+FpLj5lvisspvKadeF6cdtd4M+sVNRZsMKS2jiCEIUgPRRb1Uj0SHVA0L5ukxO2PbJBP4f8A+qe+cIDKaEIFhB+qmg9EEFCX9k73KahL+xd7igmjBUu4qO/igDnvTG+ySY8UBsn1RjdNAHoonplNLuKBZPcsfeL3bLBbZLleK6Gho4sc80zsNGTgDzJPcsjjZYbUembPqq1Ntl7pBVUzZmTtbzFpa9h5muBByCCov+D4vq6K5wR3iy1cdS+nbn6J4+kYdyw56eIz3hVfrm3WXj1wyv1ttMT4LtZa+SGlNS3kcypjAOCOoa9rsfEHuVn6i0xQagtdRRSukpJJoHwCppXdnKxrmluxHUYPQ5CqbhtorUfC+5V9FdLoLq2rkY2Cpe/lFdG1uGNJd+znYNgCcPbgZ22pf6Xx8eftxE6e6W6Sp09XNmt9XS1BzHJljopW7FrltD7nX2yssGtrbmmu1uLBPtj6Rjjyux4FowR0wV1jxe4IWfiZC/UenXRW/VELeVznt5G1OBtHKOrXjoHfA5HTkW7z3HTkkmldRWaSguFK7llilYQ57d8u64cOmCNj1BC58sbjfD0OPkx5J5d3aH1ZaNS2m36stDm+oXAkSM5t6SdxHaRO8PbAI8yfELarXVClt9ZTvZ9JRTyMLQPskl7D8WuH81wJw64j3PhpdZai2iO8aerwG11tkdgEdM4P1XAdHdD0K7B0lrW0axtXy5oevZcqiOINmtdU8RVLW/dvz1xk8r/5kFbYZyxxcvFcL/jeNO6jptRxVboqaeIU8zoHCaIsyR1xnqFn8DGAtctWpbTUARSwyWmtcfbpK6PsZGn3nZ3vaSCs+J4SAWyxkeTwrxix99ZWm2EUbY3kuHaNeXA8n2uXlBJPljB3BVa1j7rFe6WOmp6dtMwFku5D24xyhoAxjIPw6K2pmx1EDonjnY8FpGeoOxWCrbFaIHRVk87aSkhDu0Y4hsbgWNaMud9XlDRjBCjKbWxuny0r8oCGQPghjoSA5hD3OeXnr1aG8uMHIJJJOfFZy43KgtNunuNyq4qSkgaXyzTODWsaO8kqlNZekRw/0ZFLQacf847m57iKagf9C15O/NJuOvc3PwWhUeiOLvHW5Q3fiBWy6X0s1wfBbo2ljnjxbGd8/wAcm/gFHb6i0w+8vEQ11xC1Zxwv8nD7hdSzRWMnFdcXgsErM9Xn7EXgPrO8O5Xzww4Y2XhnpdlstzRPWygPrK5zcPqH/wCjR3N7veSs7pPSGn9FWCKy6et8dJTM3cRu+V3e97ju5x8T8MLYQFOOP3UZZeNT0MJgnvQgdVooaEIQCM74RlLvygEbISHmg+EtLTzHM0EcpHe9gdj8V8fku35z8n02fHsW5/ovbsD0RndRqG1N624G2+7agbrDQtzl0Zq+LJFdQtxFUHwmjGxB7yOveCqznrOMsmpn6dg4UWiPVrfpDqDncaA529aaw/Rc/wDERzZ2x3LrA4O+EvZznBUaW2o/SPo9WmnvA1VxIus2udTOIeZq4l1PC4b4ZGeoHdnbyCuwQtYwNY0NAGAAMADyX22Rtnop1Eb2qviNwP0VxFpnzVtH8m3gDMd0omhkwPdz90g/xb+BCp25VWuuFENLS8U6Kq1Rp2ld2dDqy1OIrbeO4PJ3Lf4H5B6ZPRdbHC+M0FPUQSQVELJYpAWvje0Oa4HqCDsQq3H+k9r9uWbDqio1BW1M/B7hqzVcshaK3UuoYW08UwA/ZRjDQ1o6BjcAeC1Z8+qdR/KegdeaUvDLxHWB1osVpDaSndAXuc9kkrW8pgGR7ZJ2O2+67NpaKjoKaKloqWOmp4m8scUTAxjB4ADYL69mzOeXfGM+Sr1qZn/ildMcFTU0lCeIU9LW0lFg0em7ewxWujI6Et6zv/iftnuVxspIIqZtNHCxsDW8oia0BoHhjphekADxRgeBV5jIrbb5eL5NoP8A9DT/APRN/RS+TqHGPUqf/om/ovVkeCeydYbeQUFEwgspIWkd4jaP9F6hsMBPbwR7Pgpk0gkiMjdTwPBBwO5SMb8jWn183AWuk9cP/wAR2DO0/NjP815tRajsWk7JNe9QXOnttDCPbmnfygnGzR+8442A3KzYI8F46+12y6wthudvpq2JruYMqImyNB8cOB3UaI5a4l+lRaKnTklv4cVVbHdHzR4uE0DI2Rxg5eWteSSSBjdveVzBe9TXvUuoZNQXu9vrrnIWn1iQt5hy/VAwABju2X6XHQ2iT10hZf8AcIv/ACpfMPQ566Osv+4Rf+VZZYZV0cfLjh9PzCulwrb1JDJdbg+sfDGYmOlkBIbzF2M+8n8V6LtfbrfTCbvcfWxC3kjDy32G4AwMf4R+C/TT5g6G/wD2dZf9wi/8qR0DoUjB0dZP9wi/8qp/Fk1/5OP9OLuE/pCXzR92pqHV14qbnpaGl9WZTMZG6Sm5QBGWfVJAA5SCeh8l1Ho7j1wy1tdWWm0X8Q3CT9nTVsZp3S+TC7Zx8gcrbfmDoXu0bZP9wi/8qbdB6Ga9r2aOsrXNcHNcKCIEEdCDy7FaYyz2588scvMjZAQR1QRlIBrRgDClkLTbJhLxpXTWoC033T1tupYMNNZSxzFo8i4EhZCkoqWhpY6Sip4qanibyxxQsDGMHgGjAA9y9WR4IyAVHgVnxk4WUvFXRsVpdXOt9wop/WqKra3m7OQAjBHXBHhvsD3Kn7/Qel861O07BNaamDk7E3OimijnlbjGeZ5BaSOpDQV1ZkeCY5fBTpaXTiDSPoh6suVYKzXV8prVTl/NJBRO9ZqJPH2z7LSfH2iuwdK6Xsuj9OUmn7BRNo7fSN5WRjfJ73OPVzidyT1Wdw3wRho7kkkTlncvZjqmkMDcIBBUqGhLKOYIGvk6RrCA47noiWeOFpL+bHk0n+i1DU+tNMWiie28VNbHGdi6ChqJC09xBaw4I65UW6TJtkK+9Q0uubJaHOw+vpqp7B4mPsz/AEJWeErTIWc3tAZwuH7zx6r4+Ltpu9O1lyhssFRQU9ROx0Qm7U47Z7AMjADcgDJwcYyAul9E660lUWuMxXmtuddUHmqKp9uqG9rIepA5MNb3AdAAPes8c5WmfHlhrazgU15oaqKoAMRcQdxzMLf6hejOVqyNBOEgg9EC6nK+cv7J3uKmoS/sne4oPr3FRUu5RQHcmD0CRTzthADZHVPGR7kcqBDplMDIQAmgAMJHomhBEr4z08NTA6GeJksbxgte0EH3hehLAUDAS6fe2US0VdLTyAYa76xaPDJ+s3+F2fLCwWpNEWXWVvNu1vpykusbQezqoQRIzzb9th/wkhb7hYq+y3CCz1D7XC2Wqa3MbHEgE/AKNJls9OT9V+idUdpJU6A1MyoZuRQ3UFj2DwEjRv8A5mhVRWcIOMmla8VcWlLq2WE5ZU2uQTY8wY3c38l3tpz5WuemoXagh9UrHtGRDKeZvudgH4rF3mqgoJom0dZU1YY8iqe+4ua2lbjPM7Y/h1WVwnt0Tnzk1fLke1cX+PenYGUdwoa25wx9I7vZ5JHfnDWuPxK2qi4+cYKktZRcK6GWQ9HR2mp3P4q9b7Neaujnp7Zfq2gLIe0kmieS6JpGWk8+cOP2WkAnrgDda7o6k11aqapg1NrSvuj+YntZcDsgHFv2RnG253x1xjOM/MupU98bN9Y0T51+lfqb2LbpaCwQvH7R1LHBy/GZzj/JDPR64ma2mZU8UOJcr4frGlgc6ct8hnljb7w0q7TcDHdhSVdVNFDEAZ5xWyBzeb6p5RkcpGTzZxt3La6S307oe1jq6mpimYNpZzK0g75Gf6rXqyvJ/UaLw64YcNdKh8+nLVBU10D+zfXVJE83MOuCdme5oCs8DwWDsel7Rp/t/k2lZD28plfgdXHqfJZ4brTGajO232WNk0xsEKyAhCEAllNCBIwmhBhtR6htulrFU3y7ulZQUoDppIonSGNuccxa0ZwM7nuWKpuIWmai5UFudUVNJU3L/wBjbWUctOKk4zhjntAJxvjOV4OMTuTgpq92cf8ABk39FoU9ZVas1hoHSl6tr9OttzYr1E+oma99wdFHyiOEsyBjOXcxBxjAWdtlXmO5ta2qdW0GlqajfVwVNXU11SykpKSkj7Saoldvho22ABcSTgAElZ9hLmBxGCRnCpur1RfL/rnV9vop7xR02nuWkpPkuibMZakx87nSOc07AloDNsjOV76DU2rJNVcN47t2tukvdDVfKdulia3lmijDgR3tOSTjPTCdvKOtWuPBJVb8uauNz4nUFon+U621dibVTStaAx0kHPyZGM+1nGfIZXk0ZqOtvNdO2j1XcKi7UlveK3T16p2087KnA5JBhoLWZyDjmByOmFPc61b+Vh7DqS2alp6uotUr3x0lXLQyl8ZZiWM4eBnqM9/QqsdB6lut5vVut9+1TcLbqWNkhudhuFNHEJPZI5qfDRlrTghwc7IG6x02q9VQcEeIF4ZqCZ90sF3rKekqnRx83ZxSMDWuHLg7EgnGVHY61e3Ur4euU3rpo+3j9ZDO07LnHPy5xzcvXGdsrXdN2zULK0Xa6amkr6eqoov7D6uxkcEv1nPY4bkEHGDnp13WiTWesrPSYrootS3KkJsDJwYeyyxpn5eyGWH2Mjm8c96taSLkBwglVDYbvqTX0Wr7nR6gqrLFabjPbbdFTMjLS6FozJLzNPPzOP1dgB57rCN19qfUemeFd6tlzFpqNRVxoq+JkbZI3EMfzEA77FhIGe/fKjvDrV9DoteueraG1atsum6qlq+3vPaimnawGHmjbzOa52cg8u42Wr6PuF/puKGqNJXW+S3iko6SlraWWojY2VglLw5hLAAQCzbbvXn4jR103EjhxFb6plLO+trGmV0YfyN9WPMQDtzY6Z2z3FLfGyTzpZ4IxlPKqCnu+qrXrfV+i67UM9wgZZPle3Vz42NqKYkuYWEtaGuAIBBIWNsd/wBY0nCS3cU7vqeWviprFLV1NqbAxsdQ8MzG7nHtBwIJcehzsBhR3ietXllACoyy6k15NHoy4Bt+r5rpKwXqJ9vEdLDDIwntIXYBaGOLcHJ5hklSo9V6rpdMa6sFzvU9Rqu03JtJbZWxxsdM2fBpCG8uCDk823RrumFPaI6rxLl8Z6qnpgwzzMjD3hjS9wbzOPQDPUnwVNVGpdQv4gz6IqLren09ktcE1ZWWmjbJPVVUpJ3w0hjA0ZAA3PU7LAaiq9U3rSGg5dR1FztFxbquGiJ7FkLqlnO7sqksIPK7lAIHQEu26KO6Zg6JBTysZBE6zWR5qrhU3H1dj5Hzz8pkcBk/ZAHTboqMtWttd3rRts1vbW3+tuNbUsmFqgt7TQOpHS4LA/lzzCPfn5s8w8Nla5aRJt0KdynnZVE2p1bfuL2rNKU+q6m12qkoaWqh7GGN08b5Q76rnNIDcjJBBOwAI3Ww8Jb9dtScM7fcb7Usqbg2WemmnYzkEpildGHYGwJDd8KJlsuOvLdWVMElRJAyVjpYgC9gcC5oPQkdRnC++VTunbXUScd9fuGobjEIG2+Z7GGPlkDo3HkcCw+yAMADBwTusZHqXWV/4R3jiTQX99vqqSSqqaKhZEw0zoIXuaI5QW8zi4MJLgQQSMdE7J6r0JyVCWVkET5pXNZGwFznOIAAHUknoqwoNXXO58QtEGCrfFbL/YZrhNRkAtbI0RlpBxzbc5HnhYC/3K83fQHGK31t5nMVnlmhp3BrA4Q+rteYycbglxGeuO9OyOq72SMkjbIwtcxwBDmnII8VIKlbje7xozhXpX5Pu1wr6+/PoaKAPijldSh0fM8xMa0cx5QcB2d8LYtKXPVA4g1trqae9VOnX0DJ4ay7UoifFUh2HRBwA5gWkO6bHOCkyNLJJwktM1dWGnutthn1dLZqaZsg9VooRJVVT9iC32XENaM5w3qRk9yrYa71MeCFXfxd5mXS2X8W/t3wta+aIVTIsSMI2cWP32BylykJjavw7dV8op4Zy8RSsk5HcjuVwPK7vBx0PktFvV4utLxl0tZKe4ubbblQ1r56flaQXxBvI4HGQfaPfjZaVo3t9NW3iLqd98uFVHZ7vXyy0n0QjqnNja4ufhmQ4nHQgDA2UXI6r0zthPwVFXPU+rtP8KLFxMrNQzVdRUy0k1ZbezjbTOhneGmOMAczS0OGHcxJI36rNOrtWXTjbqLSNJqie3WuG1U1bEWwRvkhfI9zTycwwB7OTnPl1yp7p61beUsqhab6RquPhFb5ZKuGo1FW6jdpxtcYgGtPrDmdsWdMhjTt0zhbU+6XvTPGCwaTqb5V3W2ahoalzXVTY+1pp4cHma5rR7Lg7oQcED3J2iOq0OZJx2XOY1JxBPCLWGrjrCYVum7lWxU8Xq8RbOyGXl5ZvZ3y3b2cY67rb4Lxqy1cQdDtuGo/lCi1RTzMqaJ0DGR08rIBK10RA5gOow4nPXKd09Fl2u/Wy8VdzpbfOZZbXUmkqgWFvZyhody7jfZw3Gy9Fa+pFO5lI1pmeOVpectbnvcO8Dw7+ip6o19e9OWLixcpqh10k09cBDb45mtAYHxRlrXFoGWhz+p3wML3W25a1oNUaWb2t/vdLXl0V5NZbhFDTksy2WMhreQB/s8uT7J8d07fSOtaRfeAumH8XNNU0hramK5UdfUV9SZy2Z1QwxlkzXNxykGTYAYGAMLoCxwXCitsVBcqoVc9O0RipDeUztHR7gNg4jqBtncbHCnPQtk1FQXAt9qCCeIO8A8xn/wLJ48Exxk8wyyuXujqE8IHuTV1RhB6ISPRAj4L5yj6J3uK+ncvnL+xf7j/AEQfTqEFCfcgijp7kJjw7kDy5BKMkdUuqBg5TSb3poBCEIBCEIBJzQ4YTQg+fKGtwAtNqp4bfqwWmgs7mzXNjpp6xkfsNIwBzHvPh7lupGV83RMLg4t3Heos2NIbbmuvstuo5nVEEUsUs8BIHZZw4ucT9dzi0Ek7gDHRO6xz0tO64wyNpaeJs3aVhcCIT2xIcWH6wA5tu8EhbbVCGkilq+yHMG5JA3OFrmk7xRamssj/AFGojiM8zXR1UJZzYkdvg9x7vEKl8JY+5V1DZ7RSctLJdbXc5GRMjhiLywPB3/8Al4Pfs0bdOm8UsUUFLFDBGI4mNDWMaMBoA2CYp4hG2MRhrGjDQO4L6huBgBWkQPcFIdEAI6KwaWU0sIDKOqMJoBCEIBR7ymjCDWtcaYdrLRdx0ybk+3RXCPsZZ44w9wYSMgA7AnHXuWH1Hw7j1FZLDTvvNRRXaxTRT0d0p4m9ox7W8py0+zhw2I6LfcBHKFWyVMtnpXdRw6uMWr6/Utg1hVWae6RxtuEDKWKaKd7G8ola1/1H4791677w/kuzNO1NLqS4UN1sD3Op7g4MnfKHN5XiQOGHcw9y3nlCO7onWHaq3oeGtbQVWqaqDWlzFTqKOLtKgxx9rBKwYEjHAAdNuXAAC9I4fVdTqM6ku2ppqi8RW+W30lTT0sdP6u2T60mBnmfsMZOB4brf+VGE6w3Wh0egq99+st51FqZ95qLIyQUZNHHCed7eQvkIJLjjwwM7rEN4Ru/2f6p0jLqmqfFqOslrJ6gU0YfCZXB0jWjpg4GM7hWngIxunWJ7V4bVRy2+0UlFLUmpkghZE6UsDOctAGcDpnHRapeNBVFdxFpta2vUtXZ6xtH8n1EUUMcrKiEP5wDzg8pB7wt6SwFOkbquRw0qKCvv0mm9V1llor/KaispWU8cvJK5vK+SFzt43OHXZwzvhKs4WUXZ6MpbLdJLRQaTnE9NTMhbL2zgC323OOdwXZx1JyrHwPBGAo6w3WnUGin0PE+663+WZpPlKkio3UToWhjGx7tIcN85Ls5658k9XaMl1NebBdqa+VFpq7HPJUQPhiZIJHPYGFrw7q3Gcjz6hbhgIwFPWG60eHQXLWX+7VN6nqL1eqQUT6sxNa2nhaCGsjj6AAucdyST1K++m9DUlm4Zw6Er6t92t8VK6hL5o2sdJC4Ecrg3bOCRlbiQOqFHWG60DTGg71p2C322TXVwr7RbXD1amfBFHI5gGGRySt3exo7sDOBleqs4fW6r4pUWvHVUzKimpPVn0zQOzmcC7s5Hd/MwPeB/iW648kYTrDdaFfNAVVXrE6t05qap0/dZaVtHUmOnjqIqmJpy3nY/7TcnDgemyhqHhw+/6PoLPPqa4fKVDWx3KG6yNZJIKhji4O5MBvLuRyDAA2CsFLATrCWsbbKCppbRHR3Ovdc5wzllqJI2s7XPX2W7AeQ7lo1i4Z3TTUcNps2u7nS6agnMsVsFPCXxsLufsmzkc4ZknbrjbKss7pYHgp1DbTKLRVRQ8RL3rGO+vdLdaSOkNMaZvLCI89mQc5JHMc56+S+2gNHfMXSjdPNu01zhjmlmZLNE1jx2jy9wPLsfacfxW3Y8kYCjrDdaK7QdRHxMrNZW3UVVQNuMMMNdRMhjeyo7LIYQ5wJbscHAzjvCxEXCNlPpm66RpNT11Ppm51D5pKFsUfaRMkdzSwxy9WscSe7IycEK0cBGAnWHatJvXD+mr7tp672e5z2SusML6WmfBGyRhge0NdE5jxgjDRg9xCx9Fwup6ei1nQVl9rq+l1Y4vqBMGCSImPsyWuA32A2xgYVjqOB4J1h2qsJOFdXW6DodM3PWddU1Fslhmt9wjpoo5KV0IxGQAMOONjk7+S2rT1ivtvqpaq+aqnvMroxG2MUzKaGPByXBjc5cfEnp0AWz4CMBJjIW2tGvuhKi566o9X2vUdTZ7hBRuoHhkEczXxF3NsH/AFXZ79/MLERcILczQ+odHvvddJQXerdWskdy9tSSl7X8zX/aPO0Oy7z8VZ+AggJ1h2quKfhzdBrKwaquOs62411pilgcJKaJkc0cgALQxv1Dtku3JPkAF9bfw19Qvmo5nahqqiyagmlqaq0SQx9n2kjOR+JMc/KR9nx71YOAnhOsT2qsqbhSRYrXpi56mqbppq1zxSwUM1OwSPETuaKOSUbvY0gdwJwMkrMwaImg4n3PXDb3IZa6hjoPVPV28kbGEuaebOSeYk+fRbpgJgYTrEbqp6TgxRs0HV6WrtQ1lS6S6uvNNXRxMhlpKkv5+doGQ7Ds7HuJC2K36JqWatpdU6gvhvF0oaV9JRuFM2COBryDI7laTl7uUAnOABgAZK3ZIp1h2qrBwllHDzU+jzqmoMeoauarnqfVI+eMyu5pGtGcYPd4LJ1XDyarvei7vNqGXt9Ksc1jW0zA2r5mCNxcM+zlowMdOqsDCMeSdYbquafhZb3fPaG7XOouVJq+TtKuB0bI+xPLyDkc3fZobjPeM9691g0dqS1VFA258QLjdqKgbyxU7qaGEygN5R2z2jmkwP8ADkgE5W8YCOUKdQt2jy75wpDpun0QpQEsp9EBAIPRCR6IEdioP3jd7lJQkOIne5B9EFGUkAU+5JCCXghGdgllBJCAcoQCEIQCEIQCEIQCEIQQfG2RhY9oc0jBBHVfOKmhp2lsMTWD+EYX3QgiAc7qSEsoGhCEAhCEAhLKeUAhCEAhCWUDQllNAdUIQgEIQgEJZTQCEIQCEJZQNCEIBCEIBCWUZQNCEIBCEIBCEsoGhCEAhCMoBCWU0AhCEAhCWUDQllNAIQhAIQllA0HohLuQRUJf2bvcf6L6HqvnL+xf7j/RBNMdU1FAx1yg4yn35SPkgY3CEDYJYHcgYTQOiEAhCEAhCEAhCEAhCEAhCEAlhNCAQhCBITQgWE0IQCEIQJGE0IBCEIBJNCBYQmhAIQhAJd6aECwjCaEAhCEAkmhAk0IQCEIQLKE0IEmhCAQhBQLKE0IFhNCEAhCEC7kYTwhAsJoQgEIQgSMJoQCEIQCXVNCBIwmhAJHomg9EED1UJf2TvcVM9VCX9k73FB9B0STyl1KA8k9so70d6BgZCMYQOiMoAZ700k0AhCEAhCEAhCEAhCEAhCEAllNLCBoQhAISQgaQRhNAIQllA0JIQMoSwmgEIQgEJIQCaWE0AhCSBoSQgaEIQCEsoQNCSMIGhCEAhCSBoSTQCEIQCEsoQNLKE0AhCEAhIoQGUBGE0AhCEAhJCAymhCAQhCAQllGEBlM9EdUj0QRUJf2Tvcf6KahL+yd7ig+iMdyMoygMJJkpoF8UdEJIGCnzKKEEspqA6oQTQlkeKeQgEJc26XMUEkKPMfJHMUEkKOSjJQSQoE7phBJCQPinlAIRlGQgEIykD5oGhRyc7oygkhLKeR4oBCMjxUSd9kEkKOUZQSQoJ83mgkhRJ32QSgkhRB8UZ3QSQo58UZQSQo82EZQSQo5QgkhRJ3Rn2kEkKOdtkZKCSEifBLKCSFHKMoJIUe5HMUEkJE7oztugaEgfFPI8UAhGQjKAQkTsjKBoRkeKWR4oGhGd0id0DQkCnkeKAQjI8UZCAQllBI96BoSztsgnZA0j0SyjKBKEn7N3uP9FNQk/Zn3FB9MpLE/L9F93N+Ufql84KL7uf8o/VBl0ZWI+cFF93P+Ufqj5wUX3c/5R+qDLpZWI+X6L7uf8o/VHy/Rfdz/lH6oMvlGViPnBRfdz/lH6o+cFF93P8AlH6oMwhYf5fovu5/yj9UfL9F93P+UfqgzCFh/nBRfdz/AJR+qPnBRfdz/lH6oMwhYf5wUX3c/wCUfqn84KL7uf8AKP1QZdCxB1BRfdz/AJR+qXzgovu5/wAo/VBmELD/AC/Rfdz/AJR+qDf6If3c/wCUfqgzCFifl+iH93N+Ufql84KL7uf8o/VBmMlLKxHzgovu5/yj9UvnBRfdz/lH6oMxk4RlYj5wUX3c/wCUfqj5wUX3c/5R+qDL5QsR84KL7uf8o/VBv9F93P8AlH6oMuhYj5eovu5vyj9Uvl+i+7n/ACj9UGYyhYf5fosfUn/KP1T+X6L7uf8AKP1QZfKFh/l+i+7n/KP1TN/ovu5/yj9UGXyhYf5fovu5/wAo/VHy/Rfdz/lH6oMwhYf5fovu5/yj9U/nBRfdz/lH6oMuhYj5wUX3c/5R+qPnBRfdz/lH6oMuhYj5wUX3c/5R+qPnBRfdz/lH6oMuhYj5wUX3c/5R+qPnBRfdz/lH6oMuhYj5wUX3c/5R+qfy/R/dzflH6oMshYn5fovu5vyj9UvnBRfdz/lH6oMuhYj5wUX3c/5R+qPnBRfdz/lH6oMv0CFiTf6L7uf8o/VL5wUX3c/5R+qDLoWI+cFF93P+Ufql84KL7uf8o/VBmELD/OCi+7n/ACj9UfOCi+7n/KP1QZhGViBqCi+7n/KP1S+X6L7uf8o/VBmELEDUFF93P+Ufqj5wUX3c/wCUfqgy6FiPl+iH93N+Ufqj5wUX3c/5R+qDLp5Kw/zgoj/dz/lH6o+cFF93P+Ufqgy6FiPl+iH93P8AlH6o+X6L7uf8o/VBl8oysR84KLH7Of8AKP1R84KL7uf8o/VBl0LEDUFF93P+Ufqj5wUX3c/5R+qDLoysT8v0X3c35R+qXzgovu5/yj9UGXQsQdQUQ/u5/wAo/VHzgovu5vyj9UGXQsR84KL7uf8AKP1R84KL7uf8o/VBl0LE/L9F93N+Ufql84KL7uf8o/VBl0LEfOCi+7n/ACj9UfOCi+7n/KP1QZfuUJf2Z9x/osV84KL7uf8AKP1Skv1F2Z+jm/KP1Qf/2Q==";</script>
+</head>
+<body>
+<a class="skip-link" href="#cours">Aller au contenu</a>
+
+<header>
+  <div class="hero-deco d1">ƒ</div>
+  <div class="hero-deco d2">x↦y</div>
+  <div class="hero-deco d3">(x ; y)</div>
+  <div class="hero-deco d4">f(x)</div>
+
+  <div class="header-inner">
+    <img class="header-logo" alt="Logo Estif-Maths" width="100" height="55" src="Estif_logo.jpg" />
+    
+    <p class="header-tagline">Réussir ton brevet en toute autonomie !</p>
+    <h1 class="header-title">Chapitre 8 : Introduction aux fonctions</h1>
+    <p class="header-subtitle">Image, antécédent, représentation graphique, calculs</p>
+    <div class="header-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      100 % gratuit
+    </div>
+  </div>
+</header>
+
+<svg class="wave-divider" viewBox="0 0 1440 54" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <rect width="1440" height="54" fill="#0f0e17"/>
+  <path d="M0,54 C360,0 1080,54 1440,20 L1440,54 Z" fill="#f8f9fe"/>
+</svg>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Retour au menu principal</a>
+
+    <div class="tabs" role="tablist" aria-label="Rubriques du chapitre">
+        <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="cours" onclick="showSection('cours', event)">📖 Cours Détaillé</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="automatismes" onclick="showSection('automatismes', event)">⚡ Automatismes</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="exercices" onclick="showSection('exercices', event)">📝 Exercices Interactifs</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="brevet" onclick="showSection('brevet', event)">🎓 Exercices Type Brevet</button>
+    </div>
+
+    <!-- ============================================================
+         SECTION COURS DÉTAILLÉ
+         ============================================================ -->
+    <div id="cours" role="tabpanel" class="content-section active">
+        
+        <div class="progress-tracker" id="progress-tracker"></div>
+        <div style="text-align:center; margin-bottom:20px;">
+            <button class="auto-btn secondary" style="font-size:0.85rem; padding:8px 16px;" onclick="resetCoursProgress()">🔄 Réinitialiser ma progression du cours</button>
+        </div>
+
+        <div class="utilite-box" id="cours-completion-box">
+            <strong>🏆 Un certificat t'attend !</strong> Termine les 5 quiz du cours (75% minimum à chacun) pour débloquer ton certificat de réussite. Il sera téléchargeable tout en bas de cette page.
+        </div>
+
+        <div class="course-section" id="section-1" data-section="1">
+            <div class="section-inner">
+                <h2>1. Introduction aux fonctions</h2>
+                <div class="definition-box">
+                    <strong>Vocabulaire :</strong>
+                    <ul>
+                        <li>Le processus qui, à un nombre donné au départ, associe un unique autre nombre, s'appelle une <strong>fonction</strong>, souvent notée \( f \).</li>
+                        <li>Le nombre de départ est noté \( x \) et s'appelle un <strong>antécédent</strong>.</li>
+                        <li>Le nombre associé est noté \( f(x) \) (se lit « \( f \) de \( x \) ») et s'appelle l'<strong>image</strong> de \( x \) par \( f \).</li>
+                    </ul>
+                </div>
+                <div class="remark-box">
+                    <div class="two-columns">
+                        <div class="col-text">
+                            <strong>💡 Remarque :</strong> Il ne faut pas confondre \( f \) et \( f(x) \). \( f \) désigne une fonction alors que \( f(x) \) désigne un nombre (l'image du nombre \( x \) par la fonction \( f \)).
+                        </div>
+                        <div class="vertical-img">
+                            <img src="OGD2A.png" alt="Schéma fonction machine" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+                <iframe src="machine.html" width="100%" height="500px" frameborder="0" title="Machine à fonctions interactive"></iframe>
+                <div class="example-box">
+                    <ul>
+                        <li>Si l'on introduit 2 dans la machine, il sortira 4 puisque \(2^2 = 4\). On dit que <strong>2 a pour image 4</strong>.</li>
+                        <li>Si l'on a obtenu 49, on a pu introduire 7 ou \(-7\). On dit que <strong>49 a deux antécédents : 7 et \(-7\)</strong>.</li>
+                    </ul>
+                    Notation : \( c : x \mapsto x^2 \) ou \( c(x)=x^2 \).
+                </div>
+                <div class="definition-box">
+                    <strong>Expression algébrique d'une fonction :</strong><br>
+                    On peut noter : \( f : x \mapsto \ldots \) ou \( f(x) = \ldots \).
+                </div>
+                <div class="utilite-box">
+                    <strong>💡 Ça sert à quoi ?</strong> Les fonctions servent à modéliser des phénomènes concrets : calculer le prix à payer en fonction de la quantité, la distance parcourue en fonction du temps, l'aire d'une figure en fonction de ses dimensions, la vitesse d'un objet en fonction du temps...
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Pièges à éviter :</strong>
+                    <ul>
+                        <li>Ne pas confondre <strong>image</strong> et <strong>antécédent</strong> : l'image est le résultat, l'antécédent est le nombre de départ.</li>
+                        <li>Une fonction associe à chaque antécédent <strong>une seule image</strong>.</li>
+                        <li>Un nombre peut avoir <strong>zéro, un ou plusieurs antécédents</strong>.</li>
+                    </ul>
+                </div>
+                <div class="wg" id="wg6-machine-box">
+                    <h4>⚙️ La machine à fonctions</h4>
+                    <p class="wg-sub">Entre un nombre, choisis une opération, et observe le résultat.</p>
+                    <div class="wg-ctl">
+                        <label>Nombre d'entrée x = <output id="wg6-mach-xv"></output><input type="range" id="wg6-mach-x" min="-10" max="10" step="1" value="3" aria-label="Nombre d'entrée"></label>
+                        <label>Opération
+                            <select id="wg6-mach-op" aria-label="Opération">
+                                <option value="square">x² (carré)</option>
+                                <option value="double">2x (double)</option>
+                                <option value="triple">3x + 1</option>
+                                <option value="half">x ÷ 2</option>
+                                <option value="affine">2x − 5</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="wg-out" id="wg6-mach-out"></div>
+                </div>
+                <div class="quiz-block" id="quiz-1">
+                    <h3>🤔 Ai-je bien compris ? (Section 1)</h3>
+                    <div class="quiz-container" id="quiz-container-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-section locked" id="section-2" data-section="2">
+            <div class="lock-overlay"><i class="fas fa-lock"></i> Termine le quiz précédent avec au moins 75% pour débloquer.</div>
+            <div class="section-inner">
+                <h2>2. Représentation graphique d'une fonction</h2>
+                <div class="definition-box">
+                    <ul>
+                        <li>Toute fonction \( f \) peut être représentée par une <strong>courbe représentative</strong> notée \( \mathcal{C}_f \).</li>
+                        <li>La courbe est l'ensemble des points de coordonnées \((x ; f(x))\).<br>
+                         L'antécédent \(x\) se lit sur l'axe des abscisses.<br>
+                         L'image \(f(x)\) sur l'axe des ordonnées.</li>
+                    </ul>
+                </div>
+                <div class="remark-box">
+                    Dans certains cas, les valeurs lues sont exactes (points sur quadrillage), mais le plus souvent il s'agit de <strong>valeurs approchées</strong>.
+                </div>
+                <div class="example-box">
+                    <div class="two-columns">
+                        <div class="col-text">
+                            <strong>📖 Lecture graphique (fonction \(f\)) :</strong><br>
+                            Par lecture graphique ci-contre :
+                            <ul>
+                                <li>L'image de 1 par la fonction \( f \) est 2. <br>Le point A a pour coordonnées \((1 ; 2)\).</li>
+                                <li>Un antécédent de 4 par \( f \) est environ 1,7 (valeur approchée).<br>4 a un deuxième antécédent : environ \(-1,7\).</li>
+                            </ul>
+                        </div>
+                        <div class="col-img">
+                            <img src="OGD2B.png" alt="Graphique fonction f" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+                <div class="method-box">
+                    <strong>📐 Méthode pour lire une image sur un graphique :</strong>
+                    <ol class="step-list">
+                        <li>Placer le nombre \(a\) sur l'axe des <strong>abscisses</strong> (axe horizontal).</li>
+                        <li>Tracer une <strong>verticale</strong> jusqu'à la courbe.</li>
+                        <li>Lire l'<strong>ordonnée</strong> (axe vertical) du point d'intersection : c'est \(f(a)\).</li>
+                    </ol>
+                </div>
+                <div class="method-box">
+                    <strong>📐 Méthode pour lire un antécédent sur un graphique :</strong>
+                    <ol class="step-list">
+                        <li>Placer le nombre \(b\) sur l'axe des <strong>ordonnées</strong> (axe vertical).</li>
+                        <li>Tracer une <strong>horizontale</strong> jusqu'à la courbe.</li>
+                        <li>Lire les <strong>abscisses</strong> des points d'intersection : ce sont les antécédents de \(b\).</li>
+                    </ol>
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Pièges à éviter :</strong>
+                    <ul>
+                        <li>Ne pas inverser les axes : l'antécédent se lit sur l'axe horizontal, l'image sur l'axe vertical.</li>
+                        <li>En lecture graphique, les valeurs sont souvent <strong>approchées</strong>.</li>
+                        <li>Une image est toujours <strong>unique</strong>, mais un nombre peut avoir <strong>plusieurs antécédents</strong>.</li>
+                    </ul>
+                </div>
+                <div class="quiz-block" id="quiz-2">
+                    <h3>🤔 Ai-je bien compris ? (Section 2)</h3>
+                    <div class="quiz-container" id="quiz-container-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-section locked" id="section-3" data-section="3">
+            <div class="lock-overlay"><i class="fas fa-lock"></i> Termine le quiz précédent avec au moins 75% pour débloquer.</div>
+            <div class="section-inner">
+                <h2>3. Tableau de valeurs d'une fonction</h2>
+                <div class="definition-box">
+                    Un <strong>tableau de valeurs</strong> d'une fonction \( f \) regroupe les coordonnées d'un certain nombre de points de sa courbe.
+                </div>
+                <div class="example-box">
+                    Tableau de valeurs pour une fonction \( g \) :
+                    \[
+                    \begin{array}{|c|c|c|c|c|c|c|}
+                    \hline x & -1 & 0 & 2 & 4 & 6 & 8 \\ \hline g(x) & 2 & 3 & 5 & 4 & 2 & 0 \\ \hline
+                    \end{array}
+                    \]
+                    <ul><li>L'image de 0 est 3.</li><li>Les antécédents de 2 sont \(-1\) et \(6\).</li></ul>
+                </div>
+                <div class="property-box">
+                    <strong>À retenir :</strong>
+                    <ul>
+                        <li>Une fonction associe à chaque antécédent une unique image.</li>
+                        <li>On note \( f : x \mapsto f(x) \).</li>
+                        <li>Graphiquement, la courbe est l'ensemble des points \((x ; f(x))\).</li>
+                        <li>Un tableau donne des points particuliers.</li>
+                    </ul>
+                </div>
+                <div class="method-box">
+                    <strong>📐 Construire un tableau de valeurs :</strong>
+                    <ol class="step-list">
+                        <li>Choisir des valeurs de \(x\) (souvent des nombres simples).</li>
+                        <li>Calculer l'image de chaque valeur en remplaçant \(x\) dans l'expression de \(f\).</li>
+                        <li>Inscrire les résultats dans un tableau à deux lignes.</li>
+                    </ol>
+                    <strong>Exemple :</strong> pour \(f(x) = 2x - 3\), avec \(x = 0, 1, 2, 3\) :<br>
+                    \(f(0) = -3\), \(f(1) = -1\), \(f(2) = 1\), \(f(3) = 3\).
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Pièges à éviter :</strong>
+                    <ul>
+                        <li>Ne pas confondre la ligne des \(x\) (antécédents) et la ligne des \(f(x)\) (images).</li>
+                        <li>Bien vérifier les calculs pour chaque valeur.</li>
+                    </ul>
+                </div>
+                <div class="quiz-block" id="quiz-3">
+                    <h3>🤔 Ai-je bien compris ? (Section 3)</h3>
+                    <div class="quiz-container" id="quiz-container-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-section locked" id="section-4" data-section="4">
+            <div class="lock-overlay"><i class="fas fa-lock"></i> Termine le quiz précédent avec au moins 75% pour débloquer.</div>
+            <div class="section-inner">
+                <h2>4. Déterminer image et antécédent par calcul</h2>
+                <div class="method-box">
+                    <strong>📐 Calculer l'image d'un nombre :</strong> remplacer \(x\) par le nombre dans \(f(x)\).<br>
+                    <strong>🔍 Trouver un antécédent :</strong> résoudre l'équation \(f(x) = b\).
+                </div>
+                <div class="example-box">
+                    <strong>Exemple 1 : image</strong><br>
+                    Soit \(f(x)=x^2+5x\). Calculer l'image de 4 :<br>
+                    \(f(4)=4^2+5\times 4=16+20=36\).
+                </div>
+                <div class="example-box">
+                    <strong>Exemple 2 : antécédent</strong><br>
+                    Soit \(f(x)=2x-9\). Trouver l'antécédent de 7 :<br>
+                    \(2x-9=7 \Rightarrow 2x=16 \Rightarrow x=8\).<br>
+                    L'antécédent de 7 par \(f\) est 8.
+                </div>
+                <div class="example-box">
+                    <strong>Exemple 3 : équation du second degré (cas simple)</strong><br>
+                    Soit \(f(x)=x^2\). Trouver les antécédents de 49 :<br>
+                    \(x^2=49 \Rightarrow x=7\) ou \(x=-7\).<br>
+                    49 a deux antécédents : 7 et \(-7\).
+                </div>
+                <div class="warning-box">
+                    <strong>⚠️ Pièges à éviter :</strong>
+                    <ul>
+                        <li>Pour un antécédent, il faut bien <strong>résoudre une équation</strong>, pas simplement remplacer.</li>
+                        <li>Ne pas oublier qu'une équation du type \(x^2=a\) (avec \(a>0\)) a <strong>deux solutions</strong>.</li>
+                        <li>Vérifier le résultat en remplaçant dans l'expression.</li>
+                    </ul>
+                </div>
+                <div class="quiz-block" id="quiz-4">
+                    <h3>🤔 Ai-je bien compris ? (Section 4)</h3>
+                    <div class="quiz-container" id="quiz-container-4"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-section locked" id="section-5" data-section="5">
+            <div class="lock-overlay"><i class="fas fa-lock"></i> Termine le quiz précédent avec au moins 75% pour débloquer.</div>
+            <div class="section-inner">
+                <h2>5. Synthèse et applications</h2>
+                <div class="property-box">
+                    <strong>📌 À retenir pour tout le chapitre :</strong>
+                    <ul>
+                        <li><strong>Image par calcul :</strong> remplacer \(x\) par la valeur donnée dans l'expression de \(f\).</li>
+                        <li><strong>Antécédent par calcul :</strong> résoudre l'équation \(f(x) = \text{valeur}\).</li>
+                        <li><strong>Image graphique :</strong> vertical → courbe → ordonnée.</li>
+                        <li><strong>Antécédent graphique :</strong> horizontal → courbe → abscisse(s).</li>
+                        <li>Une image est toujours <strong>unique</strong> ; un nombre peut avoir <strong>0, 1 ou plusieurs antécédents</strong>.</li>
+                    </ul>
+                </div>
+                <div class="utilite-box">
+                    <strong>💡 Applications concrètes :</strong>
+                    <ul>
+                        <li><strong>Tarifs :</strong> le prix à payer est une fonction de la quantité achetée.</li>
+                        <li><strong>Géométrie :</strong> l'aire d'un carré est une fonction de son côté.</li>
+                        <li><strong>Physique :</strong> la distance parcourue est une fonction du temps.</li>
+                        <li><strong>Statistiques :</strong> l'effectif est une fonction de la valeur observée.</li>
+                    </ul>
+                </div>
+                <div class="example-box">
+                    <div class="two-columns">
+                        <div class="col-text">
+                            <strong>📖 Exercice graphique (fonction \(h\)) :</strong><br>
+                            1) Déterminer l'image de 3 par \(h\).<br>
+                            2) Déterminer les antécédents de 2 par \(h\).<br><br>
+                            <strong>Solutions :</strong><br>
+                            ✔ Image de 3 : 5.<br>
+                            ✔ Antécédents de 2 : environ \(-0,9\) ; \(1,3\) ; \(2,5\).
+                        </div>
+                        <div class="col-img">
+                            <img src="OGD2C.png" alt="Courbe pour lecture graphique" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-block" id="quiz-5">
+                    <h3>🤔 Ai-je bien compris ? (Section 5)</h3>
+                    <div class="quiz-container" id="quiz-container-5"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scoreboard" id="full-course-download-box" style="display:none;">
+            <h3>🎉 Félicitations, tu as terminé tout le chapitre !</h3>
+            <div class="score-display">Tu as validé les 5 sections avec au moins 75% de réussite à chaque quiz. Télécharge ton certificat de réussite et le cours complet en PDF pour le réviser :</div>
+            <p style="text-align:center; margin-top:12px; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:center;">
+                <button class="download-cert-btn" id="download-cours" onclick="downloadCoursCompletion()">🏆 Télécharger mon certificat du cours</button>
+                <a class="download-cert-btn" id="download-cours-pdf" href="N8%20Fonctions%20Cours%20complet.pdf" download="N8 Fonctions Cours complet.pdf" style="display:inline-block; text-decoration:none;">📄 Télécharger le cours complet (PDF)</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SECTION AUTOMATISMES
+         ============================================================ -->
+    <div id="automatismes" role="tabpanel" class="content-section">
+        <h2>⚡ Automatismes</h2>
+        <p style="margin-bottom: 20px;">Comme au Brevet : chaque série est <strong>chronométrée</strong>. Réponds le plus vite et le plus juste possible avant la fin du temps imparti !</p>
+
+        <div id="auto6-container"></div>
+    </div>
+
+    <!-- ============================================================
+         SECTION EXERCICES INTERACTIFS
+         ============================================================ -->
+    <div id="exercices" role="tabpanel" class="content-section">
+        <h2>📚 Exercices d'entraînement</h2>
+        <div class="copy-notice" role="note"><strong class="t">✍️ Travaille comme le jour de l'examen !</strong>
+            Avant de saisir tes réponses, <strong>rédige sur ton cahier toutes les étapes</strong> puis termine par une <strong>phrase réponse</strong>. À la fin de chaque exercice, compare ta copie avec la <strong>solution complète</strong>.</div>
+
+        <h3>I. QCM – Choix unique</h3>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧮 QCM 1 – Vocabulaire des fonctions</h4>
+                <div class="badge-import">QCM</div>
+            </div>
+            <div class="card-body">
+                <div class="question">On donne \( f : 3 \mapsto 7 \) et \( f(4) = 9 \). Quelle affirmation est vraie ?</div>
+                <div class="input-group">
+                    <label>A) L'image de 7 par \(f\) est 3.</label>
+                    <button class="verify" onclick="checkQCM6('q1a', 'A', false, 'solQ6_1', 'q1a', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>B) Un antécédent de 3 par \(f\) est 7.</label>
+                    <button class="verify" onclick="checkQCM6('q1b', 'B', false, 'solQ6_1', 'q1b', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>C) L'image de 3 par \(f\) est 7.</label>
+                    <button class="verify" onclick="checkQCM6('q1c', 'C', true, 'solQ6_1', 'q1c', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>D) Un antécédent de 4 par \(f\) est 9.</label>
+                    <button class="verify" onclick="checkQCM6('q1d', 'D', false, 'solQ6_1', 'q1d', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div id="solQ6_1" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧮 QCM 2 – Calcul d'image</h4>
+                <div class="badge-import">QCM</div>
+            </div>
+            <div class="card-body">
+                <div class="question">\( g(x) = x^2 - 3 \). L'image de 4 par \(g\) est :</div>
+                <div class="input-group">
+                    <label>A) 5</label>
+                    <button class="verify" onclick="checkQCM6('q2a', 'A', false, 'solQ6_2', 'q2a', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>B) 13</label>
+                    <button class="verify" onclick="checkQCM6('q2b', 'B', true, 'solQ6_2', 'q2b', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>C) 11</label>
+                    <button class="verify" onclick="checkQCM6('q2c', 'C', false, 'solQ6_2', 'q2c', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>D) 19</label>
+                    <button class="verify" onclick="checkQCM6('q2d', 'D', false, 'solQ6_2', 'q2d', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div id="solQ6_2" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧮 QCM 3 – Tableau de valeurs</h4>
+                <div class="badge-import">QCM</div>
+            </div>
+            <div class="card-body">
+                <div class="question">On a le tableau de valeurs de \(h\) : \(h(-2) = -4\), \(h(-1) = -1\), \(h(0) = 0\), \(h(1) = -1\). Quelle affirmation est vraie ?</div>
+                <div class="input-group">
+                    <label>A) L'image de \(-2\) par \(h\) est \(-4\).</label>
+                    <button class="verify" onclick="checkQCM6('q3a', 'A', true, 'solQ6_3', 'q3a', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>B) Un antécédent de \(-1\) par \(h\) est \(-1\).</label>
+                    <button class="verify" onclick="checkQCM6('q3b', 'B', false, 'solQ6_3', 'q3b', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>C) L'image de 0 par \(h\) est \(-1\).</label>
+                    <button class="verify" onclick="checkQCM6('q3c', 'C', false, 'solQ6_3', 'q3c', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>D) Un antécédent de \(-1\) par \(h\) est \(-4\).</label>
+                    <button class="verify" onclick="checkQCM6('q3d', 'D', false, 'solQ6_3', 'q3d', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div id="solQ6_3" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧮 QCM 4 – Recherche d'antécédent</h4>
+                <div class="badge-import">QCM</div>
+            </div>
+            <div class="card-body">
+                <div class="question">\( j(x) = 3x - 6 \). Un antécédent de 0 par \(j\) est :</div>
+                <div class="input-group">
+                    <label>A) 2</label>
+                    <button class="verify" onclick="checkQCM6('q4a', 'A', true, 'solQ6_4', 'q4a', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>B) -2</label>
+                    <button class="verify" onclick="checkQCM6('q4b', 'B', false, 'solQ6_4', 'q4b', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>C) 6</label>
+                    <button class="verify" onclick="checkQCM6('q4c', 'C', false, 'solQ6_4', 'q4c', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>D) 0,5</label>
+                    <button class="verify" onclick="checkQCM6('q4d', 'D', false, 'solQ6_4', 'q4d', 'interactifs')">✔️ Vérifier</button>
+                </div>
+                <div id="solQ6_4" class="solution"></div>
+            </div>
+        </div>
+
+        <h3>II. Exercices de calcul</h3>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📐 Exercice 1 – Image par calcul</h4>
+                <div class="badge-import">Calcul</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Soit \( f(x) = x^2 + 3x - 2 \).</div>
+                <div class="subquestion">a) Calculer \(f(0)\).</div>
+                <div class="input-group"><label>\(f(0) =\)</label>
+                    <input type="number" id="ex6_1a" placeholder="ex: 5">
+                    <button class="verify" onclick="checkNumber6('ex6_1a', -2, 'solEx6_1', 'ex6_1a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Calculer \(f(2)\).</div>
+                <div class="input-group"><label>\(f(2) =\)</label>
+                    <input type="number" id="ex6_1b" placeholder="ex: 5">
+                    <button class="verify" onclick="checkNumber6('ex6_1b', 8, 'solEx6_1', 'ex6_1b', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">c) Calculer \(f(-1)\).</div>
+                <div class="input-group"><label>\(f(-1) =\)</label>
+                    <input type="number" id="ex6_1c" placeholder="ex: 5">
+                    <button class="verify" onclick="checkNumber6('ex6_1c', -4, 'solEx6_1', 'ex6_1c', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solEx6_1" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📐 Exercice 2 – Antécédent par calcul</h4>
+                <div class="badge-import">Calcul</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Soit \( g(x) = 4x - 5 \).</div>
+                <div class="subquestion">a) Trouver l'antécédent de 3 par \(g\).</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="number" id="ex6_2a" placeholder="ex: 2">
+                    <button class="verify" onclick="checkNumber6('ex6_2a', 2, 'solEx6_2', 'ex6_2a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Trouver l'antécédent de 0 par \(g\).</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="number" id="ex6_2b" placeholder="ex: 2" step="0.01">
+                    <button class="verify" onclick="checkNumber6('ex6_2b', 1.25, 'solEx6_2', 'ex6_2b', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solEx6_2" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>📐 Exercice 3 – Antécédents avec un carré</h4>
+                <div class="badge-import">Calcul</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Soit \( h(x) = x^2 \).</div>
+                <div class="subquestion">a) Trouver les antécédents de 25 par \(h\) (séparés par une virgule).</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="text" id="ex6_3a" placeholder="ex: 5, -5">
+                    <button class="verify" onclick="checkText6('ex6_3a', ['5,-5','-5,5'], 'solEx6_3', 'ex6_3a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Trouver les antécédents de 0 par \(h\) (séparés par une virgule).</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="text" id="ex6_3b" placeholder="ex: 0">
+                    <button class="verify" onclick="checkText6('ex6_3b', ['0'], 'solEx6_3', 'ex6_3b', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solEx6_3" class="solution"></div>
+            </div>
+        </div>
+
+        <h3>III. Problèmes concrets</h3>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🍕 Problème 1 – Aire d'un carré</h4>
+                <div class="badge-import">Géométrie</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Un carré a pour côté \(x\) (en cm). Son aire est donnée par \(A(x) = x^2\).</div>
+                <div class="subquestion">a) Calculer l'aire d'un carré de côté 5 cm.</div>
+                <div class="input-group"><label>\(A(5) =\)</label>
+                    <input type="number" id="p6_1a" placeholder="ex: 25">
+                    <button class="verify" onclick="checkNumber6('p6_1a', 25, 'solP6_1', 'p6_1a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Calculer l'aire d'un carré de côté 7 cm.</div>
+                <div class="input-group"><label>\(A(7) =\)</label>
+                    <input type="number" id="p6_1b" placeholder="ex: 49">
+                    <button class="verify" onclick="checkNumber6('p6_1b', 49, 'solP6_1', 'p6_1b', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">c) Trouver le côté d'un carré dont l'aire est 64 cm².</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="number" id="p6_1c" placeholder="ex: 8">
+                    <button class="verify" onclick="checkNumber6('p6_1c', 8, 'solP6_1', 'p6_1c', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solP6_1" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🛒 Problème 2 – Prix d'un article</h4>
+                <div class="badge-import">Problème</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Un article coûte 12 € l'unité. Le prix total en fonction du nombre d'articles achetés est \(P(x) = 12x\).</div>
+                <div class="subquestion">a) Calculer le prix pour 3 articles.</div>
+                <div class="input-group"><label>\(P(3) =\)</label>
+                    <input type="number" id="p6_2a" placeholder="ex: 36">
+                    <button class="verify" onclick="checkNumber6('p6_2a', 36, 'solP6_2', 'p6_2a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Calculer le prix pour 7 articles.</div>
+                <div class="input-group"><label>\(P(7) =\)</label>
+                    <input type="number" id="p6_2b" placeholder="ex: 84">
+                    <button class="verify" onclick="checkNumber6('p6_2b', 84, 'solP6_2', 'p6_2b', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">c) Combien d'articles a-t-on achetés si l'on a payé 120 € ?</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="number" id="p6_2c" placeholder="ex: 10">
+                    <button class="verify" onclick="checkNumber6('p6_2c', 10, 'solP6_2', 'p6_2c', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solP6_2" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🚗 Problème 3 – Distance parcourue</h4>
+                <div class="badge-import">Problème</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Une voiture roule à une vitesse moyenne de 80 km/h. La distance parcourue en fonction du temps \(t\) (en heures) est \(D(t) = 80t\).</div>
+                <div class="subquestion">a) Quelle distance parcourt-elle en 2 heures ?</div>
+                <div class="input-group"><label>\(D(2) =\)</label>
+                    <input type="number" id="p6_3a" placeholder="ex: 160">
+                    <button class="verify" onclick="checkNumber6('p6_3a', 160, 'solP6_3', 'p6_3a', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">b) Quelle distance parcourt-elle en 3,5 heures ?</div>
+                <div class="input-group"><label>\(D(3,5) =\)</label>
+                    <input type="number" id="p6_3b" placeholder="ex: 280">
+                    <button class="verify" onclick="checkNumber6('p6_3b', 280, 'solP6_3', 'p6_3b', 'interactifs')">✔️ Vérifier</button></div>
+                <div class="subquestion">c) Au bout de combien de temps a-t-elle parcouru 240 km ?</div>
+                <div class="input-group"><label>\(t =\)</label>
+                    <input type="number" id="p6_3c" placeholder="ex: 3" step="0.1">
+                    <button class="verify" onclick="checkNumber6('p6_3c', 3, 'solP6_3', 'p6_3c', 'interactifs')">✔️ Vérifier</button></div>
+                <div id="solP6_3" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="scoreboard">
+            <h3>📊 Mon score sur cette série</h3>
+            <div class="score-display" id="score-interactifs">Score : 0 / 16 (0%) — 0/16 questions faites</div>
+            <button type="button" class="reset-scores-btn" onclick="resetScores('interactifs')">🔄 Recommencer cette série</button>
+            <button class="download-cert-btn" id="download-interactifs" disabled onclick="downloadCertificate('interactifs')">Termine les 16 questions restantes</button>
+        </div>
+
+        <div class="scoreboard" id="pdf-box-interactifs" style="display:none;">
+            <h3>🎉 Bravo, tu as réussi au moins 75 % des questions !</h3>
+            <div class="score-display">Tu as bien maîtrisé ces exercices. Continue avec les exercices type Brevet !</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SECTION EXERCICES TYPE BREVET
+         ============================================================ -->
+    <div id="brevet" role="tabpanel" class="content-section">
+        <div class="brevet-header">
+            <i class="fas fa-graduation-cap"></i> Entraînement au Brevet des Collèges
+        </div>
+        <h2>📝 Exercices Type Brevet</h2>
+        <p style="margin-bottom: 20px;">Ces exercices sont inspirés d'annales du Diplôme National du Brevet. Ils mobilisent les fonctions, les lectures graphiques et les calculs d'images et d'antécédents.</p>
+        <div class="copy-notice" role="note"><strong class="t">✍️ Travaille comme le jour de l'examen !</strong>
+            Rédige toutes les étapes sur ton cahier, justifie tes calculs et termine par une <strong>phrase réponse</strong>. Compare ensuite avec la <strong>solution complète</strong>.</div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🏝️ Exercice Brevet 1 – Hauteur de la mer (Fort-de-France)</h4>
+                <div class="badge-brevet">Brevet</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Julien dispose de 15 jours de vacances. Il contacte l'agence de voyages « À LA VOILE » pour préparer une croisière en voilier au départ de Fort-de-France. Le départ de la croisière choisie par Julien a lieu le 10 juillet (entre 0 h et 12 h). On a représenté ci-dessous la courbe représentative de la fonction \(f\) qui, à l'heure de la matinée (entre 0 h et 12 h) du 10 juillet, associe la hauteur de la mer dans le port de Fort-de-France.</div>
+                <div class="graph-container"><img src="OGD2EXTB1.png" alt="Courbe hauteur de la mer" onerror="this.style.display='none'"></div>
+                <div class="subquestion">1) Le voilier ne peut sortir du port que si la hauteur d'eau dépasse 3,20 mètres. Quelles sont les tranches horaires de départ possibles pour ce voilier ?</div>
+                <div class="input-group"><label>Réponse :</label>
+                    <input type="text" id="brevet6_1a" placeholder="ex: entre 1h30 et 7h40" style="width:250px">
+                    <button class="verify" onclick="checkText6('brevet6_1a', ['entre 1h30 et 7h40','1h30-7h40','1h30 à 7h40','1h30 et 7h40'], 'solBrevet6_1', 'brevet6_1a', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">2) Le skipper du voilier décide de partir lorsque la hauteur d'eau est maximale. À quelle heure Julien va-t-il partir ?</div>
+                <div class="input-group"><label>Réponse :</label>
+                    <input type="text" id="brevet6_1b" placeholder="ex: 10h30" style="width:120px">
+                    <button class="verify" onclick="checkText6('brevet6_1b', ['10h30','10:30','10h 30'], 'solBrevet6_1', 'brevet6_1b', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3) Donner l'image de 2 par la fonction \(f\). Interpréter le résultat.</div>
+                <div class="input-group"><label>Image de 2 :</label>
+                    <input type="number" id="brevet6_1c" placeholder="ex: 3" step="0.1">
+                    <button class="verify" onclick="checkNumber6('brevet6_1c', 3, 'solBrevet6_1', 'brevet6_1c', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">4) Donner le (ou les) antécédent(s) de 2 par la fonction \(f\). Interpréter le résultat.</div>
+                <div class="input-group"><label>Antécédent(s) :</label>
+                    <input type="text" id="brevet6_1d" placeholder="ex: 4 et 6h05" style="width:150px">
+                    <button class="verify" onclick="checkText6('brevet6_1d', ['4 et 6h05','4;6h05','4 et 6h05'], 'solBrevet6_1', 'brevet6_1d', 'brevet')">🎯 Vérifier</button></div>
+                <div id="solBrevet6_1" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🎭 Exercice Brevet 2 – Réduction et recette</h4>
+                <div class="badge-brevet">Brevet</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Le directeur d'un théâtre sait qu'il accueille environ 500 spectateurs quand le prix d'une place est de 20 euros. Il a constaté que chaque réduction de 1 euro du prix d'une place attire 50 spectateurs de plus. On note \(R\) la fonction donnant la recette (en €) en fonction du montant \(x\) de la réduction (en €).</div>
+                <div class="subquestion">1) Compléter le tableau suivant :</div>
+                <div style="margin: 20px 0; overflow-x: auto;">
+                    <table class="interactive-table" id="tableRecette6">
+                        <thead>
+                            <tr><th>Réduction (€)</th><th>Prix de la place (€)</th><th>Nombre de spectateurs</th><th>Recette (€)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>0</td><td>20</td><td>500</td><td>10 000</td></tr>
+                            <tr><td>1</td><td>19</td><td><input type="number" id="tab6_nb1" placeholder="550" step="1"></td><td><input type="number" id="tab6_rec1" placeholder="10450" step="1"></td></tr>
+                            <tr><td><input type="number" id="tab6_red2" placeholder="2" step="1"></td><td><input type="number" id="tab6_prix2" placeholder="18" step="1"></td><td>600</td><td><input type="number" id="tab6_rec2" placeholder="10800" step="1"></td></tr>
+                            <tr><td><input type="number" id="tab6_red3" placeholder="4" step="1"></td><td>16</td><td><input type="number" id="tab6_nb3" placeholder="700" step="1"></td><td><input type="number" id="tab6_rec3" placeholder="11200" step="1"></td></tr>
+                        </tbody>
+                    </table>
+                    <button id="verifTableau6" style="background-color: #2c7da0; margin-top: 8px;">✅ Vérifier le tableau</button>
+                    <div id="tableFeedback6" class="table-feedback"></div>
+                </div>
+                <div class="subquestion">2a) Quelle est la recette pour une réduction de 5 € ?</div>
+                <div class="input-group"><label>Recette :</label>
+                    <input type="number" id="brevet6_2a" placeholder="ex: 11200" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2a', 11200, 'solBrevet6_2', 'brevet6_2a', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">2b) Quel est le montant de la réduction pour une recette de 4 050 € ? Quel est alors le prix d'une place ?</div>
+                <div class="input-group"><label>Réduction :</label>
+                    <input type="number" id="brevet6_2b" placeholder="ex: 17" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2b', 17, 'solBrevet6_2', 'brevet6_2b', 'brevet')">🎯 Vérifier</button></div>
+                <div class="input-group"><label>Prix de la place :</label>
+                    <input type="number" id="brevet6_2c" placeholder="ex: 3" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2c', 3, 'solBrevet6_2', 'brevet6_2c', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3) Quelle est l'image de 8 par la fonction \(R\) ? Interpréter ce résultat.</div>
+                <div class="input-group"><label>Image de 8 :</label>
+                    <input type="number" id="brevet6_2d" placeholder="ex: 4050" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2d', 4050, 'solBrevet6_2', 'brevet6_2d', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">4) Quelle est la recette maximale ? Quel est alors le prix de la place ?</div>
+                <div class="input-group"><label>Recette maximale :</label>
+                    <input type="number" id="brevet6_2e" placeholder="ex: 11200" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2e', 11200, 'solBrevet6_2', 'brevet6_2e', 'brevet')">🎯 Vérifier</button></div>
+                <div class="input-group"><label>Prix de la place :</label>
+                    <input type="number" id="brevet6_2f" placeholder="ex: 15" step="1">
+                    <button class="verify" onclick="checkNumber6('brevet6_2f', 15, 'solBrevet6_2', 'brevet6_2f', 'brevet')">🎯 Vérifier</button></div>
+                <div id="solBrevet6_2" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🧮 Exercice Brevet 3 – Programme de calcul (Polynésie 2025)</h4>
+                <div class="badge-brevet">Brevet</div>
+            </div>
+            <div class="card-body">
+                <div class="question">On considère le programme de calcul suivant :</div>
+                <div class="graph-container"><img src="OGD2EXTB6.png" alt="Programme de calcul" style="max-width:450px;" onerror="this.style.display='none'"></div>
+                <div class="subquestion">1) Montrer que si on choisit 5 comme nombre de départ, le résultat du programme est 2.</div>
+                <div class="input-group"><label>Résultat avec 5 :</label>
+                    <input type="number" id="brevet6_3a" placeholder="ex: 2">
+                    <button class="verify" onclick="checkNumber6('brevet6_3a', 2, 'solBrevet6_3', 'brevet6_3a', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">2a) Parmi les expressions suivantes, quelle est celle qui permet d'exprimer le résultat en fonction de \(x\) ?</div>
+                <div class="input-group">
+                    <label>A) \(x+4\times x-2-x^2\)</label>
+                    <button class="verify" onclick="checkText6('brevet6_3b', ['A'], 'solBrevet6_3', 'brevet6_3b', 'brevet')">🎯 Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>B) \(x+4\times x-2-2x\)</label>
+                    <button class="verify" onclick="checkText6('brevet6_3b', ['B'], 'solBrevet6_3', 'brevet6_3b', 'brevet')">🎯 Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>C) \((x+4)(x-2)-x^2\)</label>
+                    <button class="verify" onclick="checkText6('brevet6_3b', ['C'], 'solBrevet6_3', 'brevet6_3b', 'brevet')">🎯 Vérifier</button>
+                </div>
+                <div class="input-group">
+                    <label>D) \((x+4)(x-2)-2x\)</label>
+                    <button class="verify" onclick="checkText6('brevet6_3b', ['D'], 'solBrevet6_3', 'brevet6_3b', 'brevet')">🎯 Vérifier</button>
+                </div>
+                <div class="subquestion">2b) Montrer que le résultat du programme peut s'écrire sous la forme \(2x-8\).</div>
+                <div class="input-group"><label>Vérification avec \(x=3\) :</label>
+                    <input type="number" id="brevet6_3c" placeholder="ex: -2">
+                    <button class="verify" onclick="checkNumber6('brevet6_3c', -2, 'solBrevet6_3', 'brevet6_3c', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3a) La représentation graphique de \(f\) est la n°3. Expliquer pourquoi les n°1 et n°2 ne conviennent pas.</div>
+                <div class="input-group"><label>Réponse :</label>
+                    <input type="text" id="brevet6_3d" placeholder="ex: n°1 horizontale, n°2 décroissante" style="width:280px">
+                    <button class="verify" onclick="checkText6('brevet6_3d', ['n°1 horizontale, n°2 décroissante','1 horizontale 2 decroissante','horizontale et decroissante'], 'solBrevet6_3', 'brevet6_3d', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3b) Déterminer l'image de 4 par la fonction \(f\).</div>
+                <div class="input-group"><label>\(f(4) =\)</label>
+                    <input type="number" id="brevet6_3e" placeholder="ex: 0">
+                    <button class="verify" onclick="checkNumber6('brevet6_3e', 0, 'solBrevet6_3', 'brevet6_3e', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">4) Quel nombre de départ faut-il choisir pour que le résultat du programme soit égal à 100 ?</div>
+                <div class="input-group"><label>\(x =\)</label>
+                    <input type="number" id="brevet6_3f" placeholder="ex: 54">
+                    <button class="verify" onclick="checkNumber6('brevet6_3f', 54, 'solBrevet6_3', 'brevet6_3f', 'brevet')">🎯 Vérifier</button></div>
+                <div id="solBrevet6_3" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="exercice-card-import">
+            <div class="card-header">
+                <h4>🌀 Exercice Brevet 4 – Hand-spinner</h4>
+                <div class="badge-brevet">Brevet</div>
+            </div>
+            <div class="card-body">
+                <div class="question">Le hand-spinner est une sorte de toupie plate qui tourne sur elle-même. On donne au hand-spinner une vitesse de rotation initiale au temps \(t=0\). Puis, au cours du temps, sa vitesse de rotation diminue jusqu'à l'arrêt complet. Sa vitesse est alors égale à 0. Grâce à un appareil de mesure, on a relevé la vitesse de rotation exprimée en nombre de tours par seconde.</div>
+                <div class="graph-container"><img src="OGD2EXTB4.png" alt="Graphique vitesse hand-spinner" onerror="this.style.display='none'"></div>
+                <div class="subquestion">1) Le temps et la vitesse de rotation du hand-spinner sont-ils proportionnels ? Justifier.</div>
+                <div class="input-group">
+                    <label>Réponse :</label>
+                    <button class="verify" onclick="checkText6('brevet6_4a', ['non'], 'solBrevet6_4', 'brevet6_4a', 'brevet')">🎯 Vérifier (Non)</button>
+                    <button class="verify" onclick="checkText6('brevet6_4a', ['oui'], 'solBrevet6_4', 'brevet6_4a', 'brevet')">🎯 Vérifier (Oui)</button>
+                </div>
+                <div class="subquestion">2a) Quelle est la vitesse de rotation initiale (en tours par seconde) ?</div>
+                <div class="input-group"><label>Vitesse initiale :</label>
+                    <input type="number" id="brevet6_4b" placeholder="ex: 20">
+                    <button class="verify" onclick="checkNumber6('brevet6_4b', 20, 'solBrevet6_4', 'brevet6_4b', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">2b) Quelle est la vitesse au bout d'une minute et vingt secondes ?</div>
+                <div class="input-group"><label>Vitesse (t/s) :</label>
+                    <input type="number" id="brevet6_4c" placeholder="ex: 2.9" step="0.1">
+                    <button class="verify" onclick="checkNumber6('brevet6_4c', 2.9, 'solBrevet6_4', 'brevet6_4c', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">2c) Au bout de combien de temps le hand-spinner va-t-il s'arrêter ?</div>
+                <div class="input-group"><label>Temps (s) :</label>
+                    <input type="number" id="brevet6_4d" placeholder="ex: 93.5" step="0.1">
+                    <button class="verify" onclick="checkNumber6('brevet6_4d', 93.5, 'solBrevet6_4', 'brevet6_4d', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3a) On lance le hand-spinner à une vitesse initiale de 20 tours par seconde. Calculer sa vitesse au bout de 30 secondes.</div>
+                <div class="input-group"><label>\(V(30) =\)</label>
+                    <input type="number" id="brevet6_4e" placeholder="ex: 13.58" step="0.01">
+                    <button class="verify" onclick="checkNumber6('brevet6_4e', 13.58, 'solBrevet6_4', 'brevet6_4e', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3b) Au bout de combien de temps s'arrêtera-t-il ? Justifier par un calcul.</div>
+                <div class="input-group"><label>Temps (s) :</label>
+                    <input type="number" id="brevet6_4f" placeholder="ex: 93.46" step="0.01">
+                    <button class="verify" onclick="checkNumber6('brevet6_4f', 93.46, 'solBrevet6_4', 'brevet6_4f', 'brevet')">🎯 Vérifier</button></div>
+                <div class="subquestion">3c) Est-il vrai que, d'une manière générale, si l'on fait tourner le hand-spinner deux fois plus vite au départ, il tournera deux fois plus longtemps ? Justifier.</div>
+                <div class="input-group">
+                    <label>Réponse :</label>
+                    <button class="verify" onclick="checkText6('brevet6_4g', ['oui'], 'solBrevet6_4', 'brevet6_4g', 'brevet')">🎯 Vérifier (Oui)</button>
+                    <button class="verify" onclick="checkText6('brevet6_4g', ['non'], 'solBrevet6_4', 'brevet6_4g', 'brevet')">🎯 Vérifier (Non)</button>
+                </div>
+                <div id="solBrevet6_4" class="solution"></div>
+            </div>
+        </div>
+
+        <div class="scoreboard">
+            <h3>📊 Mon score sur cette série Brevet</h3>
+            <div class="score-display" id="score-brevet">Score : 0 / 19 (0%) — 0/19 questions faites</div>
+            <button type="button" class="reset-scores-btn" onclick="resetScores('brevet')">🔄 Recommencer cette série</button>
+            <button class="download-cert-btn" id="download-brevet" disabled onclick="downloadCertificate('brevet')">Termine les 19 questions restantes</button>
+        </div>
+
+        <div class="scoreboard" id="pdf-box-brevet" style="display:none;">
+            <h3>🎉 Bravo, tu as réussi au moins 75 % des questions !</h3>
+            <div class="score-display">Tu es bien préparé(e) pour le Brevet. Continue à t'entraîner régulièrement !</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSection(id, evt) {
+        evt = evt || window.event;
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+        document.getElementById(id).classList.add('active');
+        const btn = (evt && evt.currentTarget) || document.querySelector('.tab-btn[aria-controls="' + id + '"]');
+        if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+    }
+
+    function fracHTML(n, d) {
+        return `<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+    }
+
+    /* ================= GESTION DES SCORES ET DU CERTIFICAT ================= */
+    const interactifsKeys = [
+        'q1a','q1b','q1c','q1d','q2a','q2b','q2c','q2d','q3a','q3b','q3c','q3d','q4a','q4b','q4c','q4d',
+        'ex6_1a','ex6_1b','ex6_1c','ex6_2a','ex6_2b','ex6_3a','ex6_3b',
+        'p6_1a','p6_1b','p6_1c','p6_2a','p6_2b','p6_2c','p6_3a','p6_3b','p6_3c'
+    ];
+    const brevetKeys = [
+        'brevet6_1a','brevet6_1b','brevet6_1c','brevet6_1d',
+        'brevet6_2a','brevet6_2b','brevet6_2c','brevet6_2d','brevet6_2e','brevet6_2f',
+        'brevet6_3a','brevet6_3b','brevet6_3c','brevet6_3d','brevet6_3e','brevet6_3f',
+        'brevet6_4a','brevet6_4b','brevet6_4c','brevet6_4d','brevet6_4e','brevet6_4f','brevet6_4g'
+    ];
+    const scoreTracker = { interactifs: {}, brevet: {} };
+
+    function recordScore(tab, key, isCorrect) {
+        if (!key) return;
+        scoreTracker[tab][key] = isCorrect;
+        try { localStorage.setItem('chapitre8_scores_' + tab, JSON.stringify(scoreTracker[tab])); } catch (e) {}
+        updateScoreDisplay(tab);
+    }
+
+    function loadScores(tab) {
+        try {
+            const raw = localStorage.getItem('chapitre8_scores_' + tab);
+            if (raw) scoreTracker[tab] = JSON.parse(raw);
+        } catch (e) {}
+    }
+
+    function updateScoreDisplay(tab) {
+        const totalKeys = tab === 'interactifs' ? interactifsKeys : brevetKeys;
+        const attempted = Object.keys(scoreTracker[tab]).filter(k => totalKeys.includes(k)).length;
+        const correct = totalKeys.filter(k => scoreTracker[tab][k] === true).length;
+        const pct = totalKeys.length ? Math.round((correct / totalKeys.length) * 100) : 0;
+        const el = document.getElementById('score-' + tab);
+        if (el) el.innerText = `Score : ${correct} / ${totalKeys.length} (${pct}%) — ${attempted}/${totalKeys.length} questions faites`;
+        
+        const pdfBox = document.getElementById('pdf-box-' + tab);
+        if (pdfBox) pdfBox.style.display = (attempted === totalKeys.length && pct >= 75) ? 'block' : 'none';
+        
+        const dlBtn = document.getElementById('download-' + tab);
+        if (dlBtn) {
+            if (attempted === totalKeys.length && pct >= 75) {
+                dlBtn.disabled = false;
+                dlBtn.innerText = '🏆 Télécharger mon certificat de réussite';
+            } else if (attempted < totalKeys.length) {
+                dlBtn.disabled = true;
+                dlBtn.innerText = `Termine les ${totalKeys.length - attempted} question(s) restante(s)`;
+            } else {
+                dlBtn.disabled = true;
+                dlBtn.innerText = `Il te faut au moins 75% (actuellement ${pct}%) — réessaie`;
+            }
+        }
+    }
+
+    function resetScores(tab) {
+        if (!confirm('Recommencer cette série ? Tes résultats seront effacés.')) return;
+        try { localStorage.removeItem('chapitre8_scores_' + tab); } catch (e) {}
+        location.reload();
+    }
+
+    loadScores('interactifs');
+    loadScores('brevet');
+    updateScoreDisplay('interactifs');
+    updateScoreDisplay('brevet');
+
+    /* ================= LOGIQUE DE VALIDATION ================= */
+    const attemptCount = {};
+    const MAX_TRIES = 2;
+
+    function processAnswer6(isCorrect, solId, key, tab, detailMsg, inputElement, specificMsg = null) {
+        const solDiv = document.getElementById(solId);
+        solDiv.style.display = 'block';
+
+        if (scoreTracker[tab][key] !== undefined) {
+            const wasRight = scoreTracker[tab][key] === true;
+            const msg = (isCorrect && !wasRight)
+                ? '✔️ Ta réponse est juste, mais cette question avait déjà été notée comme ratée : ton score ne change pas.'
+                : '🔒 Cette question a déjà été notée : ton score ne change pas.';
+            solDiv.innerHTML = `<div class="feedback-info">${msg}</div><div style="margin-top:10px;">${detailMsg}</div>`;
+            return;
+        }
+
+        if (isCorrect) {
+            solDiv.innerHTML = `<div class="feedback-correct">✔️ Bonne réponse !</div><div style="margin-top:10px;">${detailMsg}</div>`;
+            recordScore(tab, key, true);
+        } else {
+            attemptCount[key] = (attemptCount[key] || 0) + 1;
+            if (attemptCount[key] < MAX_TRIES) {
+                let msg = "❌ Pas tout à fait. Relis ton calcul et réessaie : il te reste 1 essai avant la correction.";
+                if (specificMsg) msg = `<div class="feedback-wrong">${specificMsg}</div><div style="margin-top:8px; font-weight:600; color:#b91c1c;">Relis ton calcul et réessaie : il te reste 1 essai.</div>`;
+                solDiv.innerHTML = msg;
+                if (inputElement) {
+                    inputElement.classList.remove('shake-field');
+                    void inputElement.offsetWidth;
+                    inputElement.classList.add('shake-field');
+                }
+            } else {
+                solDiv.innerHTML = `<div class="feedback-wrong">❌ Réponse incorrecte. Voici la correction détaillée :</div><div style="margin-top:10px;">${detailMsg}</div>`;
+                recordScore(tab, key, false);
+            }
+        }
+    }
+
+    function checkQCM6(id, choice, isCorrect, solId, key, tab) {
+        const detail = isCorrect
+            ? "C'est la bonne réponse."
+            : "La bonne réponse était : " + choice;
+        processAnswer6(isCorrect, solId, key, tab, detail, null);
+    }
+
+    function checkNumber6(id, expected, solId, key, tab) {
+        const el = document.getElementById(id);
+        const val = parseFloat(el.value);
+        const ok = !isNaN(val) && Math.abs(val - expected) < 0.01;
+        processAnswer6(ok, solId, key, tab, `La bonne réponse est : <strong>${expected}</strong>.`, el);
+    }
+
+    function checkText6(id, acceptedAnswers, solId, key, tab) {
+        const el = document.getElementById(id);
+        const val = el.value.trim().toLowerCase().replace(/\s+/g, ' ');
+        const ok = acceptedAnswers.some(a => val === a.toLowerCase());
+        processAnswer6(ok, solId, key, tab, `Réponse attendue : <strong>${acceptedAnswers[0]}</strong>.`, el);
+    }
+
+    /* ================= SYSTEME DE PROGRESSION ET QUIZ ================= */
+    const TOTAL_SECTIONS = 5;
+    const sectionNames = { 1: "Introduction", 2: "Représentation graphique", 3: "Tableau de valeurs", 4: "Image et antécédent", 5: "Synthèse" };
+    
+    function loadProgress() {
+        try {
+            const raw = localStorage.getItem('chapitre8_progress');
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return { unlocked: [1] };
+    }
+    function saveProgress(progress) { try { localStorage.setItem('chapitre8_progress', JSON.stringify(progress)); } catch (e) {} }
+    let progress = loadProgress();
+
+    function renderProgressTracker() {
+        const tracker = document.getElementById('progress-tracker');
+        if (!tracker) return;
+        let html = '';
+        for (let i = 1; i <= TOTAL_SECTIONS; i++) {
+            let cls = 'progress-step';
+            let icon = '🔒';
+            if (progress.unlocked.includes(i + 1) || (i === TOTAL_SECTIONS && localStorage.getItem('chapitre8_cours_complete') === 'true')) { cls += ' done'; icon = '✅'; }
+            else if (progress.unlocked.includes(i)) { cls += ' current'; icon = '📖'; }
+            html += `<span class="${cls}">${icon} ${i}. ${sectionNames[i]}</span>`;
+        }
+        tracker.innerHTML = html;
+    }
+
+    function applyProgress() {
+        for (let i = 1; i <= TOTAL_SECTIONS; i++) {
+            const sec = document.getElementById('section-' + i);
+            if (sec) sec.classList.toggle('locked', !progress.unlocked.includes(i));
+        }
+        renderProgressTracker();
+        try {
+            if (localStorage.getItem('chapitre8_cours_complete') === 'true') {
+                const fb = document.getElementById('full-course-download-box'); if (fb) fb.style.display = 'block';
+                const dl = document.getElementById('download-cours'); if (dl) { dl.disabled = false; dl.innerText = '🏆 Télécharger mon certificat du cours'; }
+            }
+        } catch (e) {}
+    }
+
+    function resetCoursProgress() {
+        try { localStorage.removeItem('chapitre8_progress'); localStorage.removeItem('chapitre8_cours_complete'); } catch (e) {}
+        progress = { unlocked: [1] };
+        applyProgress();
+        renderAllQuizzes();
+        const dlBtn = document.getElementById('download-cours');
+        if (dlBtn) { dlBtn.disabled = true; dlBtn.innerText = 'Termine tout le cours pour débloquer'; }
+        const fullBox = document.getElementById('full-course-download-box');
+        if (fullBox) fullBox.style.display = 'none';
+        document.getElementById('section-1').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    const quizData = {};
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function pickOne(arr) { return arr[randInt(0, arr.length - 1)]; }
+    function shuffleArray(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) { const j = randInt(0, i); [a[i], a[j]] = [a[j], a[i]]; }
+        return a;
+    }
+    function shuffleOptions(options, correctIndex) {
+        const tagged = options.map((opt, i) => ({ opt, isCorrect: i === correctIndex }));
+        const shuffled = shuffleArray(tagged);
+        return { options: shuffled.map(t => t.opt), correct: shuffled.findIndex(t => t.isCorrect) };
+    }
+
+    const quizGenerators = {
+        1: function () {
+            const a = randInt(-5, 5), fa = randInt(-10, 10), b = randInt(-5, 5);
+            return [
+                { q: `On donne f : ${a} ↦ ${fa}. Quelle affirmation est vraie ?`, options: shuffleOptions([`L'image de ${a} par f est ${fa}.`, `L'image de ${fa} par f est ${a}.`, `L'antécédent de ${a} par f est ${fa}.`, `f(${fa}) = ${a}.`], 0) },
+                { q: `Que désigne f(x) ?`, options: shuffleOptions(["L'image de x par la fonction f", "L'antécédent de x par f", "La fonction f", "Le nombre x"], 0) },
+                { q: `Si f(3) = 7, que peut-on dire ?`, options: shuffleOptions(["L'image de 3 est 7", "L'image de 7 est 3", "L'antécédent de 3 est 7", "f(7) = 3"], 0) },
+                { q: `Combien d'images un antécédent peut-il avoir par une fonction ?`, options: shuffleOptions(["Une seule", "Deux", "Trois", "Autant que l'on veut"], 0) }
+            ];
+        },
+        2: function () {
+            const a = randInt(-5, 5), b = randInt(-5, 5);
+            return [
+                { q: `Sur un graphique, où lit-on l'antécédent ?`, options: shuffleOptions(["Sur l'axe des abscisses", "Sur l'axe des ordonnées", "Sur la courbe", "Nulle part"], 0) },
+                { q: `Sur un graphique, où lit-on l'image ?`, options: shuffleOptions(["Sur l'axe des ordonnées", "Sur l'axe des abscisses", "Sur la courbe", "Nulle part"], 0) },
+                { q: `Pour trouver l'image de ${a} sur un graphique, on trace :`, options: shuffleOptions(["Une verticale depuis l'axe des abscisses", "Une horizontale depuis l'axe des ordonnées", "Une diagonale", "Rien du tout"], 0) },
+                { q: `Pour trouver les antécédents de ${b} sur un graphique, on trace :`, options: shuffleOptions(["Une horizontale depuis l'axe des ordonnées", "Une verticale depuis l'axe des abscisses", "Une diagonale", "Rien du tout"], 0) }
+            ];
+        },
+        3: function () {
+            const xs = [-2, -1, 0, 1], a = pickOne([1, 2, -1, -2]), b = randInt(-3, 3);
+            const ys = xs.map(x => a * x + b);
+            return [
+                { q: `Tableau : x = ${xs.join(', ')} et f(x) = ${ys.join(', ')}. Quelle affirmation est vraie ?`, options: shuffleOptions([`L'image de ${xs[0]} par f est ${ys[0]}.`, `L'image de ${xs[1]} par f est ${ys[1]}.`, `L'image de ${xs[2]} par f est ${ys[3]}.`, `L'image de ${xs[3]} par f est ${ys[0]}.`], 0) },
+                { q: `Dans un tableau de valeurs, la première ligne contient :`, options: shuffleOptions(["Les antécédents", "Les images", "Les fonctions", "Les résultats"], 0) },
+                { q: `Dans un tableau de valeurs, la deuxième ligne contient :`, options: shuffleOptions(["Les images", "Les antécédents", "Les fonctions", "Les résultats"], 0) },
+                { q: `Si f(2) = 5, alors :`, options: shuffleOptions(["L'image de 2 est 5", "L'image de 5 est 2", "L'antécédent de 2 est 5", "f(5) = 2"], 0) }
+            ];
+        },
+        4: function () {
+            const a = pickOne([2, 3, 4, 5, -2, -3]), b = randInt(-6, 6) || 1;
+            const ant = -b / a;
+            return [
+                { q: `Pour calculer l'image de 3 par f(x) = x² + 1, on fait :`, options: shuffleOptions(["3² + 1 = 10", "3 × 2 + 1 = 7", "3 + 1 = 4", "3² − 1 = 8"], 0) },
+                { q: `Pour trouver l'antécédent de 7 par f(x) = 2x + 1, on résout :`, options: shuffleOptions(["2x + 1 = 7", "2x + 1 = 0", "2x − 1 = 7", "x + 1 = 7"], 0) },
+                { q: `Les antécédents de 9 par f(x) = x² sont :`, options: shuffleOptions(["3 et −3", "3 seulement", "−3 seulement", "9 et −9"], 0) },
+                { q: `f(x) = ${a}x + ${b}. L'antécédent de 0 est :`, options: shuffleOptions([String(ant), String(-ant), String(b), String(a)], 0) }
+            ];
+        },
+        5: function () {
+            return [
+                { q: `Une image est toujours :`, options: shuffleOptions(["Unique", "Multiple", "Nulle", "Infinie"], 0) },
+                { q: `Un antécédent peut être :`, options: shuffleOptions(["0, 1 ou plusieurs", "Toujours unique", "Toujours multiple", "Toujours nul"], 0) },
+                { q: `Pour calculer une image, on :`, options: shuffleOptions(["Remplace x par la valeur donnée", "Résout une équation", "Trace une courbe", "Lit sur l'axe des ordonnées"], 0) },
+                { q: `Pour trouver un antécédent, on :`, options: shuffleOptions(["Résout l'équation f(x) = valeur", "Remplace x par la valeur donnée", "Trace une verticale", "Lit sur l'axe des abscisses"], 0) }
+            ];
+        }
+    };
+
+    function renderQuiz(n) {
+        const container = document.getElementById('quiz-container-' + n);
+        if (!container) return;
+        const qs = quizGenerators[n]();
+        quizData[n] = qs;
+        let html = '';
+        qs.forEach((item, qi) => {
+            html += `<div class="quiz-question"><p>${qi + 1}. ${item.q}</p><div class="quiz-options">`;
+            item.options.options.forEach((opt, oi) => {
+                html += `<label><input type="radio" name="q${n}_${qi}" value="${oi}"> ${opt}</label>`;
+            });
+            html += `</div></div>`;
+        });
+        html += `<div class="quiz-actions" style="display:flex; gap:10px;"><button class="quiz-submit-btn" onclick="validateQuiz(${n})">✔️ Valider</button><button class="quiz-submit-btn" type="button" style="background:#5c677d;" onclick="renderQuiz(${n})">🔄 Nouvelles questions</button></div>`;
+        html += `<div class="quiz-result" id="quiz-result-${n}"></div>`;
+        container.innerHTML = html;
+    }
+
+    function validateQuiz(n) {
+        const questions = quizData[n];
+        let score = 0;
+        questions.forEach((item, qi) => {
+            const selected = document.querySelector(`input[name="q${n}_${qi}"]:checked`);
+            if (selected && parseInt(selected.value, 10) === item.options.correct) score++;
+        });
+        const pct = Math.round((score / questions.length) * 100);
+        const res = document.getElementById('quiz-result-' + n);
+        if (pct >= 75) {
+            res.className = 'quiz-result success';
+            if (n < TOTAL_SECTIONS) {
+                if (!progress.unlocked.includes(n + 1)) progress.unlocked.push(n + 1);
+                saveProgress(progress); applyProgress();
+                res.innerHTML = `🎉 Bravo ! ${score}/${questions.length} (${pct}%). Section suivante débloquée.`;
+                const next = document.getElementById('section-' + (n + 1));
+                if (next) next.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                try { localStorage.setItem('chapitre8_cours_complete', 'true'); } catch (e) {}
+                res.innerHTML = `🎉 Bravo, tu as terminé le cours ! Certificat disponible en bas.`;
+                renderProgressTracker();
+                const dlBtn = document.getElementById('download-cours');
+                if (dlBtn) { dlBtn.disabled = false; dlBtn.innerText = '🏆 Télécharger mon certificat'; }
+                document.getElementById('full-course-download-box').style.display = 'block';
+            }
+        } else {
+            res.className = 'quiz-result fail';
+            res.innerHTML = `${score}/${questions.length} (${pct}%). Il faut 75% pour débloquer la suite. Réessaie ou clique sur Nouvelles questions.`;
+        }
+    }
+
+    function renderAllQuizzes() { for (let i = 1; i <= TOTAL_SECTIONS; i++) renderQuiz(i); }
+    renderAllQuizzes();
+    applyProgress();
+
+    /* ================= CERTIFICATS PDF ================= */
+    const notionsDuChapitre = [
+        "Introduction aux fonctions",
+        "Représentation graphique",
+        "Tableau de valeurs",
+        "Image et antécédent par calcul",
+        "Synthèse et applications"
+    ];
+
+    function askForCertificateName() {
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            let raw;
+            try { raw = prompt('Ton prénom pour le certificat :', ''); } catch (e) { return 'Élève'; }
+            if (raw === null) return 'Élève';
+            raw = raw.trim();
+            if (raw === '') return 'Élève';
+            if (!/^[A-Za-zÀ-ÖØ-öø-ÿ' -]{1,25}$/.test(raw)) { alert("Merci d'utiliser uniquement des lettres (pas de chiffres ni de symboles), 25 caractères maximum."); continue; }
+            return raw.replace(/\s+/g, ' ').replace(/(^|[\s-])([a-zà-öø-ÿ])/g, (m, sep, c) => sep + c.toUpperCase());
+        }
+        return 'Élève';
+    }
+
+    function generateCertificatePDF({ title, name, scoreLine, notionsList }) {
+        if (!window.jspdf) { alert("Le générateur de PDF n'a pas pu se charger (connexion internet requise). Réessaie un peu plus tard."); return; }
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+        const W = 297, H = 210, brown = [76, 46, 28], gold = [186, 140, 60], cream = [250, 246, 237];
+        doc.setFillColor(...cream); doc.rect(0, 0, W, H, 'F');
+        doc.setDrawColor(...brown); doc.setLineWidth(2.2); doc.rect(8, 8, W - 16, H - 16);
+        doc.setDrawColor(...gold); doc.setLineWidth(0.8); doc.rect(12, 12, W - 24, H - 24);
+        try {
+            if (typeof ESTIF_LOGO_B64 === 'string' && ESTIF_LOGO_B64.length > 100) {
+                const logoW = 46, logoH = 46 * (350 / 640);
+                doc.addImage(ESTIF_LOGO_B64, 'JPEG', (W - logoW) / 2, 17, logoW, logoH);
+            }
+        } catch (e) {}
+        doc.setFont('times', 'bold'); doc.setTextColor(...brown); doc.setFontSize(30);
+        doc.text('CERTIFICAT DE RÉUSSITE', W / 2, 60, { align: 'center' });
+        doc.setFont('helvetica', 'italic'); doc.setFontSize(13); doc.setTextColor(...gold);
+        doc.text(title, W / 2, 69, { align: 'center' });
+        doc.setDrawColor(...gold); doc.setLineWidth(0.6); doc.line(W / 2 - 35, 74, W / 2 + 35, 74);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(13); doc.setTextColor(90, 70, 55);
+        doc.text('Ce certificat est fièrement décerné à', W / 2, 86, { align: 'center' });
+        doc.setFont('times', 'bolditalic'); doc.setFontSize(26); doc.setTextColor(...brown);
+        doc.text(name, W / 2, 100, { align: 'center' });
+        const nameWidth = doc.getTextWidth(name);
+        doc.setDrawColor(...brown); doc.setLineWidth(0.4); doc.line(W / 2 - nameWidth / 2 - 4, 103, W / 2 + nameWidth / 2 + 4, 103);
+        let y = 114;
+        if (notionsList && notionsList.length) {
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(12.5); doc.setTextColor(70, 50, 40);
+            doc.text('pour avoir validé avec succès les notions du chapitre :', W / 2, y, { align: 'center' });
+            y += 9; doc.setFont('helvetica', 'bold'); doc.setFontSize(11.5);
+            const colWidth = 130, leftX = W / 2 - colWidth - 5, rightX = W / 2 + 5;
+            notionsList.forEach((n, i) => {
+                const col = i % 2 === 0 ? leftX : rightX, row = Math.floor(i / 2);
+                const ty = y + row * 8; doc.setDrawColor(...gold); doc.setLineWidth(0.8); doc.line(col, ty - 1.6, col + 1.3, ty - 0.2); doc.line(col + 1.3, ty - 0.2, col + 3.8, ty - 3.4);
+                doc.setTextColor(60, 45, 35);
+                doc.text(n, col + 6, ty);
+            });
+            y += Math.ceil(notionsList.length / 2) * 8 + 4;
+        }
+        if (scoreLine) {
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(12.5); doc.setTextColor(70, 50, 40);
+            doc.text(notionsList && notionsList.length ? 'Résultat :' : 'avec un score de', W / 2 - (notionsList && notionsList.length ? 22 : 0), y + 6, { align: notionsList && notionsList.length ? 'right' : 'center' });
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(notionsList && notionsList.length ? 15 : 20); doc.setTextColor(34, 139, 79);
+            if (notionsList && notionsList.length) doc.text(scoreLine, W / 2 - 18, y + 6, { align: 'left' }); else doc.text(scoreLine, W / 2, y + 16, { align: 'center' });
+        }
+        const today = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110, 90, 75);
+        doc.text(`Délivré le ${today}`, W / 2, H - 30, { align: 'center' });
+        doc.setFont('helvetica', 'italic'); doc.setFontSize(10.5); doc.setTextColor(...gold);
+        doc.text('Estif-Maths — Réussir ton brevet en toute autonomie', W / 2, H - 22, { align: 'center' });
+        return doc;
+    }
+
+    function downloadCertificate(tab) {
+        const totalKeys = tab === 'interactifs' ? interactifsKeys : brevetKeys;
+        const correct = totalKeys.filter(k => scoreTracker[tab][k] === true).length;
+        const pct = Math.round((correct / totalKeys.length) * 100);
+        if (pct < 75) return;
+        const name = askForCertificateName();
+        const title = tab === 'interactifs' ? 'Exercices Interactifs — Chapitre 8 : Fonctions' : 'Exercices Type Brevet — Chapitre 8 : Fonctions';
+        const doc = generateCertificatePDF({ title, name, scoreLine: `${correct} / ${totalKeys.length} (${pct}%)`, notionsList: notionsDuChapitre });
+        if (doc) doc.save(`Certificat_Chapitre8_${tab}_${name}.pdf`);
+    }
+
+    function downloadCoursCompletion() {
+        try { if (localStorage.getItem('chapitre8_cours_complete') !== 'true') return; } catch (e) {}
+        const name = askForCertificateName();
+        const doc = generateCertificatePDF({ title: 'Cours complet — Chapitre 8 : Fonctions', name, scoreLine: '5 quiz réussis (75 % ou plus)', notionsList: notionsDuChapitre });
+        if (doc) doc.save(`Certificat_Chapitre8_cours_${name}.pdf`);
+    }
+
+    /* ================= AUTOMATISMES ================= */
+    const AUTO6 = {
+        img: { icon: '🖼️', title: 'Image éclair', per: 15, kind: 'num', tip: 'Remplace x par la valeur donnée dans l\'expression.',
+            gen() { const a = pickOne([2, 3, -2, 4]), b = randInt(-5, 5), x = randInt(-3, 3); const res = a * x + b; return { q: `f(x) = ${a}x ${b >= 0 ? '+' : '−'} ${Math.abs(b)}. Image de ${x} ?`, ans: res, how: [`f(${x}) = ${a} × ${x} ${b >= 0 ? '+' : '−'} ${Math.abs(b)} = ${res}`] }; } },
+        ant: { icon: '🔍', title: 'Antécédent éclair', per: 20, kind: 'num', tip: 'Résous l\'équation f(x) = valeur.',
+            gen() { const a = pickOne([2, 3, 4, -2]), b = randInt(-6, 6), y = randInt(-5, 5) * a + b; const x = (y - b) / a; return { q: `f(x) = ${a}x ${b >= 0 ? '+' : '−'} ${Math.abs(b)}. Antécédent de ${y} ?`, ans: x, how: [`${a}x ${b >= 0 ? '+' : '−'} ${Math.abs(b)} = ${y}`, `${a}x = ${y - b}`, `x = ${x}`] }; } },
+        carre: { icon: '🔲', title: 'Carré éclair', per: 15, kind: 'num', tip: 'Un nombre positif a deux antécédents par la fonction carré.',
+            gen() { const n = randInt(1, 10); return { q: `f(x) = x². Image de ${n} ?`, ans: n * n, how: [`f(${n}) = ${n}² = ${n * n}`] }; } },
+        aff: { icon: '📈', title: 'Fonction affine éclair', per: 20, kind: 'num', tip: 'Pour une fonction affine f(x) = ax + b, calcule en remplaçant x.',
+            gen() { const a = randInt(-4, 4) || 1, b = randInt(-8, 8), x = randInt(-4, 4); return { q: `f(x) = ${a}x ${b >= 0 ? '+' : '−'} ${Math.abs(b)}. Image de ${x} ?`, ans: a * x + b, how: [`f(${x}) = ${a} × ${x} ${b >= 0 ? '+' : '−'} ${Math.abs(b)} = ${a * x + b}`] }; } }
+    };
+    const autoSession = {}, autoCur = {}, AUTO_TOTAL = 10, AUTO_BEST_KEY = 'chapitre8_auto_best';
+    const fmtTime = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    function loadBest() { try { return JSON.parse(localStorage.getItem(AUTO_BEST_KEY)) || {}; } catch (e) { return {}; } }
+    function renderAutoCards() {
+        const c = document.getElementById('auto6-container'); if (!c) return; const best = loadBest();
+        c.innerHTML = Object.keys(AUTO6).map(t => {
+            const a = AUTO6[t], tot = AUTO_TOTAL * a.per;
+            return `<div class="auto-card"><h3>${a.icon} ${a.title} <span style="font-size:0.8rem; color:#8d99ae;">(10 questions — ${Math.floor(tot / 60)} min${tot % 60 ? ' ' + tot % 60 : ''})</span></h3><p style="font-size:0.9rem; color:#8d99ae; margin:4px 0 0;">💡 ${a.tip}</p>` +
+                `<div class="timer-display" id="auto-${t}-timer">⏱ ${fmtTime(tot)}</div><div class="auto-score" id="auto-${t}-progress">Question 0/10 — Score : 0/0${best[t] !== undefined ? ' — 🏅 Meilleur score : ' + best[t] + '/10' : ''}</div>` +
+                `<div class="auto-question-zone" id="auto-${t}-question">Clique sur « Démarrer » pour commencer la série chronométrée.</div>` +
+                `<div class="auto-answer-zone"><label>Réponse = <input type="text" id="auto-${t}-ans" placeholder="ex : 12" disabled></label><button class="auto-btn" id="auto-${t}-verify" onclick="answerAuto6('${t}')" disabled>✔️ Vérifier</button><button class="auto-btn secondary" id="auto-${t}-start" onclick="startAutoSession6('${t}')">▶️ Démarrer</button></div>` +
+                `<div class="auto-feedback" id="auto-${t}-feedback"></div><div class="auto-session-score" id="auto-${t}-final"></div></div>`;
+        }).join('');
+        Object.keys(AUTO6).forEach(t => { const i = document.getElementById(`auto-${t}-ans`); if (i) i.addEventListener('keydown', e => { if (e.key === 'Enter' && !i.disabled) answerAuto6(t); }); });
+    }
+    function setAutoEnabled(t, on) { ['ans', 'verify'].forEach(s => { const el = document.getElementById(`auto-${t}-${s}`); if (el) el.disabled = !on; }); }
+    function autoProgress(t) { const s = autoSession[t]; document.getElementById(`auto-${t}-progress`).innerText = `Question ${Math.min(s.index + 1, s.total)}/${s.total} — Score : ${s.correct}/${s.index}`; }
+    function autoTimer(t) { const s = autoSession[t], el = document.getElementById(`auto-${t}-timer`); el.innerText = '⏱ ' + fmtTime(Math.max(0, s.timeLeft)); el.classList.toggle('time-up', s.timeLeft <= 10); }
+    function nextAuto(t) { autoCur[t] = AUTO6[t].gen(); document.getElementById(`auto-${t}-question`).innerHTML = autoCur[t].q; const i = document.getElementById(`auto-${t}-ans`); if (i) { i.value = ''; i.focus(); } }
+    function startAutoSession6(t) {
+        if (autoSession[t] && autoSession[t].interval) clearInterval(autoSession[t].interval);
+        autoSession[t] = { index: 0, correct: 0, total: AUTO_TOTAL, timeLeft: AUTO_TOTAL * AUTO6[t].per, active: true, interval: null };
+        const sb = document.getElementById(`auto-${t}-start`); sb.innerText = '⏸ Série en cours…'; sb.disabled = true;
+        document.getElementById(`auto-${t}-final`).innerHTML = ''; document.getElementById(`auto-${t}-feedback`).style.display = 'none';
+        setAutoEnabled(t, true); autoProgress(t); autoTimer(t); nextAuto(t);
+        autoSession[t].interval = setInterval(() => { const s = autoSession[t]; if (!s.active) return; s.timeLeft--; autoTimer(t); if (s.timeLeft <= 0) endAuto6(t, true); }, 1000);
+    }
+    function answerAuto6(t) {
+        const s = autoSession[t]; if (!s || !s.active) return; const A = AUTO6[t], cur = autoCur[t];
+        const raw = document.getElementById(`auto-${t}-ans`).value;
+        const val = parseFloat(raw.replace(',', '.'));
+        const ok = !isNaN(val) && Math.abs(val - cur.ans) < 0.01;
+        const fb = document.getElementById(`auto-${t}-feedback`); fb.className = 'auto-feedback ' + (ok ? 'success' : 'fail'); fb.style.display = 'block';
+        fb.innerHTML = ok ? '✔️ Exact !' : `❌ Réponse : <b>${cur.ans}</b><br>${cur.how.join('<br>')}`;
+        s.correct += ok ? 1 : 0; s.index++; autoProgress(t);
+        if (s.index >= s.total) endAuto6(t, false); else nextAuto(t);
+    }
+    function endAuto6(t, timeUp) {
+        const s = autoSession[t]; s.active = false; clearInterval(s.interval); setAutoEnabled(t, false);
+        const sb = document.getElementById(`auto-${t}-start`); sb.disabled = false; sb.innerText = '🔄 Recommencer';
+        const pct = Math.round(s.correct / s.total * 100), best = loadBest(); let rec = '';
+        if (best[t] === undefined || s.correct > best[t]) { best[t] = s.correct; try { localStorage.setItem(AUTO_BEST_KEY, JSON.stringify(best)); } catch (e) {} rec = best[t] > 0 ? ' — 🏅 Nouveau record !' : ''; }
+        document.getElementById(`auto-${t}-final`).innerHTML = (timeUp ? '⏰ Temps écoulé ! ' : '🏁 Série terminée ! ') + `Score final : ${s.correct}/${s.total} (${pct}%)${rec}`;
+    }
+    renderAutoCards();
+
+    /* ================= CORRECTIONS DÉTAILLÉES ================= */
+    const DETAILS6 = {
+        q1a: { l: "L'image de 7 par f est 3 : non, f(3) = 7 signifie que l'image de 3 est 7, pas l'inverse.", a: "La bonne réponse est C." },
+        q1b: { l: "Un antécédent de 3 par f est 7 : non, 3 est l'antécédent, 7 est l'image.", a: "La bonne réponse est C." },
+        q1c: { l: "L'image de 3 par f est 7 : oui, f(3) = 7.", a: "La bonne réponse est C." },
+        q1d: { l: "Un antécédent de 4 par f est 9 : non, 4 est l'antécédent, 9 est l'image.", a: "La bonne réponse est C." },
+        q2a: { l: "g(4) = 4² − 3 = 16 − 3 = 13, pas 5.", a: "La bonne réponse est B : 13." },
+        q2b: { l: "g(4) = 4² − 3 = 16 − 3 = 13.", a: "La bonne réponse est B : 13." },
+        q2c: { l: "g(4) = 4² − 3 = 16 − 3 = 13, pas 11.", a: "La bonne réponse est B : 13." },
+        q2d: { l: "g(4) = 4² − 3 = 16 − 3 = 13, pas 19.", a: "La bonne réponse est B : 13." },
+        q3a: { l: "h(−2) = −4 : oui, c'est bien dans le tableau.", a: "La bonne réponse est A." },
+        q3b: { l: "Un antécédent de −1 par h est −1 : oui, h(−1) = −1. Mais A est aussi vraie et c'est la réponse attendue.", a: "La bonne réponse est A." },
+        q3c: { l: "L'image de 0 par h est −1 : non, h(0) = 0.", a: "La bonne réponse est A." },
+        q3d: { l: "Un antécédent de −1 par h est −4 : non, h(−4) n'est pas dans le tableau.", a: "La bonne réponse est A." },
+        q4a: { l: "j(x) = 3x − 6. On résout 3x − 6 = 0 → 3x = 6 → x = 2.", a: "La bonne réponse est A : 2." },
+        q4b: { l: "3x − 6 = 0 → 3x = 6 → x = 2, pas −2.", a: "La bonne réponse est A : 2." },
+        q4c: { l: "3x − 6 = 0 → 3x = 6 → x = 2, pas 6.", a: "La bonne réponse est A : 2." },
+        q4d: { l: "3x − 6 = 0 → 3x = 6 → x = 2, pas 0,5.", a: "La bonne réponse est A : 2." },
+        ex6_1a: { l: "f(0) = 0² + 3×0 − 2 = 0 + 0 − 2 = −2.", a: "f(0) = −2." },
+        ex6_1b: { l: "f(2) = 2² + 3×2 − 2 = 4 + 6 − 2 = 8.", a: "f(2) = 8." },
+        ex6_1c: { l: "f(−1) = (−1)² + 3×(−1) − 2 = 1 − 3 − 2 = −4.", a: "f(−1) = −4." },
+        ex6_2a: { l: "4x − 5 = 3 → 4x = 8 → x = 2.", a: "L'antécédent de 3 est 2." },
+        ex6_2b: { l: "4x − 5 = 0 → 4x = 5 → x = 5/4 = 1,25.", a: "L'antécédent de 0 est 1,25." },
+        ex6_3a: { l: "x² = 25 → x = 5 ou x = −5.", a: "Les antécédents de 25 sont 5 et −5." },
+        ex6_3b: { l: "x² = 0 → x = 0.", a: "L'antécédent de 0 est 0." },
+        p6_1a: { l: "A(5) = 5² = 25.", a: "L'aire est 25 cm²." },
+        p6_1b: { l: "A(7) = 7² = 49.", a: "L'aire est 49 cm²." },
+        p6_1c: { l: "x² = 64 → x = 8 (on ne garde que la solution positive pour un côté).", a: "Le côté est 8 cm." },
+        p6_2a: { l: "P(3) = 12 × 3 = 36.", a: "Le prix est 36 €." },
+        p6_2b: { l: "P(7) = 12 × 7 = 84.", a: "Le prix est 84 €." },
+        p6_2c: { l: "12x = 120 → x = 10.", a: "On a acheté 10 articles." },
+        p6_3a: { l: "D(2) = 80 × 2 = 160.", a: "La distance est 160 km." },
+        p6_3b: { l: "D(3,5) = 80 × 3,5 = 280.", a: "La distance est 280 km." },
+        p6_3c: { l: "80t = 240 → t = 3.", a: "Le temps est 3 heures." },
+        brevet6_1a: { l: "La courbe dépasse 3,20 m entre environ 1h30 et 7h40.", a: "Le voilier peut sortir entre 1h30 et 7h40." },
+        brevet6_1b: { l: "La hauteur maximale est atteinte à 10h30.", a: "Julien partira à 10h30." },
+        brevet6_1c: { l: "f(2) = 3. À 2h du matin, la hauteur de l'eau est de 3 m.", a: "L'image de 2 est 3." },
+        brevet6_1d: { l: "Les antécédents de 2 sont 4 et 6h05. La hauteur de l'eau est de 2 m à 4h et à 6h05.", a: "Les antécédents de 2 sont 4 et 6h05." },
+        brevet6_2a: { l: "Par lecture graphique, pour x = 5, R(5) ≈ 11 200.", a: "La recette est d'environ 11 200 €." },
+        brevet6_2b: { l: "Pour R(x) = 4 050, on lit x ≈ 17. Le prix est 20 − 17 = 3 €.", a: "La réduction est d'environ 17 € et la place coûte 3 €." },
+        brevet6_2c: { l: "Le prix de la place est 20 − 17 = 3 €.", a: "Le prix de la place est 3 €." },
+        brevet6_2d: { l: "R(8) ≈ 4 050. Pour une réduction de 8 €, la recette est de 4 050 €.", a: "L'image de 8 est environ 4 050 €." },
+        brevet6_2e: { l: "La recette maximale est d'environ 11 200 €.", a: "La recette maximale est 11 200 €." },
+        brevet6_2f: { l: "La recette maximale est atteinte pour x = 5, donc le prix est 20 − 5 = 15 €.", a: "Le prix de la place est 15 €." },
+        brevet6_3a: { l: "(5+4)(5−2) − 5² = 9 × 3 − 25 = 27 − 25 = 2.", a: "Avec 5, on obtient 2." },
+        brevet6_3b: { l: "L'expression correcte est (x+4)(x−2) − x².", a: "La bonne réponse est C." },
+        brevet6_3c: { l: "(3+4)(3−2) − 3² = 7 × 1 − 9 = −2 = 2×3 − 8. On retrouve bien 2x − 8.", a: "Le résultat s'écrit 2x − 8." },
+        brevet6_3d: { l: "f(x) = 2x − 8 est affine croissante (pente 2). Le graphique n°1 est horizontal (constante), le n°2 est décroissant.", a: "Les graphiques n°1 et n°2 ne conviennent pas." },
+        brevet6_3e: { l: "f(4) = 2×4 − 8 = 0.", a: "f(4) = 0." },
+        brevet6_3f: { l: "2x − 8 = 100 → 2x = 108 → x = 54.", a: "Il faut choisir 54." },
+        brevet6_4a: { l: "La fonction est affine (V(t) = −0,214t + V₀), elle ne passe pas par l'origine. Ce n'est pas proportionnel.", a: "Non, il n'y a pas proportionnalité." },
+        brevet6_4b: { l: "La vitesse initiale est 20 tours par seconde.", a: "La vitesse initiale est 20 t/s." },
+        brevet6_4c: { l: "À 80 s, la vitesse est d'environ 2,9 tours par seconde.", a: "La vitesse est d'environ 2,9 t/s." },
+        brevet6_4d: { l: "Le hand-spinner s'arrête au bout d'environ 93,5 s.", a: "Il s'arrête au bout d'environ 93,5 s." },
+        brevet6_4e: { l: "V(30) = 20 − 0,214×30 = 20 − 6,42 = 13,58 t/s.", a: "V(30) = 13,58 t/s." },
+        brevet6_4f: { l: "0 = −0,214t + 20 → t = 20/0,214 ≈ 93,46 s.", a: "Il s'arrête au bout d'environ 93,46 s." },
+        brevet6_4g: { l: "t_arrêt = V₀/0,214 : le temps d'arrêt est proportionnel à la vitesse initiale.", a: "Oui, il tournera deux fois plus longtemps." }
+    };
+
+    function detailHTML6(key) {
+        const D = DETAILS6[key];
+        if (!D) return '';
+        return D.l + '<br>✅ <strong>' + D.a + '</strong>';
+    }
+
+    const _processAnswer6 = processAnswer6;
+    processAnswer6 = function(isCorrect, solId, key, tab, detailMsg, inputElement, specificMsg = null) {
+        if (DETAILS6[key]) detailMsg = detailHTML6(key);
+        _processAnswer6(isCorrect, solId, key, tab, detailMsg, inputElement, specificMsg);
+    };
+
+    /* ================= VÉRIFICATION DU TABLEAU INTERACTIF ================= */
+    document.getElementById('verifTableau6')?.addEventListener('click', function() {
+        const expected = { nb1: 550, rec1: 10450, red2: 2, prix2: 18, rec2: 10800, red3: 4, nb3: 700, rec3: 11200 };
+        let nb1 = parseFloat(document.getElementById('tab6_nb1')?.value);
+        let rec1 = parseFloat(document.getElementById('tab6_rec1')?.value);
+        let red2 = parseFloat(document.getElementById('tab6_red2')?.value);
+        let prix2 = parseFloat(document.getElementById('tab6_prix2')?.value);
+        let rec2 = parseFloat(document.getElementById('tab6_rec2')?.value);
+        let red3 = parseFloat(document.getElementById('tab6_red3')?.value);
+        let nb3 = parseFloat(document.getElementById('tab6_nb3')?.value);
+        let rec3 = parseFloat(document.getElementById('tab6_rec3')?.value);
+
+        let errors = [];
+        if (isNaN(nb1) || nb1 !== expected.nb1) errors.push(`ligne 2 : nombre de spectateurs = ${expected.nb1}`);
+        if (isNaN(rec1) || rec1 !== expected.rec1) errors.push(`ligne 2 : recette = ${expected.rec1} €`);
+        if (isNaN(red2) || red2 !== expected.red2) errors.push(`ligne 3 : réduction = ${expected.red2} €`);
+        if (isNaN(prix2) || prix2 !== expected.prix2) errors.push(`ligne 3 : prix de la place = ${expected.prix2} €`);
+        if (isNaN(rec2) || rec2 !== expected.rec2) errors.push(`ligne 3 : recette = ${expected.rec2} €`);
+        if (isNaN(red3) || red3 !== expected.red3) errors.push(`ligne 4 : réduction = ${expected.red3} €`);
+        if (isNaN(nb3) || nb3 !== expected.nb3) errors.push(`ligne 4 : nombre de spectateurs = ${expected.nb3}`);
+        if (isNaN(rec3) || rec3 !== expected.rec3) errors.push(`ligne 4 : recette = ${expected.rec3} €`);
+
+        const feedbackDiv = document.getElementById('tableFeedback6');
+        if (errors.length === 0) {
+            feedbackDiv.innerHTML = '<span style="color:#15803d; background:#dcfce7; padding:4px 12px; border-radius:20px;">✔️ Tableau parfaitement complété ! Félicitations.</span>';
+        } else {
+            feedbackDiv.innerHTML = '<span style="color:#b91c1c; background:#fee2e2; padding:4px 12px; border-radius:20px;">❌ Erreur(s) : ' + errors.join(' ; ') + '.</span>';
+        }
+    });
+
+    /* ================= ANIMATION MACHINE À FONCTIONS ================= */
+    (function() {
+        const $ = id => document.getElementById(id);
+        const xInput = $('wg6-mach-x'), opSelect = $('wg6-mach-op');
+        if (!xInput || !opSelect) return;
+        function update() {
+            const x = parseInt(xInput.value, 10);
+            const op = opSelect.value;
+            let result, expr;
+            switch(op) {
+                case 'square': result = x * x; expr = `x²`; break;
+                case 'double': result = 2 * x; expr = `2x`; break;
+                case 'triple': result = 3 * x + 1; expr = `3x + 1`; break;
+                case 'half': result = x / 2; expr = `x ÷ 2`; break;
+                case 'affine': result = 2 * x - 5; expr = `2x − 5`; break;
+            }
+            $('wg6-mach-xv').textContent = x;
+            $('wg6-mach-out').innerHTML = `Entrée : <strong>${x}</strong> → Opération : <strong>${expr}</strong> → Sortie : <strong>${result}</strong><br>On dit que <strong>${result}</strong> est l'image de <strong>${x}</strong> par cette fonction.`;
+        }
+        xInput.addEventListener('input', update);
+        opSelect.addEventListener('change', update);
+        update();
+    })();
+
+    /* ================= WARNING MATHJAX ================= */
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (!(window.MathJax && window.MathJax.typesetPromise)) {
+                const box = document.querySelector('.container');
+                if (box) {
+                    const w = document.createElement('div');
+                    w.className = 'math-warning';
+                    w.innerHTML = "⚠️ Les formules mathématiques n'ont pas pu se charger (connexion internet requise).";
+                    box.insertBefore(w, box.firstChild);
+                }
+            }
+        }, 4000);
+    });
+</script>
+</body>
+</html>
