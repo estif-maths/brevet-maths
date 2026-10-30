@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre 1 : Nombres Entiers - Maths 3ème</title>
-	<script data-goatcounter="https://estifmaths.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -1730,10 +1728,6 @@
             <a href="N1 - Arithmétique - Cours.pdf" download="N1 - Arithmétique - Cours.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;">
                 📄 Télécharger le cours complet (PDF)
             </a>
-			<a href="N1 - Arithmétique - Cours.pdf" download="N1 - Arithmétique - Cours.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;" 
-  			 data-goatcounter-click="telechargement-cours-arithmetique">
-    		📄 Télécharger le cours complet (PDF)
-			</a>
         </p>
     </div>
 
@@ -2042,11 +2036,7 @@
                 <a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;">
                     📄 Télécharger la fiche d'exercices (PDF)
                 </a>
-				<a href="N1 - Exercices Les bases.pdf" download="N1 - Exercices Les bases.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;" 
-  			 	data-goatcounter-click="telechargement-exercices-bases">
-    			📄 Télécharger la fiche d'exercices (PDF)
-				</a>
-			</p>
+            </p>
         </div>
 
         <footer><i class="fas fa-chalkboard-teacher"></i> Toutes les corrections utilisent la division euclidienne, le PGCD ou le PPCM conformément au programme.</footer>
@@ -2234,10 +2224,6 @@
                 <a href="N1 - Exercices Type Brevet.pdf" download="N1 - Exercices Type Brevet.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;">
                     📄 Télécharger les exercices type Brevet (PDF)
                 </a>
-				<a href="N1 - Exercices Type Brevet.pdf" download="N1 - Exercices Type Brevet.pdf" class="download-cert-btn" style="display:inline-block; text-decoration:none;" 
-   					data-goatcounter-click="telechargement-exercices-brevet">
-    				📄 Télécharger les exercices type Brevet (PDF)
-				</a>
             </p>
         </div>
 
@@ -3323,9 +3309,9 @@
         const pct = Math.round((correct / totalKeys.length) * 100);
         if (pct < 75) return;
         const name = askForCertificateName();
-        const title = tab === 'interactifs' ? 'Exercices Interactifs — Chapitre 1 : Nombres Entiers' : 'Exercices Type Brevet — Chapitre 1 : Nombres Entiers';
+        const title = tab === 'interactifs' ? 'Exercices d’entraînement — Chapitre 1 : Nombres Entiers' : 'Exercices Type Brevet — Chapitre 1 : Nombres Entiers';
         const doc = generateCertificatePDF({ title, name, scoreLine: `${correct} / ${totalKeys.length} (${pct}%)` });
-        if (doc) doc.save(`Certificat_${tab}_${name}.pdf`);
+        if (doc) doc.save(`Certificat_${tab === 'interactifs' ? 'entrainement' : tab}_${name}.pdf`);
     }
 
     function downloadCoursCompletion() {

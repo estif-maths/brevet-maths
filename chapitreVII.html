@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre 7 : Proportionnalité, pourcentages, échelles, ratios et transformations</title>
-	<script data-goatcounter="https://estifmaths.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -735,13 +733,7 @@
             </div>
             <p>\[ \frac{3}{2}=1,5 \quad \frac{7,5}{5}=1,5 \quad \frac{16,5}{11}=1,5 \quad \frac{21}{14}=1,5 \] → coefficient = <strong>1,5</strong></p>
         </div>
-			<div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7 - Reconnaître proportionnalité.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
+
         <h3>🔢 Compléter un tableau de proportionnalité</h3>
         <div class="method-box">
             <strong>📌 Méthode 1 : Passage à l’unité (coefficient de proportionnalité)</strong>
@@ -781,7 +773,7 @@
             <div class="step">De 2 à 12 : multiplication par 6 → \(3,2 \times 6 = 19,2\) €</div>
             <p><strong>Résultat : 2 kg → 3,20 € ; 12 kg → 19,20 €.</strong></p>
         </div>
-			
+
         <div class="definition-box">
             <strong>✖️ Produit en croix (quatrième proportionnelle)</strong>
             <p>\[ \frac{a}{c} = \frac{b}{d} \iff a \times d = b \times c \]</p>
@@ -791,13 +783,7 @@
                 <p>✅ Pour 35 heures, il gagne 700 €.</p>
             </div>
         </div>
-		<div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7- Traiter une situation de proportionnalité.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
+
 <div class="utilite-box"><strong>💡 Ça sert à quoi ?</strong> Recettes de cuisine, prix à la pesée, change de monnaie, vitesse constante… la proportionnalité est partout dans la vie quotidienne.</div>
 <div class="warning-box"><strong>⚠️ Pièges à éviter :</strong><ul><li>Deux grandeurs qui augmentent ensemble ne sont pas forcément proportionnelles (l’âge et la taille).</li><li>Vérifie <strong>tous</strong> les rapports d’un tableau, pas un seul.</li><li>Écris toujours les grandeurs dans les mêmes unités.</li></ul></div>
 <div class="quiz-block" id="quiz-1"><h3>🤔 Ai-je bien compris ? (Section 1 : La proportionnalité)</h3><div class="quiz-container" id="quiz-container-1"></div></div>
@@ -808,15 +794,6 @@
             <p>✔️ Situation proportionnelle ⇔ points <strong>alignés avec l’origine</strong>.<br>
             ❌ Alignés sans origine ou non alignés ⇒ non proportionnel.</p>
         </div>
-				<div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7- Graphique et proportionnalité.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-
-	
         <div class="svg-group">
             <div class="graph-card">
                 <p class="highlight">✅ Proportionnel (avec O)</p>
@@ -880,13 +857,7 @@
                 <div class="step">\(\frac{80}{250} = 0,32 = 32\%\)</div>
             </div>
         </div>
-        <div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7 - Déterminer un pourcentages.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
+        
         <h3>📈 Augmentation et réduction (taux d'évolution) – Explications détaillées</h3>
         <div class="definition-box">
             <strong>🔍 Pourquoi ces formules ?</strong><br>
@@ -910,14 +881,6 @@
             <p>✅ Prix final = 134,40 € (baisse globale 44%, et non 50%).</p>
         </div>
         <div class="note">⚠️ Les pourcentages ne s’additionnent pas : on multiplie les coefficients.</div>
-
-	<div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7 - Manipuler les pourcentages.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
 <div class="wg" id="wg-pct"><h4>📊 Coefficient multiplicateur</h4><p class="wg-sub">Fais varier la valeur et le pourcentage. Active la 2ᵉ évolution pour voir que les pourcentages ne s’additionnent pas.</p><div class="wg-ctl"><label>Valeur de départ <output id="wg-p-vv"></output><input type="range" id="wg-p-v" min="20" max="200" step="10" value="80" aria-label="Valeur de départ"></label>
  <label>1ʳᵉ évolution <output id="wg-p-1v"></output><input type="range" id="wg-p-1" min="-80" max="100" step="5" value="-40" aria-label="Première évolution en pourcentage"></label>
  <label class="row"><input type="checkbox" id="wg-p-two"> Ajouter une 2ᵉ évolution</label>
@@ -1002,14 +965,6 @@
             - Les volumes sont multipliés par \(k^3\).<br>
             - Les angles restent inchangés (la figure est « semblable »).
         </div>
-			<div class="definition-box">
-                    <div style="max-width: 800px; margin: auto;">
-                        <video controls style="width: 100%; height: auto;">
-                            <source src="N7 - Agrandissement . réduction.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-	
         <div class="example-box">
             <div class="enonce">Un rectangle mesure 6 cm sur 4 cm. On l’agrandit avec un coefficient \(k = 2,5\). Quelles sont les nouvelles dimensions ? Quelle est la nouvelle aire ?</div>
             <div class="step">Nouvelle longueur = \(6 \times 2,5 = 15\) cm ; nouvelle largeur = \(4 \times 2,5 = 10\) cm.</div>
@@ -2013,9 +1968,9 @@ function downloadCertificate5(tab) {
   const keys = totalKeysOf(tab), correct = keys.filter(k => scoreTracker[tab][k] === true).length, pct = Math.round(correct / keys.length * 100);
   if (pct < 75 || keys.some(k => !(k in scoreTracker[tab]))) return;
   const name = askForCertificateName();
-  const title = tab === 'interactifs' ? 'Exercices Interactifs — Chapitre 7 : Proportionnalité et transformations' : 'Exercices Type Brevet — Chapitre 7 : Proportionnalité et transformations';
+  const title = tab === 'interactifs' ? 'Exercices d’entraînement — Chapitre 7 : Proportionnalité et transformations' : 'Exercices Type Brevet — Chapitre 7 : Proportionnalité et transformations';
   const doc = generateCertificatePDF({ title, name, scoreLine: `${correct} / ${keys.length} (${pct}%)` });
-  if (doc) doc.save(`Certificat_${tab}_chapitre7_${name}.pdf`);
+  if (doc) doc.save(`Certificat_${tab === 'interactifs' ? 'entrainement' : tab}_chapitre7_${name}.pdf`);
 }
 function resetBrevet5() {
   if (!confirm('Recommencer les exercices type brevet ? Tes résultats seront effacés.')) return;
