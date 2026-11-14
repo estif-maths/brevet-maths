@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre 1 : Nombres Entiers - Maths 3ème</title>
-	<script data-goatcounter="https://estifmaths.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -702,6 +700,9 @@
 #crible button.cr-btn:hover{background:rgba(255,255,255,.16)} #crible button.go{background:linear-gradient(135deg,#ffb347,#ff7a45);border-color:transparent;color:#2a1200}
 #crible button:focus-visible{outline:3px solid #fff;outline-offset:2px}
 @media print{#crible{display:none}}
+/* ===== EXPOSANTS : présentation homogène ===== */
+sup { font-size: 0.72em; line-height: 0; vertical-align: super; margin-left: 0.06em; font-weight: inherit; }
+.auto-question-zone .frac, .auto-feedback .frac { vertical-align: middle; }
 </style>
 </head>
 <body>
@@ -3694,6 +3695,37 @@
         });
         solCapture = false;
         refreshFullSolutions();   // exercices déjà terminés lors d'une visite précédente
+    })();
+
+    // ==========================================
+    // EXPOSANTS : même présentation partout (balise <sup>, vrai signe moins)
+    // ==========================================
+    (function () {
+        const SUPMAP = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '−', '⁺': '+' };
+        const RE = /[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g, CARET = /([0-9a-zA-Z\)])\^(−|-)?([0-9]+|\([^)]*\))/g;
+        const skip = el => !el || /^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|BUTTON)$/.test(el.tagName) || (el.closest && el.closest('script,style,button'));
+        function toFragment(t) {
+            const frag = document.createDocumentFragment(); let last = 0, changed = false;
+            const parts = []; let m;
+            RE.lastIndex = 0; while ((m = RE.exec(t))) parts.push({ i: m.index, len: m[0].length, sup: [...m[0]].map(c => SUPMAP[c]).join('') });
+            CARET.lastIndex = 0; while ((m = CARET.exec(t))) { const lead = m[1].length; parts.push({ i: m.index + lead, len: m[0].length - lead, sup: (m[2] ? '−' : '') + m[3].replace(/^\(|\)$/g, '') }); }
+            parts.sort((a, b) => a.i - b.i);
+            parts.forEach(pt => { if (pt.i < last) return; if (pt.i > last) frag.appendChild(document.createTextNode(t.slice(last, pt.i))); const s = document.createElement('sup'); s.textContent = pt.sup; frag.appendChild(s); last = pt.i + pt.len; changed = true; });
+            if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+            return changed ? frag : null;
+        }
+        function fixText(node) { const frag = toFragment(node.nodeValue); if (frag && node.parentNode) node.parentNode.replaceChild(frag, node); }
+        function scan(root) {
+            if (!root) return;
+            if (root.nodeType === 3) { if (!skip(root.parentNode)) fixText(root); return; }
+            if (root.nodeType !== 1 || skip(root)) return;
+            const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), nodes = [];
+            while (w.nextNode()) nodes.push(w.currentNode);
+            nodes.forEach(n => { if (!skip(n.parentNode)) fixText(n); });
+            (root.tagName === 'SUP' ? [root] : []).concat([...root.querySelectorAll('sup')]).forEach(s => { if (/^-/.test(s.textContent)) s.textContent = s.textContent.replace(/^-/, '−'); });
+        }
+        scan(document.body);
+        new MutationObserver(ms => ms.forEach(m => { m.addedNodes.forEach(scan); if (m.type === 'characterData') scan(m.target); })).observe(document.body, { childList: true, subtree: true, characterData: true });
     })();
 </script>
 
